@@ -1,0 +1,5 @@
+C:\Users\LENOVO\Documents\OOP-Fair-Fare\obj\Debug\net9.0\OOP-Fair-Fare.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LENOVO\Documents\OOP-Fair-Fare\obj\Debug\net9.0\OOP-Fair-Fare.AssemblyInfoInputs.cache
+C:\Users\LENOVO\Documents\OOP-Fair-Fare\obj\Debug\net9.0\OOP-Fair-Fare.AssemblyInfo.cs
+C:\Users\LENOVO\Documents\OOP-Fair-Fare\obj\Debug\net9.0\OOP-Fair-Fare.csproj.CoreCompileInputs.cache
+C:\Users\LENOVO\Documents\OOP-Fair-Fare\obj\Debug\net9.0\OOP-Fair-Fare.sourcelink.json
