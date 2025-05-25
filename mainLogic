@@ -1,0 +1,46 @@
+using System;
+
+public class FareCalculator
+{
+    private const decimal BaseFare = 13.00m;
+    private const int BaseDistance = 4;
+    private const decimal AdditionalFarePerKm = 2.00m;
+    private const decimal DiscountRate = 0.20m;
+
+    public static void CalculateFare(double distanceTraveled, bool isDiscounted)
+    {
+        decimal regularFare = BaseFare;
+
+        if (distanceTraveled > BaseDistance)
+        {
+            int extraKm = (int)Math.Floor(distanceTraveled - BaseDistance);
+            regularFare += extraKm * AdditionalFarePerKm;
+        }
+
+        int discountAmount = 0;
+        if (isDiscounted)
+        {
+            discountAmount = (int)Math.Round(regularFare * DiscountRate);
+        }
+
+        int totalFare = (int)Math.Round(regularFare) - discountAmount;
+
+        // Display fare breakdown
+        Console.WriteLine("\n--- Fare Summary ---");
+        Console.WriteLine($"Regular Fare    : ₱{Math.Round(regularFare)}");
+        Console.WriteLine($"Discount Applied: ₱{discountAmount}");
+        Console.WriteLine($"Total Fare      : ₱{totalFare}");
+    }
+
+    public static void Main()
+    {
+        Console.Write("Enter distance traveled (in km): ");
+        double distance = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Is the passenger a student, senior, or PWD? (yes/no): ");
+        string discountInput = Console.ReadLine().Trim().ToLower();
+        bool isDiscounted = (discountInput == "yes");
+
+        CalculateFare(distance, isDiscounted);
+    }
+}
