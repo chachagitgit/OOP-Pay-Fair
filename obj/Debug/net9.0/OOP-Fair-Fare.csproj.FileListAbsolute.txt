@@ -3,3 +3,13 @@ C:\Users\LENOVO\Documents\OOP-Fair-Fare\obj\Debug\net9.0\OOP-Fair-Fare.AssemblyI
 C:\Users\LENOVO\Documents\OOP-Fair-Fare\obj\Debug\net9.0\OOP-Fair-Fare.AssemblyInfo.cs
 C:\Users\LENOVO\Documents\OOP-Fair-Fare\obj\Debug\net9.0\OOP-Fair-Fare.csproj.CoreCompileInputs.cache
 C:\Users\LENOVO\Documents\OOP-Fair-Fare\obj\Debug\net9.0\OOP-Fair-Fare.sourcelink.json
+C:\Users\LENOVO\Documents\OOP-Fair-Fare\bin\Debug\net9.0\OOP-Fair-Fare.exe
+C:\Users\LENOVO\Documents\OOP-Fair-Fare\bin\Debug\net9.0\OOP-Fair-Fare.deps.json
+C:\Users\LENOVO\Documents\OOP-Fair-Fare\bin\Debug\net9.0\OOP-Fair-Fare.runtimeconfig.json
+C:\Users\LENOVO\Documents\OOP-Fair-Fare\bin\Debug\net9.0\OOP-Fair-Fare.dll
+C:\Users\LENOVO\Documents\OOP-Fair-Fare\bin\Debug\net9.0\OOP-Fair-Fare.pdb
+C:\Users\LENOVO\Documents\OOP-Fair-Fare\obj\Debug\net9.0\OOP-Fair-Fare.dll
+C:\Users\LENOVO\Documents\OOP-Fair-Fare\obj\Debug\net9.0\refint\OOP-Fair-Fare.dll
+C:\Users\LENOVO\Documents\OOP-Fair-Fare\obj\Debug\net9.0\OOP-Fair-Fare.pdb
+C:\Users\LENOVO\Documents\OOP-Fair-Fare\obj\Debug\net9.0\OOP-Fair-Fare.genruntimeconfig.cache
+C:\Users\LENOVO\Documents\OOP-Fair-Fare\obj\Debug\net9.0\ref\OOP-Fair-Fare.dll
