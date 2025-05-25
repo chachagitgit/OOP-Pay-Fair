@@ -2,19 +2,53 @@
 
 public class FareCalculator
 {
-    private const decimal BaseFare = 13.00m;
-    private const int BaseDistance = 4;
-    private const decimal AdditionalFarePerKm = 2.00m;
     private const decimal DiscountRate = 0.20m;
 
-    public static void CalculateFare(double distanceTraveled, bool isDiscounted)
+    public static void CalculateFare(double distanceTraveled, int vehicleChoice, bool isDiscounted)
     {
-        decimal regularFare = BaseFare;
+        decimal baseFare = 0;
+        int baseDistance = 0;
+        decimal perKmRate = 0;
+        string vehicleName = "";
 
-        if (distanceTraveled > BaseDistance)
+// vehicle selection
+        switch (vehicleChoice)
         {
-            int extraKm = (int)Math.Floor(distanceTraveled - BaseDistance);
-            regularFare += extraKm * AdditionalFarePerKm;
+            case 1:
+                vehicleName = "Airconditioned Bus";
+                baseFare = 15;
+                baseDistance = 5;
+                perKmRate = 3;
+                break;
+            case 2:
+                vehicleName = "Ordinary Bus";
+                baseFare = 13;
+                baseDistance = 5;
+                perKmRate = 3;
+                break;
+            case 3:
+                vehicleName = "Modern E-Jeepney";
+                baseFare = 15;
+                baseDistance = 4;
+                perKmRate = 3;
+                break;
+            case 4:
+                vehicleName = "Traditional Jeepney";
+                baseFare = 13;
+                baseDistance = 4;
+                perKmRate = 2;
+                break;
+            default:
+                Console.WriteLine("Invalid vehicle selection.");
+                return;
+        }
+
+        decimal regularFare = baseFare;
+
+        if (distanceTraveled > baseDistance)
+        {
+            int extraKm = (int)Math.Floor(distanceTraveled - baseDistance);
+            regularFare += extraKm * perKmRate;
         }
 
         int discountAmount = 0;
@@ -25,11 +59,13 @@ public class FareCalculator
 
         int totalFare = (int)Math.Round(regularFare) - discountAmount;
 
-        // Display fare breakdown
+// fare summary
         Console.WriteLine("\n--- Fare Summary ---");
-        Console.WriteLine($"Regular Fare    : ₱{Math.Round(regularFare)}");
-        Console.WriteLine($"Discount Applied: ₱{discountAmount}");
-        Console.WriteLine($"Total Fare      : ₱{totalFare}");
+        Console.WriteLine($"Vehicle Type     : {vehicleName}");
+        Console.WriteLine($"Distance Traveled: {distanceTraveled} km");
+        Console.WriteLine($"Regular Fare     : ₱{Math.Round(regularFare)}");
+        Console.WriteLine($"Discount Applied : ₱{discountAmount}");
+        Console.WriteLine($"Total Fare       : ₱{totalFare}");
     }
 
     public static void Main()
@@ -37,10 +73,18 @@ public class FareCalculator
         Console.Write("Enter distance traveled (in km): ");
         double distance = Convert.ToDouble(Console.ReadLine());
 
-        Console.Write("Is the passenger a student, senior, or PWD? (yes/no): ");
-        string discountInput = Console.ReadLine().Trim().ToLower();
-        bool isDiscounted = (discountInput == "yes");
+        Console.WriteLine("\nSelect Transporation Type:");
+        Console.WriteLine("1 - Airconditioned Bus");
+        Console.WriteLine("2 - Ordinary Bus");
+        Console.WriteLine("3 - Modern E-Jeepney");
+        Console.WriteLine("4 - Traditional Jeepney");
+        Console.Write("Enter vehicle number: ");
+        int vehicleChoice = Convert.ToInt32(Console.ReadLine());
 
-        CalculateFare(distance, isDiscounted);
+        Console.Write("Is the passenger a student, senior, or PWD? (y/n): ");
+        string discountInput = Console.ReadLine().Trim().ToLower();
+        bool isDiscounted = (discountInput == "y");
+
+        CalculateFare(distance, vehicleChoice, isDiscounted);
     }
 }
