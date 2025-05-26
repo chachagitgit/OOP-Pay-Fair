@@ -1,6 +1,40 @@
 .container{
-    background-color:
+    background-color: white;
 }
+#check {
+    display: none;
+}
+input[type="radio"]{
+    display: none;
+}
+
+label[for="check"]{
+    position: fixed;
+    cursor: pointer;
+    z-index: 101;
+    left: 20px;
+    top: 20px;
+    font-size: 30px;
+    color: #2d3436;
+    transition: all 0.3s ease;
+}
+
+label #btn, label #cancel {
+    transition: all 0.3s ease;
+}
+
+#check:checked ~ label #btn {
+    display: none;
+}
+
+#check:checked ~ label #cancel{
+    display: block;
+}
+
+label #cancel {
+    display: none;
+}
+
 .app-title{
     padding-top: 15px;
     padding-bottom: 20px;
@@ -13,45 +47,208 @@
 .sidebar {
     position: fixed;
     top: 0;
-    left: -250px;
+    left: -280px;
     width: 280px;
     height: 100vh;
     background-color: white;
     transition: left 0.3s ease;
-    padding: 10px;
-    color: white;
+    padding: 10px 10px 10px 30px;
+    color: black;
     z-index: 100;
     padding-left: 30px;
 }
 
-#check:checked ~ .sidebar{
+#check:checked ~ .container .sidebar{
     left: 0;
 }
 
-label #btn, label #cancel{
-    position: fixed;
-    cursor: pointer;
-    z-index: 101;
-    left: 20px;
-    top: 20px;
-    font-size: 30px;
-    color: black;
+.tabs-container {
+    background: #f8f9fa;
+    padding: 0;
+    border-bottom: 1px solid #e9ecef;
+    margin: 0 -30px 0 -10px;
 }
 
-#check:checked+ label #btn{
+.tabs {
+    display: flex;
+}
+
+.tab_btn{
+    flex:1;
+    padding: 16px 20px;
+    text-align: center;
+    cursor: pointer;
+    background: transparent;
+    border: none; 
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+.tab_btn:hover {
+    background: rgba(116, 185, 255, 0.1)
+}
+
+.content-container {
+    padding: 24px 0;
+}
+
+.content_box {
     display: none;
 }
 
-#check:checked + label #cancel{
+#tab-route:checked ~ .container .route-content {
     display: block;
 }
 
-label #cancel{
+#tab-fare:checked ~ .container .route-fare {
+    display: block;
+}
+
+#tab-route:checked ~ .container .tabs label[for="tab-route"] {
+    background: #74b9ff;
+    color: white;
+}
+
+#tab-route:checked ~ .container .tabs label[for="tab-fare"] {
+    background: #74b9ff;
+    color: white;
+}
+
+.location-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d3436;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.input-group {
+    margin-bottom: 24px;
+}
+
+.input-wrapper {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.input-group input{
+    width: 100%;
+    padding: 12px 40px, 12px, 16px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #74b9ff;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(116, 185, 255, 0.1);
+}
+
+.location-icon {
     position: absolute;
-    left: 250px;
-    top: 25px;
-    display: none;
-    z-index: 101;
-    font-size: 35px;
+    right: 12px;
+    top: 50%;
+    color: #636e72;
+    font-size: 16px;
+}
+
+.section-title {
+    font-weight: 700;
+    margin: 24px 0 16px 0;
+    color: #2d3436;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}
+
+.vehicle-options{
+    margin-bottom: 24px;
+}
+
+.vehicle-button {
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border: 2px solid #e9ecef;
+    background: white;
+    color: #636e72;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: cneter;
+    justify-content: space-between;
+}
+
+.vehicle-button:hover {
+    border-color: lightblue;
+    background: rgba(116, 185, 255, 0.05);
+}
+
+.vehicle-button.active {
+    background: lightskyblue;
+    color: white;
+}
+
+.discount {
+    margin-bottom: 24px;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.checkbox-wrapper:hover {
+    background: rgba (116, 185, 255.0.05);
+    border-color: lightblue;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.checkbox-wrapper label {
+    font-weight: 600;
     color: black;
+    cursor: pointer;
+    flex: 1;
+    font-size: 14px;
+}
+
+.calculate-fare {
+    width: 100%;
+    padding: 12px;
+    background: #f8de7f;
+    border: none;
+    border-radius: 8px;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.fare-breakdown {
+    background: lightblue;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid lightskyblue;
 }
