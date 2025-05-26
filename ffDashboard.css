@@ -1,0 +1,57 @@
+.container{
+    background-color:
+}
+.app-title{
+    padding-top: 15px;
+    padding-bottom: 20px;
+    font-size: 36px;
+    font-weight: 700;
+    color: black;
+    font-family: 'Inter', sans-serif;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 280px;
+    height: 100vh;
+    background-color: white;
+    transition: left 0.3s ease;
+    padding: 10px;
+    color: white;
+    z-index: 100;
+    padding-left: 30px;
+}
+
+#check:checked ~ .sidebar{
+    left: 0;
+}
+
+label #btn, label #cancel{
+    position: fixed;
+    cursor: pointer;
+    z-index: 101;
+    left: 20px;
+    top: 20px;
+    font-size: 30px;
+    color: black;
+}
+
+#check:checked+ label #btn{
+    display: none;
+}
+
+#check:checked + label #cancel{
+    display: block;
+}
+
+label #cancel{
+    position: absolute;
+    left: 250px;
+    top: 25px;
+    display: none;
+    z-index: 101;
+    font-size: 35px;
+    color: black;
+}
