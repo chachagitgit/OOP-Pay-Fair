@@ -1,77 +1,110 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale = 1.0">
-   <script> src = "https://kit.fontawesome.com/a076d05399.js"</script>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-   <title>FairFare</title>
-    <link rel="stylesheet" href="ffDashboard.css">
+    <script src = "https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>FairFare</title>
+    <link rel="stylesheet" href="try.css">
 </head>
 
 <body>
-    <div class="container">
-        <!--for hidden checkbox-->
-        <input type= "checkbox" id="check">
-
+     <!--for hidden checkbox-->
+    <input type="checkbox" id="check">
+    <input type = "radio" name = "tab" id = "tab-route" checked>
+    <input type = "radio" name = "tab" id = "tab-fare" >
+    <div class="container">        
         <!--for toggle button-->
-        <label for="check">
-            <i class=" fas fa-bars" id="btn"></i>
-            <i class=" fas fa-times" id="cancel"></i>
+        <label for = "check">
+            <i class =" fas fa-bars" id = "btn"></i>
+            <i class =" fas fa-times" id = "cancel"></i>
         </label>
-    
+
+
         <!--for sidebar-->
-        <div class="sidebar" id="sidebar"> 
-            <div class="sidebar-header"> 
-                <div class="app-title">FairFare</div>  <!--header-->
+        <div class="sidebar" id = "sidebar">
+            <div class = "sidebar-header">
+                <div class = "app-title">FairFare</div> <!--header-->
             </div>
 
-            <div class="container"> <!--yung buong screen-->
-                
-                
+            <div class = "tabs-container">
                 <div class = "tabs">
-                    <lable for ="tab-route" class = "tab_btn">ROUTE</label>
-                    <label for="tab-fare" class = "tab_btn">FARE</label>
+                    <label for="tab-route" class="tab_btn">Route</label>
+                    <label for="tab-fare" class="tab_btn">Fare</label>
                 </div>
-                <div class="content_box route-content active">
-                    <div class="input-group">
-                        <input type="text" placeholder="Enter starting location" aria-label="Starting location">
-                        <input type="text" placeholder="Enter destination" aria-label="Destination">
+            </div>
+
+            <div class="content-container">
+                <div class = "content_box route-content">
+                    <label class="location-label">Enter starting location</label>
+                    
+                    <div class = "input-group">
+                        <div class="input-wrapper">
+                            <input type="text" placeholder="Starting location" aria-label="Starting location">
+                            <i class="fas fa-map-marker-alt location-icon"></i>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="text" placeholder="Destination" aria-label="Destination">
+                            <i class="fas fa-flag-checkered location-icon"></i>
+                        </div>
                     </div>
-                    <div class="section-title">Select transportation vehicle</div>
+
+                    <div class = "section-title">Transportation Options</div>
                     <div class="vehicle-options">
-                        <label class="button-label">
-                            <button class="tab-button active">Jeep</button>
-                        </label>
-                        <label class="button-label">
-                            <button class="tab-button active">Airconditioned Bus</button>
-                        </label>
-                        <label class="button-label">
-                            <button class="tab-button active">Ordinary Bus</button>
-                        </label>
+                        <button class="vehicle-button active">
+                            <span>Jeepney</span>
+                            <i class="fas fa-bus-alt vehicle-icon"></i>
+                        </button>
+                        <button class="vehicle-button active">
+                            <span>Ordinary Bus</span>
+                            <i class="fas fa-bus-alt vehicle-icon"></i>
+                        </button>
+                        <button class="vehicle-button active">
+                            <span>Airconditioned Bus</span>
+                            <i class="fas fa-bus-alt vehicle-icon"></i>
+                        </button>
                     </div>
-                    <div class="section-title">Discount options</div>
-                    <div class="discount-options">
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="discount" value="Student/PWD/Senior Citizen">
-                            Student/PWD/Senior Citizen
-                        </label>
+
+                    <div class="section-title">Discount</div>
+                    <div class ="discount">
+                        <div class ="checkbox-wrapper">
+                            <input type ="checkbox" id="discounts" name="discounts" value="Student/PWD/Senior Citizen">
+                            <label for="discount">Student/PWD/Senior Citizen</label>
+                        </div>
                     </div>
+                    <button class = "calculate-fare">Calculate Fare</button>
                 </div>
 
-                <div class="content_box">
-                     <div><a>Fare BreakDown</a></div>
+                <!--fare tab content-->
+                <div class = "content_box fare-content">
+                    <div class ="section-title">Fare Breakdown</div>
+                    <div class="fare-breakdown">
+                        <div class="fare-item">
+                            <span class="fare-label">Base fare: </span>
+                        </div>
+                        <div class="fare-item">
+                            <span class="fare-label">Distance: </span>
+                        </div>
+                        <div class="fare-item">
+                            <span class="fare-label">Vehicle type: </span>
+                        </div>
+                        <div class="fare-item">
+                            <span class="fare-label">Discount: </span>
+                        </div>
+                        <div class="fare-item">
+                            <span class="fare-label">Total Fare: </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <!---
-        <div id="map" class="map-container">
-            <img src="https://placehold.co/800x600/E0E0E0/333333?text=Interactive+Map+Placeholder" alt="Placeholder Map" class="placeholder-map">
-        </div> -->
     </div>
 </body>
+
 </html>
