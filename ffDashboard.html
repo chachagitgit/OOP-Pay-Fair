@@ -18,7 +18,7 @@
 </head>
 
 <body>
-     <!--for hidden checkbox-->
+      <!--for hidden checkbox-->
     <input type="checkbox" id="check">
     <input type = "radio" name = "tab" id = "tab-route" checked>
     <input type = "radio" name = "tab" id = "tab-fare" >
@@ -30,84 +30,100 @@
     </label>
 
     <div class="container"> 
-    <!--for sidebar-->
-    <div class="sidebar" id = "sidebar">
-        <div class = "sidebar-header">
-            <div class = "app-title">FairFare</div> <!--h   eader-->
-         </div>
-
-        <div class = "tabs-container">
-            <div class = "tabs">
-                <label for="tab-route" class="tab_btn">Route</label>
-                <label for="tab-fare" class="tab_btn">Fare</label>
-             </div>
+        <!--for sidebar-->
+        <div class="sidebar" id = "sidebar">
+            <div class = "sidebar-header">
+                <div class = "app-title">FairFare</div> <!--h   eader-->
             </div>
 
-            <div class="content-container">
-                <div class = "content_box route-content">
-                    <label class="location-label">Enter starting location</label>
-                    
-                    <div class = "input-group">
-                        <div class="input-wrapper">
-                            <input type="text" placeholder="Starting location" aria-label="Starting location">
-                            <i class="fas fa-map-marker-alt location-icon"></i>
-                        </div>
-                        <div class="input-wrapper">
-                            <input type="text" placeholder="Destination" aria-label="Destination">
-                            <i class="fas fa-flag-checkered location-icon"></i>
-                        </div>
-                    </div>
-
-                    <div class = "section-title">Transportation Options</div>
-                    <div class="vehicle-options">
-                        <button class="vehicle-button active">
-                            <span>Jeepney</span>
-                            <i class="fas fa-bus-alt vehicle-icon"></i>
-                        </button>
-                        <button class="vehicle-button active">
-                            <span>Ordinary Bus</span>
-                            <i class="fas fa-bus-alt vehicle-icon"></i>
-                        </button>
-                        <button class="vehicle-button active">
-                            <span>Airconditioned Bus</span>
-                            <i class="fas fa-bus-alt vehicle-icon"></i>
-                        </button>
-                    </div>
-
-                    <div class="section-title">Discount</div>
-                    <div class ="discount">
-                        <div class ="checkbox-wrapper">
-                            <input type ="checkbox" id="discounts" name="discounts" value="Student/PWD/Senior Citizen">
-                            <label for="discount">Student/PWD/Senior Citizen</label>
-                        </div>
-                    </div>
-                    <button class = "calculate-fare">Calculate Fare</button>
+            <div class = "tabs-container">
+                <div class = "tabs">
+                    <label for="tab-route" class="tab_btn">Route</label>
+                    <label for="tab-fare" class="tab_btn">Fare</label>
+                </div>
                 </div>
 
-                <!--fare tab content-->
-                <div class = "content_box fare-content">
-                    <div class ="section-title">Fare Breakdown</div>
-                    <div class="fare-breakdown">
-                        <div class="fare-item">
-                            <span class="fare-label">Base fare: </span>
+                <div class="content-container">
+                    <div class = "content_box route-content">
+                        <label class="location-label">Enter starting location</label>
+                        
+                        <div class = "input-group">
+                            <div class="input-wrapper">
+                                <input type="text" placeholder="Starting location" aria-label="Starting location">
+                                <i class="fas fa-map-marker-alt location-icon"></i>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="text" placeholder="Destination" aria-label="Destination">
+                                <i class="fas fa-flag-checkered location-icon"></i>
+                            </div>
                         </div>
-                        <div class="fare-item">
-                            <span class="fare-label">Distance: </span>
+
+                        <div class = "section-title">Transportation Options</div>
+                        <div class="vehicle-options">
+                            <button class="vehicle-button active">
+                                <span>Jeepney</span>
+                                <i class="fas fa-bus-alt vehicle-icon"></i>
+                            </button>
+                            <button class="vehicle-button active">
+                                <span>Ordinary Bus</span>
+                                <i class="fas fa-bus-alt vehicle-icon"></i>
+                            </button>
+                            <button class="vehicle-button active">
+                                <span>Airconditioned Bus</span>
+                                <i class="fas fa-bus-alt vehicle-icon"></i>
+                            </button>
                         </div>
-                        <div class="fare-item">
-                            <span class="fare-label">Vehicle type: </span>
+
+                        <div class="section-title">Discount</div>
+                        <div class ="discount">
+                            <div class ="checkbox-wrapper">
+                                <input type ="checkbox" id="discounts" name="discounts" value="Student/PWD/Senior Citizen">
+                                <label for="discounts">Student/PWD/Senior Citizen</label>
                         </div>
-                        <div class="fare-item">
-                            <span class="fare-label">Discount: </span>
                         </div>
-                        <div class="fare-item">
-                            <span class="fare-label">Total Fare: </span>
-                        </div>
+                        <button class = "calculate-fare">Calculate Fare</button>
+                    </div>
+
+                    <!--fare tab content-->
+                    <div class = "content_box fare-content">
+                        <div class="fare-card">
+                            <div class="header-section"></div>
+                            
+                            <div class="content-section">
+                                <div class="total-fare">
+                                    <h2>Total estimated fare:</h2>
+                                    <div class="fare-amount">₱ XXXX</div>
+                                </div>
+
+                                <div class="section">
+                                    <div class="section-title">Location</div>
+                                </div>
+
+                                <div class="section">
+                                    <div class="section-title">Breakdown</div>
+                                    <div class="breakdown-item">
+                                        <span class="item-label">Base fare</span>
+                                        <span class="item-value">XXXX</span>
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <span class="item-label">Applied discount</span>
+                                        <span class="item-value">XXXX</span>
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <span class="item-label">Distance</span>
+                                        <span class="item-value">XXXX</span>
+                                    </div>
+                                    <div class="breakdown-item total">
+                                        <span class="item-label">Total estimated fare</span>
+                                        <span class="item-value">XXXX</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>       
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+    </div>    
 </body>
 
 </html>
