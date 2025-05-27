@@ -219,9 +219,15 @@ label #cancel {
     background: rgba(116, 185, 255, 0.05);
 }
 
-.vehicle-button.active {
-    background: lightskyblue;
+/* Vehicle selection styling */
+.vehicle-radio {
+    display: none;
+}
+
+.vehicle-radio:checked + .vehicle-button {
+    background: #ff69b4;
     color: white;
+    border-color: #ff1493;
 }
 
 .discount {
@@ -274,6 +280,11 @@ label #cancel {
     letter-spacing: 1px;
     font-family: "Poppins", sans-serif ;
     font-weight: 700;
+}
+
+/* Auto-switch to fare tab when calculate button is clicked */
+.calculate-fare:active ~ #tab-fare {
+    opacity: 1;
 }
 
 .fare-breakdown {
