@@ -34,12 +34,14 @@ label #btn, label #cancel {
     transition: all 0.3s ease;
 }
 
- label #btn {
+label #btn {
     display: block;
-    }
+}
+
 label #cancel {
     display: none;
-    padding-left: 210px;
+    padding-left: 230px;
+    padding-top: 10px;
     transition: all 0.9s ease;
 }
 
@@ -52,7 +54,7 @@ label #cancel {
 }
 
 .app-title{
-    padding-top: 15px;
+    padding-top: 10px;
     padding-bottom: 20px;
     font-size: 36px;
     font-weight: 700;
@@ -63,8 +65,8 @@ label #cancel {
 .sidebar {
     position: fixed;
     top: 0;
-    left: -280px;
-    width: 280px;
+    left: -320px;
+    width: 320px;
     height: 100vh;
     background-color: white;
     transition: left 0.3s ease;
@@ -85,9 +87,11 @@ label #cancel {
 
 .tabs-container {
     background: #f8f9fa;
-    padding: 0;
+    justify-content: center;
+    gap: 8px; 
+    padding: 8px; 
     border-bottom: 1px solid #e9ecef;
-    margin: 0 -30px 0 -10px;
+    border-radius: 12px;
 }
 
 .tabs {
@@ -109,7 +113,9 @@ label #cancel {
 
 
 .tab_btn:hover {
-    background: rgba(116, 185, 255, 0.1)
+    background: rgba(116, 185, 255, 0.1);
+    border-radius: 10px; 
+    margin-right: 5px;
 }
 
 .content-container {
@@ -130,11 +136,15 @@ label #cancel {
 
 #tab-route:checked ~ .container .tabs label[for="tab-route"] {
     background: #74b9ff;
+    border-radius: 10px; 
+    margin-right: 5px;
     color: white;
 }
 
 #tab-fare:checked ~ .container .tabs label[for="tab-fare"] {
     background: #74b9ff;
+    border-radius: 10px; 
+    margin-right: 5px;
     color: white;
 }
 
@@ -196,7 +206,7 @@ label #cancel {
     margin-bottom: 24px;
 }
 
-.vehicle-button {
+.vehicle-btn {
     width: 100%;
     padding: 12px 16px;
     margin-bottom: 8px;
@@ -214,7 +224,7 @@ label #cancel {
     justify-content: space-between;
 }
 
-.vehicle-button:hover {
+.vehicle-btn:hover {
     border-color: lightblue;
     background: rgba(116, 185, 255, 0.05);
 }
@@ -224,10 +234,10 @@ label #cancel {
     display: none;
 }
 
-.vehicle-radio:checked + .vehicle-button {
-    background: #ff69b4;
+.vehicle-radio:checked + .vehicle-btn {
+    background: #74b9ff;
     color: white;
-    border-color: #ff1493;
+    border-color: lightblue;
 }
 
 .discount {
@@ -270,6 +280,7 @@ label #cancel {
 .calculate-fare {
     width: 100%;
     padding: 12px;
+    margin-left: 40px;
     background: #f8de7f;
     border: none;
     border-radius: 8px;
@@ -295,101 +306,100 @@ label #cancel {
 }
 
 .fare-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            width: 100%;
-            max-width: 400px;
-        }
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+    max-width: 400px;
+}
 
-        .header-section {
-            background: linear-gradient(135deg, #a8c8ec 0%, #7ab3e8 100%);
-            height: 120px;
-            position: relative;
-            overflow: hidden;
-        }
+.header-section {
+    background: linear-gradient(135deg, #a8c8ec 0%, #7ab3e8 100%);
+    height: 120px;
+    position: relative;
+    overflow: hidden;
+}
 
-        .header-section::after {
-            content: '';
-            position: absolute;
-            top: 20px;
-            right: -20px;
-            width: 200px;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.4);
-            transform: rotate(-15deg);
-            box-shadow: 
-                0 15px 0 rgba(255, 255, 255, 0.3),
+.header-section::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: -20px;
+    width: 200px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.4);
+    transform: rotate(-15deg);
+    box-shadow: 0 15px 0 rgba(255, 255, 255, 0.3),
                 0 30px 0 rgba(255, 255, 255, 0.2);
-        }
+}
 
-        .content-section {
-            padding: 24px;
-        }
+.content-section {
+    padding: 24px;
+}
 
-        .total-fare {
-            margin-bottom: 24px;
-        }
+.total-fare {
+    margin-bottom: 24px;
+}
 
-        .total-fare h2 {
-            font-size: 16px;
-            font-weight: 500;
-            color: #333;
-            margin-bottom: 8px;
-        }
+.total-fare h2 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+}
 
-        .fare-amount {
-            font-size: 24px;
-            font-weight: 700;
-            color: #000;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #2563eb;
-            display: inline-block;
-            min-width: 120px;
-        }
+.fare-amount {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000;
+    padding-bottom: 12px;
+    border-bottom: 3px solid #2563eb;
+    display: inline-block;
+    min-width: 120px;
+}
 
-        .section {
-            margin-bottom: 20px;
-        }
+.section {
+    margin-bottom: 20px;
+}
 
-        .breakdown-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            color: #666;
-            font-size: 14px;
-        }
+.breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    color: #666;
+    font-size: 14px;
+}
 
-        .breakdown-item:not(:last-child) {
-            border-bottom: 1px solid #f0f0f0;
-        }
+.breakdown-item:not(:last-child) {
+    border-bottom: 1px solid #f0f0f0;
+}
 
-        .breakdown-item.total {
-            font-weight: 600;
-            color: #333;
-            padding-top: 12px;
-            margin-top: 8px;
-            border-top: 1px solid #e0e0e0;
-        }
+.breakdown-item.total {
+    font-weight: 600;
+    color: #333;
+    padding-top: 12px;
+    margin-top: 8px;
+    border-top: 1px solid #e0e0e0;
+}
 
-        .item-label {
-            font-weight: 500;
-        }
+.item-label {
+    font-weight: 500;
+}
 
-        .item-value {
-            font-weight: 600;
-            color: #333;
-        }
+.item-value {
+    font-weight: 600;
+    color: #333;
+}
 
-        /* Responsive design */
-        @media (max-width: 480px) {
-            .fare-card {
-                margin: 10px;
-            }
+/* Responsive design */
+@media (max-width: 480px) {
+    .fare-card {
+        margin: 10px;
+    }
             
-            .content-section {
-                padding: 20px;
-            }
-        }
+    .content-section {
+        padding: 20px;
+    }
+}
