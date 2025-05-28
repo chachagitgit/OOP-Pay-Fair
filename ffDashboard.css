@@ -12,6 +12,8 @@ body {
 .container{
     background-color: white;
 }
+
+/*for burger and close*/
 #check {
     display: none;
 }
@@ -27,11 +29,11 @@ label[for="check"]{
     top: 20px;
     font-size: 30px;  
     color: #2d3436;
-    transition: all 0.3s ease;
+    transition: all 1.5s ease;
 }
 
 label #btn, label #cancel {
-    transition: all 0.3s ease;
+    transition: all 1.5s ease;
 }
 
 label #btn {
@@ -42,7 +44,7 @@ label #cancel {
     display: none;
     padding-left: 230px;
     padding-top: 10px;
-    transition: all 0.9s ease;
+    transition: all 2s ease;
 }
 
 #check:checked ~ label #btn {
@@ -53,6 +55,7 @@ label #cancel {
     display: block;
 }
 
+/*sidebar title*/
 .app-title{
     padding-top: 10px;
     padding-bottom: 20px;
@@ -76,6 +79,7 @@ label #cancel {
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/*for double tabs (route and fare)*/
 #check:checked ~ .container .sidebar{
     left: 0;
 }
@@ -119,7 +123,7 @@ label #cancel {
 }
 
 .content-container {
-    padding: 24px 0;
+    padding: 5px 0;
 }
 
 .content_box {
@@ -148,49 +152,156 @@ label #cancel {
     color: white;
 }
 
+/*route tab contents*/
+/*location input*/
+.content_box {  
+    max-width: 500px;
+    margin: 5px auto;
+    padding: 20px 20px 20px 0px;
+    font-family: "Poppins", sans-serif;
+}
 .location-label {
-    font-size: 16px;
-    font-weight: 600;
-    font-family: "Poppins", sans-serif ;
-    color: #2d3436;
-    margin-bottom: 12px;
+    color: #2d3436; 
+    margin-bottom: 5px;
     display: block;
+    font-weight: 700;
+    font-size: 16px;
 }
 
 .input-group {
-    margin-bottom: 24px;
+    display: flex; 
+    flex-direction: column; 
+    gap: 2px;
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 10px;
 }
 
 .input-wrapper {
     position: relative;
-    margin-bottom: 12px;
-}
-
-.input-group input{
-    width: 100%;
-    padding: 12px 40px 12px 16px;
-    border: 2px solid #e9ecef;
+    display: flex;
+    align-items: center;
+    border:1px;
     border-radius: 8px;
-    font-family: "Poppins", sans-serif ;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    background: #f8f9fa;
+    background: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3 ease;
 }
 
-.input-group input:focus {
+.input-container:focus-within{
+    border-color: lightblue;
+}
+
+.main-input {
+    flex: 1;
+    padding: 12px 15px;
+    border: none;
     outline: none;
-    border-color: #74b9ff;
-    background: white;
-    box-shadow: 0 0 0 3px rgba(116, 185, 255, 0.1);
+    font-size: 16px;
+    background: transparent;
 }
 
 .location-icon {
+    margin-left: 15px;
+    color: gray;
+    font-size: 18px;
+}
+
+/*location input*/
+.dropdown-control {
+    display: none;
+}
+
+.dropdown-btn {
     position: absolute;
     right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #636e72;
-    font-size: 16px;
+    padding: 12px 15px;
+    color: lightblue;
+    font-size: 14px;
+    transition: color 0.3s ease;
+    user-select: none;
+    cursor: pointer;
+}
+
+.dropdown-btn:hover {
+    color: #007bff;
+}
+
+.dropdown-btn i {
+    transition: transform 0.3s ease;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 3px;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.input-wrapper:focus-within .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.input-wrapper:focus-within .dropdown-btn i {
+    transform: rotate(180deg);
+}
+
+.dropdown-placeholder {
+    padding: 12px 15px;
+    color: #999;
+    font-style: italic;
+    text-align: center;
+}
+
+.dropdown-item {
+    padding: 12px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid #f0f0f0;
+    color: #666;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.dropdown-item::before {
+    content: "📍 ";
+    opacity: 0.5;
+}
+
+.dropdown-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    display: none;
+}
+
+.input-wrapper:focus-within .dropdown-overlay {
+    display: block;
 }
 
 .section-title {
@@ -200,6 +311,7 @@ label #cancel {
     color: #2d3436;
     font-size: 16px;
     letter-spacing: 0.5px;
+    margin-bottom: 4px;
 }
 
 .vehicle-options{
@@ -212,7 +324,7 @@ label #cancel {
     margin-bottom: 8px;
     border: 2px solid #e9ecef;
     background: white;
-    color: #636e72;
+    color: #2d3436;
     border-radius: 8px;
     cursor: pointer;
     font-size: 14px;
@@ -241,13 +353,14 @@ label #cancel {
 }
 
 .discount {
-    margin-bottom: 24px;
+    margin-bottom: 30px;
+    margin-top: 5px;
 }
 
 .checkbox-wrapper {
     display: flex;
     align-items: center;
-    padding: 12px 16px;
+    padding: 4px 10px;
     background: #f8f9fa;
     border: 2px solid #e9ecef;
     border-radius: 8px;
@@ -264,14 +377,14 @@ label #cancel {
 .checkbox-wrapper input[type="checkbox"] {
     width: 16px;
     height: 16px;
-    margin-right: 8px;
+    margin-right: 10px;
     cursor: pointer;
 }
 
 .checkbox-wrapper label {
     font-weight: 600;
     font-family: "Poppins", sans-serif ;
-    color: black;
+    color: #2d3436;
     cursor: pointer;
     flex: 1;
     font-size: 14px;
@@ -279,12 +392,12 @@ label #cancel {
 
 .calculate-fare {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     margin-left: 40px;
     background: #f8de7f;
     border: none;
     border-radius: 8px;
-    color: black;
+    color: #2d3436;
     font-size: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -298,6 +411,7 @@ label #cancel {
     opacity: 1;
 }
 
+/* fare tab*/
 .fare-breakdown {
     background: pink;
     padding: 20px;
@@ -305,6 +419,7 @@ label #cancel {
     border: 1px solid lightskyblue;
 }
 
+/*container for the contents*/
 .fare-card {
     background: white;
     border-radius: 12px;
