@@ -38,11 +38,17 @@
             color: #007bff;
         }
 
-        .app-title {
-            font-size: 30px;
+         .app-title {
+            font-size: 20px;
             font-weight: 600;
             color: #333;
             font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .app-title:hover {
+            color: #007bff;
         }
 
         .logo {
@@ -137,8 +143,7 @@
             visibility: visible;
         }
 
-        /* Main Content */
-                
+        /* Main Content */             
         .slideshow-container {
             width: 100%;
             max-width: 1535px; 
@@ -150,49 +155,6 @@
             border: none;    
         }
 
-        .slideshow-wrapper {
-            width: 100%;
-            display: flex;
-            animation: slide 10s infinite;
-        }
-
-        @keyframes slide {
-            0%, 20% {
-                transform: translateX(0);
-            } 
-            25%, 45% {
-                transform: translateX(-100%);
-            }
-            50%, 70%{
-                transform: translateX(-200%);
-            }
-            75%, 100% {
-                transform: translateX(0%);
-            }
-        }
-
-
-        .calculate-now-btn {
-            position: absolute;
-            bottom: 100px;
-            right: 80px;
-            background-color: black;
-            color: white;
-            font-family: "Poppins" sans-serif;
-            font-size: 16px;
-            border-radius: 2px;
-            cursor: pointer;
-            padding: 10px 20px;
-            transition: background-color 0.3 ease;
-            text-decoration: none;
-            font-weight: 300;
-        }
-
-        .calculate-now-btn:hover {
-            background-color: aliceblue;
-            color: black;
-            border: black;
-        }
 
         /* Responsive Design */
         @media (max-width: 768px) {
