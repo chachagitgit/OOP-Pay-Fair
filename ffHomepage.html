@@ -16,7 +16,39 @@
 
 </head>
 <body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <h1 class="app-title">FairFare</h1>
+        </div>
+        <div class="logo">
+            <i class="fas fa-user"></i>
+        </div>
+    </header>
 
+   <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2 class="sidebar-title">FairFare</h2>
+            <div class="close-btn" id="closeSidebar">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div class="sidebar-menu">
+            <div class="sidebar-item" data-link="tAndC.html">Terms and Conditions</div>
+            <div class="sidebar-item" data-link="PrivAndPol.html">Privacy Policy</div>
+            <div class="sidebar-item" data-link="about.html">About Us</div>
+            <div class="sidebar-item" data-link="contact.html">Contact Us</div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Main Content -->
     <div class="slideshow-container">
         <div class="slideshow-wrapper">
             <img src="2.png"></image>
@@ -25,6 +57,52 @@
         </div>
         <a href="ffDashboard.html" class="calculate-now-btn">CALCULATE NOW</a>>
     </div>
-</body>
 
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const closeSidebar = document.getElementById('closeSidebar');
+        const overlay = document.getElementById('overlay');
+
+        // Open sidebar
+        hamburger.addEventListener('click', () => {
+            sidebar.classList.add('open');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close sidebar
+        function closeSidebarFunc() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        closeSidebar.addEventListener('click', closeSidebarFunc);
+        overlay.addEventListener('click', closeSidebarFunc);
+
+        // Close sidebar with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+                closeSidebarFunc();
+            }
+        });
+
+         // Add click functionality to sidebar items with navigation
+        const sidebarItems = document.querySelectorAll('.sidebar-item');
+        sidebarItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const link = item.getAttribute('data-link');
+                if (link) {
+                    // Close sidebar first
+                    closeSidebarFunc();
+                    // Navigate to the page after a short delay for smooth transition
+                    setTimeout(() => {
+                        window.location.href = link;
+                    }, 300);
+                }
+            });
+        });
+    </script>
+</body>
 </html>
