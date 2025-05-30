@@ -1,0 +1,526 @@
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #f5f5f5;
+    }
+
+.container{
+    background-color: white;
+}
+
+/*for burger and close*/
+#check {
+    display: none;
+}
+input[type="radio"]{
+    display: none;
+}
+
+label[for="check"]{
+    position: fixed;
+    cursor: pointer;
+    z-index: 101;
+    left: 20px;
+    top: 20px;
+    font-size: 30px;  
+    color: #2d3436;
+    transition: all 0.3s ease;
+}
+
+label #btn, label #cancel {
+    transition: all 0.3s ease;
+}
+
+label #btn {
+    display: block;
+}
+
+label #cancel {
+    display: none;
+    transform: translateX(230px);  
+    padding-top: 10px;
+    transition: all 0.3s ease;
+}
+
+#check:checked ~ label #btn {
+    display: none;
+}
+
+#check:checked ~ label #cancel{
+    display: block;
+}
+
+/*sidebar title*/
+.app-title{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 36px;
+    font-weight: 700;
+    color: black;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif ;
+    display: inline-block;
+}
+
+.app-title:hover {
+    color: midnightblue;
+    cursor: pointer;
+}
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -320px;
+    width: 320px;
+    height: 100vh;
+    background-color: white;
+    transition: left 0.3s ease;
+    padding: 10px 30px;
+    color: black;
+    z-index: 100;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/*for double tabs (route and fare)*/
+#check:checked ~ .container .sidebar{
+    left: 0;
+}
+
+.sidebar-header {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+}
+
+.tabs-container {
+    background: #f8f9fa;
+    justify-content: center;
+    gap: 8px; 
+    padding: 8px; 
+    border-bottom: 1px solid #e9ecef;
+    border-radius: 12px;
+}
+
+.tabs {
+    display: flex;
+}
+
+.tab_btn{
+    flex:1;
+    padding: 16px 20px;
+    text-align: center;
+    cursor: pointer;
+    background: transparent;
+    border: none; 
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Poppins", sans-serif ;
+}
+
+
+.tab_btn:hover {
+    background: rgba(116, 185, 255, 0.1);
+    border-radius: 10px; 
+    margin-right: 5px;
+}
+
+.content-container {
+    padding: 5px 0;
+}
+
+.content_box {
+    display: none;
+}
+
+#tab-route:checked ~ .container .route-content {
+    display: block;
+}
+
+#tab-fare:checked ~ .container .fare-content {
+    display: block;
+}
+
+#tab-route:checked ~ .container .tabs label[for="tab-route"] {
+    background: #74b9ff;
+    border-radius: 10px; 
+    margin-right: 5px;
+    color: white;
+}
+
+#tab-fare:checked ~ .container .tabs label[for="tab-fare"] {
+    background: #74b9ff;
+    border-radius: 10px; 
+    margin-right: 5px;
+    color: white;
+}
+
+/*route tab contents*/
+/*location input*/
+.content_box {  
+    max-width: 500px;
+    margin: 5px auto;
+    padding: 20px 20px 20px 0px;
+    font-family: "Poppins", sans-serif;
+}
+.location-label {
+    color: #2d3436; 
+    margin-bottom: 5px;
+    display: block;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.input-group {
+    display: flex; 
+    flex-direction: column; 
+    gap: 2px;
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border:1px;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3 ease;
+}
+
+.input-container:focus-within{
+    border-color: lightblue;
+}
+
+.main-input {
+    flex: 1;
+    padding: 12px 15px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background: transparent;
+}
+
+.location-icon {
+    margin-left: 15px;
+    color: gray;
+    font-size: 18px;
+}
+
+/*location input*/
+.dropdown-control {
+    display: none;
+}
+
+.dropdown-btn {
+    position: absolute;
+    right: 12px;
+    padding: 12px 15px;
+    color: lightblue;
+    font-size: 14px;
+    transition: color 0.3s ease;
+    user-select: none;
+    cursor: pointer;
+}
+
+.dropdown-btn:hover {
+    color: #007bff;
+}
+
+.dropdown-btn i {
+    transition: transform 0.3s ease;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 3px;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.input-wrapper:focus-within .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.input-wrapper:focus-within .dropdown-btn i {
+    transform: rotate(180deg);
+}
+
+.dropdown-placeholder {
+    padding: 12px 15px;
+    color: #999;
+    font-style: italic;
+    text-align: center;
+}
+
+.dropdown-item {
+    padding: 12px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid #f0f0f0;
+    color: #666;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.dropdown-item::before {
+    content: "📍 ";
+    opacity: 0.5;
+}
+
+.dropdown-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    display: none;
+}
+
+.input-wrapper:focus-within .dropdown-overlay {
+    display: block;
+}
+
+.section-title {
+    font-weight: 700;
+    font-family: "Poppins", sans-serif ;
+    margin: 24px 0 16px 0;
+    color: #2d3436;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.vehicle-options{
+    margin-bottom: 24px;
+}
+
+.vehicle-btn {
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border: 2px solid #e9ecef;
+    background: white;
+    color: #2d3436;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Poppins", sans-serif ;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.vehicle-btn:hover {
+    border-color: lightblue;
+    background: rgba(116, 185, 255, 0.05);
+}
+
+/* Vehicle selection styling */
+.vehicle-radio {
+    display: none;
+}
+
+.vehicle-radio:checked + .vehicle-btn {
+    background: #74b9ff;
+    color: white;
+    border-color: lightblue;
+}
+
+.discount {
+    margin-bottom: 30px;
+    margin-top: 5px;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 4px 10px;
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+
+.checkbox-wrapper:hover {
+    background: rgba(116, 185, 255, 0.05);
+    border-color: lightblue;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.checkbox-wrapper label {
+    font-weight: 600;
+    font-family: "Poppins", sans-serif ;
+    color: #2d3436;
+    cursor: pointer;
+    flex: 1;
+    font-size: 14px;
+}
+
+.calculate-fare {
+    width: 100%;
+    padding: 10px;
+    margin-left: 40px;
+    background: #f8de7f;
+    border: none;
+    border-radius: 8px;
+    color: #2d3436;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+    font-family: "Poppins", sans-serif ;
+    font-weight: 700;
+}
+
+/* Auto-switch to fare tab when calculate button is clicked */
+.calculate-fare:active ~ #tab-fare {
+    opacity: 1;
+}
+
+/* fare tab*/
+.fare-breakdown {
+    background: pink;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid lightskyblue;
+}
+
+/*container for the contents*/
+.fare-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+    max-width: 400px;
+}
+
+.header-section {
+    background: linear-gradient(135deg, #a8c8ec 0%, #7ab3e8 100%);
+    height: 120px;
+    position: relative;
+    overflow: hidden;
+}
+
+.header-section::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: -20px;
+    width: 200px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.4);
+    transform: rotate(-15deg);
+    box-shadow: 0 15px 0 rgba(255, 255, 255, 0.3),
+                0 30px 0 rgba(255, 255, 255, 0.2);
+}
+
+.content-section {
+    padding: 24px;
+}
+
+.total-fare {
+    margin-bottom: 24px;
+}
+
+.total-fare h2 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.fare-amount {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000;
+    padding-bottom: 12px;
+    border-bottom: 3px solid #2563eb;
+    display: inline-block;
+    min-width: 120px;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.breakdown-item:not(:last-child) {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.breakdown-item.total {
+    font-weight: 600;
+    color: #333;
+    padding-top: 12px;
+    margin-top: 8px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.item-label {
+    font-weight: 500;
+}
+
+.item-value {
+    font-weight: 600;
+    color: #333;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+    .fare-card {
+        margin: 10px;
+    }
+            
+    .content-section {
+        padding: 20px;
+    }
+}

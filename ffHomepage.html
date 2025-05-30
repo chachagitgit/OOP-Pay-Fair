@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src = "https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>FairFare</title>
+    <link rel="stylesheet" href="ffHomepage.css">
+
+
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <h1 class="app-title">FairFare</h1>
+        </div>
+        <div class="logo">
+            <i class="fas fa-user"></i>
+        </div>
+    </header>
+
+   <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2 class="sidebar-title">FairFare</h2>
+            <div class="close-btn" id="closeSidebar">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div class="sidebar-menu">
+            <div class="sidebar-item" data-link="tAndC.html">Terms and Conditions</div>
+            <div class="sidebar-item" data-link="PrivAndPol.html">Privacy Policy</div>
+            <div class="sidebar-item" data-link="about.html">About Us</div>
+            <div class="sidebar-item" data-link="contact.html">Contact Us</div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Main Content -->
+    <div class="slideshow-container">
+        <div class="slideshow-wrapper">
+            <img src="2.png"></image>
+            <img src="3.png"></image>
+            <img src="4.png"></image>
+        </div>
+        <a href="ffDashboard.html" class="calculate-now-btn">CALCULATE NOW</a>>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const closeSidebar = document.getElementById('closeSidebar');
+        const overlay = document.getElementById('overlay');
+
+        // Open sidebar
+        hamburger.addEventListener('click', () => {
+            sidebar.classList.add('open');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close sidebar
+        function closeSidebarFunc() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        closeSidebar.addEventListener('click', closeSidebarFunc);
+        overlay.addEventListener('click', closeSidebarFunc);
+
+        // Close sidebar with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+                closeSidebarFunc();
+            }
+        });
+
+         // Add click functionality to sidebar items with navigation
+        const sidebarItems = document.querySelectorAll('.sidebar-item');
+        sidebarItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const link = item.getAttribute('data-link');
+                if (link) {
+                    // Close sidebar first
+                    closeSidebarFunc();
+                    // Navigate to the page after a short delay for smooth transition
+                    setTimeout(() => {
+                        window.location.href = link;
+                    }, 300);
+                }
+            });
+        });
+    </script>
+
+    <div class="section-AU reveal">ABOUT US</div>
+    <div class="AU">
+        <p class="reveal"><strong>FairFare</strong> is a commuter-focused fare calculator designed to provide quick, accurate, and transparent fare estimates for everyday travelers.</p>
+        <p class="reveal">Whether you're heading to work, school, or home, we help you stay informed and in control of your transportation costs.</p>
+        <p class="reveal">Our mission is to make commuting more predictable and budget-friendly for everyone.</p>
+        <p class="reveal">Built with simplicity and fairness in mind, FairFare empowers users with the information they need—before they even step out the door.</p>
+    </div>
+    
+    <div class="section-TC reveal">TERMS AND CONDITIONS</div>
+    <div class="TandC">
+        <p class="reveal"><strong><em>Effective Date: May 25, 2025</em></strong></p>
+        <p class="reveal">Welcome to FairFare. By accessing or using our app, you agree to be bound by these Terms of Use. Please read them carefully.
+        <ol class="reveal">
+            <li><strong>Use of the App:</strong> You may use FairFare solely for personal, non-commercial purposes. You agree not to misuse or attempt to disrupt the operation of the app.</li>
+            <li><strong>Accuracy of Information:</strong> While we strive for accurate fare estimates, actual fares may vary due to traffic, route changes, or service providers. FairFare is not responsible for discrepancies.<</li>
+            <li><strong>User Conduct:</strong> You agree not to use the app for unlawful purposes or to violate the rights of others.</li>
+            <li><strong>Intellectual Property:</strong> All content within FairFare, including logos and branding, is the property of FairFare and may not be used without permission.</li>
+        </ol>
+        <p class="reveal"><strong>Modifications:</strong> We may update these Terms at any time. Continued use of the app means you accept the revised terms.</p>
+        <p class="reveal">If you do not agree to these terms, please do not use the app.</p>
+    </div>
+
+    <div class="section-PC reveal">PRIVACY POLICY</div>
+    <div class="PC">
+        <p class="reveal">Your privacy is important to us. This Privacy Policy explains how FairFare collects, uses, and protects your information.</p>
+        <ul class="reveal"><strong>Information We Collect</strong>
+            <li>Basic location data to calculate fare estimates.</li>
+            <li>Device information (for diagnostics and analytics).</li>
+            <li>Optional contact details (if you submit feedback).</li>
+        </ul>
+        <ul class="reveal"><strong>How We Use Your Data</strong>
+            <li>To provide accurate fare estimates.</li>
+            <li>To improve app performance and user experience.</li>
+            <li>To respond to user inquiries or support requests.</li>
+        </ul>
+        <ul class="reveal"><strong>Data Protection</strong>
+            <li>We do not sell or share your data with third parties.</li>
+            <li>We use encryption and secure storage practices.</li>
+        </ul>
+        <p class="reveal"><strong>Your Rights</strong></p>
+        <ul class="reveal">
+            <li class="reveal">You may request to view or delete your data at any time.</li>
+        </ul>
+        <p class="reveal delay-1s">For questions or concerns, contact us at support@fairfare.app.</p>
+    </div>
+
+    <div class="section-CU reveal">CONTACT US</div>
+    <div class="CU">
+        <ul class="reveal">We’d love to hear from you!
+            <li><strong>Email:</strong>support@fairfare.app</li>
+            <li><strong>Phone:</strong>(Optional – insert if available)</li>
+            <li><strong>Business Hours:</strong>Monday to Friday, 9:00 AM – 5:00 PM (Your Time Zone)</li>
+        </ul>
+        <p class="reveal">For questions, feedback, or support, reach out any time. We’re here to help make your commute smoother and smarter.</p>
+    </div>
+
+    <script>
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target); // Remove this line if you want it to repeat
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+        observer.observe(el);
+    });
+    </script>
+</body>
+</html>

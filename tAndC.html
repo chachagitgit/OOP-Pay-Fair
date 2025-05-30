@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src = "https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>FairFare</title>
+    <link rel="stylesheet" href="tAndC.css">
+
+
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <h1 class="app-title" onclick="window.location.href='ffHomepage.html'">FairFare</h1>
+        </div>
+        <div class="logo">
+            <i class="fas fa-user"></i>
+        </div>
+    </header>
+
+   <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2 class="sidebar-title">FairFare</h2>
+            <div class="close-btn" id="closeSidebar">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div class="sidebar-menu">
+            <div class="sidebar-item" data-link="tAndC.html">Terms and Conditions</div>
+            <div class="sidebar-item" data-link="PrivAndPol.html">Privacy Policy</div>
+            <div class="sidebar-item" data-link="about.html">About Us</div>
+            <div class="sidebar-item" data-link="contact.html">Contact Us</div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Main Content -->
+    <div class="slideshow-container">
+        <h1>
+            Terms and COndition
+        </h1>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const closeSidebar = document.getElementById('closeSidebar');
+        const overlay = document.getElementById('overlay');
+
+        // Open sidebar
+        hamburger.addEventListener('click', () => {
+            sidebar.classList.add('open');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close sidebar
+        function closeSidebarFunc() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        closeSidebar.addEventListener('click', closeSidebarFunc);
+        overlay.addEventListener('click', closeSidebarFunc);
+
+        // Close sidebar with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+                closeSidebarFunc();
+            }
+        });
+
+         // Add click functionality to sidebar items with navigation
+        const sidebarItems = document.querySelectorAll('.sidebar-item');
+        sidebarItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const link = item.getAttribute('data-link');
+                if (link) {
+                    // Close sidebar first
+                    closeSidebarFunc();
+                    // Navigate to the page after a short delay for smooth transition
+                    setTimeout(() => {
+                        window.location.href = link;
+                    }, 300);
+                }
+            });
+        });
+    </script>
+    <div class="section-TC reveal">Terms and Conditions</div>
+    <div class="TandC">
+        <p class="reveal"> Effective Date: May 25, 2025</p>
+        <p class="reveal">Welcome to FairFare. By accessing or using our app, you agree to be bound by these Terms of Use. Please read them carefully.
+        <p class="reveal">1. Use of the App: You may use FairFare solely for personal, non-commercial purposes. You agree not to misuse or attempt to disrupt the operation of the app.</p>
+        <p class="reveal">2. Accuracy of Information: While we strive for accurate fare estimates, actual fares may vary due to traffic, route changes, or service providers. FairFare is not responsible for discrepancies.</p>
+        <p class="reveal">3. User Conduct: You agree not to use the app for unlawful purposes or to violate the rights of others.</p>
+        <p class="reveal">4. Intellectual Property: All content within FairFare, including logos and branding, is the property of FairFare and may not be used without permission.</p>
+        <p class="reveal">Modifications: We may update these Terms at any time. Continued use of the app means you accept the revised terms.</p>
+        <p class="reveal delay-1s"><a>If you do not agree to these terms, please do not use the app.</a></p>
+
+    </div>
+
+    <div class="section-PC reveal">Privacy Policy</div>
+    <div class="PC">
+        <p class="reveal">Your privacy is important to us. This Privacy Policy explains how FairFare collects, uses, and protects your information.</p>
+        <p class="reveal">Information We Collect:</p>
+        <ul class="reveal">
+            <li>Basic location data to calculate fare estimates.</li>
+            <li>Device information (for diagnostics and analytics).</li>
+            <li>Optional contact details (if you submit feedback).</li>
+        </ul>
+        <p class="reveal">How We Use Your Data:</p>
+        <ul class="reveal">
+            <li>To provide accurate fare estimates.</li>
+            <li>To improve app performance and user experience.</li>
+            <li>To respond to user inquiries or support requests.</li>
+        </ul>
+        <p class="reveal">Data Protection:</p>
+        <ul class="reveal">
+            <li>We do not sell or share your data with third parties.</li>
+            <li>We use encryption and secure storage practices.</li>
+        </ul>
+        <p class="reveal">Your Rights:</p>
+        <ul class="reveal">
+            <li class="reveal">You may request to view or delete your data at any time.</li>
+        </ul>
+        <p class="reveal delay-1s">For questions or concerns, contact us at support@fairfare.app.</p>
+    </div>
+
+    <script>
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target); // Remove this line if you want it to repeat
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+        observer.observe(el);
+    });
+    </script>
+
+</body>
+</html>
