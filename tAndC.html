@@ -101,5 +101,62 @@
             });
         });
     </script>
+    <div class="section-TC reveal">Terms and Conditions</div>
+    <div class="TandC">
+        <p class="reveal"> Effective Date: May 25, 2025</p>
+        <p class="reveal">Welcome to FairFare. By accessing or using our app, you agree to be bound by these Terms of Use. Please read them carefully.
+        <p class="reveal">1. Use of the App: You may use FairFare solely for personal, non-commercial purposes. You agree not to misuse or attempt to disrupt the operation of the app.</p>
+        <p class="reveal">2. Accuracy of Information: While we strive for accurate fare estimates, actual fares may vary due to traffic, route changes, or service providers. FairFare is not responsible for discrepancies.</p>
+        <p class="reveal">3. User Conduct: You agree not to use the app for unlawful purposes or to violate the rights of others.</p>
+        <p class="reveal">4. Intellectual Property: All content within FairFare, including logos and branding, is the property of FairFare and may not be used without permission.</p>
+        <p class="reveal">Modifications: We may update these Terms at any time. Continued use of the app means you accept the revised terms.</p>
+        <p class="reveal delay-1s"><a>If you do not agree to these terms, please do not use the app.</a></p>
+
+    </div>
+
+    <div class="section-PC reveal">Privacy Policy</div>
+    <div class="PC">
+        <p class="reveal">Your privacy is important to us. This Privacy Policy explains how FairFare collects, uses, and protects your information.</p>
+        <p class="reveal">Information We Collect:</p>
+        <ul class="reveal">
+            <li>Basic location data to calculate fare estimates.</li>
+            <li>Device information (for diagnostics and analytics).</li>
+            <li>Optional contact details (if you submit feedback).</li>
+        </ul>
+        <p class="reveal">How We Use Your Data:</p>
+        <ul class="reveal">
+            <li>To provide accurate fare estimates.</li>
+            <li>To improve app performance and user experience.</li>
+            <li>To respond to user inquiries or support requests.</li>
+        </ul>
+        <p class="reveal">Data Protection:</p>
+        <ul class="reveal">
+            <li>We do not sell or share your data with third parties.</li>
+            <li>We use encryption and secure storage practices.</li>
+        </ul>
+        <p class="reveal">Your Rights:</p>
+        <ul class="reveal">
+            <li class="reveal">You may request to view or delete your data at any time.</li>
+        </ul>
+        <p class="reveal delay-1s">For questions or concerns, contact us at support@fairfare.app.</p>
+    </div>
+
+    <script>
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target); // Remove this line if you want it to repeat
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+        observer.observe(el);
+    });
+    </script>
+
 </body>
 </html>
