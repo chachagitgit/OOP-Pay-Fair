@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PayFair</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      padding: 20px;
+      background-color: #f5f5f5;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 2em;
+    }
+
+    .input-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus,
+    select:focus {
+      outline: none;
+      border-color: #3498db;
+    }
+
+    .discount-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      background-color: #f8f9fa;
+      border-radius: 6px;
+    }
+
+    .discount-group label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    #map {
+      height: 400px;
+      width: 100%;
+      margin: 20px 0;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+    }
+
+    #fareSummary {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    #fareSummary h3 {
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+
+    #fareSummary p {
+      margin: 10px 0;
+      color: #34495e;
+      line-height: 1.5;
+    }
+
+    .total-fare {
+      font-size: 1.2em;
+      color: #2c3e50;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 2px dashed #ddd;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 15px;
+      }
+
+      .input-group {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pac-container {
+      z-index: 1051 !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>PayFair</h2>
+    
+    <div class="input-group">
+      <input 
+        type="text" 
+        id="originInput" 
+        placeholder="Enter origin location">
+
+      <input 
+        type="text" 
+        id="destinationInput" 
+        placeholder="Enter destination location">
+
+      <select id="vehicle">
+        <option value="1">Airconditioned Bus</option>
+        <option value="2">Ordinary Bus</option>
+        <option value="3">Modern E-Jeepney</option>
+        <option value="4">Traditional Jeepney</option>
+      </select>
+
+      <div class="discount-group">
+        <label>
+          <input type="checkbox" id="discount">
+          <span>Discounted Rate (Student/Senior/PWD)</span>
+        </label>
+      </div>
+
+      <button onclick="calculateRoute()">Calculate Fare</button>
+    </div>
+
+    <div id="map"></div>
+    <div id="fareSummary"></div>
+  </div>
+
+  <script>
+    let map, directionsService, directionsRenderer;
+    let originAutocomplete, destinationAutocomplete;
+
+    function initMap() {
+      const manila = { lat: 14.5995, lng: 120.9842 };
+      
+      //initialize the map
+      map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 11,
+        center: manila,
+        styles: [
+          {
+            featureType: "poi",
+            elementType: "labels",
+            stylers: [{ visibility: "off" }]
+          }
+        ]
+      });
+
+      //initialize directions
+      directionsService = new google.maps.DirectionsService();
+      directionsRenderer = new google.maps.DirectionsRenderer({
+        suppressMarkers: true,
+        polylineOptions: {
+          strokeColor: "#3498db",
+          strokeWeight: 5
+        }
+      });
+      directionsRenderer.setMap(map);
+
+      //autocomplete
+      originAutocomplete = new google.maps.places.Autocomplete(
+        document.getElementById("originInput"),
+        { 
+          componentRestrictions: { country: "ph" },
+          fields: ["geometry", "name"]
+        }
+      );
+
+      destinationAutocomplete = new google.maps.places.Autocomplete(
+        document.getElementById("destinationInput"),
+        { 
+          componentRestrictions: { country: "ph" },
+          fields: ["geometry", "name"]
+        }
+      );
+    }
+
+    function calculateRoute() {
+      const origin = originAutocomplete.getPlace();
+      const destination = destinationAutocomplete.getPlace();
+
+      if (!origin || !origin.geometry) {
+        alert("Please select a valid origin from the dropdown.");
+        return;
+      }
+
+      if (!destination || !destination.geometry) {
+        alert("Please select a valid destination from the dropdown.");
+        return;
+      }
+
+      //clear old markers if there are any
+      if (window.originMarker) window.originMarker.setMap(null);
+      if (window.destMarker) window.destMarker.setMap(null);
+
+      //add markers for origin and destination
+      window.originMarker = new google.maps.Marker({
+        position: origin.geometry.location,
+        map: map,
+        title: origin.name,
+        icon: {
+          url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+          scaledSize: new google.maps.Size(40, 40)
+        },
+        animation: google.maps.Animation.DROP
+      });
+
+      window.destMarker = new google.maps.Marker({
+        position: destination.geometry.location,
+        map: map,
+        title: destination.name,
+        icon: {
+          url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+          scaledSize: new google.maps.Size(40, 40)
+        },
+        animation: google.maps.Animation.DROP
+      });
+
+      const request = {
+        origin: origin.geometry.location,
+        destination: destination.geometry.location,
+        travelMode: google.maps.TravelMode.DRIVING,
+        optimizeWaypoints: true
+      };
+
+      directionsService.route(request, function(result, status) {
+        if (status === "OK") {
+          directionsRenderer.setDirections(result);
+
+          const route = result.routes[0];
+          const distanceMeters = route.legs[0].distance.value;
+          const distanceKm = distanceMeters / 1000;
+          const duration = route.legs[0].duration.text;
+
+          const vehicleChoice = parseInt(document.getElementById("vehicle").value);
+          const isDiscounted = document.getElementById("discount").checked;
+
+          const fareInfo = calculateFare(distanceKm, vehicleChoice, isDiscounted);
+          displayFare(distanceKm, fareInfo, duration);
+
+          //adjust map zoom level to show route
+          const bounds = new google.maps.LatLngBounds();
+          bounds.extend(origin.geometry.location);
+          bounds.extend(destination.geometry.location);
+          map.fitBounds(bounds);
+        } else {
+          console.error('Route calculation failed:', status);
+          alert("Could not calculate route. Please ensure the selected locations are reachable by road.");
+        }
+      });
+    }
+
+    function calculateFare(distanceTraveled, vehicleChoice, isDiscounted) {
+      const DiscountRate = 0.20;
+
+      let baseFare = 0;
+      let baseDistance = 0;
+      let perKmRate = 0;
+      let vehicleName = "";
+
+      switch (vehicleChoice) {
+        case 1:
+          vehicleName = "Airconditioned Bus";
+          baseFare = 15;
+          baseDistance = 5;
+          perKmRate = 3;
+          break;
+        case 2:
+          vehicleName = "Ordinary Bus";
+          baseFare = 13;
+          baseDistance = 5;
+          perKmRate = 3;
+          break;
+        case 3:
+          vehicleName = "Modern E-Jeepney";
+          baseFare = 15;
+          baseDistance = 4;
+          perKmRate = 3;
+          break;
+        case 4:
+          vehicleName = "Traditional Jeepney";
+          baseFare = 13;
+          baseDistance = 4;
+          perKmRate = 2;
+          break;
+        default:
+          return { error: "Invalid vehicle type" };
+      }
+
+      let regularFare = baseFare;
+
+      if (distanceTraveled > baseDistance) {
+        const extraKm = Math.floor(distanceTraveled - baseDistance);
+        regularFare += extraKm * perKmRate;
+      }
+
+      const discountAmount = isDiscounted ? Math.round(regularFare * DiscountRate) : 0;
+      const totalFare = Math.round(regularFare) - discountAmount;
+
+      return {
+        vehicleName,
+        regularFare: Math.round(regularFare),
+        discountAmount,
+        totalFare
+      };
+    }
+
+    function displayFare(distance, fareInfo, duration) {
+      if (fareInfo.error) {
+        document.getElementById("fareSummary").innerHTML = `<p>${fareInfo.error}</p>`;
+        return;
+      }
+
+      document.getElementById("fareSummary").innerHTML = `
+        <h3>Fare Summary</h3>
+        <p><strong>Vehicle Type:</strong> ${fareInfo.vehicleName}</p>
+        <p><strong>Distance:</strong> ${distance.toFixed(2)} km</p>
+        <p><strong>Estimated Travel Time:</strong> ${duration}</p>
+        <p><strong>Regular Fare:</strong> ₱${fareInfo.regularFare.toFixed(2)}</p>
+        <p><strong>Discount Applied:</strong> ₱${fareInfo.discountAmount.toFixed(2)}</p>
+        <div class="total-fare">
+          <p><strong>Total Fare:</strong> <strong>₱${fareInfo.totalFare.toFixed(2)}</strong></p>
+        </div>
+      `;
+    }
+  </script>
+
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJWH0VLI60CGZNcXQQbFWrLUDIfG3z3G0&libraries=places&callback=initMap">
+  </script>
+</body>
+</html> 
