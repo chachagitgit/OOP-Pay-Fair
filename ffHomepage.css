@@ -237,3 +237,24 @@ height: 40px;
 .delay-1-5s {
     transition-delay: 1.5s;
 }
+.app-footer{
+  text-align: left;
+  padding: 20px;
+  background-color: #A5CCEC; 
+  color: black;            
+  font-size: 14px;
+  margin-top: 40px;
+  border-top: 1px solid #ddd;
+}
+.app-footer p{
+    margin-left: 100px;
+}
+.app-footer span{
+    font-size: 13px;
+    margin-top: 40px;
+    margin-left: 580px;
+}
+.app-footer a{
+    color: black;
+    text-decoration: none;
+}
