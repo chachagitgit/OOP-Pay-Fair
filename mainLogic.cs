@@ -81,8 +81,7 @@ public class FareCalculator
         Console.Write("Enter vehicle number: ");
         int vehicleChoice = Convert.ToInt32(Console.ReadLine());
 
-        Console.Write("Is the passenger a student, senior, or PWD? (y/n): ");
-        string discountInput = Console.ReadLine().Trim().ToLower();
+        string discountInput = Console.ReadLine()?.Trim().ToLower() ?? "";
         bool isDiscounted = (discountInput == "y");
 
         CalculateFare(distance, vehicleChoice, isDiscounted);
