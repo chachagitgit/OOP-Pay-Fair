@@ -1,0 +1,69 @@
+function calculateRoute() {
+  const originName = document.getElementById("originInput").value;
+  const destinationName = document.getElementById("destinationInput").value;
+  const vehicleChoice = parseInt(document.getElementById("vehicle").value);
+  const isDiscounted = document.getElementById("discount").checked;
+
+  const originStop = stops.find(s => s.stop_name === originName);
+  const destStop = stops.find(s => s.stop_name === destinationName);
+
+  if (!originStop || !destStop) {
+    alert("Please select valid stops.");
+    return;
+  }
+
+  // Add markers for origin and destination
+  const originMarker = new google.maps.Marker({
+    position: { lat: originStop.lat, lng: originStop.lon },
+    map: map,
+    title: originStop.stop_name,
+    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+  });
+
+  const destMarker = new google.maps.Marker({
+    position: { lat: destStop.lat, lng: destStop.lon },
+    map: map,
+    title: destStop.stop_name,
+    icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+  });
+
+  const request = {
+    origin: { lat: originStop.lat, lng: originStop.lon },
+    destination: { lat: destStop.lat, lng: destStop.lon },
+    travelMode: google.maps.TravelMode.DRIVING,
+    optimizeWaypoints: true
+  };
+
+  directionsService.route(request, function(result, status) {
+    if (status === "OK") {
+      directionsRenderer.setDirections(result);
+
+      const route = result.routes[0];
+      const distanceMeters = route.legs[0].distance.value;
+      const distanceKm = distanceMeters / 1000;
+      const duration = route.legs[0].duration.text;
+
+      const fareInfo = calculateFare(distanceKm, vehicleChoice, isDiscounted);
+      displayFare(distanceKm, fareInfo, duration);
+    } else {
+      alert("Could not get directions: " + status);
+    }
+  });
+}
+
+function displayFare(distance, fareInfo, duration) {
+  if (fareInfo.error) {
+    document.getElementById("fareSummary").innerHTML = `<p>${fareInfo.error}</p>`;
+    return;
+  }
+
+  document.getElementById("fareSummary").innerHTML = `
+    <h3>Fare Summary</h3>
+    <p><strong>Vehicle Type:</strong> ${fareInfo.vehicleName}</p>
+    <p><strong>Distance:</strong> ${distance.toFixed(2)} km</p>
+    <p><strong>Estimated Travel Time:</strong> ${duration}</p>
+    <p><strong>Regular Fare:</strong> ₱${fareInfo.regularFare}</p>
+    <p><strong>Discount Applied:</strong> ₱${fareInfo.discountAmount}</p>
+    <p><strong>Total Fare:</strong> <strong>₱${fareInfo.totalFare}</strong></p>
+  `;
+} 
