@@ -185,23 +185,31 @@ height: 40px;
     }
 }
 /*T&Cs content animation*/
-.section-TC, .section-PC{
+.section-AU, .section-TC, .section-PC, .section-CU{
     padding: 80px 50px 20px;
     font-size: 30px;
     font-weight: 700;
     text-align: center
 }
-.section-TC:hover, .section-PC:hover{
+.section-AU:hover, .section-TC:hover, .section-PC:hover, .section-CU:hover{
     color: #007bff;
 }
-.TandC, .PC {
-    padding: 20px 100px 120px 120px;
+.AU, .TandC, .PC, .CU {
+    padding: 20px 100px 20px 100px;
     font-family: 'Poppins', sans-serif;
+    font-size: 18px;
     max-width: 2000px;
     margin: 10px auto 100px auto;
     opacity: 0;
     animation: fadeInContainer 2s forwards;
 }
+.TandC li, .PC li, .CU li{
+    margin: 10px 0px 10px 80px;
+}
+.PC ul {
+    margin-top: 10px;
+}
+
 @keyframes fadeInContainer {
     to {
         opacity: 1;
