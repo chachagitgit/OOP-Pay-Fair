@@ -2,107 +2,114 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src = "https://kit.fontawesome.com/a076d05399.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <title>FairFare</title>
+    <title>PayFare - Ride Easy, Pay Fairly</title>
     <link rel="stylesheet" href="ffHomepage.css">
-
-
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-left">
-            <div class="hamburger" id="hamburger">
-                <i class="fas fa-bars"></i>
-            </div>
-            <h1 class="app-title">FairFare</h1>
-        </div>
-        <div class="logo">
-            <i class="fas fa-user"></i>
-        </div>
-    </header>
-
-   <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
+    
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h2 class="sidebar-title">FairFare</h2>
-            <div class="close-btn" id="closeSidebar">
-                <i class="fas fa-times"></i>
-            </div>
+            <button class="close-btn" id="closeSidebar">×</button>
         </div>
         <div class="sidebar-menu">
-            <div class="sidebar-item" data-link="tAndC.html">Terms and Conditions</div>
-            <div class="sidebar-item" data-link="PrivAndPol.html">Privacy Policy</div>
-            <div class="sidebar-item" data-link="about.html">About Us</div>
-            <div class="sidebar-item" data-link="contact.html">Contact Us</div>
+            <a href="tAndC.html">Terms and Conditions</a>
+            <a href="PrivandPol.html">Privacy Policy</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Us</a>
         </div>
-    </div>
-
-    <!-- Overlay -->
-    <div class="overlay" id="overlay"></div>
-
-    <!-- Main Content -->
-    <div class="slideshow-container">
-        <div class="slideshow-wrapper">
-            <img src="2.png"></image>
-            <img src="3.png"></image>
-            <img src="4.png"></image>
+    </nav>
+    
+    <header>
+        <!-- Burger Menu on the left -->
+        <div class="burger-menu" id="burgerMenu">
+            <div class="burger-icon" id="burgerIcon">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-        <a href="ffDashboard.html" class="calculate-now-btn">CALCULATE NOW</a>>
-    </div>
+        
+        <!-- Empty middle section -->
+        <div></div>
+        
+        <!-- Logo on the right -->
+        <figure class="logo">
+            <img src="logo.png" alt="PayFare Logo">
+        </figure>
+    </header>
 
-    <script>
-        const hamburger = document.getElementById('hamburger');
-        const sidebar = document.getElementById('sidebar');
-        const closeSidebar = document.getElementById('closeSidebar');
-        const overlay = document.getElementById('overlay');
+    <main>
+        <section class="carousel next">
+            <div class="list">
+                
+                <article class="item other_1">
+                    <div class="main-content" 
+                    style="background-color: #9c4d2f; background-image: url('bg1.png'); background-size: cover; background-position: center;">
+                        <div class="content">
+                            <img src="full logo.png" alt="PayFare Logo" class="title-image">
+                            <p class="Header">Ride Easy, Pay Fairly</p>
+                            <p class="description">
+                                PayFare is a fare calculating app designed for commuters across the Philippines. It provides accurate fare estimates for various transportation modes, helping users plan their trips efficiently and budget their travel costs with ease.
+                            </p>
+                        </div>
+                    </div>
+                    <figure class="image">
+                        <img src="pogs.png" alt="PayFare App Interface">
+                    </figure>
+                </article>
 
-        // Open sidebar
-        hamburger.addEventListener('click', () => {
-            sidebar.classList.add('open');
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
+                <article class="item active">
+                    <div class="main-content" 
+                    style="background-color: #f5bfaf; background-image: url('bg2.png'); background-size: cover; background-position: center;">
+                        <div class="content">
+                            <img src="full logo.png" alt="PayFare Logo" class="title-image">
+                            <p class="Aheader2">Your fare buddy, anywhere in the Philippines</p>
+                            <p class="description">
+                                A Fare Calculating App designed for commuters across the Philippines
+                            </p>
+                        </div>
+                    </div>
+                    <figure class="image">
+                        <img src="pinplace.png" alt="Location Pin">
+                    </figure>
+                </article>
 
-        // Close sidebar
-        function closeSidebarFunc() {
-            sidebar.classList.remove('open');
-            overlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
+                <article class="item other_2">
+                    <div class="main-content" 
+                    style="background-color: #dedfe1; background-image: url('bg3.png'); background-size: cover; background-position: center;">
+                        <div class="content">
+                            <img src="full logo.png" alt="PayFare Logo" class="title-image">
+                            <p class="description">
+                                A Fare Calculating App designed for commuters across the Philippines
+                            </p>
+                            <button class="CalculateNow">
+                                Calculate Now
+                            </button>
+                        </div>
+                    </div>
+                    <figure class="image">
+                        <img src="cars.png" alt="Transportation Options">
+                    </figure>
+                </article>
+                
+            </div>
+            <div class="arrows">
+                <button id="prev"><</button>
+                <button id="next">></button>
+            </div>
+        </section>
+    </main>
 
-        closeSidebar.addEventListener('click', closeSidebarFunc);
-        overlay.addEventListener('click', closeSidebarFunc);
-
-        // Close sidebar with Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && sidebar.classList.contains('open')) {
-                closeSidebarFunc();
-            }
-        });
-
-         // Add click functionality to sidebar items with navigation
-        const sidebarItems = document.querySelectorAll('.sidebar-item');
-        sidebarItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const link = item.getAttribute('data-link');
-                if (link) {
-                    // Close sidebar first
-                    closeSidebarFunc();
-                    // Navigate to the page after a short delay for smooth transition
-                    setTimeout(() => {
-                        window.location.href = link;
-                    }, 300);
-                }
-            });
-        });
-    </script>
+    <script src="ffHomepage.js"></script>
 </body>
 </html>
