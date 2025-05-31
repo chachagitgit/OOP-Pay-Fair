@@ -37,19 +37,19 @@
     <!--for sidebar-->
     <div class="sidebar" id = "sidebar">
         <div class = "sidebar-header">
-            <a href="ffHomepage.html" class = "app-title">FairFare</a> <!--h   eader-->
+            <a href="tAndC.html" class = "app-title">PayFair</a> <!--header-->
          </div>
 
         <div class = "tabs-container">
-            <div class = "tabs">
+            <div class = "tabs"> <!--double tab option-->
                 <label for="tab-route" class="tab_btn">Route</label>
                 <label for="tab-fare" class="tab_btn">Fare</label>
              </div>
             </div>
             <!--Route tab content-->
             <div class="content-container">
-                <div class = "content_box route-content">
-                    <label class="location-label">Enter Starting location</label>
+                <div class = "content_box route-content"> <!--user input starting location-->
+                    <label class="location-label">Enter Starting location</label> 
                     
                     <div class = "input-group">
                         <!--starting location-->
@@ -57,12 +57,12 @@
                             <input type="checkbox" id="dropdown1" class="dropdown-control"> 
                             <div class="input-wrapper">
                                 <div class="dropdown-overlay"></div>
-                                <i class = "fas fa-map-marker-alt location-icon"></i>
+                                <i class = "fas fa-map-marker-alt location-icon"></i><!--location icon-->
                                 <input type="text" class="main-input" placeholder="Starting location" aria-label="Starting location"> 
-                                <label for="dropdown1" class="dropdown-btn" aria-label="Toggle dropdown">
-                                    <i class="fas fa-chevron-down"></i>
+                                <label for="dropdown1" class="dropdown-btn" aria-label="Toggle dropdown">  <!--when user types, there will be a dropdown-->
+                                    <i class="fas fa-chevron-down"></i><!--dropdown icon-->
                                 </label>
-                                <div class="dropdown-menu">
+                                <div class="dropdown-menu">  <!--dropdown menu contents (placeholders)-->
                                     <div class="dropdown-item">Related areas</div>
                                     <div class="dropdown-item">Placeholder lang muna</div>
                                 </div>
@@ -73,12 +73,12 @@
                             <input type="checkbox" id="dropdown2" class="dropdown-control">
                             <div class="input-wrapper">
                                 <div class="dropdown-overlay"></div>
-                                <i class = "fas fa-map-marker-alt location-icon"></i>
+                                <i class = "fas fa-map-marker-alt location-icon"></i><!--location icon-->
                                 <input type="text" class="main-input" placeholder = "Destination" aria-label="Destination"> 
-                                <label for="dropdown2" class="dropdown-btn" aria-label="Toggle dropdown">
-                                    <i class="fas fa-chevron-down"></i>
+                                <label for="dropdown2" class="dropdown-btn" aria-label="Toggle dropdown"> <!--when user types, there will be a dropdown-->
+                                    <i class="fas fa-chevron-down"></i><!--dropdown icon-->
                                 </label>
-                                <div class="dropdown-menu">
+                                <div class="dropdown-menu">  <!--dropdown menu contents (placeholders)-->
                                     <div class="dropdown-item">Related areas</div>
                                     <div class="dropdown-item">Placeholder lang muna</div>
                                 </div>
@@ -86,16 +86,19 @@
                         </div>
                     </div>
                     <!--transportation vehicles-->
-                    <div class = "section-title">Transportation Options</div>
+                    <div class = "section-title">Transportation Options</div>  <!--4 public vehicles option-->
                     <div class="vehicle-options">
                         <input type="radio" id="vehicle1" name="vehicle" class="vehicle-radio">
-                        <label for="vehicle1" class="vehicle-btn">Jeepney<i class="fas fa-bus-alt vehicle-icon"></i></label>
+                        <label for="vehicle1" class="vehicle-btn">Traditional Jeepney<i class="fas fa-bus-alt vehicle-icon"></i></label>
                  
                         <input type="radio" id="vehicle2" name="vehicle" class="vehicle-radio">
                         <label for="vehicle2" class="vehicle-btn">Airconditioned Bus<i class="fas fa-bus-alt vehicle-icon"></i></label>
                         
                         <input type="radio" id="vehicle3" name="vehicle" class="vehicle-radio">
                         <label for="vehicle3" class="vehicle-btn">Ordinary Bus<i class="fas fa-bus-alt vehicle-icon"></i></label>
+
+                        <input type="radio" id="vehicle4" name="vehicle" class="vehicle-radio">
+                        <label for="vehicle4" class="vehicle-btn">Modern E-Jeepney<i class="fas fa-bus-alt vehicle-icon"></i></label>
                     </div>
                     <!--for discount-->
                     <div class="section-title">Discount</div>
@@ -115,16 +118,16 @@
                         <div class="header-section"></div>
                         
                         <div class="content-section">
-                            <div class="total-fare">
+                            <div class="total-fare">  <!--section header 1-->
                                 <h2>Total estimated fare:</h2>
                                 <div class="fare-amount">₱ XXXX</div>
                             </div>
 
-                            <div class="section">
+                            <div class="section">  <!--section header 2-->
                                 <div class="section-title">Location</div>
                             </div>
 
-                            <div class="section">
+                            <div class="section"><!--section header 3-->
                                 <div class="section-title">Breakdown</div>
                                 <div class="breakdown-item">
                                     <span class="item-label">Base fare</span>
