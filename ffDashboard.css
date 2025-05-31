@@ -13,14 +13,14 @@ body {
     background-color: white;
 }
 
-/*for burger and close*/
+/*burger menu layout*/
 #check {
     display: none;
 }
 input[type="radio"]{
     display: none;
 }
-
+/*for both open and close*/
 label[for="check"]{
     position: fixed;
     cursor: pointer;
@@ -28,7 +28,7 @@ label[for="check"]{
     left: 20px;
     top: 20px;
     font-size: 30px;  
-    color: #2d3436;
+    color: rgba(10, 36, 99, 0.8);
     transition: all 0.3s ease;
 }
 
@@ -39,18 +39,18 @@ label #btn, label #cancel {
 label #btn {
     display: block;
 }
-
+/*change from burger icon to x icon*/
 label #cancel {
     display: none;
     transform: translateX(230px);  
     padding-top: 10px;
-    transition: all 0.3s ease;
+    transition: all 0.8s ease;
 }
-
+/*changes to burger icon*/
 #check:checked ~ label #btn {
     display: none;
 }
-
+/*changes to x icon*/
 #check:checked ~ label #cancel{
     display: block;
 }
@@ -58,7 +58,7 @@ label #cancel {
 /*sidebar title*/
 .app-title{
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-size: 36px;
     font-weight: 700;
     color: black;
@@ -66,11 +66,11 @@ label #cancel {
     font-family: "Poppins", sans-serif ;
     display: inline-block;
 }
-
 .app-title:hover {
-    color: midnightblue;
+    color: #0a2463;
     cursor: pointer;
 }
+/*sidebar container layout*/
 .sidebar {
     position: fixed;
     top: 0;
@@ -94,7 +94,7 @@ label #cancel {
     border-bottom: 1px solid #eee;
     margin-bottom: 20px;
 }
-
+/*container behind the route and fare tabs*/
 .tabs-container {
     background: #f8f9fa;
     justify-content: center;
@@ -107,7 +107,7 @@ label #cancel {
 .tabs {
     display: flex;
 }
-
+/*double tab buttons layout*/
 .tab_btn{
     flex:1;
     padding: 16px 20px;
@@ -120,10 +120,9 @@ label #cancel {
     font-weight: 600;
     font-family: "Poppins", sans-serif ;
 }
-
-
+/*route and fare tabs when hovered*/
 .tab_btn:hover {
-    background: rgba(116, 185, 255, 0.1);
+    background: rgba(62, 196, 204, 0.1);
     border-radius: 10px; 
     margin-right: 5px;
 }
@@ -135,24 +134,24 @@ label #cancel {
 .content_box {
     display: none;
 }
-
+/*changing tab contents (this is to display route contents)*/
 #tab-route:checked ~ .container .route-content {
     display: block;
 }
-
+/*changing tab contents (this is to display fare contents)*/
 #tab-fare:checked ~ .container .fare-content {
     display: block;
 }
 
 #tab-route:checked ~ .container .tabs label[for="tab-route"] {
-    background: #74b9ff;
+    background: rgba(10, 36, 99, 0.8);
     border-radius: 10px; 
     margin-right: 5px;
     color: white;
 }
 
 #tab-fare:checked ~ .container .tabs label[for="tab-fare"] {
-    background: #74b9ff;
+    background: rgba(10, 36, 99, 0.8);
     border-radius: 10px; 
     margin-right: 5px;
     color: white;
@@ -167,24 +166,22 @@ label #cancel {
     font-family: "Poppins", sans-serif;
 }
 .location-label {
-    color: #2d3436; 
+    color: #0a2463; 
     margin-bottom: 5px;
     display: block;
     font-weight: 700;
     font-size: 16px;
 }
-
+/*location dropdown layout*/
 .input-group {
     display: flex; 
     flex-direction: column; 
     gap: 2px;
 }
-
 .input-container {
     position: relative;
     margin-bottom: 10px;
 }
-
 .input-wrapper {
     position: relative;
     display: flex;
@@ -195,11 +192,9 @@ label #cancel {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s ease, box-shadow 0.3 ease;
 }
-
 .input-container:focus-within{
-    border-color: lightblue;
+    border-color: rgba(62, 196, 204, 0.1);
 }
-
 .main-input {
     flex: 1;
     padding: 12px 15px;
@@ -208,14 +203,13 @@ label #cancel {
     font-size: 16px;
     background: transparent;
 }
-
 .location-icon {
     margin-left: 15px;
-    color: gray;
+    color: rgba(10, 36, 99, 0.8);
     font-size: 18px;
 }
 
-/*location input*/
+/*dropdwon button in location input*/
 .dropdown-control {
     display: none;
 }
@@ -224,21 +218,19 @@ label #cancel {
     position: absolute;
     right: 12px;
     padding: 12px 15px;
-    color: lightblue;
+    color: rgba(10, 36, 99, 0.8) ;
     font-size: 14px;
     transition: color 0.3s ease;
     user-select: none;
     cursor: pointer;
 }
-
 .dropdown-btn:hover {
-    color: #007bff;
+    color:rgba(62, 196, 204, 0.8) ;
 }
-
 .dropdown-btn i {
     transition: transform 0.3s ease;
 }
-
+/*dropdown layout*/
 .dropdown-menu {
     position: absolute;
     top: 100%;
@@ -256,46 +248,42 @@ label #cancel {
     transition: all 0.3s ease;
     pointer-events: none;
 }
-
+/*dropdown button layout*/
 .input-wrapper:focus-within .dropdown-menu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
     pointer-events: auto;
 }
-
 .input-wrapper:focus-within .dropdown-btn i {
     transform: rotate(180deg);
 }
 
+/*dropdown layout & contents*/
 .dropdown-placeholder {
     padding: 12px 15px;
     color: #999;
     font-style: italic;
     text-align: center;
 }
-
 .dropdown-item {
     padding: 12px 15px;
     cursor: pointer;
     transition: background-color 0.2s ease;
     border-bottom: 1px solid #f0f0f0;
-    color: #666;
+    color: #0a2463;
 }
-
 .dropdown-item:last-child {
     border-bottom: none;
 }
-
 .dropdown-item:hover {
     background-color: #f8f9fa;
 }
-
+/*dropdown content icon*/
 .dropdown-item::before {
     content: "📍 ";
     opacity: 0.5;
 }
-
 .dropdown-overlay {
     position: fixed;
     top: 0;
@@ -305,32 +293,30 @@ label #cancel {
     z-index: 999;
     display: none;
 }
-
 .input-wrapper:focus-within .dropdown-overlay {
     display: block;
 }
-
+/*for fare content headings*/
 .section-title {
     font-weight: 700;
     font-family: "Poppins", sans-serif ;
     margin: 24px 0 16px 0;
-    color: #2d3436;
+    color: #0a2463;
     font-size: 16px;
     letter-spacing: 0.5px;
     margin-bottom: 4px;
 }
-
 .vehicle-options{
     margin-bottom: 24px;
 }
-
+/*vehcle options layout*/
 .vehicle-btn {
     width: 100%;
     padding: 12px 16px;
     margin-bottom: 8px;
     border: 2px solid #e9ecef;
     background: white;
-    color: #2d3436;
+    color: #0a2463;
     border-radius: 8px;
     cursor: pointer;
     font-size: 14px;
@@ -341,9 +327,8 @@ label #cancel {
     align-items: center;
     justify-content: space-between;
 }
-
 .vehicle-btn:hover {
-    border-color: lightblue;
+    border-color: rgba(62, 196, 204, 0.4);
     background: rgba(116, 185, 255, 0.05);
 }
 
@@ -351,18 +336,17 @@ label #cancel {
 .vehicle-radio {
     display: none;
 }
-
 .vehicle-radio:checked + .vehicle-btn {
-    background: #74b9ff;
+    background: rgba(10, 36, 99, 0.8);
     color: white;
-    border-color: lightblue;
+    border-color:  rgba(62, 196, 204, 0.4);
 }
 
+/*discount checkbox layout*/
 .discount {
     margin-bottom: 30px;
     margin-top: 5px;
 }
-
 .checkbox-wrapper {
     display: flex;
     align-items: center;
@@ -373,37 +357,35 @@ label #cancel {
     cursor: pointer;
     transition: all 0.3s ease;
 }
-
-
 .checkbox-wrapper:hover {
     background: rgba(116, 185, 255, 0.05);
-    border-color: lightblue;
+    border-color: rgba(10, 36, 99, 0.3) ;
 }
-
+/*discount checkbox layout padding*/
 .checkbox-wrapper input[type="checkbox"] {
     width: 16px;
     height: 16px;
     margin-right: 10px;
     cursor: pointer;
 }
-
+/*discount contents*/
 .checkbox-wrapper label {
     font-weight: 600;
     font-family: "Poppins", sans-serif ;
-    color: #2d3436;
+    color: #0a2463;
     cursor: pointer;
     flex: 1;
     font-size: 14px;
 }
-
+/*button for calculate fare */
 .calculate-fare {
     width: 100%;
     padding: 10px;
     margin-left: 40px;
-    background: #f8de7f;
+    background: rgba(216, 49, 91, 0.8);
     border: none;
     border-radius: 8px;
-    color: #2d3436;
+    color: black;
     font-size: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -411,37 +393,37 @@ label #cancel {
     font-family: "Poppins", sans-serif ;
     font-weight: 700;
 }
-
+.calculate-fare:hover{
+    cursor: pointer; 
+    box-shadow: gray;
+}
 /* Auto-switch to fare tab when calculate button is clicked */
 .calculate-fare:active ~ #tab-fare {
     opacity: 1;
-}
-
-/* fare tab*/
+}/* fare tab*/
 .fare-breakdown {
-    background: pink;
     padding: 20px;
     border-radius: 12px;
-    border: 1px solid lightskyblue;
+    border: 1px solid rgba(10, 36, 99, 0.8);
 }
 
-/*container for the contents*/
+/*container for the fare contents - WIDENED*/
 .fare-card {
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     width: 100%;
-    max-width: 400px;
+    max-width: 600px; /* Increased from 400px to 600px */
 }
 
+/*gradient design*/
 .header-section {
-    background: linear-gradient(135deg, #a8c8ec 0%, #7ab3e8 100%);
+    background: linear-gradient(135deg, #a8c8ec 0%, rgba(10, 36, 99, 0.8)  100%);
     height: 120px;
     position: relative;
     overflow: hidden;
 }
-
 .header-section::after {
     content: '';
     position: absolute;
@@ -454,36 +436,34 @@ label #cancel {
     box-shadow: 0 15px 0 rgba(255, 255, 255, 0.3),
                 0 30px 0 rgba(255, 255, 255, 0.2);
 }
-
+/*content inside the container layout*/
 .content-section {
     padding: 24px;
 }
-
 .total-fare {
     margin-bottom: 24px;
 }
-
+/*for the total estimated fare*/
 .total-fare h2 {
     font-size: 16px;
     font-weight: 500;
-    color: #333;
+    color: #0a2463;
     margin-bottom: 8px;
 }
-
+/*estimated fare layout*/
 .fare-amount {
     font-size: 24px;
     font-weight: 700;
     color: #000;
     padding-bottom: 12px;
-    border-bottom: 3px solid #2563eb;
+    border-bottom: 3px solid rgba(10, 36, 99, 0.8);
     display: inline-block;
     min-width: 120px;
 }
-
 .section {
     margin-bottom: 20px;
 }
-
+/*fare breakdown contents layout*/
 .breakdown-item {
     display: flex;
     justify-content: space-between;
@@ -496,31 +476,48 @@ label #cancel {
 .breakdown-item:not(:last-child) {
     border-bottom: 1px solid #f0f0f0;
 }
-
+/*for the estimated fare at the bottom of the container*/
 .breakdown-item.total {
     font-weight: 600;
-    color: #333;
+    color: black;
     padding-top: 12px;
     margin-top: 8px;
     border-top: 1px solid #e0e0e0;
 }
-
+/*fare breakdown contents layout*/
 .item-label {
     font-weight: 500;
 }
-
 .item-value {
     font-weight: 600;
     color: #333;
 }
 
 /* Responsive design */
+@media (max-width: 768px) {
+    .fare-card {
+        max-width: 500px; 
+        margin: 10px;
+    }
+}
+
 @media (max-width: 480px) {
     .fare-card {
+        max-width: 95%;
         margin: 10px;
     }
             
     .content-section {
         padding: 20px;
+    }
+
+    .fare-amount {
+        font-size: 24px;
+        min-width: 120px;
+    }
+
+    .breakdown-item {
+        font-size: 14px;
+        padding: 8px 0;
     }
 }
