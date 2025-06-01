@@ -56,20 +56,13 @@ label #cancel {
 }
 
 /*sidebar title*/
-.app-title{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-size: 36px;
-    font-weight: 700;
-    color: black;
-    text-decoration: none;
-    font-family: "Poppins", sans-serif ;
-    display: inline-block;
+.sidebar-logo {
+    height: 70px; /* size of the logo */
+    width: auto;
+    padding-left: 5px;
+    padding-top: 8px;
 }
-.app-title:hover {
-    color: #0a2463;
-    cursor: pointer;
-}
+
 /*sidebar container layout*/
 .sidebar {
     position: fixed;

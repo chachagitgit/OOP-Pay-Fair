@@ -126,13 +126,13 @@ header .logo img{
     align-items: center;
 }
 
-.sidebar-title {
-    color: #fff;
-    font-size: 1.9em;
-    font-weight: 600;
+.sidebar-logo {
+    height: 70px; /* size of the logo */
+    width: auto;
     padding-left: 15px;
     padding-top: 8px;
 }
+
 
 .close-btn {
     background: none;
