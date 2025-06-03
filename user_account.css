@@ -6,13 +6,23 @@ body {
     font-family: "Poppins", sans-serif;
 
 }
-.user-profile{
+.logo { /*logo on the upper right*/
+  position: absolute;
+  top: 20px;      
+  right: 30px;     
+  margin: 0;
+}
+.logo img { /*logo sizing*/
+  width: 55px;     
+  height: auto;
+}
+.user-profile{ /*heading 1 layout*/
     font-size: 2rem;
     margin-top: 30px;
     margin-left: 90px;
     color: #1e3a8a;
 }
-.user-pic-container{
+.user-pic-container{ /*container that has the picture and edit btn*/
     position: absolute;
     top: 100px;
     left: 80px;
@@ -27,14 +37,14 @@ body {
     flex-direction: center;
     gap: 15px;
 }
-.user.pic {
+.user.pic { /*defaul user picture container*/
     width: 80%;
     height: 80%;
     border-radius: 60px;
     overflow: hidden;
     margin-bottom: 20px;
 }
-.user-pic img {
+.user-pic img { /*default picture*/
     width: 100%;
     height: 100%;
 }
@@ -50,12 +60,12 @@ body {
     border-radius: 20px;
     padding-left: 60px;
 }
-.user-pic-container div:last-child:hover {
+.user-pic-container div:last-child:hover { /*for edit button */
     background: rgba(30, 58, 138, 0.8);
     transform: translateY(-2px);
 }
 
-.user-info-container {
+.user-info-container { /*for the username and user email*/
     position: absolute;
     top: 100px;
     left: 450px;
@@ -71,23 +81,23 @@ body {
     justify-content: center;
     gap: 15px;
 }
-.user-info-container h3{
+.user-info-container h3{ /*your history*/
     margin: 0;
     color: #1e3a8a;
     font-size: 1.2rem;
     font-weight: 600;
 }
-.user-info-item {
+.user-info-item { 
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
-.user-info-label {
+.user-info-label { /*usrname label*/
     font-size: 0.875rem;
     color: white;
     font-weight: 600%;
 }
-.user-info-value {
+.user-info-value { /*user details (placeholders)*/
     border-radius: 20px;
     padding: 8px 12px;
     font-size: 0.875rem;
@@ -96,7 +106,7 @@ body {
     font-weight: 500;
 }
 /*history container*/
-.history-container {
+.history-container { 
     position: absolute;
     top: 320px;
     left: 450px;
@@ -108,7 +118,7 @@ body {
     backdrop-filter: blur(20px);
     padding: 20px;
 }
-.history-container h3{
+.history-container h3{ 
     margin: 0 0 15px 0;
     color: #1e3a8a;
     font-size: 1.2rem;
@@ -119,7 +129,7 @@ body {
     border-collapse: collapse;
     overflow: hidden;
 }
-.history-table th {
+.history-table th { /*history table column headers */
     padding-left: 85px;
     padding-top: 15px;
     text-align: left;
@@ -127,18 +137,18 @@ body {
     font-size: 16px;
     color: #0a2463;
 }
-.histroy-table td, .history-table th{
+.histroy-table td, .history-table th{ /*horizontal line separator for headers and history*/
     padding-bottom: 12px;
     border-bottom: 1px solid #0a2463;
 }
-.history-table td {
+.history-table td { /*placeholders for history instance*/
     padding-left: 85px;
     padding-top: 15px;
     border-bottom:  1px solid rgba(255, 255, 255, 0.1);
     color: #64748b;
     font-size: 0.975rem;
 }
-.history-table tr:last-child td {
+.history-table tr:last-child td { /*if last instance, no border-bottom*/
     border-bottom: none;
 }
 .history-placeholder {
@@ -147,7 +157,7 @@ body {
     padding: 6px 8px;
     color: #94a3b8;    
 }
-.sign-out-btn {
+.sign-out-btn { /*sign out button*/
     position: absolute;
     top: 520px;
     left: 110px;
@@ -167,7 +177,7 @@ body {
     box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3);
     backdrop-filter: blur(10px);
 }
-.sign-out-btn i {
+.sign-out-btn i { /*sign out icon*/
     font-size: 1rem;
     color: white;
 }
@@ -176,6 +186,7 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
 }
+/*footer*/
 .app-footer{
     position: fixed;
     bottom: 0;
