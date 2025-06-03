@@ -67,24 +67,4 @@ public class FareCalculator
         Console.WriteLine($"Discount Applied : ₱{discountAmount}");
         Console.WriteLine($"Total Fare       : ₱{totalFare}");
     }
-
-    public static void Main()
-    {
-        Console.Write("Enter distance traveled (in km): ");
-        double distance = Convert.ToDouble(Console.ReadLine());
-
-        Console.WriteLine("\nSelect Transporation Type:");
-        Console.WriteLine("1 - Airconditioned Bus");
-        Console.WriteLine("2 - Ordinary Bus");
-        Console.WriteLine("3 - Modern E-Jeepney");
-        Console.WriteLine("4 - Traditional Jeepney");
-        Console.Write("Enter vehicle number: ");
-        int vehicleChoice = Convert.ToInt32(Console.ReadLine());
-
-        Console.Write("Is the passenger a student, senior, or PWD? (y/n): ");
-        string discountInput = Console.ReadLine().Trim().ToLower();
-        bool isDiscounted = (discountInput == "y");
-
-        CalculateFare(distance, vehicleChoice, isDiscounted);
-    }
 }
