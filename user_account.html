@@ -14,28 +14,33 @@
     <link rel="stylesheet" href="user_account.css">
 </head>
 <body>
-    <h1 class="user-profile">User Profile</h1>
+    <!--logo layout and navigates to homepage-->
+    <figure class="logo">
+            <a href="ffHomepage.html"><img src="logo.png" alt="PayFair Logo"></a>
+    </figure>
+
+    <h1 class="user-profile">User Profile</h1> <!--page heading-->
     <div class="user-pic-container">
         <div class="user-pic">
-            <img src="user-pic.png">
+            <img src="user-pic.png"> <!--user default profile picture-->
         </div>
-        <div>Edit profile</div>
+        <div>Edit profile</div> 
     </div>
-    <a href="log-in.html">
+    <a href="log-in.html"> <!--navigate to log in when signed out-->
         <button class="sign-out-btn">
             Sign out
-            <i class="fas fa-sign-out-alt"></i>
+            <i class="fas fa-sign-out-alt"></i> <!--sign out icon-->
         </button>
     </a>
     
     <div class="user-info-container">
         <div class="user-info-item">
-            <span class="user-info-label">Username</span>
-            <span class="user-info-value">Username</span>
+            <span class="user-info-label">Username</span> <!--label in username field-->
+            <span class="user-info-value">Username</span> <!--username set by user-->
         </div>
         <div class="user-info-item">
-            <span class="user-info-label">Email</span>
-            <span class="user-info-value">Email</span>
+            <span class="user-info-label">Email</span> <!--label in email field-->
+            <span class="user-info-value">Email</span> <!--user's email-->
         </div>
     </div>
 
@@ -43,18 +48,18 @@
 
     </div>
 
-    <div class="history-container">
+    <div class="history-container"> <!--for history-->
         <h3>Your history</h3>
         <table class="history-table">
             <thead>
-                <tr>
-                    <th>Starting Location</th>
+                <tr><!--table headers-->
+                    <th>Starting Location</th> 
                     <th>Destination</th>
                     <th>Estimated Fare</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr><!--table value placeholders-->
                     <td><div class="history-placholder">Starting point</div></td>
                     <td><div class="history-placholder">Destination</div></td>
                     <td><div class="history-placholder">₱0.00</div></td>
@@ -65,12 +70,12 @@
 
 
 </body>
-<footer class="app-footer"> 
+<footer class="app-footer"> <!--footer-->
     <p>Copyright© 2025 PayFair · All rights reserved
         <span class="footer-nav">
             <a href="ffHomepage.html#aboutSection">About Us |</a>
             <a href="ffHomepage.html#tncSection">Terms and Conditions |</a>
-            <a href="ffHoempage.html#privacySection">Privacy Policy |</a>
+            <a href="ffHomepage.html#privacySection">Privacy Policy |</a>
             <a href="ffHomepage.html#contactSection">Contact Us</a>
         </span> 
     </p>
