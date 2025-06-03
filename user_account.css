@@ -1,0 +1,204 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: rgba(10, 36, 99, 0.1);
+    font-family: "Poppins", sans-serif;
+
+}
+.user-profile{
+    font-size: 2rem;
+    margin-top: 30px;
+    margin-left: 90px;
+    color: #1e3a8a;
+}
+.user-pic-container{
+    position: absolute;
+    top: 100px;
+    left: 80px;
+    height: 250px;
+    width: 200px;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+    padding: 25px;
+    flex-direction: center;
+    gap: 15px;
+}
+.user.pic {
+    width: 80%;
+    height: 80%;
+    border-radius: 60px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.user-pic img {
+    width: 100%;
+    height: 100%;
+}
+.user-pic-container div:last-child{ /*edit button*/
+    background:rgba(10, 36, 99, 0.8) ;
+    color: white;
+    padding: 8px 16px; 
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    border-radius: 20px;
+    padding-left: 60px;
+}
+.user-pic-container div:last-child:hover {
+    background: rgba(30, 58, 138, 0.8);
+    transform: translateY(-2px);
+}
+
+.user-info-container {
+    position: absolute;
+    top: 100px;
+    left: 450px;
+    width: 800px;
+    height: 150px;
+    background: rgba(10, 36, 99, 0.9) ;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+.user-info-container h3{
+    margin: 0;
+    color: #1e3a8a;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.user-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.user-info-label {
+    font-size: 0.875rem;
+    color: white;
+    font-weight: 600%;
+}
+.user-info-value {
+    border-radius: 20px;
+    padding: 8px 12px;
+    font-size: 0.875rem;
+    color: #c2ccda;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+/*history container*/
+.history-container {
+    position: absolute;
+    top: 320px;
+    left: 450px;
+    width: 800px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    padding: 20px;
+}
+.history-container h3{
+    margin: 0 0 15px 0;
+    color: #1e3a8a;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+.history-table th {
+    padding-left: 85px;
+    padding-top: 15px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 16px;
+    color: #0a2463;
+}
+.histroy-table td, .history-table th{
+    padding-bottom: 12px;
+    border-bottom: 1px solid #0a2463;
+}
+.history-table td {
+    padding-left: 85px;
+    padding-top: 15px;
+    border-bottom:  1px solid rgba(255, 255, 255, 0.1);
+    color: #64748b;
+    font-size: 0.975rem;
+}
+.history-table tr:last-child td {
+    border-bottom: none;
+}
+.history-placeholder {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 6px 8px;
+    color: #94a3b8;    
+}
+.sign-out-btn {
+    position: absolute;
+    top: 520px;
+    left: 110px;
+    width: 200px;
+    background: rgba(220, 38, 38, 0.8);
+    color: white;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 450;
+    height: 40px;
+    padding: 10px 20px;
+    justify-content: center;
+    display: flex;
+    border: none;
+    gap: 8px;
+    box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3);
+    backdrop-filter: blur(10px);
+}
+.sign-out-btn i {
+    font-size: 1rem;
+    color: white;
+}
+.sign-out-btn:hover {
+    background: rgba(220, 38, 38, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+}
+.app-footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: whitesmoke;
+    color: black;
+    text-align: center;
+    padding: 2px;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    border-top: 1px solid #ccc;
+}
+
+.footer-nav{
+    padding-left: 400px;
+}
+.footer-nav a{
+    text-decoration: none;
+    color: black;
+}
+.footer-nav a:hover{
+    text-decoration: underline;
+    color: #0a2463;
+    font-weight: 300;
+}
