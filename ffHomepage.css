@@ -157,7 +157,13 @@ header .logo img{
 .sidebar-menu {
     padding: 20px 0;
 }
-
+.sidebar-menu a:last-child {
+    margin-top: 250px;
+    font-weight: bold;
+}
+.sidebar-menu a:last-child i{
+    margin-right: 20px;
+}
 .sidebar-menu a {
     display: block;
     color: #fff;
