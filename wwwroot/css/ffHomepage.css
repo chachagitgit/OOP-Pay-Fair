@@ -1,0 +1,102 @@
+body{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    font-size: 16px;
+    background-color: #4f8b69;
+}
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+}
+:root{
+    --border-color: #fff5;
+    --w-image: 500px;
+    --calculate: calc(3 / 2);
+}
+
+/* Header Styles - Modified for burger menu and repositioned logo */
+header{
+    display: grid;
+    grid-template-columns: 80px 1fr 80px;
+    grid-template-rows: 80px;
+    position: relative;
+    z-index: 10;
+    padding: 0 20px;
+}
+
+/* Burger Menu Styles */
+.burger-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.burger-icon {
+    width: 30px;
+    height: 24px;
+    position: relative;
+    transform: rotate(0deg);
+    transition: .3s ease-in-out;
+}
+
+.burger-icon span {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: #fff;
+    border-radius: 2px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+}
+
+.burger-icon span:nth-child(1) {
+    top: 0px;
+}
+
+.burger-icon span:nth-child(2),
+.burger-icon span:nth-child(3) {
+    top: 10px;
+}
+
+.burger-icon span:nth-child(4) {
+    top: 20px;
+}
+
+.burger-icon.open span:nth-child(1) {
+    top: 10px;
+    width: 0%;
+    left: 50%;
+}
+
+.burger-icon.open span:nth-child(2) {
+    transform: rotate(45deg);
+}
+
+.burger-icon.open span:nth-child(3) {
+    transform: rotate(-45deg);
+}
+
+.burger-icon.open span:nth-child(4) {
+    top: 10px;
+    width: 0%;
+    left: 50%;
+}
+
+/* Logo positioned on the right */
+header .logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header .logo img{
+    width: 65%;
+}

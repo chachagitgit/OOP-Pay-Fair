@@ -52,27 +52,27 @@
           "dependencies": {
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[9.0.0-preview.3.24172.13, )"
+              "version": "[9.0.0-preview.4.24267.6, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[9.0.0-preview.3.24172.13, )"
+              "version": "[9.0.0-preview.4.24267.6, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[9.0.0-preview.3.24172.13, )"
+              "version": "[9.0.0-preview.4.24267.6, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[9.0.0-preview.3.24172.13, )"
+              "version": "[9.0.0-preview.4.24267.1, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
-              "version": "[9.0.0-preview.3.24172.13, )"
+              "version": "[9.0.0-preview.4.24267.1, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[9.0.0-preview.3.24172.13, )"
+              "version": "[9.0.0-preview.3.24207.3, )"
             }
           },
           "imports": [

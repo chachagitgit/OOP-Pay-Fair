@@ -1,3 +1,102 @@
-/* Copied from cshtml/cshtml/wwwroot/css/ffDashboard.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
 
-/* ...existing ffDashboard.css content... */
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #f5f5f5;
+    }
+
+.container{
+    background-color: white;
+}
+
+/*burger menu layout*/
+#check {
+    display: none;
+}
+input[type="radio"]{
+    display: none;
+}
+/*for both open and close*/
+label[for="check"]{
+    position: fixed;
+    cursor: pointer;
+    z-index: 101;
+    left: 20px;
+    top: 20px;
+    font-size: 30px;  
+    color: rgba(10, 36, 99, 0.8);
+    transition: all 0.3s ease;
+}
+
+label #btn, label #cancel {
+    transition: all 0.3s ease;
+}
+
+label #btn {
+    display: block;
+}
+/*change from burger icon to x icon*/
+label #cancel {
+    display: none;
+    transform: translateX(230px);  
+    padding-top: 10px;
+    transition: all 0.8s ease;
+}
+/*changes to burger icon*/
+#check:checked ~ label #btn {
+    display: none;
+}
+/*changes to x icon*/
+#check:checked ~ label #cancel{
+    display: block;
+}
+
+/*sidebar title*/
+.app-title{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 36px;
+    font-weight: 700;
+    color: black;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif ;
+    display: inline-block;
+}
+.app-title:hover {
+    color: #0a2463;
+    cursor: pointer;
+}
+/*sidebar container layout*/
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -320px;
+    width: 320px;
+    height: 100vh;
+    background-color: white;
+    transition: left 0.3s ease;
+    padding: 10px 30px;
+    color: black;
+    z-index: 100;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/*for double tabs (route and fare)*/
+#check:checked ~ .container .sidebar{
+    left: 0;
+}
+
+.sidebar-header {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+}
+/*container behind the route and fare tabs*/
+.tabs-container {
+    background: #f8f9fa;
+    justify-content: center;
+    gap: 8px;
+}

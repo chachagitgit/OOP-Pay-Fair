@@ -596,7 +596,7 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Cryptography.Internal/9.0.0-preview.3.24172.13": {
+      "Microsoft.AspNetCore.Cryptography.Internal/9.0.0-preview.4.24267.6": {
         "type": "package",
         "compile": {
           "lib/net9.0/Microsoft.AspNetCore.Cryptography.Internal.dll": {
@@ -609,10 +609,10 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Cryptography.KeyDerivation/9.0.0-preview.3.24172.13": {
+      "Microsoft.AspNetCore.Cryptography.KeyDerivation/9.0.0-preview.4.24267.6": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Cryptography.Internal": "9.0.0-preview.3.24172.13"
+          "Microsoft.AspNetCore.Cryptography.Internal": "9.0.0-preview.4.24267.6"
         },
         "compile": {
           "lib/net9.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {
@@ -625,10 +625,10 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore/9.0.0-preview.3.24172.13": {
+      "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore/9.0.0-preview.4.24267.6": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Relational": "9.0.0-preview.3.24172.4"
+          "Microsoft.EntityFrameworkCore.Relational": "9.0.0-preview.4.24267.1"
         },
         "compile": {
           "lib/net9.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll": {
@@ -644,11 +644,11 @@
           "Microsoft.AspNetCore.App"
         ]
       },
-      "Microsoft.AspNetCore.Identity.EntityFrameworkCore/9.0.0-preview.3.24172.13": {
+      "Microsoft.AspNetCore.Identity.EntityFrameworkCore/9.0.0-preview.4.24267.6": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Relational": "9.0.0-preview.3.24172.4",
-          "Microsoft.Extensions.Identity.Stores": "9.0.0-preview.3.24172.13"
+          "Microsoft.EntityFrameworkCore.Relational": "9.0.0-preview.4.24267.1",
+          "Microsoft.Extensions.Identity.Stores": "9.0.0-preview.4.24267.6"
         },
         "compile": {
           "lib/net9.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll": {
@@ -661,11 +661,11 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Identity.UI/9.0.0-preview.3.24172.13": {
+      "Microsoft.AspNetCore.Identity.UI/9.0.0-preview.4.24267.6": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.FileProviders.Embedded": "9.0.0-preview.3.24172.13",
-          "Microsoft.Extensions.Identity.Stores": "9.0.0-preview.3.24172.13"
+          "Microsoft.Extensions.FileProviders.Embedded": "9.0.0-preview.4.24267.6",
+          "Microsoft.Extensions.Identity.Stores": "9.0.0-preview.4.24267.6"
         },
         "compile": {
           "lib/net9.0/Microsoft.AspNetCore.Identity.UI.dll": {
@@ -1495,10 +1495,10 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.FileProviders.Abstractions/9.0.0-preview.3.24172.9": {
+      "Microsoft.Extensions.FileProviders.Abstractions/9.0.0-preview.4.24266.19": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "9.0.0-preview.3.24172.9"
+          "Microsoft.Extensions.Primitives": "9.0.0-preview.4.24266.19"
         },
         "compile": {
           "lib/net9.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {
@@ -1514,10 +1514,10 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.FileProviders.Embedded/9.0.0-preview.3.24172.13": {
+      "Microsoft.Extensions.FileProviders.Embedded/9.0.0-preview.4.24267.6": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.FileProviders.Abstractions": "9.0.0-preview.3.24172.9"
+          "Microsoft.Extensions.FileProviders.Abstractions": "9.0.0-preview.4.24266.19"
         },
         "compile": {
           "lib/net9.0/Microsoft.Extensions.FileProviders.Embedded.dll": {
@@ -1536,12 +1536,12 @@
           "buildMultiTargeting/_._": {}
         }
       },
-      "Microsoft.Extensions.Identity.Core/9.0.0-preview.3.24172.13": {
+      "Microsoft.Extensions.Identity.Core/9.0.0-preview.4.24267.6": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Cryptography.KeyDerivation": "9.0.0-preview.3.24172.13",
-          "Microsoft.Extensions.Logging": "9.0.0-preview.3.24172.9",
-          "Microsoft.Extensions.Options": "9.0.0-preview.3.24172.9"
+          "Microsoft.AspNetCore.Cryptography.KeyDerivation": "9.0.0-preview.4.24267.6",
+          "Microsoft.Extensions.Logging": "9.0.0-preview.4.24266.19",
+          "Microsoft.Extensions.Options": "9.0.0-preview.4.24266.19"
         },
         "compile": {
           "lib/net9.0/Microsoft.Extensions.Identity.Core.dll": {
@@ -1554,12 +1554,12 @@
           }
         }
       },
-      "Microsoft.Extensions.Identity.Stores/9.0.0-preview.3.24172.13": {
+      "Microsoft.Extensions.Identity.Stores/9.0.0-preview.4.24267.6": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Caching.Abstractions": "9.0.0-preview.3.24172.9",
-          "Microsoft.Extensions.Identity.Core": "9.0.0-preview.3.24172.13",
-          "Microsoft.Extensions.Logging": "9.0.0-preview.3.24172.9"
+          "Microsoft.Extensions.Caching.Abstractions": "9.0.0-preview.4.24266.19",
+          "Microsoft.Extensions.Identity.Core": "9.0.0-preview.4.24267.6",
+          "Microsoft.Extensions.Logging": "9.0.0-preview.4.24266.19"
         },
         "compile": {
           "lib/net9.0/Microsoft.Extensions.Identity.Stores.dll": {
@@ -3331,10 +3331,10 @@
         "logo.png"
       ]
     },
-    "Microsoft.AspNetCore.Cryptography.Internal/9.0.0-preview.3.24172.13": {
-      "sha512": "OCYhmGi9Lz/HC6aLsWw3ivAILwBhUk3UDeAK+E6A6R59Ldi5kIwwjiSc3Xl3EBsdA/LP2sHunLW4fEJ8JV6HaQ==",
+    "Microsoft.AspNetCore.Cryptography.Internal/9.0.0-preview.4.24267.6": {
+      "sha512": "sCdk9qvaIzoHpMuxahlgw2RVKaxBGXK2HPrEw2iFKMy/dw4oDTz1dhMceT5UrP/40qm0L4nlum9S7wBFzve2vg==",
       "type": "package",
-      "path": "microsoft.aspnetcore.cryptography.internal/9.0.0-preview.3.24172.13",
+      "path": "microsoft.aspnetcore.cryptography.internal/9.0.0-preview.4.24267.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3346,14 +3346,14 @@
         "lib/net9.0/Microsoft.AspNetCore.Cryptography.Internal.xml",
         "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.Internal.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.Internal.xml",
-        "microsoft.aspnetcore.cryptography.internal.9.0.0-preview.3.24172.13.nupkg.sha512",
+        "microsoft.aspnetcore.cryptography.internal.9.0.0-preview.4.24267.6.nupkg.sha512",
         "microsoft.aspnetcore.cryptography.internal.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Cryptography.KeyDerivation/9.0.0-preview.3.24172.13": {
-      "sha512": "3GEgf+/VUoa+KWsnB/BQGFZZyWuafkpmR7E+cQBNjiXc8N4Lyhl0hcgw7v6pd0yKO261rBEZuPFPUHmacEDwUA==",
+    "Microsoft.AspNetCore.Cryptography.KeyDerivation/9.0.0-preview.4.24267.6": {
+      "sha512": "Qmlv0MwkBa2vJtm60knEUhTRKKNjA9zM3lXTcPsMngxVwBbsDB9fTFPRMbNr20jvKx+/w6TbB6qepTsNTlDDgg==",
       "type": "package",
-      "path": "microsoft.aspnetcore.cryptography.keyderivation/9.0.0-preview.3.24172.13",
+      "path": "microsoft.aspnetcore.cryptography.keyderivation/9.0.0-preview.4.24267.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3365,14 +3365,14 @@
         "lib/net9.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
         "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
-        "microsoft.aspnetcore.cryptography.keyderivation.9.0.0-preview.3.24172.13.nupkg.sha512",
+        "microsoft.aspnetcore.cryptography.keyderivation.9.0.0-preview.4.24267.6.nupkg.sha512",
         "microsoft.aspnetcore.cryptography.keyderivation.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore/9.0.0-preview.3.24172.13": {
-      "sha512": "Yjfxg5pIHS7NfBFYY4znlHYpeLv4n9lcviziUQgFhqM98Z1myDlZXf+YQyjxCrjI2NjlgsxK1YAQ2TsKStYkbw==",
+    "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore/9.0.0-preview.4.24267.6": {
+      "sha512": "rjPv1tIPAKI9bt9taxSikyQdhhs6rtwmjsyW45thIZ9NIcutGmmB5OSifJUJo4LAPzYX1gSpb2EvVETIAKdopg==",
       "type": "package",
-      "path": "microsoft.aspnetcore.diagnostics.entityframeworkcore/9.0.0-preview.3.24172.13",
+      "path": "microsoft.aspnetcore.diagnostics.entityframeworkcore/9.0.0-preview.4.24267.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3380,14 +3380,14 @@
         "THIRD-PARTY-NOTICES.TXT",
         "lib/net9.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll",
         "lib/net9.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.xml",
-        "microsoft.aspnetcore.diagnostics.entityframeworkcore.9.0.0-preview.3.24172.13.nupkg.sha512",
+        "microsoft.aspnetcore.diagnostics.entityframeworkcore.9.0.0-preview.4.24267.6.nupkg.sha512",
         "microsoft.aspnetcore.diagnostics.entityframeworkcore.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Identity.EntityFrameworkCore/9.0.0-preview.3.24172.13": {
-      "sha512": "F1lkbrclYSBqYnvrVYE63oxm0OgDAhNbWp8VjT3WTGe3o32UJhv1excZaq0wLMuPnpqiXBtpvDeVpbkWqnKHjw==",
+    "Microsoft.AspNetCore.Identity.EntityFrameworkCore/9.0.0-preview.4.24267.6": {
+      "sha512": "25q42v9eGJj8YcFwlQOOPO1gvKgmSYXhrtnhEUluoLfNeJKSijQ7RRaemMaa+wxszWen+FiQFsjCxwSzY0Ju8w==",
       "type": "package",
-      "path": "microsoft.aspnetcore.identity.entityframeworkcore/9.0.0-preview.3.24172.13",
+      "path": "microsoft.aspnetcore.identity.entityframeworkcore/9.0.0-preview.4.24267.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3395,14 +3395,14 @@
         "THIRD-PARTY-NOTICES.TXT",
         "lib/net9.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll",
         "lib/net9.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.xml",
-        "microsoft.aspnetcore.identity.entityframeworkcore.9.0.0-preview.3.24172.13.nupkg.sha512",
+        "microsoft.aspnetcore.identity.entityframeworkcore.9.0.0-preview.4.24267.6.nupkg.sha512",
         "microsoft.aspnetcore.identity.entityframeworkcore.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Identity.UI/9.0.0-preview.3.24172.13": {
-      "sha512": "OMZXBPr/guaqaJk7Zw5dhGwozL79ZsjLzC4sIbTb4/QGD3cLksW+lESpxEzL5movQrzVHopki3sY8iuNaIHemw==",
+    "Microsoft.AspNetCore.Identity.UI/9.0.0-preview.4.24267.6": {
+      "sha512": "1YtQf9ObwGykVkC09o0Co/gplCGZMg3GaVI/DkLYTYHeDnfF2HDmEfOP83lSMV8kN2kPp135jZUQID8T6MBEDQ==",
       "type": "package",
-      "path": "microsoft.aspnetcore.identity.ui/9.0.0-preview.3.24172.13",
+      "path": "microsoft.aspnetcore.identity.ui/9.0.0-preview.4.24267.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3410,14 +3410,16 @@
         "THIRD-PARTY-NOTICES.TXT",
         "build/Microsoft.AspNetCore.Identity.UI.props",
         "build/Microsoft.AspNetCore.Identity.UI.targets",
+        "build/Microsoft.AspNetCore.StaticWebAssets.V4.endpoints.targets",
         "build/Microsoft.AspNetCore.StaticWebAssets.V4.targets",
+        "build/Microsoft.AspNetCore.StaticWebAssets.V5.endpoints.targets",
         "build/Microsoft.AspNetCore.StaticWebAssets.V5.targets",
         "build/Microsoft.AspNetCore.StaticWebAssets.targets",
         "buildMultiTargeting/Microsoft.AspNetCore.Identity.UI.targets",
         "buildTransitive/Microsoft.AspNetCore.Identity.UI.targets",
         "lib/net9.0/Microsoft.AspNetCore.Identity.UI.dll",
         "lib/net9.0/Microsoft.AspNetCore.Identity.UI.xml",
-        "microsoft.aspnetcore.identity.ui.9.0.0-preview.3.24172.13.nupkg.sha512",
+        "microsoft.aspnetcore.identity.ui.9.0.0-preview.4.24267.6.nupkg.sha512",
         "microsoft.aspnetcore.identity.ui.nuspec",
         "staticwebassets/V4/css/site.css",
         "staticwebassets/V4/favicon.ico",
@@ -5027,10 +5029,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.FileProviders.Abstractions/9.0.0-preview.3.24172.9": {
-      "sha512": "Rx/ySkSk+X6tTBvNm8yY2GhdeDj3h6dknI6FK4SW5jdYXRRaIaL0Ve14xz5uthMBdrAkS4U5XH5lgM74DDb95A==",
+    "Microsoft.Extensions.FileProviders.Abstractions/9.0.0-preview.4.24266.19": {
+      "sha512": "vbQprFK4I69ThDqTcOOG0k+EZ2iuB4N0pr7Sgn/d1ZWvf9caBzJqs2HDMgJVnomr7j9HH9slvzfnmDaMJ0NkWg==",
       "type": "package",
-      "path": "microsoft.extensions.fileproviders.abstractions/9.0.0-preview.3.24172.9",
+      "path": "microsoft.extensions.fileproviders.abstractions/9.0.0-preview.4.24266.19",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5050,15 +5052,15 @@
         "lib/net9.0/Microsoft.Extensions.FileProviders.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Abstractions.xml",
-        "microsoft.extensions.fileproviders.abstractions.9.0.0-preview.3.24172.9.nupkg.sha512",
+        "microsoft.extensions.fileproviders.abstractions.9.0.0-preview.4.24266.19.nupkg.sha512",
         "microsoft.extensions.fileproviders.abstractions.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.FileProviders.Embedded/9.0.0-preview.3.24172.13": {
-      "sha512": "LDCQ9qOqiw1LoTjswW9pKaJF7XlrNrvdjOzFCq6GPr5gAL8yFgt9Eb5WPtftBVBJIETXTtbVb1G1SpbFrRGdaw==",
+    "Microsoft.Extensions.FileProviders.Embedded/9.0.0-preview.4.24267.6": {
+      "sha512": "ph9B3ftz2mfnAWZr5GK+KNbRWBkT3F6M/MxQEOy6UdRHEvMLb+04Ew5POfJnv8lOP+2Xr1n5iqQN3/t/RdJd+g==",
       "type": "package",
-      "path": "microsoft.extensions.fileproviders.embedded/9.0.0-preview.3.24172.13",
+      "path": "microsoft.extensions.fileproviders.embedded/9.0.0-preview.4.24267.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5073,15 +5075,15 @@
         "lib/net9.0/Microsoft.Extensions.FileProviders.Embedded.xml",
         "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Embedded.dll",
         "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Embedded.xml",
-        "microsoft.extensions.fileproviders.embedded.9.0.0-preview.3.24172.13.nupkg.sha512",
+        "microsoft.extensions.fileproviders.embedded.9.0.0-preview.4.24267.6.nupkg.sha512",
         "microsoft.extensions.fileproviders.embedded.nuspec",
         "tasks/netstandard2.0/Microsoft.Extensions.FileProviders.Embedded.Manifest.Task.dll"
       ]
     },
-    "Microsoft.Extensions.Identity.Core/9.0.0-preview.3.24172.13": {
-      "sha512": "QTBZIaCcnDvP7U5jZ6RBdOYuBFLrcP28x1G3N2VJ7LeC3ijDCWP2aoLXrCeuqyuk3BwoWxsDQ+hUIMsS/uvtcg==",
+    "Microsoft.Extensions.Identity.Core/9.0.0-preview.4.24267.6": {
+      "sha512": "Oj4XPK/+yqjH/grLBRzOaeu0+dCnMkN9099OxsQTlC8Xs1bXcszmf3fSEEHUw/1P8Vg50CbyiYUHphvpTof96w==",
       "type": "package",
-      "path": "microsoft.extensions.identity.core/9.0.0-preview.3.24172.13",
+      "path": "microsoft.extensions.identity.core/9.0.0-preview.4.24267.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5093,14 +5095,14 @@
         "lib/net9.0/Microsoft.Extensions.Identity.Core.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Identity.Core.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Identity.Core.xml",
-        "microsoft.extensions.identity.core.9.0.0-preview.3.24172.13.nupkg.sha512",
+        "microsoft.extensions.identity.core.9.0.0-preview.4.24267.6.nupkg.sha512",
         "microsoft.extensions.identity.core.nuspec"
       ]
     },
-    "Microsoft.Extensions.Identity.Stores/9.0.0-preview.3.24172.13": {
-      "sha512": "pwx+aPUyJ4vmI2z7Y6ND6evwsNPkZRfZ4K+inBzlpxJuBuxK3cLnPu6SoanhycftobJiq53nAlPtPWv52eHTCw==",
+    "Microsoft.Extensions.Identity.Stores/9.0.0-preview.4.24267.6": {
+      "sha512": "Lu/GryWgpoCjpDpYBq35yBzwh+ELZuDqP8NbvtRTvXn28FLENH+VhZ7XdjKJNtoe//3jdwaYcAN+UNFwXX5FZQ==",
       "type": "package",
-      "path": "microsoft.extensions.identity.stores/9.0.0-preview.3.24172.13",
+      "path": "microsoft.extensions.identity.stores/9.0.0-preview.4.24267.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5112,7 +5114,7 @@
         "lib/net9.0/Microsoft.Extensions.Identity.Stores.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Identity.Stores.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Identity.Stores.xml",
-        "microsoft.extensions.identity.stores.9.0.0-preview.3.24172.13.nupkg.sha512",
+        "microsoft.extensions.identity.stores.9.0.0-preview.4.24267.6.nupkg.sha512",
         "microsoft.extensions.identity.stores.nuspec"
       ]
     },
@@ -7055,12 +7057,12 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
-      "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 9.0.0-preview.3.24172.13",
-      "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 9.0.0-preview.3.24172.13",
-      "Microsoft.AspNetCore.Identity.UI >= 9.0.0-preview.3.24172.13",
-      "Microsoft.EntityFrameworkCore.Sqlite >= 9.0.0-preview.3.24172.13",
-      "Microsoft.EntityFrameworkCore.Tools >= 9.0.0-preview.3.24172.13",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 9.0.0-preview.3.24172.13"
+      "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 9.0.0-preview.4.24267.6",
+      "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 9.0.0-preview.4.24267.6",
+      "Microsoft.AspNetCore.Identity.UI >= 9.0.0-preview.4.24267.6",
+      "Microsoft.EntityFrameworkCore.Sqlite >= 9.0.0-preview.4.24267.1",
+      "Microsoft.EntityFrameworkCore.Tools >= 9.0.0-preview.4.24267.1",
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 9.0.0-preview.3.24207.3"
     ]
   },
   "packageFolders": {
@@ -7115,27 +7117,27 @@
         "dependencies": {
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
             "target": "Package",
-            "version": "[9.0.0-preview.3.24172.13, )"
+            "version": "[9.0.0-preview.4.24267.6, )"
           },
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
             "target": "Package",
-            "version": "[9.0.0-preview.3.24172.13, )"
+            "version": "[9.0.0-preview.4.24267.6, )"
           },
           "Microsoft.AspNetCore.Identity.UI": {
             "target": "Package",
-            "version": "[9.0.0-preview.3.24172.13, )"
+            "version": "[9.0.0-preview.4.24267.6, )"
           },
           "Microsoft.EntityFrameworkCore.Sqlite": {
             "target": "Package",
-            "version": "[9.0.0-preview.3.24172.13, )"
+            "version": "[9.0.0-preview.4.24267.1, )"
           },
           "Microsoft.EntityFrameworkCore.Tools": {
             "target": "Package",
-            "version": "[9.0.0-preview.3.24172.13, )"
+            "version": "[9.0.0-preview.4.24267.1, )"
           },
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
-            "version": "[9.0.0-preview.3.24172.13, )"
+            "version": "[9.0.0-preview.3.24207.3, )"
           }
         },
         "imports": [
@@ -7160,37 +7162,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1603",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "OOP-Fair-Fare depends on Microsoft.EntityFrameworkCore.Sqlite (>= 9.0.0-preview.3.24172.13) but Microsoft.EntityFrameworkCore.Sqlite 9.0.0-preview.3.24172.13 was not found. Microsoft.EntityFrameworkCore.Sqlite 9.0.0-preview.4.24267.1 was resolved instead.",
-      "libraryId": "Microsoft.EntityFrameworkCore.Sqlite",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    },
-    {
-      "code": "NU1603",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "OOP-Fair-Fare depends on Microsoft.EntityFrameworkCore.Tools (>= 9.0.0-preview.3.24172.13) but Microsoft.EntityFrameworkCore.Tools 9.0.0-preview.3.24172.13 was not found. Microsoft.EntityFrameworkCore.Tools 9.0.0-preview.4.24267.1 was resolved instead.",
-      "libraryId": "Microsoft.EntityFrameworkCore.Tools",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    },
-    {
-      "code": "NU1603",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "OOP-Fair-Fare depends on Microsoft.VisualStudio.Web.CodeGeneration.Design (>= 9.0.0-preview.3.24172.13) but Microsoft.VisualStudio.Web.CodeGeneration.Design 9.0.0-preview.3.24172.13 was not found. Microsoft.VisualStudio.Web.CodeGeneration.Design 9.0.0-preview.3.24207.3 was resolved instead.",
-      "libraryId": "Microsoft.VisualStudio.Web.CodeGeneration.Design",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    }
-  ]
+  }
 }
