@@ -1,4 +1,4 @@
- * {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -26,7 +26,7 @@ label[for="check"]{
     cursor: pointer;
     z-index: 101;
     left: 20px;
-    top: 20px;
+    top: 60px;  /* to move the burger button */
     font-size: 30px;  
     color: rgba(10, 36, 99, 0.8);
     transition: all 0.3s ease;
@@ -43,7 +43,8 @@ label #btn {
 label #cancel {
     display: none;
     transform: translateX(230px);  
-    padding-top: 10px;
+    position: absolute;         
+    top: -25px;                      /* <-- Add this (keeps it at original position) */
     transition: all 0.8s ease;
 }
 /*changes to burger icon*/
@@ -63,7 +64,7 @@ label #cancel {
     padding-top: 8px;
 }
 
-/*sidebar container layout*/
+/*sidebar container layout - UPDATED WITH SCROLLING*/
 .sidebar {
     position: fixed;
     top: 0;
@@ -72,10 +73,12 @@ label #cancel {
     height: 100vh;
     background-color: white;
     transition: left 0.3s ease;
-    padding: 10px 30px;
     color: black;
     z-index: 100;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent content from overflowing */
 }
 
 /*for double tabs (route and fare)*/
@@ -86,7 +89,39 @@ label #cancel {
 .sidebar-header {
     border-bottom: 1px solid #eee;
     margin-bottom: 20px;
+    padding: 10px 30px 0;
+    flex-shrink: 0; /* Prevent header from shrinking */
 }
+
+/* UPDATED: Make sidebar content scrollable */
+.sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 30px 20px;
+    /* Custom scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(10, 36, 99, 0.3) transparent;
+}
+
+/* Custom scrollbar for webkit browsers */
+.sidebar-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb {
+    background: rgba(10, 36, 99, 0.3);
+    border-radius: 3px;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(10, 36, 99, 0.5);
+}
+
 /*container behind the route and fare tabs*/
 .tabs-container {
     background: #f8f9fa;
@@ -95,6 +130,7 @@ label #cancel {
     padding: 8px; 
     border-bottom: 1px solid #e9ecef;
     border-radius: 12px;
+    margin-bottom: 20px;
 }
 
 .tabs {
@@ -492,6 +528,16 @@ label #cancel {
         max-width: 500px; 
         margin: 10px;
     }
+    
+    /* Adjust sidebar for smaller screens */
+    .sidebar {
+        width: 300px;
+        left: -300px;
+    }
+    
+    label #cancel {
+        transform: translateX(210px);
+    }
 }
 
 @media (max-width: 480px) {
@@ -512,6 +558,16 @@ label #cancel {
     .breakdown-item {
         font-size: 14px;
         padding: 8px 0;
+    }
+    
+    /* Further adjust sidebar for very small screens */
+    .sidebar {
+        width: 280px;
+        left: -280px;
+    }
+    
+    label #cancel {
+        transform: translateX(190px);
     }
 }
 
