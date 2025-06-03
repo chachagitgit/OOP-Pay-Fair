@@ -1,0 +1,313 @@
+@page
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_Layout";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="css/ffDashboard.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,900&display=swap" rel="stylesheet">
+}
+
+<!-- Hidden inputs for UI control -->
+<input type="checkbox" id="check">
+<input type="radio" name="tab" id="tab-route" checked>
+<input type="radio" name="tab" id="tab-fare">
+<input type="radio" name="vehicle" id="jeepney" class="vehicle-radio">
+<input type="radio" name="vehicle" id="ordinary-bus" class="vehicle-radio">
+<input type="radio" name="vehicle" id="aircon-bus" class="vehicle-radio">
+
+<!-- Toggle button -->
+<label for="check">
+    <i class="fas fa-bars" id="btn"></i>
+    <i class="fas fa-times" id="cancel"></i>
+</label>
+
+<div class="container">
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="tAndC.html" class="app-title">PayFair</a>
+        </div>
+
+        <div class="tabs-container">
+            <div class="tabs">
+                <label for="tab-route" class="tab_btn">Route</label>
+                <label for="tab-fare" class="tab_btn">Fare</label>
+            </div>
+        </div>
+
+        <div class="content-container">
+            <!-- ROUTE TAB -->
+            <div class="content_box route-content">
+                <label class="location-label">Enter Starting location</label>
+                <div class="input-group">
+                    <!-- Origin -->
+                    <div class="input-container">
+                        <input type="checkbox" id="dropdown1" class="dropdown-control">
+                        <div class="input-wrapper">
+                            <div class="dropdown-overlay"></div>
+                            <i class="fas fa-map-marker-alt location-icon"></i>
+                            <input type="text" id="originInput" class="main-input" placeholder="Starting location" aria-label="Starting location">
+                            <label for="dropdown1" class="dropdown-btn"><i class="fas fa-chevron-down"></i></label>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-item">Related areas</div>
+                                <div class="dropdown-item">Placeholder lang muna</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Destination -->
+                    <div class="input-container">
+                        <input type="checkbox" id="dropdown2" class="dropdown-control">
+                        <div class="input-wrapper">
+                            <div class="dropdown-overlay"></div>
+                            <i class="fas fa-map-marker-alt location-icon"></i>
+                            <input type="text" id="destinationInput" class="main-input" placeholder="Destination" aria-label="Destination">
+                            <label for="dropdown2" class="dropdown-btn"><i class="fas fa-chevron-down"></i></label>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-item">Related areas</div>
+                                <div class="dropdown-item">Placeholder lang muna</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vehicle Options -->
+                <div class="section-title">Transportation Options</div>
+                <div class="vehicle-options">
+                    <input type="radio" id="vehicle1" name="vehicle" class="vehicle-radio" value="4">
+                    <label for="vehicle1" class="vehicle-btn">Traditional Jeepney<i class="fas fa-bus-alt vehicle-icon"></i></label>
+
+                    <input type="radio" id="vehicle2" name="vehicle" class="vehicle-radio" value="1">
+                    <label for="vehicle2" class="vehicle-btn">Airconditioned Bus<i class="fas fa-bus-alt vehicle-icon"></i></label>
+
+                    <input type="radio" id="vehicle3" name="vehicle" class="vehicle-radio" value="2">
+                    <label for="vehicle3" class="vehicle-btn">Ordinary Bus<i class="fas fa-bus-alt vehicle-icon"></i></label>
+
+                    <input type="radio" id="vehicle4" name="vehicle" class="vehicle-radio" value="3">
+                    <label for="vehicle4" class="vehicle-btn">Modern E-Jeepney<i class="fas fa-bus-alt vehicle-icon"></i></label>
+                </div>
+
+                <!-- Discount Checkbox -->
+                <div class="section-title">Discount</div>
+                <div class="discount">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="discounts" name="discounts" value="Student/PWD/Senior Citizen">
+                        <label for="discounts">Student/PWD/Senior Citizen</label>
+                    </div>
+                </div>
+
+                <!-- Calculate Button -->
+                <button class="calculate-fare" onclick="calculateRoute()">Calculate Fare</button>
+            </div>
+
+            <!-- FARE TAB -->
+            <div class="content_box fare-content">
+                <div class="fare-card">
+                    <div class="header-section"></div>
+                    <div class="content-section">
+                        <div class="total-fare">
+                            <h2>Total estimated fare:</h2>
+                            <div class="fare-amount" id="fareAmount">₱ XXXX</div>
+                        </div>
+                        <div class="section">
+                            <div class="section-title">Location</div>
+                            <div id="fareLocation"></div>
+                        </div>
+                        <div class="section">
+                            <div class="section-title">Breakdown</div>
+                            <div class="breakdown-item">
+                                <span class="item-label">Base fare</span>
+                                <span class="item-value" id="baseFare">XXXX</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="item-label">Applied discount</span>
+                                <span class="item-value" id="appliedDiscount">XXXX</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="item-label">Distance</span>
+                                <span class="item-value" id="distance">XXXX</span>
+                            </div>
+                            <div class="breakdown-item total">
+                                <span class="item-label">Total estimated fare</span>
+                                <span class="item-value" id="totalFare">XXXX</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Map container -->
+    <div id="map" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;"></div>
+</div>
+
+@section Scripts {
+    <script>
+        let map, directionsService, directionsRenderer;
+        let originAutocomplete, destinationAutocomplete;
+        function initMap() {
+            const manila = { lat: 14.5995, lng: 120.9842 };
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 11,
+                center: manila,
+                mapTypeControl: false,
+                styles: [
+                    {
+                        featureType: "poi",
+                        elementType: "labels",
+                        stylers: [{ visibility: "off" }]
+                    }
+                ]
+            });
+            directionsService = new google.maps.DirectionsService();
+            directionsRenderer = new google.maps.DirectionsRenderer({
+                suppressMarkers: true,
+                polylineOptions: {
+                    strokeColor: "#3498db",
+                    strokeWeight: 5
+                }
+            });
+            directionsRenderer.setMap(map);
+            originAutocomplete = new google.maps.places.Autocomplete(
+                document.getElementById("originInput"),
+                {
+                    componentRestrictions: { country: "ph" },
+                    fields: ["geometry", "name"]
+                }
+            );
+            destinationAutocomplete = new google.maps.places.Autocomplete(
+                document.getElementById("destinationInput"),
+                {
+                    componentRestrictions: { country: "ph" },
+                    fields: ["geometry", "name"]
+                }
+            );
+        }
+        function calculateRoute() {
+            const origin = originAutocomplete.getPlace();
+            const destination = destinationAutocomplete.getPlace();
+            if (!origin || !origin.geometry) {
+                alert("Please select a valid origin from the dropdown.");
+                return;
+            }
+            if (!destination || !destination.geometry) {
+                alert("Please select a valid destination from the dropdown.");
+                return;
+            }
+            if (window.originMarker) window.originMarker.setMap(null);
+            if (window.destMarker) window.destMarker.setMap(null);
+            window.originMarker = new google.maps.Marker({
+                position: origin.geometry.location,
+                map: map,
+                title: origin.name,
+                icon: {
+                    url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                    scaledSize: new google.maps.Size(40, 40)
+                },
+                animation: google.maps.Animation.DROP
+            });
+            window.destMarker = new google.maps.Marker({
+                position: destination.geometry.location,
+                map: map,
+                title: destination.name,
+                icon: {
+                    url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                    scaledSize: new google.maps.Size(40, 40)
+                },
+                animation: google.maps.Animation.DROP
+            });
+            const request = {
+                origin: origin.geometry.location,
+                destination: destination.geometry.location,
+                travelMode: google.maps.TravelMode.TRANSIT,
+                optimizeWaypoints: true
+            };
+            directionsService.route(request, function(result, status) {
+                if (status === "OK") {
+                    directionsRenderer.setDirections(result);
+                    const route = result.routes[0];
+                    const distanceMeters = route.legs[0].distance.value;
+                    const distanceKm = distanceMeters / 1000;
+                    const duration = route.legs[0].duration.text;
+                    const vehicleChoice = parseInt(document.querySelector('input[name="vehicle"]:checked')?.value || '4');
+                    const isDiscounted = document.getElementById("discounts").checked;
+                    const fareInfo = calculateFare(distanceKm, vehicleChoice, isDiscounted);
+                    displayFare(distanceKm, fareInfo, duration, origin.name, destination.name);
+                    const bounds = new google.maps.LatLngBounds();
+                    bounds.extend(origin.geometry.location);
+                    bounds.extend(destination.geometry.location);
+                    map.fitBounds(bounds);
+                } else {
+                    console.error('Route calculation failed:', status);
+                    alert("Could not calculate route. Please ensure the selected locations are reachable by road.");
+                }
+            });
+        }
+        function calculateFare(distanceTraveled, vehicleChoice, isDiscounted) {
+            const DiscountRate = 0.20;
+            let baseFare = 0;
+            let baseDistance = 0;
+            let perKmRate = 0;
+            let vehicleName = "";
+            switch (vehicleChoice) {
+                case 1:
+                    vehicleName = "Airconditioned Bus";
+                    baseFare = 15;
+                    baseDistance = 5;
+                    perKmRate = 3;
+                    break;
+                case 2:
+                    vehicleName = "Ordinary Bus";
+                    baseFare = 13;
+                    baseDistance = 5;
+                    perKmRate = 3;
+                    break;
+                case 3:
+                    vehicleName = "Modern E-Jeepney";
+                    baseFare = 15;
+                    baseDistance = 4;
+                    perKmRate = 3;
+                    break;
+                case 4:
+                    vehicleName = "Traditional Jeepney";
+                    baseFare = 13;
+                    baseDistance = 4;
+                    perKmRate = 2;
+                    break;
+                default:
+                    return { error: "Invalid vehicle type" };
+            }
+            let regularFare = baseFare;
+            if (distanceTraveled > baseDistance) {
+                const extraKm = Math.floor(distanceTraveled - baseDistance);
+                regularFare += extraKm * perKmRate;
+            }
+            const discountAmount = isDiscounted ? Math.round(regularFare * DiscountRate) : 0;
+            const totalFare = Math.round(regularFare) - discountAmount;
+            return {
+                vehicleName,
+                regularFare: Math.round(regularFare),
+                discountAmount,
+                totalFare,
+                baseFare,
+                distanceTraveled
+            };
+        }
+        function displayFare(distance, fareInfo, duration, originName, destinationName) {
+            if (fareInfo.error) {
+                document.getElementById("fareAmount").innerText = fareInfo.error;
+                return;
+            }
+            document.getElementById("fareAmount").innerText = `₱ ${fareInfo.totalFare.toFixed(2)}`;
+            document.getElementById("baseFare").innerText = `₱ ${fareInfo.baseFare.toFixed(2)}`;
+            document.getElementById("appliedDiscount").innerText = `₱ ${fareInfo.discountAmount.toFixed(2)}`;
+            document.getElementById("distance").innerText = `${distance.toFixed(2)} km`;
+            document.getElementById("totalFare").innerText = `₱ ${fareInfo.totalFare.toFixed(2)}`;
+            document.getElementById("fareLocation").innerText = `${originName} → ${destinationName}`;
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJWH0VLI60CGZNcXQQbFWrLUDIfG3z3G0&libraries=places&callback=initMap"></script>
+}
