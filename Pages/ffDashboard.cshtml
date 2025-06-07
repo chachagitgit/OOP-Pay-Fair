@@ -52,7 +52,7 @@
 <div class="container">
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <a href="tAndC.html" class="app-title">PayFair</a>
+            <a href="Pages/Terms.cshtml" class="app-title">PayFair</a>
         </div>
 
         <div class="tabs-container">
@@ -169,7 +169,7 @@
         function initMap() {
             const manila = { lat: 14.5995, lng: 120.9842 };
             map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 11,
+                zoom: 12,
                 center: manila,
                 mapTypeControl: false,
                 styles: [
@@ -262,7 +262,7 @@
                     console.error('Route calculation failed:', status);
                     alert("Could not calculate route. Please ensure the selected locations are reachable by road.");
                 }
-            });
+            }); 
         }
         function calculateFare(distanceTraveled, vehicleChoice, isDiscounted) {
             const DiscountRate = 0.20;

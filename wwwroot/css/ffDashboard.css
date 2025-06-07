@@ -381,7 +381,7 @@ label #cancel {
 .calculate-fare {
     width: 100%;
     padding: 10px;
-    margin-left: 40px;
+    /*margin-left: 0px;*/
     background: rgba(216, 49, 91, 0.8);
     border: none;
     border-radius: 8px;

@@ -44,6 +44,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Jerlee/Desktop/OOP/OOP-Pay-Fair/Pages/log-in.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcbG9nLWluLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Jerlee/Desktop/OOP/OOP-Pay-Fair/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -56,8 +60,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcc2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Jerlee/Desktop/OOP/OOP-Pay-Fair/Pages/signUp.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcc2lnblVwLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Jerlee/Desktop/OOP/OOP-Pay-Fair/Pages/Terms.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVybXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jerlee/Desktop/OOP/OOP-Pay-Fair/Pages/user_account.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcdXNlcl9hY2NvdW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Jerlee/Desktop/OOP/OOP-Pay-Fair/Pages/_ViewImports.cshtml]

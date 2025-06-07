@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OOP-Fair-Fare")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ccd881f1b480d4f2c8faa071ee4d039ae1dac9f6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+89815eb2f96269f63a605cb0bf8ae6bc4498b876")]
 [assembly: System.Reflection.AssemblyProductAttribute("OOP-Fair-Fare")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OOP-Fair-Fare")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

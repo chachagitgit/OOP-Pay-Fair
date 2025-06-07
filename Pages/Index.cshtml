@@ -6,94 +6,327 @@
 @section Styles {
     <link rel="stylesheet" href="/css/ffHomepage.css" />
 }
-<!-- Sidebar Overlay -->
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
-<!-- Sidebar -->
-<nav class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-        <h2 class="sidebar-title">FairFare</h2>
-        <button class="close-btn" id="closeSidebar">×</button>
-    </div>
-    <div class="sidebar-menu">
-        <a href="/Terms">Terms and Conditions</a>
-        <a href="/Privacy">Privacy Policy</a>
-        <a href="/About">About Us</a>
-        <a href="/Contact">Contact Us</a>
-    </div>
-</nav>
-<header>
-    <!-- Burger Menu on the left -->
-    <div class="burger-menu" id="burgerMenu">
-        <div class="burger-icon" id="burgerIcon">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>PayFair - Ride Easy, Pay Fairly</title>
+    <link rel="icon" href="/images/logo.png" type="image/png">
+</head>
+<body>
+    
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="/ffDashboard">
+            <img src="/images/full logo.png" alt="PayFair Logo" class="sidebar-logo">
+            </a>
+            <button class="close-btn" id="closeSidebar">×</button>
         </div>
-    </div>
-    <div></div>
-    <!-- Logo on the right -->
-    <figure class="logo">
-        <img src="/images/logo.png" alt="PayFare Logo">
-    </figure>
-</header>
-<main>
-    <section class="carousel next">
-        <div class="list">
-            <article class="item other_1">
-                <div class="main-content" 
-                style="background-color: #9c4d2f; background-image: url('/images/bg1.png'); background-size: cover; background-position: center;">
-                    <div class="content">
-                        <img src="/images/full%20logo.png" alt="PayFare Logo" class="title-image">
-                        <p class="Header">Ride Easy, Pay Fairly</p>
-                        <p class="description">
-                            PayFare is a fare calculating app designed for commuters across the Philippines. It provides accurate fare estimates for various transportation modes, helping users plan their trips efficiently and budget their travel costs with ease.
-                        </p>
-                    </div>
-                </div>
-                <figure class="image">
-                    <img src="/images/pogs.png" alt="PayFare App Interface">
-                </figure>
-            </article>
-            <article class="item active">
-                <div class="main-content" 
-                style="background-color: #f5bfaf; background-image: url('/images/bg2.png'); background-size: cover; background-position: center;">
-                    <div class="content">
-                        <img src="/images/full%20logo.png" alt="PayFare Logo" class="title-image">
-                        <p class="Aheader2">Your fare buddy, anywhere in the Philippines</p>
-                        <p class="description">
-                            A Fare Calculating App designed for commuters across the Philippines
-                        </p>
-                    </div>
-                </div>
-                <figure class="image">
-                    <img src="/images/pinplace.png" alt="Location Pin">
-                </figure>
-            </article>
-            <article class="item other_2">
-                <div class="main-content" 
-                style="background-color: #dedfe1; background-image: url('/images/bg3.png'); background-size: cover; background-position: center;">
-                    <div class="content">
-                        <img src="/images/full%20logo.png" alt="PayFare Logo" class="title-image">
-                        <p class="description">
-                            A Fare Calculating App designed for commuters across the Philippines
-                        </p>
-                        <button class="CalculateNow" onclick="location.href='/ffDashboard'">
-                            Calculate Now
-                        </button>
-                    </div>
-                </div>
-                <figure class="image">
-                    <img src="/images/cars.png" alt="Transportation Options">
-                </figure>
-            </article>
+        <div class="sidebar-menu">
+            <a href="#termsSection">Terms and Conditions</a>
+            <a href="#privacySection">Privacy Policy</a>
+            <a href="#aboutSection">About Us</a>
+            <a href="#contactSection">Contact Us</a>
+            <a href="/user_account"><i class="fas fa-user"></i>Manage Account</a>
         </div>
-        <div class="arrows">
-            <button id="prev"><</button>
-            <button id="next">></button>
+    </nav>
+    
+    <header>
+        <!-- Burger Menu on the left -->
+        <div class="burger-menu" id="burgerMenu">
+            <div class="burger-icon" id="burgerIcon">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-    </section>
-</main>
-@section Scripts {
+        
+        <!-- Empty middle section -->
+        <div></div>
+        
+        <!-- Logo on the right -->
+        <figure class="logo">
+            <img src="/images/logo.png" alt="PayFair Logo">
+        </figure>
+    </header>
+
+    <main>
+        <section class="carousel next">
+            <div class="list">
+                
+                <article class="item other_1">
+                    <div class="main-content" 
+                    style="background-color: #9c4d2f; background-image: url('/images/bg1.png'); background-size: cover; background-position: center;">
+                        <div class="content">
+                            <img src="/images/full logo.png" alt="PayFair Logo" class="title-image">
+                            <p class="Header">Ride Easy, Pay Fairly</p>
+                            <p class="description">
+                                PayFair is a fare calculating app designed for commuters across the Philippines. It provides accurate fare estimates for various transportation modes, helping users plan their trips efficiently and budget their travel costs with ease.
+                            </p>
+                        </div>
+                    </div>
+                    <figure class="image">
+                        <img src="/images/pogs.png" alt="PayFair App Interface">
+                    </figure>
+                </article>
+
+                <article class="item active">
+                    <div class="main-content" 
+                    style="background-color: #f5bfaf; background-image: url('/images/bg2.png'); background-size: cover; background-position: center;">
+                        <div class="content">
+                            <img src="/images/full logo.png" alt="PayFair Logo" class="title-image">
+                            <p class="Aheader2">Your fare buddy, anywhere in the Philippines</p>
+                            <p class="description">
+                                A Fare Calculating App designed for commuters across the Philippines
+                            </p>
+                        </div>
+                    </div>
+                    <figure class="image">
+                        <img src="/images/pinplace.png" alt="Location Pin">
+                    </figure>
+                </article>
+
+                <article class="item other_2">
+                    <div class="main-content" 
+                    style="background-color: #dedfe1; background-image: url('/images/bg3.png'); background-size: cover; background-position: center;">
+                        <div class="content">
+                            <img src="/images/full logo.png" alt="PayFair Logo" class="title-image">
+                            <p class="description">
+                                A Fare Calculating App designed for commuters across the Philippines
+                            </p>
+                            <a href="/ffDashboard"><button class="CalculateNow">Calculate Now</button></a>
+                        </div>
+                    </div>
+                    <figure class="image">
+                        <img src="/images/cars.png" alt="Transportation Options">
+                    </figure>
+                </article>
+                
+            </div>
+            <div class="arrows">
+                <button id="prev"><</button>
+                <button id="next">></button>
+            </div>
+        </section>
+    </main>
+
     <script src="/js/ffHomepage.js"></script>
-}
+
+    <div class="animation-section section-about" id="aboutSection">
+        <div class="section-title">ABOUT US</div>
+        <div class="content-container">
+            <div class="content-section">
+                <div class="reveal">
+                    <p><strong>PayFair</strong> is a commuter-focused fare calculator designed to provide quick, accurate, and transparent fare estimates for everyday travelers.</p>
+                </div>
+                <div class="reveal delay-1s">
+                    <p>Whether you're heading to work, school, or home, we help you stay informed and in control of your transportation costs.</p>
+                </div> 
+                <div class="reveal delay-1-5s">    
+                    <p>Our mission is to make commuting more predictable and budget-friendly for everyone.</p>
+                </div>
+                <div class="reveal delay-1-5s">   
+                    <p>Built with simplicity and fairness in mind, PayFair empowers users with the information they need—before they even step out the door.</p>
+                </div> 
+            </div>
+            <div class="icon-container">
+                <div class="icon-box">
+                    <img src="/images/about.png">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="animation-section section-terms" id="termsSection">
+        <div class="section-title">TERMS AND CONDITIONS</div>
+        <div class="content-container">
+            <div class="content-section">
+                <div class="reveal">
+                    <p><strong><em>Effective Date: May 25, 2025</em></strong></p>
+                </div>   
+                <div class="reveal">        
+                    <p class="reveal">Welcome to PayFair. By accessing or using our app, you agree to be bound by these Terms of Use. Please read them carefully.
+                </div>  
+                <div class="reveal delay-1s">    
+                    <ol>
+                        <li><strong>Use of the App:</strong> You may use PayFair solely for personal, non-commercial purposes. You agree not to misuse or attempt to disrupt the operation of the app.</li>
+                        <li><strong>Accuracy of Information:</strong> While we strive for accurate fare estimates, actual fares may vary due to traffic, route changes, or service providers. PayFair is not responsible for discrepancies.<</li>
+                        <li><strong>User Conduct:</strong> You agree not to use the app for unlawful purposes or to violate the rights of others.</li>
+                        <li><strong>Intellectual Property:</strong> All content within PayFair, including logos and branding, is the property of PayFair and may not be used without permission.</li>
+                    </ol>
+                </div>
+                <div class="reveal delay-1-5s">
+                    <p><strong>Modifications:</strong> We may update these Terms at any time. Continued use of the app means you accept the revised terms.</p> 
+                    <p class="reveal">If you do not agree to these terms, please do not use the app.</p>  
+                </div> 
+            </div>
+            <div class="icon-container">
+                <div class="icon-box">
+                    <img src="/images/tnc.png">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="animation-section section-privacy" id="privacySection">
+        <div class="section-title">PRIVACY POLICY</div>
+        <div class="content-container">
+            <div class="content-section">
+                <div class="reveal">
+                    <p>Your privacy is important to us. This Privacy Policy explains how PayFair collects, uses, and protects your information.</p>
+                </div>
+                <div class="reveal delay-1s">
+                    <p><strong>Information We Collect</strong></p>
+                    <ul>
+                        <li>Basic location data to calculate fare estimates.</li>
+                        <li>Device information (for diagnostics and analytics).</li>
+                        <li>Optional contact details (if you submit feedback).</li>
+                    </ul>
+                </div>
+                <div class="reveal delay-1s">
+                    <div>
+                        <p><strong>How We Use Your Data</strong></p>
+                        <ul>
+                            <li>To provide accurate fare estimates.</li>
+                            <li>To improve app performance and user experience.</li>
+                            <li>To respond to user inquiries or support requests.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="reveal dealy-1-5s">
+                        <p><strong>Data Protection</strong></p>
+                        <ul>
+                            <li>We do not sell or share your data with third parties.</li>
+                            <li>We use encryption and secure storage practices.</li>
+                        </ul>
+                        <p><strong>Your Rights</strong></p>
+                        <ul>
+                            <li class="reveal">You may request to view or delete your data at any time.</li>
+                        </ul>
+                        <p>For questions or concerns, contact us at support@PayFair.app.</p>
+                </div>
+            </div>
+            <div class="icon-container">
+                <div class="icon-box">
+                    <img src="/images/privacy.png" alt="privacy policy">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="animation-section section-contact" id="contactSection">
+        <div class="section-title">CONTACT US</div>
+        <div class="content-container">
+            <div class="content-section">
+                <div class="reveal">
+                    <p>We’d love to hear from you!</p>
+                </div>
+                <div class="reveal dealy-1s">
+                    <ul></ul>
+                        <li><strong>Email:</strong>support@payfair.app</li>
+                        <li><strong>Phone:</strong>(630123456789)</li>
+                        <li><strong>Business Hours:</strong>Monday to Friday, 9:00 AM – 5:00 PM (Your Time Zone)</li>
+                    </ul>
+                </div>
+                <div class="reveal delay-1-5s"></div>
+                    <p class="reveal">For questions, feedback, or support, reach out any time. We’re here to help make your commute smoother and smarter.</p>
+                </div>
+            </div>
+            <div class="icon-container">
+                <div class="icon-box">
+                    <img src="/images/contact.png" alt="contact us icon">
+                </div>
+            </div>
+        </div>
+    </div>
+         <script>
+        let lastScrollY = window.scrollY;
+        const animatedSections = new Set();
+
+        function updateAnimation() {
+            const sections = document.querySelectorAll('.animation-section');
+            const currentScrollY = window.scrollY;
+            const scrollingDown = currentScrollY > lastScrollY;
+            
+            sections.forEach(section => {
+                const sectionRect = section.getBoundingClientRect();
+                const sectionId = section.id;
+                const isInViewport = sectionRect.top < window.innerHeight * 0.7 && sectionRect.bottom > window.innerHeight * 0.3;
+                
+                if (isInViewport && !animatedSections.has(sectionId)) {
+                    // Section enters viewport - animate in
+                    section.classList.remove('animate-out');
+                    section.classList.add('animate-in');
+                    animatedSections.add(sectionId);
+                    
+                    // Trigger reveal animations for content
+                    setTimeout(() => {
+                        section.querySelectorAll('.reveal').forEach(el => {
+                            el.classList.add('active');
+                        });
+                    }, 400);
+                    
+                } else if (!isInViewport && animatedSections.has(sectionId)) {
+                    // Section leaves viewport - animate out
+                    section.classList.remove('animate-in');
+                    section.classList.add('animate-out');
+                    animatedSections.delete(sectionId);
+                    
+                    // Remove reveal animations
+                    section.querySelectorAll('.reveal').forEach(el => {
+                        el.classList.remove('active');
+                    });
+                    
+                    // Reset to initial state after animation completes
+                    setTimeout(() => {
+                        if (!animatedSections.has(sectionId)) {
+                            section.classList.remove('animate-out');
+                        }
+                    }, 800);
+                }
+            });
+            
+            lastScrollY = currentScrollY;
+        }
+
+        // Throttle scroll events for better performance
+        let ticking = false;
+        
+        function handleScroll() {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    updateAnimation();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        
+        // Initial check
+        updateAnimation();
+    </script>
+</body>
+<footer class="app-footer"> 
+    <p>Copyright© 2025 PayFair · All rights reserved
+        <span class="footer-nav">
+            <a href="#aboutSection">About Us |</a>
+            <a href="#tncSection">Terms and Conditions |</a>
+            <a href="#privacySection">Privacy Policy |</a>
+            <a href="#contactSection">Contact Us</a>
+        </span> 
+    </p>
+</footer>
+</html>
