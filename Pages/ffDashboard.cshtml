@@ -5,10 +5,34 @@
 }
 
 @section Styles {
-    <link rel="stylesheet" href="css/ffDashboard.css" />
+    <link rel="stylesheet" href="~/css/ffDashboard.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,900&display=swap" rel="stylesheet">
+    <style>
+        /* Prevent input text from overlapping the dropdown icon */
+        .input-wrapper {
+            position: relative;
+        }
+        .main-input {
+            max-width: calc(100% - 40px); /* leave space for icon and dropdown */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding-right: 40px; /* ensure text doesn't go under the icon */
+        }
+        .dropdown-btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            background: transparent;
+            border: none;
+            z-index: 2;
+        }
+    </style>
 }
 
 <!-- Hidden inputs for UI control -->
@@ -49,12 +73,9 @@
                         <div class="input-wrapper">
                             <div class="dropdown-overlay"></div>
                             <i class="fas fa-map-marker-alt location-icon"></i>
-                            <input type="text" id="originInput" class="main-input" placeholder="Starting location" aria-label="Starting location">
+                            <input type="text" id="originInput" class="main-input" placeholder="Starting location" aria-label="Starting location" autocomplete="off">
                             <label for="dropdown1" class="dropdown-btn"><i class="fas fa-chevron-down"></i></label>
-                            <div class="dropdown-menu">
-                                <div class="dropdown-item">Related areas</div>
-                                <div class="dropdown-item">Placeholder lang muna</div>
-                            </div>
+                            <div class="dropdown-menu" id="originDropdown"></div>
                         </div>
                     </div>
                     <!-- Destination -->
@@ -63,12 +84,9 @@
                         <div class="input-wrapper">
                             <div class="dropdown-overlay"></div>
                             <i class="fas fa-map-marker-alt location-icon"></i>
-                            <input type="text" id="destinationInput" class="main-input" placeholder="Destination" aria-label="Destination">
+                            <input type="text" id="destinationInput" class="main-input" placeholder="Destination" aria-label="Destination" autocomplete="off">
                             <label for="dropdown2" class="dropdown-btn"><i class="fas fa-chevron-down"></i></label>
-                            <div class="dropdown-menu">
-                                <div class="dropdown-item">Related areas</div>
-                                <div class="dropdown-item">Placeholder lang muna</div>
-                            </div>
+                            <div class="dropdown-menu" id="destinationDropdown"></div>
                         </div>
                     </div>
                 </div>
