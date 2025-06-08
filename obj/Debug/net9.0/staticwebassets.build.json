@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "QtVzXCxI77XcfUCvuAoen7GIPtlqhuZxqsEuzJlIzts=",
+  "Hash": "qzk++hIpxtgzV02GOTr/eYPP3uLWzEFYOaXSOd17UNA=",
   "Source": "OOP-Fair-Fare",
   "BasePath": "_content/OOP-Fair-Fare",
   "Mode": "Default",
@@ -1361,12 +1361,12 @@
       "OriginalItemSpec": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\css\\user_account.css"
     },
     {
-      "Identity": "C:\\Users\\User\\OOP-Fair-Fare\\obj\\Debug\\net9.0\\compressed\\21ixajlkwe-3yl8sayykx.gz",
+      "Identity": "C:\\Users\\User\\OOP-Fair-Fare\\obj\\Debug\\net9.0\\compressed\\21ixajlkwe-ls1duc6iw3.gz",
       "SourceId": "OOP-Fair-Fare",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\User\\OOP-Fair-Fare\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/OOP-Fair-Fare",
-      "RelativePath": "css/ffDashboard#[.{fingerprint=3yl8sayykx}]?.css.gz",
+      "RelativePath": "css/ffDashboard#[.{fingerprint=ls1duc6iw3}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -1375,8 +1375,8 @@
       "RelatedAsset": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\css\\ffDashboard.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "rxdld00dw0",
-      "Integrity": "z6a10Lo6ZfwMomequ6lIhQvTB3MvVHI979jIJ3XAQCI=",
+      "Fingerprint": "dgevsqrvc8",
+      "Integrity": "7Q4V8p+SpCsxQP6DobbDwcVJdWd3x9FqnBaO/iQR8dA=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\css\\ffDashboard.css"
@@ -2845,8 +2845,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "3yl8sayykx",
-      "Integrity": "G8Xq6TevXvQrTZgABvM7hSSyuIVbd91gjGOD7jnVrCM=",
+      "Fingerprint": "ls1duc6iw3",
+      "Integrity": "VbiA3S7h20pmqJoOcZXIX0fQFBlIZ4txGx9ZJTvLz2w=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\ffDashboard.css"
@@ -4242,13 +4242,13 @@
       ]
     },
     {
-      "Route": "css/ffDashboard.3yl8sayykx.css",
-      "AssetFile": "C:\\Users\\User\\OOP-Fair-Fare\\obj\\Debug\\net9.0\\compressed\\21ixajlkwe-3yl8sayykx.gz",
+      "Route": "css/ffDashboard.css",
+      "AssetFile": "C:\\Users\\User\\OOP-Fair-Fare\\obj\\Debug\\net9.0\\compressed\\21ixajlkwe-ls1duc6iw3.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000370233247"
+          "Quality": "0.000316555872"
         }
       ],
       "ResponseHeaders": [
@@ -4258,19 +4258,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2700"
+          "Value": "3158"
         },
         {
           "Name": "ETag",
-          "Value": "\"z6a10Lo6ZfwMomequ6lIhQvTB3MvVHI979jIJ3XAQCI=\""
+          "Value": "\"7Q4V8p+SpCsxQP6DobbDwcVJdWd3x9FqnBaO/iQR8dA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 08 Jun 2025 07:51:09 GMT"
+          "Value": "Sun, 08 Jun 2025 15:24:46 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
+          "Value": "no-cache"
         },
         {
           "Name": "Content-Encoding",
@@ -4286,26 +4286,18 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"G8Xq6TevXvQrTZgABvM7hSSyuIVbd91gjGOD7jnVrCM=\""
+          "Value": "W/\"VbiA3S7h20pmqJoOcZXIX0fQFBlIZ4txGx9ZJTvLz2w=\""
         }
       ],
       "EndpointProperties": [
         {
-          "Name": "fingerprint",
-          "Value": "3yl8sayykx"
-        },
-        {
-          "Name": "label",
-          "Value": "css/ffDashboard.css"
-        },
-        {
           "Name": "integrity",
-          "Value": "sha256-G8Xq6TevXvQrTZgABvM7hSSyuIVbd91gjGOD7jnVrCM="
+          "Value": "sha256-VbiA3S7h20pmqJoOcZXIX0fQFBlIZ4txGx9ZJTvLz2w="
         }
       ]
     },
     {
-      "Route": "css/ffDashboard.3yl8sayykx.css",
+      "Route": "css/ffDashboard.css",
       "AssetFile": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\css\\ffDashboard.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -4315,7 +4307,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "11225"
+          "Value": "12755"
         },
         {
           "Name": "Content-Type",
@@ -4323,11 +4315,156 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"G8Xq6TevXvQrTZgABvM7hSSyuIVbd91gjGOD7jnVrCM=\""
+          "Value": "\"VbiA3S7h20pmqJoOcZXIX0fQFBlIZ4txGx9ZJTvLz2w=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 08 Jun 2025 07:51:09 GMT"
+          "Value": "Sun, 08 Jun 2025 15:24:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-VbiA3S7h20pmqJoOcZXIX0fQFBlIZ4txGx9ZJTvLz2w="
+        }
+      ]
+    },
+    {
+      "Route": "css/ffDashboard.css.gz",
+      "AssetFile": "C:\\Users\\User\\OOP-Fair-Fare\\obj\\Debug\\net9.0\\compressed\\21ixajlkwe-ls1duc6iw3.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3158"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7Q4V8p+SpCsxQP6DobbDwcVJdWd3x9FqnBaO/iQR8dA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 08 Jun 2025 15:24:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-7Q4V8p+SpCsxQP6DobbDwcVJdWd3x9FqnBaO/iQR8dA="
+        }
+      ]
+    },
+    {
+      "Route": "css/ffDashboard.ls1duc6iw3.css",
+      "AssetFile": "C:\\Users\\User\\OOP-Fair-Fare\\obj\\Debug\\net9.0\\compressed\\21ixajlkwe-ls1duc6iw3.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000316555872"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3158"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7Q4V8p+SpCsxQP6DobbDwcVJdWd3x9FqnBaO/iQR8dA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 08 Jun 2025 15:24:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"VbiA3S7h20pmqJoOcZXIX0fQFBlIZ4txGx9ZJTvLz2w=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ls1duc6iw3"
+        },
+        {
+          "Name": "label",
+          "Value": "css/ffDashboard.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VbiA3S7h20pmqJoOcZXIX0fQFBlIZ4txGx9ZJTvLz2w="
+        }
+      ]
+    },
+    {
+      "Route": "css/ffDashboard.ls1duc6iw3.css",
+      "AssetFile": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\css\\ffDashboard.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "12755"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VbiA3S7h20pmqJoOcZXIX0fQFBlIZ4txGx9ZJTvLz2w=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 08 Jun 2025 15:24:46 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4337,7 +4474,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3yl8sayykx"
+          "Value": "ls1duc6iw3"
         },
         {
           "Name": "label",
@@ -4345,13 +4482,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-G8Xq6TevXvQrTZgABvM7hSSyuIVbd91gjGOD7jnVrCM="
+          "Value": "sha256-VbiA3S7h20pmqJoOcZXIX0fQFBlIZ4txGx9ZJTvLz2w="
         }
       ]
     },
     {
-      "Route": "css/ffDashboard.3yl8sayykx.css.gz",
-      "AssetFile": "C:\\Users\\User\\OOP-Fair-Fare\\obj\\Debug\\net9.0\\compressed\\21ixajlkwe-3yl8sayykx.gz",
+      "Route": "css/ffDashboard.ls1duc6iw3.css.gz",
+      "AssetFile": "C:\\Users\\User\\OOP-Fair-Fare\\obj\\Debug\\net9.0\\compressed\\21ixajlkwe-ls1duc6iw3.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4360,7 +4497,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2700"
+          "Value": "3158"
         },
         {
           "Name": "Content-Type",
@@ -4368,11 +4505,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"z6a10Lo6ZfwMomequ6lIhQvTB3MvVHI979jIJ3XAQCI=\""
+          "Value": "\"7Q4V8p+SpCsxQP6DobbDwcVJdWd3x9FqnBaO/iQR8dA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 08 Jun 2025 07:51:09 GMT"
+          "Value": "Sun, 08 Jun 2025 15:24:46 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4390,7 +4527,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3yl8sayykx"
+          "Value": "ls1duc6iw3"
         },
         {
           "Name": "label",
@@ -4398,144 +4535,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-z6a10Lo6ZfwMomequ6lIhQvTB3MvVHI979jIJ3XAQCI="
-        }
-      ]
-    },
-    {
-      "Route": "css/ffDashboard.css",
-      "AssetFile": "C:\\Users\\User\\OOP-Fair-Fare\\obj\\Debug\\net9.0\\compressed\\21ixajlkwe-3yl8sayykx.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000370233247"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2700"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"z6a10Lo6ZfwMomequ6lIhQvTB3MvVHI979jIJ3XAQCI=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 08 Jun 2025 07:51:09 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"G8Xq6TevXvQrTZgABvM7hSSyuIVbd91gjGOD7jnVrCM=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-G8Xq6TevXvQrTZgABvM7hSSyuIVbd91gjGOD7jnVrCM="
-        }
-      ]
-    },
-    {
-      "Route": "css/ffDashboard.css",
-      "AssetFile": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\css\\ffDashboard.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "11225"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"G8Xq6TevXvQrTZgABvM7hSSyuIVbd91gjGOD7jnVrCM=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 08 Jun 2025 07:51:09 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-G8Xq6TevXvQrTZgABvM7hSSyuIVbd91gjGOD7jnVrCM="
-        }
-      ]
-    },
-    {
-      "Route": "css/ffDashboard.css.gz",
-      "AssetFile": "C:\\Users\\User\\OOP-Fair-Fare\\obj\\Debug\\net9.0\\compressed\\21ixajlkwe-3yl8sayykx.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2700"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"z6a10Lo6ZfwMomequ6lIhQvTB3MvVHI979jIJ3XAQCI=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 08 Jun 2025 07:51:09 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-z6a10Lo6ZfwMomequ6lIhQvTB3MvVHI979jIJ3XAQCI="
+          "Value": "sha256-7Q4V8p+SpCsxQP6DobbDwcVJdWd3x9FqnBaO/iQR8dA="
         }
       ]
     },

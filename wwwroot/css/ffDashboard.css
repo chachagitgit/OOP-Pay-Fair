@@ -1,4 +1,4 @@
- * {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -20,6 +20,7 @@ body {
 input[type="radio"]{
     display: none;
 }
+
 /*for both open and close*/
 label[for="check"]{
     position: fixed;
@@ -37,63 +38,91 @@ label #btn, label #cancel {
 }
 
 label #btn {
-    display: block;
+    display: none;
 }
 /*change from burger icon to x icon*/
 label #cancel {
-    display: none;
+    display: block;
     transform: translateX(230px);  
-    padding-top: 10px;
+    padding-top: 0px;
     transition: all 0.8s ease;
 }
 /*changes to burger icon*/
-#check:checked ~ label #btn {
+#check:checked ~ label #cancel {
     display: none;
 }
 /*changes to x icon*/
-#check:checked ~ label #cancel{
+#check:checked ~ label #btn{
     display: block;
 }
 
-/*sidebar title*/
-.app-title{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-size: 36px;
-    font-weight: 700;
-    color: black;
-    text-decoration: none;
-    font-family: "Poppins", sans-serif ;
-    display: inline-block;
+/*sidebar title - MADE LOGO SMALLER*/
+.sidebar-logo {
+    height: 50px; 
+    width: auto;
+    padding-left: 5px;
+    padding-top: 8px;
 }
-.app-title:hover {
-    color: #0a2463;
-    cursor: pointer;
-}
-/*sidebar container layout*/
+
+/*sidebar container layout - UPDATED WITH SCROLLING*/
 .sidebar {
     position: fixed;
     top: 0;
-    left: -320px;
+    left: 0px;
     width: 320px;
     height: 100vh;
     background-color: white;
     transition: left 0.3s ease;
-    padding: 10px 30px;
     color: black;
     z-index: 100;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent content from overflowing */
 }
 
 /*for double tabs (route and fare)*/
 #check:checked ~ .container .sidebar{
-    left: 0;
+    left: -320px;
 }
 
 .sidebar-header {
     border-bottom: 1px solid #eee;
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Reduced from 20px to account for smaller logo */
+    padding: 5px 30px 0; /* Reduced top padding from 10px to 5px */
+    flex-shrink: 0; /* Prevent header from shrinking */
 }
+
+/* UPDATED: Make sidebar content scrollable with proper height calculation */
+.sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 30px 20px;
+    height: calc(100vh - 80px); /* Adjust based on header height */
+    /* Custom scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(10, 36, 99, 0.3) transparent;
+}
+
+/* Custom scrollbar for webkit browsers */
+.sidebar-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb {
+    background: rgba(10, 36, 99, 0.3);
+    border-radius: 3px;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(10, 36, 99, 0.5);
+}
+
 /*container behind the route and fare tabs*/
 .tabs-container {
     background: #f8f9fa;
@@ -102,6 +131,7 @@ label #cancel {
     padding: 8px; 
     border-bottom: 1px solid #e9ecef;
     border-radius: 12px;
+    margin-bottom: 10px; /* Add margin for better spacing */
 }
 
 .tabs {
@@ -129,6 +159,8 @@ label #cancel {
 
 .content-container {
     padding: 5px 0;
+    flex: 1; /* Allow content to expand */
+    min-height: 0; /* Important for flex scrolling */
 }
 
 .content_box {
@@ -385,7 +417,7 @@ label #cancel {
     background: rgba(216, 49, 91, 0.8);
     border: none;
     border-radius: 8px;
-    color: black;
+    color: #0a2463;
     font-size: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -438,7 +470,7 @@ label #cancel {
 }
 /*content inside the container layout*/
 .content-section {
-    padding: 24px;
+    padding: 15px;
 }
 .total-fare {
     margin-bottom: 24px;
@@ -520,4 +552,30 @@ label #cancel {
         font-size: 14px;
         padding: 8px 0;
     }
+}
+
+
+.app-footer {
+    background-color: whitesmoke;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    border-top: 1px solid #ccc;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.footer-nav{
+    padding-left: 400px;
+}
+.footer-nav a{
+    color: #0a2463;
+    text-decoration: none;
+}
+.footer-nav a:hover{
+    text-decoration: underline;
 }

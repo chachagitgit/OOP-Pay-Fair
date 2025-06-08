@@ -39,6 +39,8 @@
 <input type="checkbox" id="check">
 <input type="radio" name="tab" id="tab-route" checked>
 <input type="radio" name="tab" id="tab-fare">
+
+ <!-- Vehicle selection radio buttons -->
 <input type="radio" name="vehicle" id="jeepney" class="vehicle-radio">
 <input type="radio" name="vehicle" id="ordinary-bus" class="vehicle-radio">
 <input type="radio" name="vehicle" id="aircon-bus" class="vehicle-radio">
@@ -52,104 +54,109 @@
 <div class="container">
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <a href="Pages/Terms.cshtml" class="app-title">PayFair</a>
+            <a href="/index">
+            <img src="/images/logo.png" alt="PayFair Logo" class="sidebar-logo">
+            </a> 
         </div>
 
-        <div class="tabs-container">
-            <div class="tabs">
-                <label for="tab-route" class="tab_btn">Route</label>
-                <label for="tab-fare" class="tab_btn">Fare</label>
-            </div>
-        </div>
-
-        <div class="content-container">
-            <!-- ROUTE TAB -->
-            <div class="content_box route-content">
-                <label class="location-label">Enter Starting location</label>
-                <div class="input-group">
-                    <!-- Origin -->
-                    <div class="input-container">
-                        <input type="checkbox" id="dropdown1" class="dropdown-control">
-                        <div class="input-wrapper">
-                            <div class="dropdown-overlay"></div>
-                            <i class="fas fa-map-marker-alt location-icon"></i>
-                            <input type="text" id="originInput" class="main-input" placeholder="Starting location" aria-label="Starting location" autocomplete="off">
-                            <label for="dropdown1" class="dropdown-btn"><i class="fas fa-chevron-down"></i></label>
-                            <div class="dropdown-menu" id="originDropdown"></div>
-                        </div>
-                    </div>
-                    <!-- Destination -->
-                    <div class="input-container">
-                        <input type="checkbox" id="dropdown2" class="dropdown-control">
-                        <div class="input-wrapper">
-                            <div class="dropdown-overlay"></div>
-                            <i class="fas fa-map-marker-alt location-icon"></i>
-                            <input type="text" id="destinationInput" class="main-input" placeholder="Destination" aria-label="Destination" autocomplete="off">
-                            <label for="dropdown2" class="dropdown-btn"><i class="fas fa-chevron-down"></i></label>
-                            <div class="dropdown-menu" id="destinationDropdown"></div>
-                        </div>
-                    </div>
+        <!-- UPDATED: Wrap scrollable content in sidebar-content div -->
+        <div class="sidebar-content">
+            <div class="tabs-container">
+                <div class="tabs"> <!--double tab option-->
+                    <label for="tab-route" class="tab_btn">Route</label>
+                    <label for="tab-fare" class="tab_btn">Fare</label>
                 </div>
-
-                <!-- Vehicle Options -->
-                <div class="section-title">Transportation Options</div>
-                <div class="vehicle-options">
-                    <input type="radio" id="vehicle1" name="vehicle" class="vehicle-radio" value="4">
-                    <label for="vehicle1" class="vehicle-btn">Traditional Jeepney<i class="fas fa-bus-alt vehicle-icon"></i></label>
-
-                    <input type="radio" id="vehicle2" name="vehicle" class="vehicle-radio" value="1">
-                    <label for="vehicle2" class="vehicle-btn">Airconditioned Bus<i class="fas fa-bus-alt vehicle-icon"></i></label>
-
-                    <input type="radio" id="vehicle3" name="vehicle" class="vehicle-radio" value="2">
-                    <label for="vehicle3" class="vehicle-btn">Ordinary Bus<i class="fas fa-bus-alt vehicle-icon"></i></label>
-
-                    <input type="radio" id="vehicle4" name="vehicle" class="vehicle-radio" value="3">
-                    <label for="vehicle4" class="vehicle-btn">Modern E-Jeepney<i class="fas fa-bus-alt vehicle-icon"></i></label>
-                </div>
-
-                <!-- Discount Checkbox -->
-                <div class="section-title">Discount</div>
-                <div class="discount">
-                    <div class="checkbox-wrapper">
-                        <input type="checkbox" id="discounts" name="discounts" value="Student/PWD/Senior Citizen">
-                        <label for="discounts">Student/PWD/Senior Citizen</label>
-                    </div>
-                </div>
-
-                <!-- Calculate Button -->
-                <button class="calculate-fare" onclick="calculateRoute()">Calculate Fare</button>
             </div>
 
-            <!-- FARE TAB -->
-            <div class="content_box fare-content">
-                <div class="fare-card">
-                    <div class="header-section"></div>
-                    <div class="content-section">
-                        <div class="total-fare">
-                            <h2>Total estimated fare:</h2>
-                            <div class="fare-amount" id="fareAmount">₱ XXXX</div>
+            <div class="content-container">
+                <!-- ROUTE TAB -->
+                <div class="content_box route-content">
+                    <label class="location-label">Enter Starting location</label>
+                    <div class="input-group">
+                        <!-- Origin -->
+                        <div class="input-container">
+                            <input type="checkbox" id="dropdown1" class="dropdown-control">
+                            <div class="input-wrapper">
+                                <div class="dropdown-overlay"></div>
+                                <i class="fas fa-map-marker-alt location-icon"></i>
+                                <input type="text" id="originInput" class="main-input" placeholder="Starting location" aria-label="Starting location" autocomplete="off">
+                                <label for="dropdown1" class="dropdown-btn"><i class="fas fa-chevron-down"></i></label>
+                                <div class="dropdown-menu" id="originDropdown"></div>
+                            </div>
                         </div>
-                        <div class="section">
-                            <div class="section-title">Location</div>
-                            <div id="fareLocation"></div>
+                        <!-- Destination -->
+                        <div class="input-container">
+                            <input type="checkbox" id="dropdown2" class="dropdown-control">
+                            <div class="input-wrapper">
+                                <div class="dropdown-overlay"></div>
+                                <i class="fas fa-map-marker-alt location-icon"></i>
+                                <input type="text" id="destinationInput" class="main-input" placeholder="Destination" aria-label="Destination" autocomplete="off">
+                                <label for="dropdown2" class="dropdown-btn"><i class="fas fa-chevron-down"></i></label>
+                                <div class="dropdown-menu" id="destinationDropdown"></div>
+                            </div>
                         </div>
-                        <div class="section">
-                            <div class="section-title">Breakdown</div>
-                            <div class="breakdown-item">
-                                <span class="item-label">Base fare</span>
-                                <span class="item-value" id="baseFare">XXXX</span>
+                    </div>
+
+                    <!-- Vehicle Options -->
+                    <div class="section-title">Transportation Options</div>
+                    <div class="vehicle-options">
+                        <input type="radio" id="vehicle1" name="vehicle" class="vehicle-radio" value="4">
+                        <label for="vehicle1" class="vehicle-btn">Traditional Jeepney<i class="fas fa-bus-alt vehicle-icon"></i></label>
+
+                        <input type="radio" id="vehicle2" name="vehicle" class="vehicle-radio" value="1">
+                        <label for="vehicle2" class="vehicle-btn">Airconditioned Bus<i class="fas fa-bus-alt vehicle-icon"></i></label>
+
+                        <input type="radio" id="vehicle3" name="vehicle" class="vehicle-radio" value="2">
+                        <label for="vehicle3" class="vehicle-btn">Ordinary Bus<i class="fas fa-bus-alt vehicle-icon"></i></label>
+
+                        <input type="radio" id="vehicle4" name="vehicle" class="vehicle-radio" value="3">
+                        <label for="vehicle4" class="vehicle-btn">Modern E-Jeepney<i class="fas fa-bus-alt vehicle-icon"></i></label>
+                    </div>
+
+                    <!-- Discount Checkbox -->
+                    <div class="section-title">Discount</div>
+                    <div class="discount">
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" id="discounts" name="discounts" value="Student/PWD/Senior Citizen">
+                            <label for="discounts">Student/PWD/Senior Citizen</label>
+                        </div>
+                    </div>
+
+                    <!-- Calculate Button -->
+                    <button class="calculate-fare" onclick="calculateRoute()">Calculate Fare</button>
+                </div>
+
+                <!-- FARE TAB -->
+                <div class="content_box fare-content">
+                    <div class="fare-card">
+                        <div class="header-section"></div>
+                        <div class="content-section">
+                            <div class="total-fare">
+                                <h2>Total estimated fare:</h2>
+                                <div class="fare-amount" id="fareAmount">₱ XXXX</div>
                             </div>
-                            <div class="breakdown-item">
-                                <span class="item-label">Applied discount</span>
-                                <span class="item-value" id="appliedDiscount">XXXX</span>
+                            <div class="section">
+                                <div class="section-title">Location</div>
+                                <div id="fareLocation"></div>
                             </div>
-                            <div class="breakdown-item">
-                                <span class="item-label">Distance</span>
-                                <span class="item-value" id="distance">XXXX</span>
-                            </div>
-                            <div class="breakdown-item total">
-                                <span class="item-label">Total estimated fare</span>
-                                <span class="item-value" id="totalFare">XXXX</span>
+                            <div class="section">
+                                <div class="section-title">Breakdown</div>
+                                <div class="breakdown-item">
+                                    <span class="item-label">Base fare</span>
+                                    <span class="item-value" id="baseFare">XXXX</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span class="item-label">Applied discount</span>
+                                    <span class="item-value" id="appliedDiscount">XXXX</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span class="item-label">Distance</span>
+                                    <span class="item-value" id="distance">XXXX</span>
+                                </div>
+                                <div class="breakdown-item total">
+                                    <span class="item-label">Total estimated fare</span>
+                                    <span class="item-value" id="totalFare">XXXX</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -161,6 +168,17 @@
     <!-- Google Map container -->
     <div id="map" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;"></div>
 </div>
+
+<footer class="app-footer"> 
+    <p>Copyright© 2025 PayFair · All rights reserved
+        <span class="footer-nav">
+            <a href="~/index#aboutSection">About Us |</a>
+            <a href="~/index#termsSection">Terms and Conditions |</a>
+            <a href="~/index#privacySection">Privacy Policy |</a>
+            <a href="~/index#contactSection">Contact Us</a>
+        </span> 
+    </p>
+</footer>
 
 @section Scripts {
     <script>
@@ -262,7 +280,9 @@
                     console.error('Route calculation failed:', status);
                     alert("Could not calculate route. Please ensure the selected locations are reachable by road.");
                 }
-            }); 
+            });
+          // Add this line at the end of calculateRoute() function, right before the closing brace
+            document.getElementById('tab-fare').checked = true;   
         }
         function calculateFare(distanceTraveled, vehicleChoice, isDiscounted) {
             const DiscountRate = 0.20;
