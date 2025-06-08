@@ -33,7 +33,7 @@
         <div class="user-pic">
             <img src="/images/user-pic.png"> <!--user default profile picture-->
         </div>
-        <div>Edit profile</div> 
+        <button class="edit-profile">Edit profile</button>  <!--to edit user's profile-->
     </div>
     <a href="/log-in"> <!--navigate to log in when signed out-->
         <button class="sign-out-btn">
@@ -43,13 +43,27 @@
     </a>
     
     <div class="user-info-container">
+        <div class="user-info-row"> <!--keep first name anf last name in 1 line-->
+            <div class="user-info-item">
+                <span class="user-info-label">First Name</span><!--firstname field label-->
+                <span class="user-info-value" id="firstname-display">First Name</span><!--user's first name-->
+                <input type="text" class="user-info-input" id="firstname-input" value="Firstname"  style="display: none;"> <!--for editing value in the field-->
+            </div>
+            <div class="user-info-item">
+                <span class="user-info-label">Last Name</span><!--last name label-->
+                <span class="user-info-value" id="lastname-display">Last Name</span> <!--user's last name--> 
+                <input type="text" class="user-info-input" id="lastname-input" value="Lastname" style="display: none;"> <!--for editing value in the field-->
+            </div>
+        </div>
+
         <div class="user-info-item">
             <span class="user-info-label">Username</span> <!--label in username field-->
-            <span class="user-info-value">Username</span> <!--username set by user-->
+            <span class="user-info-value" id="username-display">Username</span> <!--username set by user-->
+            <input type="text" class="user-info-input" id="username-input" value="Username" style="display: none;"> <!--for editing value in the field-->
         </div>
         <div class="user-info-item">
             <span class="user-info-label">Email</span> <!--label in email field-->
-            <span class="user-info-value">Email</span> <!--user's email-->
+            <span class="user-info-value" id="email-display">Email</span> <!--user's email-->
         </div>
     </div>
 
@@ -72,6 +86,45 @@
             </tbody>
         </table>
     </div>
+<script>
+    const editButton = document.querySelector('.edit-profile');
+    let isEditing = false;
+
+    editButton.addEventListener('click', () => {
+        if (isEditing) {
+            // validates the input
+            const firstname = document.getElementById('firstname-input').value.trim();
+            const lastname = document.getElementById('lastname-input').value.trim();
+            const username = document.getElementById('username-input').value.trim();
+
+            const nameConstraint = /^[A-Za-z\s\-]+$/;
+
+            if (!nameConstraint.test(firstname) || !nameConstraint.test(lastname)) {
+                alert("First name and Last name must not contain numbers.");
+                return; // Stop saving and stay in editing mode
+            }
+
+            // Update the display with new values
+            document.getElementById('firstname-display').textContent = firstname;
+            document.getElementById('lastname-display').textContent = lastname;
+            document.getElementById('username-display').textContent = username;
+        }
+
+        // Toggle editing state after saving or switching to edit 
+        isEditing = !isEditing;
+
+        document.getElementById('firstname-display').style.display = isEditing ? 'none' : 'inline';
+        document.getElementById('firstname-input').style.display = isEditing ? 'inline' : 'none';
+
+        document.getElementById('lastname-display').style.display = isEditing ? 'none' : 'inline';
+        document.getElementById('lastname-input').style.display = isEditing ? 'inline' : 'none';
+
+        document.getElementById('username-display').style.display = isEditing ? 'none' : 'inline';
+        document.getElementById('username-input').style.display = isEditing ? 'inline' : 'none';
+
+        editButton.textContent = isEditing ? 'Save' : 'Edit profile';
+    });
+</script>
 
 </body>
 <footer class="app-footer"> <!--footer-->
