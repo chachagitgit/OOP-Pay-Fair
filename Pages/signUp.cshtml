@@ -30,7 +30,7 @@
                    class="form-input" 
                    placeholder="Email" 
                    required 
-                   pattern="/^[a-zA-Z0-9._%+-]+@@gmail\.com$/"
+                   pattern="^[a-zA-Z0-9._%+-]+@@gmail\.com"
                    title="Please enter a valid Gmail address (example@gmail.com)">
             <div class="error-message" id="emailError">Please enter a valid Gmail address</div>
         </div>
@@ -106,8 +106,7 @@
                 emailError.style.display = 'none';
             }
 
-            //  CHECK IF 
-            PASSWORD MATCH 
+            //  CHECK IF     PASSWORD MATCH 
             if (password.value !== confirmPassword.value) {
                 confirmError.style.display = 'block';
                 confirmPassword.setCustomValidity('Passwords do not match');
@@ -123,6 +122,8 @@
             if (!valid) {
                 e.preventDefault(); //  Prevent form submission on validation error
             } else {
+                e.preventDefault();
+                window.location.href = '/log-in';
             }
         });
     });

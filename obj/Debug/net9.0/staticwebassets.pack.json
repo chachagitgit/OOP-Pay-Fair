@@ -1,0 +1,153 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\.gitkeep",
+      "PackagePath": "staticwebassets\\.gitkeep"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\.keep",
+      "PackagePath": "staticwebassets\\.keep"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\css\\.keep",
+      "PackagePath": "staticwebassets\\css\\.keep"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\css\\PrivandPol.css",
+      "PackagePath": "staticwebassets\\css\\PrivandPol.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\css\\about.css",
+      "PackagePath": "staticwebassets\\css\\about.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\css\\contact.css",
+      "PackagePath": "staticwebassets\\css\\contact.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\css\\ffDashboard.css",
+      "PackagePath": "staticwebassets\\css\\ffDashboard.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\css\\ffHomepage.css",
+      "PackagePath": "staticwebassets\\css\\ffHomepage.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\css\\log-in.css",
+      "PackagePath": "staticwebassets\\css\\log-in.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\css\\tAndC.css",
+      "PackagePath": "staticwebassets\\css\\tAndC.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\css\\user_account.css",
+      "PackagePath": "staticwebassets\\css\\user_account.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\images\\.keep",
+      "PackagePath": "staticwebassets\\images\\.keep"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\images\\2.png",
+      "PackagePath": "staticwebassets\\images\\2.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\images\\3.png",
+      "PackagePath": "staticwebassets\\images\\3.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\images\\4.png",
+      "PackagePath": "staticwebassets\\images\\4.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\images\\about.png",
+      "PackagePath": "staticwebassets\\images\\about.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\images\\bg1.png",
+      "PackagePath": "staticwebassets\\images\\bg1.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\images\\bg2.png",
+      "PackagePath": "staticwebassets\\images\\bg2.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\images\\bg3.png",
+      "PackagePath": "staticwebassets\\images\\bg3.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\images\\cars.png",
+      "PackagePath": "staticwebassets\\images\\cars.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\images\\contact.png",
+      "PackagePath": "staticwebassets\\images\\contact.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\images\\full logo.png",
+      "PackagePath": "staticwebassets\\images\\full logo.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\images\\loginbg.png",
+      "PackagePath": "staticwebassets\\images\\loginbg.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\images\\logo.png",
+      "PackagePath": "staticwebassets\\images\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\images\\pinplace.png",
+      "PackagePath": "staticwebassets\\images\\pinplace.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\images\\pogs.png",
+      "PackagePath": "staticwebassets\\images\\pogs.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\images\\privacy.png",
+      "PackagePath": "staticwebassets\\images\\privacy.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\images\\tnc.png",
+      "PackagePath": "staticwebassets\\images\\tnc.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\images\\user-pic.png",
+      "PackagePath": "staticwebassets\\images\\user-pic.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\js\\.keep",
+      "PackagePath": "staticwebassets\\js\\.keep"
+    },
+    {
+      "Id": "C:\\Users\\User\\OOP-Fair-Fare\\wwwroot\\js\\ffHomepage.js",
+      "PackagePath": "staticwebassets\\js\\ffHomepage.js"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.OOP-Fair-Fare.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.OOP-Fair-Fare.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.OOP-Fair-Fare.props",
+      "PackagePath": "build\\OOP-Fair-Fare.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.OOP-Fair-Fare.props",
+      "PackagePath": "buildMultiTargeting\\OOP-Fair-Fare.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.OOP-Fair-Fare.props",
+      "PackagePath": "buildTransitive\\OOP-Fair-Fare.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
