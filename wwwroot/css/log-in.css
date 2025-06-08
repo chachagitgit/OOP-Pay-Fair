@@ -1,6 +1,6 @@
 body {
             background-color: white; 
-            background-image: url('loginbg.png');
+            background-image: url('/images/loginbg.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -12,8 +12,19 @@ body {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-left: 950px;
-            padding-top: 100px;
+            padding-left: 700px;
+            padding-top: 120px;
+            gap: 0px;
+            font-family: Poppins, sans-serif;
+            justify-content: center;
+        }
+
+        .signup-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-left: 700px;
+            padding-top: 50px;
             gap: 0px;
             font-family: Poppins, sans-serif;
             justify-content: center;
@@ -56,13 +67,31 @@ body {
             outline: none;
             transition: all 0.3s ease;
         }
+        .form-input-name {
+            width: 135px;
+            height: 45px;
+            padding: 0 15px; 
+            border: none;
+            background: #1e3a8a;
+            color: white;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+            transition: all 0.3s ease;
+            margin-right: 5px;
+        }
 
-        .form-input::placeholder {
+        .form-input-name:last-of-type {
+            margin-right: 0;
+        }
+
+        .form-input::placeholder, .form-input-name::placeholder {
             color: rgba(255, 255, 255, 0.7);
             font-weight: 400;
         }
 
-        .form-input:focus {
+        .form-input:focus, .form-input-name:focus {
             background: #1e40af;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
             transform: translateY(-2px);
@@ -102,8 +131,16 @@ body {
         }
 
         .signup-section {
-            padding-top: 50px;
-            padding-left: 50px;
+            padding-top: 30px;
+            padding-left: 0px;
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.95rem;
+        }
+
+         .login-section {
+            padding-top: 5px;
+            padding-left: 0px;
             text-align: center;
             color: #6b7280;
             font-size: 0.95rem;
@@ -137,19 +174,34 @@ body {
             font-size: 0.85rem;
         }
 
+        /* Custom Gmail validation */
+        .gmail-invalid {
+            border: 2px solid #ef4444 !important;
+            background: #7c2d12 !important;
+        }
+
+        .gmail-valid {
+            border: 2px solid #10b981 !important;
+            background: #065f46 !important;
+        }
+
         /* Show error message only when form has been submitted and is invalid */
-        .form-submitted .form-input:invalid + .error-message {
+        .form-submitted .form-input:invalid + .error-message,
+        .form-submitted .form-input-name:invalid + .error-message,
+        .gmail-error {
             display: block;
         }
 
         /* Error styling only shows after form submission attempt */
-        .form-submitted .form-input:invalid {
+        .form-submitted .form-input:invalid,
+        .form-submitted .form-input-name:invalid {
             border: 2px solid #ef4444;
             background: #7c2d12;
         }
 
         /* Success styling only shows after form submission attempt */
-        .form-submitted .form-input:valid {
+        .form-submitted .form-input:valid,
+        .form-submitted .form-input-name:valid {
             border: 2px solid #10b981;
             background: #065f46;
         }
