@@ -53,11 +53,11 @@
         
         <!-- Empty middle section -->
         <div></div>
-        
-        <!-- Logo on the right -->
-        <figure class="logo">
-            <img src="/images/logo.png" alt="PayFair Logo">
-        </figure>
+            <!-- Logo on the right -->
+            <figure class="logo">
+                <img src="/images/logo.png" alt="PayFair Logo">
+            </figure>
+
     </header>
 
     <main>
@@ -252,56 +252,236 @@
         </div>
     </div>
     <script>
-        let lastScrollY = window.scrollY;
-        const animatedSections = new Set ();
-        function updateAnimation() {
-            const sections = document.querySelectorAll('.animation-section');
-            const currentScrollY = window.scrollY;
-            const scrollingDown = currentScrollY > lastScrollY;
-            
-            sections.forEach(section => {
-                const sectionRect = section.getBoundingClientRect();
-                const sectionId = section.id;
-                const isInViewport = sectionRect.top < window.innerHeight * 0.7 && sectionRect.bottom > window.innerHeight * 0.3;
-                
-                if (isInViewport && !animatedSections.has(sectionId)) {
-                    // Section enters viewport - animate in
+        // Simplified and more reliable scroll snapping for PayFair
+let lastScrollY = window.scrollY;
+const animatedSections = new Set();
+let isSnapping = false;
+let scrollTimeout;
+
+// Your existing animation function
+function updateAnimation() {
+    const sections = document.querySelectorAll('.animation-section');
+    const currentScrollY = window.scrollY;
+    
+    sections.forEach(section => {
+        const sectionRect = section.getBoundingClientRect();
+        const sectionId = section.id;
+        const isInViewport = sectionRect.top < window.innerHeight * 0.7 && sectionRect.bottom > window.innerHeight * 0.3;
+        
+        if (isInViewport && !animatedSections.has(sectionId)) {
+            section.classList.remove('animate-out');
+            section.classList.add('animate-in');
+            animatedSections.add(sectionId);                   
+            setTimeout(() => {
+                section.querySelectorAll('.reveal').forEach(el => {
+                    el.classList.add('active');
+                });
+            }, 200);                    
+        } else if (!isInViewport && animatedSections.has(sectionId)) {
+            section.classList.remove('animate-in');
+            section.classList.add('animate-out');
+            animatedSections.delete(sectionId);
+            section.querySelectorAll('.reveal').forEach(el => {
+                el.classList.remove('active');
+            });                   
+            setTimeout(() => {
+                if (!animatedSections.has(sectionId)) {
                     section.classList.remove('animate-out');
-                    section.classList.add('animate-in');
-                    animatedSections.add(sectionId);                   
-                    // Trigger reveal animations for content
-                    setTimeout(() => {
-                        section.querySelectorAll('.reveal').forEach(el => {
-                            el.classList.add('active');
-                        });
-                    }, 200);                    
-                } else if (!isInViewport && animatedSections.has(sectionId)) {
-                    // Section leaves viewport - animate out
-                    section.classList.remove('animate-in');
-                    section.classList.add('animate-out');
-                    animatedSections.delete(sectionId);
-                    // Remove reveal animations
-                    section.querySelectorAll('.reveal').forEach(el => {
-                        el.classList.remove('active');
-                    });                   
-                    // Reset to initial state after animation completes
-                    setTimeout(() => {
-                        if (!animatedSections.has(sectionId)) {
-                            section.classList.remove('animate-out');
-                        }
-                    }, 800);
                 }
-            });
-            lastScrollY = currentScrollY;
+            }, 800);
         }
-        // Throttle scroll events for better performance
-        let ticking = false;
-        window.addEventListener('scroll',() => {
-            requestAnimationFrame(updateAnimation);
+    });
+    lastScrollY = currentScrollY;
+}
+
+// Enhanced snapping function
+function snapToNearestSection() {
+    if (isSnapping) return;
+    
+    // Get all sections that should snap
+    const sections = [];
+    const mainSection = document.querySelector('main');
+    if (mainSection) sections.push(mainSection);
+    
+    document.querySelectorAll('.animation-section').forEach(section => {
+        sections.push(section);
+    });
+    
+    if (sections.length === 0) return;
+    
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    let targetSection = null;
+    let minDistance = Infinity;
+    
+    // Find the section that should be snapped to
+    sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const sectionTop = scrollY + rect.top;
+        const sectionHeight = rect.height;
+        
+        // Calculate how much of the section is visible
+        const visibleTop = Math.max(0, -rect.top);
+        const visibleBottom = Math.min(sectionHeight, windowHeight - rect.top);
+        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+        const visibilityRatio = visibleHeight / windowHeight;
+        
+        // If section is more than 30% visible, consider it for snapping
+        if (visibilityRatio > 0.3) {
+            const distanceToTop = Math.abs(rect.top);
+            
+            // Prefer sections that are closer to being fully aligned
+            if (distanceToTop < minDistance) {
+                minDistance = distanceToTop;
+                targetSection = section;
+            }
+        }
+    });
+    
+    // Snap to the target section if it's not already aligned
+    if (targetSection && minDistance > 20) {
+        isSnapping = true;
+        
+        const rect = targetSection.getBoundingClientRect();
+        const targetScrollY = scrollY + rect.top;
+        
+        window.scrollTo({
+            top: targetScrollY,
+            behavior: 'smooth'
         });
-        // Initial check
-        updateAnimation();
+        
+        // Reset snapping flag after animation completes
+        setTimeout(() => {
+            isSnapping = false;
+        }, 1000);
+    }
+}
+
+// Handle scroll events
+function handleScroll() {
+    // Update animations immediately
+    updateAnimation();
+    
+    // Clear existing timeout
+    clearTimeout(scrollTimeout);
+    
+    // Set timeout to detect when scrolling stops
+    scrollTimeout = setTimeout(() => {
+        snapToNearestSection();
+    }, 150);
+}
+
+// Throttled scroll handler for better performance
+let ticking = false;
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        requestAnimationFrame(() => {
+            handleScroll();
+            ticking = false;
+        });
+        ticking = true;
+    }
+}, { passive: true });
+
+// Handle wheel events for more responsive snapping
+let wheelTimeout;
+window.addEventListener('wheel', (e) => {
+    clearTimeout(wheelTimeout);
+    wheelTimeout = setTimeout(() => {
+        snapToNearestSection();
+    }, 200);
+}, { passive: true });
+
+// Handle navigation links
+document.addEventListener('DOMContentLoaded', () => {
+    // Setup smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                isSnapping = true;
+                targetSection.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+                
+                setTimeout(() => {
+                    isSnapping = false;
+                }, 1000);
+            }
+        });
+    });
+    
+    // Initial animation check
+    updateAnimation();
+    
+    // Log for debugging
+    const mainSection = document.querySelector('main');
+    const animationSections = document.querySelectorAll('.animation-section');
+    console.log('Scroll snap initialized:');
+    console.log('- Main section found:', !!mainSection);
+    console.log('- Animation sections found:', animationSections.length);
+    console.log('- Total snap sections:', (mainSection ? 1 : 0) + animationSections.length);
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+        e.preventDefault();
+        
+        const sections = [];
+        const mainSection = document.querySelector('main');
+        if (mainSection) sections.push(mainSection);
+        document.querySelectorAll('.animation-section').forEach(s => sections.push(s));
+        
+        const currentScrollY = window.scrollY;
+        let nextSection = null;
+        
+        for (let section of sections) {
+            const rect = section.getBoundingClientRect();
+            if (rect.top > 50) { // Found section below current position
+                nextSection = section;
+                break;
+            }
+        }
+        
+        if (nextSection) {
+            isSnapping = true;
+            nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(() => { isSnapping = false; }, 1000);
+        }
+    } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+        e.preventDefault();
+        
+        const sections = [];
+        const mainSection = document.querySelector('main');
+        if (mainSection) sections.push(mainSection);
+        document.querySelectorAll('.animation-section').forEach(s => sections.push(s));
+        
+        const currentScrollY = window.scrollY;
+        let prevSection = null;
+        
+        for (let i = sections.length - 1; i >= 0; i--) {
+            const section = sections[i];
+            const rect = section.getBoundingClientRect();
+            if (rect.top < -50) { // Found section above current position
+                prevSection = section;
+                break;
+            }
+        }
+        
+        if (prevSection) {
+            isSnapping = true;
+            prevSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(() => { isSnapping = false; }, 1000);
+        }
+    }
+});
     </script>
+
     <footer class="app-footer"> 
         <p>Copyright© 2025 PayFair · All rights reserved
             <span class="footer-nav">
