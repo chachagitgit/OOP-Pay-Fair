@@ -14,9 +14,10 @@ namespace OOP_Fair_Fare
         public FareResult Calculate(double distanceTraveled, int vehicleChoice, bool isDiscounted)
         {
             //calculate with decimals for breakdown
-            double baseFare = Math.Round(CalculateBaseFare(distanceTraveled, vehicleChoice), 2);
-            double discountAmount = Math.Round(isDiscounted ? baseFare * 0.20 : 0, 2); // 20% discount
-            double rawTotalFare = baseFare - discountAmount;
+            double regularFare = Math.Round(CalculateBaseFare(distanceTraveled, vehicleChoice, false), 2);
+            double discountedFare = Math.Round(CalculateBaseFare(distanceTraveled, vehicleChoice, isDiscounted), 2);
+            double discountAmount = isDiscounted ? Math.Round(regularFare - discountedFare, 2) : 0;
+            double rawTotalFare = isDiscounted ? discountedFare : regularFare;
 
             //apply rounding rules only to the final total fare
             double roundedTotalFare = rawTotalFare;
@@ -31,33 +32,85 @@ namespace OOP_Fair_Fare
 
             return new FareResult
             {
-                BaseFare = baseFare,
+                BaseFare = regularFare,
                 DiscountAmount = discountAmount,
                 TotalFare = roundedTotalFare
             };
         }
 
-        private double CalculateBaseFare(double distanceTraveled, int vehicleChoice)
+        private double CalculateBaseFare(double distanceTraveled, int vehicleChoice, bool isDiscounted)
         {
             double baseFare = 0;
+            double initialKm;
+            double initialFare;
+            double additionalPerKm;
             
             switch (vehicleChoice)
             {
                 case 1: // Airconditioned Bus
-                    baseFare = 13 + (Math.Max(0, distanceTraveled - 5) * 2.20);
+                    initialKm = 5;
+                    if (isDiscounted)
+                    {
+                        initialFare = 12.00;
+                        additionalPerKm = 2.12;
+                    }
+                    else
+                    {
+                        initialFare = 15.00;
+                        additionalPerKm = 2.65;
+                    }
                     break;
+
                 case 2: // Ordinary Bus
-                    baseFare = 11 + (Math.Max(0, distanceTraveled - 5) * 1.85);
+                    if (isDiscounted)
+                    {
+                        initialKm = 4;
+                        initialFare = 10.40;
+                        additionalPerKm = 1.80;
+                    }
+                    else
+                    {
+                        initialKm = 5;
+                        initialFare = 13.00;
+                        additionalPerKm = 2.25;
+                    }
                     break;
+
                 case 3: // Modern E-Jeepney
-                    baseFare = 12 + (Math.Max(0, distanceTraveled - 4) * 1.80);
+                    initialKm = 4;
+                    if (isDiscounted)
+                    {
+                        initialFare = 12.00;
+                        additionalPerKm = 1.44;
+                    }
+                    else
+                    {
+                        initialFare = 15.00;
+                        additionalPerKm = 1.80;
+                    }
                     break;
+
                 case 4: // Traditional Jeepney
-                    baseFare = 12 + (Math.Max(0, distanceTraveled - 4) * 1.80);
+                    initialKm = 4;
+                    if (isDiscounted)
+                    {
+                        initialFare = 10.40;
+                        additionalPerKm = 1.44;
+                    }
+                    else
+                    {
+                        initialFare = 13.00;
+                        additionalPerKm = 1.80;
+                    }
                     break;
+
                 default:
                     throw new ArgumentException("Invalid vehicle choice");
             }
+
+            // Calculate total fare
+            double additionalDistance = Math.Max(0, distanceTraveled - initialKm);
+            baseFare = initialFare + (additionalDistance * additionalPerKm);
 
             return baseFare;
         }
