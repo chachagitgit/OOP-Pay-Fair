@@ -235,6 +235,7 @@
             const place = this.getPlace();
             if (!place.geometry) {
                 alert("Please select a location from the dropdown list.");
+                resetForm();
                 return;
             }
 
@@ -251,10 +252,44 @@
 
             if (lat < bounds.south || lat > bounds.north || lng < bounds.west || lng > bounds.east) {
                 alert("Please select a location within Metro Manila only.");
-                // Clear the input
-                this.value = "";
+                resetForm();
                 return;
             }
+        }
+
+        function resetForm() {
+            // Clear input fields
+            document.getElementById("originInput").value = "";
+            document.getElementById("destinationInput").value = "";
+
+            // Reset vehicle selection
+            const vehicleRadios = document.querySelectorAll('input[name="vehicle"]');
+            vehicleRadios.forEach(radio => radio.checked = false);
+
+            // Reset discount checkbox
+            document.getElementById("discounts").checked = false;
+
+            // Reset fare display
+            document.getElementById("fareAmount").innerText = "₱ XXXX";
+            document.getElementById("baseFare").innerText = "XXXX";
+            document.getElementById("appliedDiscount").innerText = "XXXX";
+            document.getElementById("distance").innerText = "XXXX";
+            document.getElementById("totalFare").innerText = "XXXX";
+            document.getElementById("fareLocation").innerText = "";
+
+            // Clear markers and route from map
+            if (window.originMarker) {
+                window.originMarker.setMap(null);
+            }
+            if (window.destMarker) {
+                window.destMarker.setMap(null);
+            }
+            if (directionsRenderer) {
+                directionsRenderer.setDirections({ routes: [] });
+            }
+
+            // Switch back to route tab
+            document.getElementById("tab-route").checked = true;
         }
 
         function calculateRoute() {
