@@ -53,9 +53,11 @@
         <!-- Empty middle section -->
         <div></div>
             <!-- Logo on the right -->
-            <figure class="logo">
-                <img src="/images/logo.png" alt="PayFair Logo">
-            </figure>
+           <a href="/user_account">
+                <figure class="logo">
+                    <img src="/images/logo.png" alt="PayFair Logo">
+                </figure>
+            </a>
 
     </header>
 
@@ -84,10 +86,11 @@
                     style="background-color: #f5bfaf; background-image: url('/images/bg2.png'); background-size: cover; background-position: center;">
                         <div class="content">
                             <img src="/images/full logo.png" alt="PayFair Logo" class="title-image">
-                            <p class="Aheader2">Your fare buddy, anywhere in the Philippines</p>
+                            <p class="Header">Ride Easy, Pay Fairly</p>
                             <p class="description">
                                 A Fare Calculating App designed for commuters across the Philippines
                             </p>
+                            <a href="/ffDashboard"><button class="CalculateNow">Calculate Now</button></a>
                         </div>
                     </div>
                     <figure class="image">
@@ -100,10 +103,10 @@
                     style="background-color: #dedfe1; background-image: url('/images/bg3.png'); background-size: cover; background-position: center;">
                         <div class="content">
                             <img src="/images/full logo.png" alt="PayFair Logo" class="title-image">
+                            <p class="Aheader2">Your fare buddy, anywhere in the Philippines</p>
                             <p class="description">
                                 A Fare Calculating App designed for commuters across the Philippines
                             </p>
-                            <a href="/ffDashboard"><button class="CalculateNow">Calculate Now</button></a>
                         </div>
                     </div>
                     <figure class="image">
@@ -250,12 +253,13 @@
             </div>
         </div>
     </div>
+
     <script>
         // Simplified and more reliable scroll snapping for PayFair
-let lastScrollY = window.scrollY;
-const animatedSections = new Set();
-let isSnapping = false;
-let scrollTimeout;
+    let lastScrollY = window.scrollY;
+    const animatedSections = new Set();
+    let isSnapping = false;
+    let scrollTimeout;
 
 // Your existing animation function
 function updateAnimation() {

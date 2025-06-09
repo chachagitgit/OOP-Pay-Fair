@@ -87,6 +87,7 @@ header .logo{
 }
 header .logo img{
     width: 65%;
+    margin-top: 20px;
 }
 /* Sidebar Styles */
 .sidebar {
@@ -137,13 +138,7 @@ header .logo img{
 .sidebar-menu {
     padding: 20px 0;
 }
-.sidebar-menu a:last-child {
-    margin-top: 250px;
-    font-weight: bold;
-}
-.sidebar-menu a:last-child i{
-    margin-right: 20px;
-}
+
 .sidebar-menu a {
     display: block;
     color: #fff;
@@ -273,7 +268,7 @@ header .logo img{
 
 .carousel .list .item .main-content .content .Aheader2{  /*yung fare buddy keneme*/
     font-family: 'Poppins', sans-serif;
-    font-size: 2.5em;
+    font-size: 2.3em;
     font-weight: 600;
     margin: 2opx, 0;
     padding-top: 15px;
@@ -316,13 +311,11 @@ header .logo img{
 }
 .arrows button{
     background-color: transparent;
-    border: 1px solid var(--border-color);
     color: #fff;
     font-family: 'Poppins', sans-serif;
     font-size: large;
     font-weight: bold;
     line-height: 0;
-    box-shadow: 0 10px 40px #5555;
     cursor: pointer;
     transition: 0.5s;
 }
