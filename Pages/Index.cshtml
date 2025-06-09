@@ -1,6 +1,6 @@
 @page
 @{
-    ViewData["Title"] = "FairFare Homepage";
+    ViewData["Title"] = "PayFare Homepage";
     Layout = "_Layout";
 }
 @section Styles {
@@ -115,9 +115,17 @@
                 </article>
                 
             </div>
-            <div class="arrows">
-                <button id="prev"><</button>
-                <button id="next">></button>
+            
+            <div class="carousel-navigation">
+                <div class="arrows">
+                    <button id="prev"><</button>
+                    <div class="pagination-dots">
+                        <span class="dot" data-slide="0"></span>
+                        <span class="dot active" data-slide="1"></span>
+                        <span class="dot" data-slide="2"></span>
+                    </div>
+                    <button id="next">></button>
+                </div>
             </div>
         </section>
     </main>

@@ -299,29 +299,70 @@ header .logo img{
 .carousel .list .item .main-content .content .CalculateNow:hover{
     background-color: #3a6b4f;
 }
-.arrows{
+
+/* Updated navigation styles */
+.carousel-navigation{
     position: absolute;
     bottom: 20px;
-    width: calc(100% - calc(var(--w-image) * var(--calculate)));
-    display: grid;
-    grid-template-columns: repeat(2, 50px);
-    grid-template-rows: 50px;
-    justify-content: end;
-    gap: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    z-index: 10;
 }
+
+.arrows{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 .arrows button{
-    background-color: transparent;
+    background: none;
+    border: none;
     color: #fff;
     font-family: 'Poppins', sans-serif;
-    font-size: large;
+    font-size: 24px;
     font-weight: bold;
-    line-height: 0;
     cursor: pointer;
-    transition: 0.5s;
+    transition: 0.3s;
+    padding: 10px;
+    border-radius: 50%;
 }
+
 .arrows button:hover{
-    background-color: #eee5;
+    background-color: rgba(255, 255, 255, 0.2);
 }
+
+/* Pagination dots */
+.pagination-dots{
+    display: flex;
+    gap: 8px;
+}
+
+.pagination-dots .dot{
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.pagination-dots .dot.active{
+    background-color: white !important;
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.pagination-dots .dot:hover{
+    background-color: rgba(255, 255, 255, 0.7);
+    transform: scale(1.1);
+}
+
 .carousel .list .item{
     display: none;
 }
@@ -373,9 +414,6 @@ header .logo img{
 .next .item.other_2 .image{
     z-index: 3;
     --transform-from: calc(var(--w-image) * 2);
-}
-.arrows{
-    z-index: 10;
 }
 
 .prev .list .item .image img{
