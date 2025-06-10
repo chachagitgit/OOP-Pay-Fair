@@ -35,7 +35,7 @@ body {
     overflow: hidden;
     padding: 25px;
     flex-direction: center;
-    gap: 15px;
+    gap: 60px;
 }
 .user.pic { /*defaul user picture container*/
     width: 80%;
@@ -48,7 +48,7 @@ body {
     width: 100%;
     height: 100%;
 }
-.edit_profile { /*button to edit profile*/
+.edit-profile { /*button to edit profile*/
     background: rgba(10, 36, 99, 0.8);
     border: none;
     width: 200px;
@@ -59,17 +59,16 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
 }
-.edit_profile:hover {
+.edit-profile:hover {
     background: rgba(30, 58, 138, 0.8);
     transform: translateY(-2px)
 }
-
 .user-info-container { /*for the username and user email*/
     position: absolute;
     top: 100px;
     left: 450px;
     width: 800px;
-    height: 150px;
+    height: 300px;
     background: rgba(10, 36, 99, 0.9) ;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
@@ -78,7 +77,14 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 15px;
+    gap: 20px;
+}
+.user-info-row { /*to keep LN and FN in 1 line*/
+    display: flex;
+    gap: 16px;
+}
+.user-info-row .user-info-item { /*width of input box for LN and FN*/
+    width: 450px;
 }
 .user-info-container h3{ /*your history*/
     margin: 0;
@@ -104,13 +110,23 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.8);
     font-weight: 500;
 }
+.user-info-input {
+    border-radius: 20px;
+    padding: 8px 12px;
+    gap: 5px;
+    font-size: 0.875rem;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    background: rgba(10, 36, 99, 0.3) ;
+}
 /*history container*/
 .history-container { 
-    position: absolute;
-    top: 320px;
-    left: 450px;
+    margin-top: 400px;
+    margin-left: 450px;
+    margin-right: auto;
     width: 800px;
-    height: 300px;
+    height: auto;
     background: rgba(255, 255, 255, 0.15);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     border-radius: 20px;

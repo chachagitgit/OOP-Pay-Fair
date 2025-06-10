@@ -1,6 +1,6 @@
 @page
 @{
-    ViewData["Title"] = "FairFare Homepage";
+    ViewData["Title"] = "PayFare Homepage";
     Layout = "_Layout";
 }
 @section Styles {
@@ -36,7 +36,6 @@
             <a href="#privacySection">Privacy Policy</a>
             <a href="#aboutSection">About Us</a>
             <a href="#contactSection">Contact Us</a>
-            <a href="/user_account"><i class="fas fa-user"></i>Manage Account</a>
         </div>
     </nav>
     
@@ -53,19 +52,20 @@
         
         <!-- Empty middle section -->
         <div></div>
-        
-        <!-- Logo on the right -->
-        <figure class="logo">
-            <img src="/images/logo.png" alt="PayFair Logo">
-        </figure>
+            <!-- User Logo on the right -->
+           <a href="/user_account">
+                <figure class="logo">
+                    <img src="/images/profile.png" alt="User Logo">
+                </figure>
+            </a>
     </header>
 
     <main>
-        <section class="carousel next">
-            <div class="list">
-                
-                <article class="item other_1">
-                    <div class="main-content" 
+        <section class="carousel next">         <!-- carousel -->
+            <div class="list">       <!-- the contents inside the carousel -->
+                <article class="item other_1">   <!-- the first item inside the carousel -->
+                    <!--the actual content of the first slide-->
+                    <div class="main-content"               
                     style="background-color: #9c4d2f; background-image: url('/images/bg1.png'); background-size: cover; background-position: center;">
                         <div class="content">
                             <img src="/images/full logo.png" alt="PayFair Logo" class="title-image">
@@ -75,14 +75,34 @@
                             </p>
                         </div>
                     </div>
+                    <!-- the image on the right side -->
                     <figure class="image">
                         <img src="/images/pogs.png" alt="PayFair App Interface">
                     </figure>
                 </article>
 
+                <!-- the second slide, the first slide to show when the App is loaded -->
                 <article class="item active">
                     <div class="main-content" 
                     style="background-color: #f5bfaf; background-image: url('/images/bg2.png'); background-size: cover; background-position: center;">
+                        <div class="content">
+                            <img src="/images/full logo.png" alt="PayFair Logo" class="title-image">
+                            <p class="Header">Ride Easy, Pay Fairly</p>
+                            <p class="description">
+                                A Fare Calculating App designed for commuters across the Philippines
+                            </p>
+                            <a href="/ffDashboard"><button class="CalculateNow">Calculate Now</button></a>
+                        </div>
+                    </div>
+                    <figure class="image">
+                        <img src="/images/pinplace.png" alt="Location Pin">
+                    </figure>
+                </article>
+
+                <!-- the third slide  -->
+                <article class="item other_2">
+                    <div class="main-content" 
+                    style="background-color: #dedfe1; background-image: url('/images/bg3.png'); background-size: cover; background-position: center;">
                         <div class="content">
                             <img src="/images/full logo.png" alt="PayFair Logo" class="title-image">
                             <p class="Aheader2">Your fare buddy, anywhere in the Philippines</p>
@@ -92,241 +112,401 @@
                         </div>
                     </div>
                     <figure class="image">
-                        <img src="/images/pinplace.png" alt="Location Pin">
-                    </figure>
-                </article>
-
-                <article class="item other_2">
-                    <div class="main-content" 
-                    style="background-color: #dedfe1; background-image: url('/images/bg3.png'); background-size: cover; background-position: center;">
-                        <div class="content">
-                            <img src="/images/full logo.png" alt="PayFair Logo" class="title-image">
-                            <p class="description">
-                                A Fare Calculating App designed for commuters across the Philippines
-                            </p>
-                            <a href="/ffDashboard"><button class="CalculateNow">Calculate Now</button></a>
-                        </div>
-                    </div>
-                    <figure class="image">
                         <img src="/images/cars.png" alt="Transportation Options">
                     </figure>
                 </article>
                 
             </div>
-            <div class="arrows">
-                <button id="prev"><</button>
-                <button id="next">></button>
+            <!-- the navigation arrows and pagination dots -->
+            <div class="carousel-navigation">
+                <div class="arrows">
+                    <button id="prev"><</button>
+                    <div class="pagination-dots">
+                        <span class="dot" data-slide="0"></span>
+                        <span class="dot active" data-slide="1"></span>
+                        <span class="dot" data-slide="2"></span>
+                    </div>
+                    <button id="next">></button>
+                </div>
             </div>
         </section>
     </main>
 
+     <!-- the javascript for sidebar and slider animations -->
     <script src="/js/ffHomepage.js"></script>
 
-    <div class="animation-section section-about" id="aboutSection">
-        <div class="section-title">ABOUT US</div>
-        <div class="content-container">
-            <div class="content-section">
-                <div class="reveal">
-                    <p><strong>PayFair</strong> is a commuter-focused fare calculator designed to provide quick, accurate, and transparent fare estimates for everyday travelers.</p>
+    <div class="container" id="scroll-container">
+        <div class="animation-section section-about" id="aboutSection">
+            <div class="section-title">ABOUT US</div>
+            <div class="content-container">
+                <div class="content-section">
+                    <div class="reveal">
+                        <p><strong>PayFair</strong> is a commuter-focused fare calculator designed to provide quick, accurate, and transparent fare estimates for everyday travelers.</p>
+                    </div>
+                    <div class="reveal delay-1s">
+                        <p>Whether you're heading to work, school, or home, we help you stay informed and in control of your transportation costs.</p>
+                    </div> 
+                    <div class="reveal delay-1-5s">    
+                        <p>Our mission is to make commuting more predictable and budget-friendly for everyone.</p>
+                    </div>
+                    <div class="reveal delay-1-5s">   
+                        <p>Built with simplicity and fairness in mind, PayFair empowers users with the information they need—before they even step out the door.</p>
+                    </div> 
                 </div>
-                <div class="reveal delay-1s">
-                    <p>Whether you're heading to work, school, or home, we help you stay informed and in control of your transportation costs.</p>
-                </div> 
-                <div class="reveal delay-1-5s">    
-                    <p>Our mission is to make commuting more predictable and budget-friendly for everyone.</p>
-                </div>
-                <div class="reveal delay-1-5s">   
-                    <p>Built with simplicity and fairness in mind, PayFair empowers users with the information they need—before they even step out the door.</p>
-                </div> 
-            </div>
-            <div class="icon-container">
-                <div class="icon-box">
-                    <img src="/images/about.png">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="animation-section section-terms" id="termsSection">
-        <div class="section-title">TERMS AND CONDITIONS</div>
-        <div class="content-container">
-            <div class="content-section">
-                <div class="reveal">
-                    <p><strong><em>Effective Date: May 25, 2025</em></strong></p>
-                </div>   
-                <div class="reveal">        
-                    <p class="reveal">Welcome to PayFair. By accessing or using our app, you agree to be bound by these Terms of Use. Please read them carefully.
-                </div>  
-                <div class="reveal delay-1s">    
-                    <ol>
-                        <li><strong>Use of the App:</strong> You may use PayFair solely for personal, non-commercial purposes. You agree not to misuse or attempt to disrupt the operation of the app.</li>
-                        <li><strong>Accuracy of Information:</strong> While we strive for accurate fare estimates, actual fares may vary due to traffic, route changes, or service providers. PayFair is not responsible for discrepancies.<</li>
-                        <li><strong>User Conduct:</strong> You agree not to use the app for unlawful purposes or to violate the rights of others.</li>
-                        <li><strong>Intellectual Property:</strong> All content within PayFair, including logos and branding, is the property of PayFair and may not be used without permission.</li>
-                    </ol>
-                </div>
-                <div class="reveal delay-1-5s">
-                    <p><strong>Modifications:</strong> We may update these Terms at any time. Continued use of the app means you accept the revised terms.</p> 
-                    <p class="reveal">If you do not agree to these terms, please do not use the app.</p>  
-                </div> 
-            </div>
-            <div class="icon-container">
-                <div class="icon-box">
-                    <img src="/images/tnc.png">
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="animation-section section-privacy" id="privacySection">
-        <div class="section-title">PRIVACY POLICY</div>
-        <div class="content-container">
-            <div class="content-section">
-                <div class="reveal">
-                    <p>Your privacy is important to us. This Privacy Policy explains how PayFair collects, uses, and protects your information.</p>
-                </div>
-                <div class="reveal delay-1s">
-                    <p><strong>Information We Collect</strong></p>
-                    <ul>
-                        <li>Basic location data to calculate fare estimates.</li>
-                        <li>Device information (for diagnostics and analytics).</li>
-                        <li>Optional contact details (if you submit feedback).</li>
-                    </ul>
-                </div>
-                <div class="reveal delay-1s">
-                    <div>
-                        <p><strong>How We Use Your Data</strong></p>
-                        <ul>
-                            <li>To provide accurate fare estimates.</li>
-                            <li>To improve app performance and user experience.</li>
-                            <li>To respond to user inquiries or support requests.</li>
-                        </ul>
+                <div class="icon-container">
+                    <div class="icon-box">
+                        <img src="/images/about.png">
                     </div>
                 </div>
-                <div class="reveal dealy-1-5s">
-                        <p><strong>Data Protection</strong></p>
-                        <ul>
-                            <li>We do not sell or share your data with third parties.</li>
-                            <li>We use encryption and secure storage practices.</li>
-                        </ul>
-                        <p><strong>Your Rights</strong></p>
-                        <ul>
-                            <li class="reveal">You may request to view or delete your data at any time.</li>
-                        </ul>
-                        <p>For questions or concerns, contact us at support@PayFair.app.</p>
+            </div>
+        </div>
+
+        <div class="animation-section section-terms" id="termsSection">
+            <div class="section-title">TERMS AND CONDITIONS</div>
+            <div class="content-container">
+                <div class="content-section">
+                    <div class="reveal">
+                        <p><strong><em>Effective Date: May 25, 2025</em></strong></p>
+                    </div>   
+                    <div class="reveal">        
+                        <p class="reveal">Welcome to PayFair. By accessing or using our app, you agree to be bound by these Terms of Use. Please read them carefully.
+                    </div>  
+                    <div class="reveal delay-1s">    
+                        <ol>
+                            <li><strong>Use of the App:</strong> You may use PayFair solely for personal, non-commercial purposes. You agree not to misuse or attempt to disrupt the operation of the app.</li>
+                            <li><strong>Accuracy of Information:</strong> While we strive for accurate fare estimates, actual fares may vary due to traffic, route changes, or service providers. PayFair is not responsible for discrepancies.<</li>
+                            <li><strong>User Conduct:</strong> You agree not to use the app for unlawful purposes or to violate the rights of others.</li>
+                            <li><strong>Intellectual Property:</strong> All content within PayFair, including logos and branding, is the property of PayFair and may not be used without permission.</li>
+                            <li><strong>Modifications:</strong> We may update these Terms at any time. Continued use of the app means you accept the revised terms.</li>
+                        </ol>
+                    </div>
+                    <div class="reveal delay-1-5s">
+                        <p class="reveal">If you do not agree to these terms, please do not use the app.</p>  
+                    </div> 
+                </div>
+                <div class="icon-container">
+                    <div class="icon-box">
+                        <img src="/images/tnc.png">
+                    </div>
                 </div>
             </div>
-            <div class="icon-container">
-                <div class="icon-box">
-                    <img src="/images/privacy.png" alt="privacy policy">
+        </div>
+
+
+        <div class="animation-section section-privacy" id="privacySection">
+            <div class="section-title">PRIVACY POLICY</div>
+            <div class="content-container">
+                <div class="content-section">
+                    <div class="reveal">
+                        <p>Your privacy is important to us. This Privacy Policy explains how PayFair collects, uses, and protects your information.</p>
+                    </div>
+                    <div class="reveal delay-1s">
+                        <p><strong>Information We Collect</strong></p>
+                        <ul>
+                            <li>Basic location data to calculate fare estimates.</li>
+                            <li>Device information (for diagnostics and analytics).</li>
+                            <li>Optional contact details (if you submit feedback).</li>
+                        </ul>
+                    </div>
+                    <div class="reveal delay-1s">
+                        <div>
+                            <p><strong>How We Use Your Data</strong></p>
+                            <ul>
+                                <li>To provide accurate fare estimates.</li>
+                                <li>To improve app performance and user experience.</li>
+                                <li>To respond to user inquiries or support requests.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="reveal dealy-1-5s">
+                            <p><strong>Data Protection</strong></p>
+                            <ul>
+                                <li>We do not sell or share your data with third parties.</li>
+                                <li>We use encryption and secure storage practices.</li>
+                            </ul>
+                            <p><strong>Your Rights</strong></p>
+                            <ul>
+                                <li class="reveal">You may request to view or delete your data at any time.</li>
+                            </ul>
+                            <p>For questions or concerns, contact us at support@PayFair.app.</p>
+                    </div>
+                </div>
+                <div class="icon-container">
+                    <div class="icon-box">
+                        <img src="/images/privacy.png" alt="privacy policy">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="animation-section section-contact" id="contactSection">
+            <div class="section-title">CONTACT US</div>
+            <div class="content-container">
+                <div class="content-section">
+                    <div class="reveal">
+                        <p>We’d love to hear from you!</p>
+                    </div>
+                    <div class="reveal dealy-1s">
+                        <ul>
+                            <li><strong>Email:</strong>support@payfair.app</li>
+                            <li><strong>Phone:</strong>(630123456789)</li>
+                            <li><strong>Business Hours:</strong>Monday to Friday, 9:00 AM – 5:00 PM (Your Time Zone)</li>
+                        </ul>
+                    </div>
+                    <div class="reveal delay-1-5s">
+                        <p class="reveal">For questions, feedback, or support, reach out any time. We’re here to help make your commute smoother and smarter.</p>
+                    </div>
+                </div>
+                <div class="icon-container">
+                    <div class="icon-box">
+                        <img src="/images/contact.png" alt="contact us icon">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="animation-section section-contact" id="contactSection">
-        <div class="section-title">CONTACT US</div>
-        <div class="content-container">
-            <div class="content-section">
-                <div class="reveal">
-                    <p>We’d love to hear from you!</p>
-                </div>
-                <div class="reveal dealy-1s">
-                    <ul></ul>
-                        <li><strong>Email:</strong>support@payfair.app</li>
-                        <li><strong>Phone:</strong>(630123456789)</li>
-                        <li><strong>Business Hours:</strong>Monday to Friday, 9:00 AM – 5:00 PM (Your Time Zone)</li>
-                    </ul>
-                </div>
-                <div class="reveal delay-1-5s"></div>
-                    <p class="reveal">For questions, feedback, or support, reach out any time. We’re here to help make your commute smoother and smarter.</p>
-                </div>
-            </div>
-            <div class="icon-container">
-                <div class="icon-box">
-                    <img src="/images/contact.png" alt="contact us icon">
-                </div>
-            </div>
-        </div>
-    </div>
-         <script>
-        let lastScrollY = window.scrollY;
-        const animatedSections = new Set();
+    <script>
+        // Simplified and more reliable scroll snapping for PayFair
+    let lastScrollY = window.scrollY;
+    const animatedSections = new Set();
+    let isSnapping = false;
+    let scrollTimeout;
 
-        function updateAnimation() {
-            const sections = document.querySelectorAll('.animation-section');
-            const currentScrollY = window.scrollY;
-            const scrollingDown = currentScrollY > lastScrollY;
-            
-            sections.forEach(section => {
-                const sectionRect = section.getBoundingClientRect();
-                const sectionId = section.id;
-                const isInViewport = sectionRect.top < window.innerHeight * 0.7 && sectionRect.bottom > window.innerHeight * 0.3;
-                
-                if (isInViewport && !animatedSections.has(sectionId)) {
-                    // Section enters viewport - animate in
-                    section.classList.remove('animate-out');
-                    section.classList.add('animate-in');
-                    animatedSections.add(sectionId);
-                    
-                    // Trigger reveal animations for content
-                    setTimeout(() => {
-                        section.querySelectorAll('.reveal').forEach(el => {
-                            el.classList.add('active');
-                        });
-                    }, 400);
-                    
-                } else if (!isInViewport && animatedSections.has(sectionId)) {
-                    // Section leaves viewport - animate out
-                    section.classList.remove('animate-in');
-                    section.classList.add('animate-out');
-                    animatedSections.delete(sectionId);
-                    
-                    // Remove reveal animations
-                    section.querySelectorAll('.reveal').forEach(el => {
-                        el.classList.remove('active');
-                    });
-                    
-                    // Reset to initial state after animation completes
-                    setTimeout(() => {
-                        if (!animatedSections.has(sectionId)) {
-                            section.classList.remove('animate-out');
-                        }
-                    }, 800);
-                }
-            });
-            
-            lastScrollY = currentScrollY;
-        }
-
-        // Throttle scroll events for better performance
-        let ticking = false;
+// Your existing animation function
+function updateAnimation() {
+    const sections = document.querySelectorAll('.animation-section');
+    const currentScrollY = window.scrollY;
+    
+    sections.forEach(section => {
+        const sectionRect = section.getBoundingClientRect();
+        const sectionId = section.id;
+        const isInViewport = sectionRect.top < window.innerHeight * 0.7 && sectionRect.bottom > window.innerHeight * 0.3;
         
-        function handleScroll() {
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    updateAnimation();
-                    ticking = false;
+        if (isInViewport && !animatedSections.has(sectionId)) {
+            section.classList.remove('animate-out');
+            section.classList.add('animate-in');
+            animatedSections.add(sectionId);                   
+            setTimeout(() => {
+                section.querySelectorAll('.reveal').forEach(el => {
+                    el.classList.add('active');
                 });
-                ticking = true;
+            }, 200);                    
+        } else if (!isInViewport && animatedSections.has(sectionId)) {
+            section.classList.remove('animate-in');
+            section.classList.add('animate-out');
+            animatedSections.delete(sectionId);
+            section.querySelectorAll('.reveal').forEach(el => {
+                el.classList.remove('active');
+            });                   
+            setTimeout(() => {
+                if (!animatedSections.has(sectionId)) {
+                    section.classList.remove('animate-out');
+                }
+            }, 800);
+        }
+    });
+    lastScrollY = currentScrollY;
+}
+
+// Enhanced snapping function
+function snapToNearestSection() {
+    if (isSnapping) return;
+    
+    // Get all sections that should snap
+    const sections = [];
+    const mainSection = document.querySelector('main');
+    if (mainSection) sections.push(mainSection);
+    
+    document.querySelectorAll('.animation-section').forEach(section => {
+        sections.push(section);
+    });
+    
+    if (sections.length === 0) return;
+    
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    let targetSection = null;
+    let minDistance = Infinity;
+    
+    // Find the section that should be snapped to
+    sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const sectionTop = scrollY + rect.top;
+        const sectionHeight = rect.height;
+        
+        // Calculate how much of the section is visible
+        const visibleTop = Math.max(0, -rect.top);
+        const visibleBottom = Math.min(sectionHeight, windowHeight - rect.top);
+        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+        const visibilityRatio = visibleHeight / windowHeight;
+        
+        // If section is more than 30% visible, consider it for snapping
+        if (visibilityRatio > 0.3) {
+            const distanceToTop = Math.abs(rect.top);
+            
+            // Prefer sections that are closer to being fully aligned
+            if (distanceToTop < minDistance) {
+                minDistance = distanceToTop;
+                targetSection = section;
             }
         }
-
-        window.addEventListener('scroll', handleScroll);
+    });
+    
+    // Snap to the target section if it's not already aligned
+    if (targetSection && minDistance > 20) {
+        isSnapping = true;
         
-        // Initial check
-        updateAnimation();
+        const rect = targetSection.getBoundingClientRect();
+        const targetScrollY = scrollY + rect.top;
+        
+        window.scrollTo({
+            top: targetScrollY,
+            behavior: 'smooth'
+        });
+        
+        // Reset snapping flag after animation completes
+        setTimeout(() => {
+            isSnapping = false;
+        }, 1000);
+    }
+}
+
+// Handle scroll events
+function handleScroll() {
+    // Update animations immediately
+    updateAnimation();
+    
+    // Clear existing timeout
+    clearTimeout(scrollTimeout);
+    
+    // Set timeout to detect when scrolling stops
+    scrollTimeout = setTimeout(() => {
+        snapToNearestSection();
+    }, 150);
+}
+
+// Throttled scroll handler for better performance
+let ticking = false;
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        requestAnimationFrame(() => {
+            handleScroll();
+            ticking = false;
+        });
+        ticking = true;
+    }
+}, { passive: true });
+
+// Handle wheel events for more responsive snapping
+let wheelTimeout;
+window.addEventListener('wheel', (e) => {
+    clearTimeout(wheelTimeout);
+    wheelTimeout = setTimeout(() => {
+        snapToNearestSection();
+    }, 200);
+}, { passive: true });
+
+// Handle navigation links
+document.addEventListener('DOMContentLoaded', () => {
+    // Setup smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                isSnapping = true;
+                targetSection.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+                
+                setTimeout(() => {
+                    isSnapping = false;
+                }, 1000);
+            }
+        });
+    });
+    
+    // Initial animation check
+    updateAnimation();
+    
+    // Log for debugging
+    const mainSection = document.querySelector('main');
+    const animationSections = document.querySelectorAll('.animation-section');
+    console.log('Scroll snap initialized:');
+    console.log('- Main section found:', !!mainSection);
+    console.log('- Animation sections found:', animationSections.length);
+    console.log('- Total snap sections:', (mainSection ? 1 : 0) + animationSections.length);
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+        e.preventDefault();
+        
+        const sections = [];
+        const mainSection = document.querySelector('main');
+        if (mainSection) sections.push(mainSection);
+        document.querySelectorAll('.animation-section').forEach(s => sections.push(s));
+        
+        const currentScrollY = window.scrollY;
+        let nextSection = null;
+        
+        for (let section of sections) {
+            const rect = section.getBoundingClientRect();
+            if (rect.top > 50) { // Found section below current position
+                nextSection = section;
+                break;
+            }
+        }
+        
+        if (nextSection) {
+            isSnapping = true;
+            nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(() => { isSnapping = false; }, 1000);
+        }
+    } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+        e.preventDefault();
+        
+        const sections = [];
+        const mainSection = document.querySelector('main');
+        if (mainSection) sections.push(mainSection);
+        document.querySelectorAll('.animation-section').forEach(s => sections.push(s));
+        
+        const currentScrollY = window.scrollY;
+        let prevSection = null;
+        
+        for (let i = sections.length - 1; i >= 0; i--) {
+            const section = sections[i];
+            const rect = section.getBoundingClientRect();
+            if (rect.top < -50) { // Found section above current position
+                prevSection = section;
+                break;
+            }
+        }
+        
+        if (prevSection) {
+            isSnapping = true;
+            prevSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(() => { isSnapping = false; }, 1000);
+        }
+    }
+});
     </script>
+    
+<!-- footer -->
+    <footer class="app-footer"> 
+        <p>Copyright© 2025 PayFair · All rights reserved
+            <span class="footer-nav">
+                <a href="#aboutSection">About Us |</a>
+                <a href="#termsSection">Terms and Conditions |</a>
+                <a href="#privacySection">Privacy Policy |</a>
+                <a href="#contactSection">Contact Us</a>
+            </span> 
+        </p>
+    </footer>
 </body>
-<footer class="app-footer"> 
-    <p>Copyright© 2025 PayFair · All rights reserved
-        <span class="footer-nav">
-            <a href="#aboutSection">About Us |</a>
-            <a href="#tncSection">Terms and Conditions |</a>
-            <a href="#privacySection">Privacy Policy |</a>
-            <a href="#contactSection">Contact Us</a>
-        </span> 
-    </p>
-</footer>
 </html>

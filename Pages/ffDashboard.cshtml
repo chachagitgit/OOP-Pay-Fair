@@ -167,11 +167,23 @@
         let map, directionsService, directionsRenderer;
         let originAutocomplete, destinationAutocomplete;
         function initMap() {
-            const manila = { lat: 14.5995, lng: 120.9842 };
+            // Metro Manila boundaries
+            const metroManilaBounds = {
+                north: 14.8527, // Northernmost point (around Valenzuela)
+                south: 14.3475, // Southernmost point (around Muntinlupa)
+                west: 120.8936, // Westernmost point (around Navotas)
+                east: 121.1979  // Easternmost point (around Antipolo/Marikina)
+            };
+
+            const manila = { lat: 14.5995, lng: 120.9842 }; // Center of Metro Manila
             map = new google.maps.Map(document.getElementById("map"), {
                 zoom: 12,
                 center: manila,
                 mapTypeControl: false,
+                restriction: {
+                    latLngBounds: metroManilaBounds,
+                    strictBounds: true
+                },
                 styles: [
                     {
                         featureType: "poi",
@@ -180,6 +192,7 @@
                     }
                 ]
             });
+
             directionsService = new google.maps.DirectionsService();
             directionsRenderer = new google.maps.DirectionsRenderer({
                 suppressMarkers: true,
@@ -189,32 +202,139 @@
                 }
             });
             directionsRenderer.setMap(map);
+
+            // Metro Manila bounds for autocomplete
+            const defaultBounds = new google.maps.LatLngBounds(
+                new google.maps.LatLng(14.3475, 120.8936), // SW corner
+                new google.maps.LatLng(14.8527, 121.1979)  // NE corner
+            );
+
+            const autocompleteOptions = {
+                bounds: defaultBounds,
+                componentRestrictions: { country: "ph" },
+                fields: ["geometry", "name", "formatted_address"],
+                strictBounds: true
+            };
+
             originAutocomplete = new google.maps.places.Autocomplete(
                 document.getElementById("originInput"),
-                {
-                    componentRestrictions: { country: "ph" },
-                    fields: ["geometry", "name"]
-                }
+                autocompleteOptions
             );
+
             destinationAutocomplete = new google.maps.places.Autocomplete(
                 document.getElementById("destinationInput"),
-                {
-                    componentRestrictions: { country: "ph" },
-                    fields: ["geometry", "name"]
-                }
+                autocompleteOptions
             );
+
+            // Add listeners to validate location selections
+            originAutocomplete.addListener("place_changed", validatePlace);
+            destinationAutocomplete.addListener("place_changed", validatePlace);
         }
+
+        function validatePlace() {
+            const place = this.getPlace();
+            if (!place.geometry) {
+                alert("Please select a location from the dropdown list.");
+                resetForm();
+                return;
+            }
+
+            const lat = place.geometry.location.lat();
+            const lng = place.geometry.location.lng();
+
+            // Metro Manila boundaries
+            const bounds = {
+                north: 14.8527,
+                south: 14.3475,
+                west: 120.8936,
+                east: 121.1979
+            };
+
+            if (lat < bounds.south || lat > bounds.north || lng < bounds.west || lng > bounds.east) {
+                alert("Please select a location within Metro Manila only.");
+                resetForm();
+                return;
+            }
+        }
+
+        function resetForm() {
+            // Clear input fields
+            document.getElementById("originInput").value = "";
+            document.getElementById("destinationInput").value = "";
+
+            // Reset vehicle selection
+            const vehicleRadios = document.querySelectorAll('input[name="vehicle"]');
+            vehicleRadios.forEach(radio => radio.checked = false);
+
+            // Reset discount checkbox
+            document.getElementById("discounts").checked = false;
+
+            // Reset fare display
+            document.getElementById("fareAmount").innerText = "₱ XXXX";
+            document.getElementById("baseFare").innerText = "XXXX";
+            document.getElementById("appliedDiscount").innerText = "XXXX";
+            document.getElementById("distance").innerText = "XXXX";
+            document.getElementById("totalFare").innerText = "XXXX";
+            document.getElementById("fareLocation").innerText = "";
+
+            // Clear markers and route from map
+            if (window.originMarker) {
+                window.originMarker.setMap(null);
+            }
+            if (window.destMarker) {
+                window.destMarker.setMap(null);
+            }
+            if (directionsRenderer) {
+                directionsRenderer.setDirections({ routes: [] });
+            }
+
+            // Switch back to route tab
+            document.getElementById("tab-route").checked = true;
+        }
+
         function calculateRoute() {
             const origin = originAutocomplete.getPlace();
             const destination = destinationAutocomplete.getPlace();
+            
             if (!origin || !origin.geometry) {
-                alert("Please select a valid origin from the dropdown.");
+                alert("Please select a valid origin from the dropdown list.");
                 return;
             }
             if (!destination || !destination.geometry) {
-                alert("Please select a valid destination from the dropdown.");
+                alert("Please select a valid destination from the dropdown list.");
                 return;
             }
+
+            // Validate both locations are within Metro Manila
+            const originLat = origin.geometry.location.lat();
+            const originLng = origin.geometry.location.lng();
+            const destLat = destination.geometry.location.lat();
+            const destLng = destination.geometry.location.lng();
+
+            const bounds = {
+                north: 14.8527,
+                south: 14.3475,
+                west: 120.8936,
+                east: 121.1979
+            };
+
+            if (originLat < bounds.south || originLat > bounds.north || 
+                originLng < bounds.west || originLng > bounds.east) {
+                alert("Origin must be within Metro Manila.");
+                return;
+            }
+
+            if (destLat < bounds.south || destLat > bounds.north || 
+                destLng < bounds.west || destLng > bounds.east) {
+                alert("Destination must be within Metro Manila.");
+                return;
+            }
+
+            if (!document.querySelector('input[name="vehicle"]:checked')) {
+                alert("Please select a vehicle type.");
+                return;
+            }
+
             if (window.originMarker) window.originMarker.setMap(null);
             if (window.destMarker) window.destMarker.setMap(null);
             window.originMarker = new google.maps.Marker({
@@ -252,8 +372,30 @@
                     const duration = route.legs[0].duration.text;
                     const vehicleChoice = parseInt(document.querySelector('input[name="vehicle"]:checked')?.value || '4');
                     const isDiscounted = document.getElementById("discounts").checked;
-                    const fareInfo = calculateFare(distanceKm, vehicleChoice, isDiscounted);
-                    displayFare(distanceKm, fareInfo, duration, origin.name, destination.name);
+                    
+                    console.log('Calculating fare with:', {
+                        distanceKm,
+                        vehicleChoice,
+                        isDiscounted
+                    });
+
+                    calculateFare(distanceKm, vehicleChoice, isDiscounted)
+                        .then(fareInfo => {
+                            console.log('Fare calculation response:', fareInfo);
+                            if (fareInfo.error) {
+                                console.error('Fare calculation error:', fareInfo.error);
+                                alert('Error calculating fare: ' + fareInfo.error);
+                                return;
+                            }
+                            displayFare(distanceKm, fareInfo, duration, origin.name, destination.name);
+                            // Switch to fare tab after calculation
+                            document.getElementById('tab-fare').checked = true;
+                        })
+                        .catch(error => {
+                            console.error('Fare calculation error:', error);
+                            alert('Error calculating fare. Please try again.');
+                        });
+
                     const bounds = new google.maps.LatLngBounds();
                     bounds.extend(origin.geometry.location);
                     bounds.extend(destination.geometry.location);
@@ -265,60 +407,44 @@
             }); 
         }
         function calculateFare(distanceTraveled, vehicleChoice, isDiscounted) {
-            const DiscountRate = 0.20;
-            let baseFare = 0;
-            let baseDistance = 0;
-            let perKmRate = 0;
-            let vehicleName = "";
-            switch (vehicleChoice) {
-                case 1:
-                    vehicleName = "Airconditioned Bus";
-                    baseFare = 15;
-                    baseDistance = 5;
-                    perKmRate = 3;
-                    break;
-                case 2:
-                    vehicleName = "Ordinary Bus";
-                    baseFare = 13;
-                    baseDistance = 5;
-                    perKmRate = 3;
-                    break;
-                case 3:
-                    vehicleName = "Modern E-Jeepney";
-                    baseFare = 15;
-                    baseDistance = 4;
-                    perKmRate = 3;
-                    break;
-                case 4:
-                    vehicleName = "Traditional Jeepney";
-                    baseFare = 13;
-                    baseDistance = 4;
-                    perKmRate = 2;
-                    break;
-                default:
-                    return { error: "Invalid vehicle type" };
-            }
-            let regularFare = baseFare;
-            if (distanceTraveled > baseDistance) {
-                const extraKm = Math.floor(distanceTraveled - baseDistance);
-                regularFare += extraKm * perKmRate;
-            }
-            const discountAmount = isDiscounted ? Math.round(regularFare * DiscountRate) : 0;
-            const totalFare = Math.round(regularFare) - discountAmount;
-            return {
-                vehicleName,
-                regularFare: Math.round(regularFare),
-                discountAmount,
-                totalFare,
-                baseFare,
-                distanceTraveled
+            const request = {
+                distanceTraveled: distanceTraveled,
+                vehicleChoice: vehicleChoice,
+                isDiscounted: isDiscounted
             };
+            
+            console.log('Sending fare calculation request:', request);
+            
+            return fetch('/api/fare/calculate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(request)
+            })
+            .then(response => {
+                console.log('Fare calculation response status:', response.status);
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        throw new Error(`Failed to calculate fare: ${text}`);
+                    });
+                }
+                return response.json();
+            })
+            .catch(error => {
+                console.error('Error calculating fare:', error);
+                return { error: error.message || "Failed to calculate fare" };
+            });
         }
         function displayFare(distance, fareInfo, duration, originName, destinationName) {
+            console.log('Displaying fare info:', fareInfo);
+            
             if (fareInfo.error) {
-                document.getElementById("fareAmount").innerText = fareInfo.error;
+                document.getElementById("fareAmount").innerText = "Error";
+                console.error('Error displaying fare:', fareInfo.error);
                 return;
             }
+
             document.getElementById("fareAmount").innerText = `₱ ${fareInfo.totalFare.toFixed(2)}`;
             document.getElementById("baseFare").innerText = `₱ ${fareInfo.baseFare.toFixed(2)}`;
             document.getElementById("appliedDiscount").innerText = `₱ ${fareInfo.discountAmount.toFixed(2)}`;
