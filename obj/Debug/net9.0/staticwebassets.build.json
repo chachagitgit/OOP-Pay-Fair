@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AyRMTQ4kzPBXbDPBSn/8KuktQSjW2fsdiqT9eCCl8y4=",
+  "Hash": "VA1RhyMjt9IC2OauR8KjVakJyjiRtwpm6ur7QdKqMDI=",
   "Source": "OOP-Fair-Fare",
   "BasePath": "_content/OOP-Fair-Fare",
   "Mode": "Default",
@@ -3312,6 +3312,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\privacy.png"
+    },
+    {
+      "Identity": "C:\\Users\\LENOVO\\Documents\\OOP-Fair-Fare\\wwwroot\\images\\profile.png",
+      "SourceId": "OOP-Fair-Fare",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\LENOVO\\Documents\\OOP-Fair-Fare\\wwwroot\\",
+      "BasePath": "_content/OOP-Fair-Fare",
+      "RelativePath": "images/profile#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "a4g3aby2xi",
+      "Integrity": "WmpdbHS7Lvx3WT6FEYh7GvUedBKwPOAlB0aiodh8bAg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\profile.png"
     },
     {
       "Identity": "C:\\Users\\LENOVO\\Documents\\OOP-Fair-Fare\\wwwroot\\images\\tnc.png",
@@ -15812,6 +15833,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-EAOBd2A10rEr/ICtH933oX6eIxdSiQ4LKiZmWH0KpNM="
+        }
+      ]
+    },
+    {
+      "Route": "images/profile.a4g3aby2xi.png",
+      "AssetFile": "C:\\Users\\LENOVO\\Documents\\OOP-Fair-Fare\\wwwroot\\images\\profile.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24065"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WmpdbHS7Lvx3WT6FEYh7GvUedBKwPOAlB0aiodh8bAg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 11 Jun 2025 07:07:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "a4g3aby2xi"
+        },
+        {
+          "Name": "label",
+          "Value": "images/profile.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-WmpdbHS7Lvx3WT6FEYh7GvUedBKwPOAlB0aiodh8bAg="
+        }
+      ]
+    },
+    {
+      "Route": "images/profile.png",
+      "AssetFile": "C:\\Users\\LENOVO\\Documents\\OOP-Fair-Fare\\wwwroot\\images\\profile.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24065"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WmpdbHS7Lvx3WT6FEYh7GvUedBKwPOAlB0aiodh8bAg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 11 Jun 2025 07:07:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-WmpdbHS7Lvx3WT6FEYh7GvUedBKwPOAlB0aiodh8bAg="
         }
       ]
     },

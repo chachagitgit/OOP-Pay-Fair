@@ -113,6 +113,10 @@
       "PackagePath": "staticwebassets\\images\\privacy.png"
     },
     {
+      "Id": "C:\\Users\\LENOVO\\Documents\\OOP-Fair-Fare\\wwwroot\\images\\profile.png",
+      "PackagePath": "staticwebassets\\images\\profile.png"
+    },
+    {
       "Id": "C:\\Users\\LENOVO\\Documents\\OOP-Fair-Fare\\wwwroot\\images\\tnc.png",
       "PackagePath": "staticwebassets\\images\\tnc.png"
     },
