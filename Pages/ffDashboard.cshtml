@@ -32,6 +32,74 @@
             border: none;
             z-index: 2;
         }
+
+        .custom-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px; /* Fixed width */
+            max-height: 80vh; /* Maximum height of 80% of viewport height */
+            overflow-y: auto; /* Enable vertical scrolling if content exceeds max-height */
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: none;
+        }
+
+        .place-details {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            /* Allow content to wrap naturally */
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .place-details h3 {
+            margin: 0 0 8px 0;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .place-details p {
+            margin: 5px 0;
+            font-size: 13px;
+            color: #5f6368;
+            line-height: 1.4;
+        }
+
+        .popup-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .popup-button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+
+        .origin-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .destination-btn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .cancel-btn {
+            background-color: #9e9e9e;
+            color: white;
+        }
     </style>
 }
 
@@ -39,6 +107,8 @@
 <input type="checkbox" id="check">
 <input type="radio" name="tab" id="tab-route" checked>
 <input type="radio" name="tab" id="tab-fare">
+
+ <!-- Vehicle selection radio buttons -->
 <input type="radio" name="vehicle" id="jeepney" class="vehicle-radio">
 <input type="radio" name="vehicle" id="ordinary-bus" class="vehicle-radio">
 <input type="radio" name="vehicle" id="aircon-bus" class="vehicle-radio">
@@ -52,104 +122,109 @@
 <div class="container">
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <a href="Pages/Terms.cshtml" class="app-title">PayFair</a>
+            <a href="/index">
+            <img src="/images/logo.png" alt="PayFair Logo" class="sidebar-logo">
+            </a> 
         </div>
 
-        <div class="tabs-container">
-            <div class="tabs">
-                <label for="tab-route" class="tab_btn">Route</label>
-                <label for="tab-fare" class="tab_btn">Fare</label>
-            </div>
-        </div>
-
-        <div class="content-container">
-            <!-- ROUTE TAB -->
-            <div class="content_box route-content">
-                <label class="location-label">Enter Starting location</label>
-                <div class="input-group">
-                    <!-- Origin -->
-                    <div class="input-container">
-                        <input type="checkbox" id="dropdown1" class="dropdown-control">
-                        <div class="input-wrapper">
-                            <div class="dropdown-overlay"></div>
-                            <i class="fas fa-map-marker-alt location-icon"></i>
-                            <input type="text" id="originInput" class="main-input" placeholder="Starting location" aria-label="Starting location" autocomplete="off">
-                            <label for="dropdown1" class="dropdown-btn"><i class="fas fa-chevron-down"></i></label>
-                            <div class="dropdown-menu" id="originDropdown"></div>
-                        </div>
-                    </div>
-                    <!-- Destination -->
-                    <div class="input-container">
-                        <input type="checkbox" id="dropdown2" class="dropdown-control">
-                        <div class="input-wrapper">
-                            <div class="dropdown-overlay"></div>
-                            <i class="fas fa-map-marker-alt location-icon"></i>
-                            <input type="text" id="destinationInput" class="main-input" placeholder="Destination" aria-label="Destination" autocomplete="off">
-                            <label for="dropdown2" class="dropdown-btn"><i class="fas fa-chevron-down"></i></label>
-                            <div class="dropdown-menu" id="destinationDropdown"></div>
-                        </div>
-                    </div>
+        <!-- UPDATED: Wrap scrollable content in sidebar-content div -->
+        <div class="sidebar-content">
+            <div class="tabs-container">
+                <div class="tabs"> <!--double tab option-->
+                    <label for="tab-route" class="tab_btn">Route</label>
+                    <label for="tab-fare" class="tab_btn">Fare</label>
                 </div>
-
-                <!-- Vehicle Options -->
-                <div class="section-title">Transportation Options</div>
-                <div class="vehicle-options">
-                    <input type="radio" id="vehicle1" name="vehicle" class="vehicle-radio" value="4">
-                    <label for="vehicle1" class="vehicle-btn">Traditional Jeepney<i class="fas fa-bus-alt vehicle-icon"></i></label>
-
-                    <input type="radio" id="vehicle2" name="vehicle" class="vehicle-radio" value="1">
-                    <label for="vehicle2" class="vehicle-btn">Airconditioned Bus<i class="fas fa-bus-alt vehicle-icon"></i></label>
-
-                    <input type="radio" id="vehicle3" name="vehicle" class="vehicle-radio" value="2">
-                    <label for="vehicle3" class="vehicle-btn">Ordinary Bus<i class="fas fa-bus-alt vehicle-icon"></i></label>
-
-                    <input type="radio" id="vehicle4" name="vehicle" class="vehicle-radio" value="3">
-                    <label for="vehicle4" class="vehicle-btn">Modern E-Jeepney<i class="fas fa-bus-alt vehicle-icon"></i></label>
-                </div>
-
-                <!-- Discount Checkbox -->
-                <div class="section-title">Discount</div>
-                <div class="discount">
-                    <div class="checkbox-wrapper">
-                        <input type="checkbox" id="discounts" name="discounts" value="Student/PWD/Senior Citizen">
-                        <label for="discounts">Student/PWD/Senior Citizen</label>
-                    </div>
-                </div>
-
-                <!-- Calculate Button -->
-                <button class="calculate-fare" onclick="calculateRoute()">Calculate Fare</button>
             </div>
 
-            <!-- FARE TAB -->
-            <div class="content_box fare-content">
-                <div class="fare-card">
-                    <div class="header-section"></div>
-                    <div class="content-section">
-                        <div class="total-fare">
-                            <h2>Total estimated fare:</h2>
-                            <div class="fare-amount" id="fareAmount">₱ XXXX</div>
+            <div class="content-container">
+                <!-- ROUTE TAB -->
+                <div class="content_box route-content">
+                    <label class="location-label">Enter Starting location</label>
+                    <div class="input-group">
+                        <!-- Origin -->
+                        <div class="input-container">
+                            <input type="checkbox" id="dropdown1" class="dropdown-control">
+                            <div class="input-wrapper">
+                                <div class="dropdown-overlay"></div>
+                                <i class="fas fa-map-marker-alt location-icon"></i>
+                                <input type="text" id="originInput" class="main-input" placeholder="Starting location" aria-label="Starting location" autocomplete="off">
+                                <label for="dropdown1" class="dropdown-btn"><i class="fas fa-chevron-down"></i></label>
+                                <div class="dropdown-menu" id="originDropdown"></div>
+                            </div>
                         </div>
-                        <div class="section">
-                            <div class="section-title">Location</div>
-                            <div id="fareLocation"></div>
+                        <!-- Destination -->
+                        <div class="input-container">
+                            <input type="checkbox" id="dropdown2" class="dropdown-control">
+                            <div class="input-wrapper">
+                                <div class="dropdown-overlay"></div>
+                                <i class="fas fa-map-marker-alt location-icon"></i>
+                                <input type="text" id="destinationInput" class="main-input" placeholder="Destination" aria-label="Destination" autocomplete="off">
+                                <label for="dropdown2" class="dropdown-btn"><i class="fas fa-chevron-down"></i></label>
+                                <div class="dropdown-menu" id="destinationDropdown"></div>
+                            </div>
                         </div>
-                        <div class="section">
-                            <div class="section-title">Breakdown</div>
-                            <div class="breakdown-item">
-                                <span class="item-label">Base fare</span>
-                                <span class="item-value" id="baseFare">XXXX</span>
+                    </div>
+
+                    <!-- Vehicle Options -->
+                    <div class="section-title">Transportation Options</div>
+                    <div class="vehicle-options">
+                        <input type="radio" id="vehicle1" name="vehicle" class="vehicle-radio" value="4">
+                        <label for="vehicle1" class="vehicle-btn">Traditional Jeepney<i class="fas fa-bus-alt vehicle-icon"></i></label>
+
+                        <input type="radio" id="vehicle2" name="vehicle" class="vehicle-radio" value="1">
+                        <label for="vehicle2" class="vehicle-btn">Airconditioned Bus<i class="fas fa-bus-alt vehicle-icon"></i></label>
+
+                        <input type="radio" id="vehicle3" name="vehicle" class="vehicle-radio" value="2">
+                        <label for="vehicle3" class="vehicle-btn">Ordinary Bus<i class="fas fa-bus-alt vehicle-icon"></i></label>
+
+                        <input type="radio" id="vehicle4" name="vehicle" class="vehicle-radio" value="3">
+                        <label for="vehicle4" class="vehicle-btn">Modern E-Jeepney<i class="fas fa-bus-alt vehicle-icon"></i></label>
+                    </div>
+
+                    <!-- Discount Checkbox -->
+                    <div class="section-title">Discount</div>
+                    <div class="discount">
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" id="discounts" name="discounts" value="Student/PWD/Senior Citizen">
+                            <label for="discounts">Student/PWD/Senior Citizen</label>
+                        </div>
+                    </div>
+
+                    <!-- Calculate Button -->
+                    <button class="calculate-fare" onclick="calculateRoute()">Calculate Fare</button>
+                </div>
+
+                <!-- FARE TAB -->
+                <div class="content_box fare-content">
+                    <div class="fare-card">
+                        <div class="header-section"></div>
+                        <div class="content-section">
+                            <div class="total-fare">
+                                <h2>Total estimated fare:</h2>
+                                <div class="fare-amount" id="fareAmount">₱ XXXX</div>
                             </div>
-                            <div class="breakdown-item">
-                                <span class="item-label">Applied discount</span>
-                                <span class="item-value" id="appliedDiscount">XXXX</span>
+                            <div class="section">
+                                <div class="section-title">Location</div>
+                                <div id="fareLocation"></div>
                             </div>
-                            <div class="breakdown-item">
-                                <span class="item-label">Distance</span>
-                                <span class="item-value" id="distance">XXXX</span>
-                            </div>
-                            <div class="breakdown-item total">
-                                <span class="item-label">Total estimated fare</span>
-                                <span class="item-value" id="totalFare">XXXX</span>
+                            <div class="section">
+                                <div class="section-title">Breakdown</div>
+                                <div class="breakdown-item">
+                                    <span class="item-label">Regular fare</span>
+                                    <span class="item-value" id="baseFare">XXXX</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span class="item-label">Applied discount</span>
+                                    <span class="item-value" id="appliedDiscount">XXXX</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span class="item-label">Distance</span>
+                                    <span class="item-value" id="distance">XXXX</span>
+                                </div>
+                                <div class="breakdown-item total">
+                                    <span class="item-label">Total estimated fare</span>
+                                    <span class="item-value" id="totalFare">XXXX</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -161,6 +236,31 @@
     <!-- Google Map container -->
     <div id="map" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;"></div>
 </div>
+
+<!-- Add this HTML right before the closing </div> of the container -->
+<div id="locationPopup" class="custom-popup">
+    <div class="place-details">
+        <h3 id="popup-place-name">Place Name</h3>
+        <p id="popup-place-address">Address</p>
+        <p id="popup-place-coords">Coordinates</p>
+    </div>
+    <div class="popup-buttons">
+        <button class="popup-button origin-btn" id="setOrigin">Set as Origin</button>
+        <button class="popup-button destination-btn" id="setDestination">Set as Destination</button>
+        <button class="popup-button cancel-btn" id="cancelSelection">Cancel</button>
+    </div>
+</div>
+
+<footer class="app-footer"> 
+    <p>Copyright© 2025 PayFair · All rights reserved
+        <span class="footer-nav">
+            <a href="~/index#aboutSection">About Us |</a>
+            <a href="~/index#termsSection">Terms and Conditions |</a>
+            <a href="~/index#privacySection">Privacy Policy |</a>
+            <a href="~/index#contactSection">Contact Us</a>
+        </span> 
+    </p>
+</footer>
 
 @section Scripts {
     <script>
@@ -226,17 +326,171 @@
                 autocompleteOptions
             );
 
+            // Add input event listeners to reset manual selection state
+            document.getElementById('originInput').addEventListener('input', function(e) {
+                if (e.target.value === '') {
+                    // Reset origin autocomplete
+                    if (originAutocomplete._originalGetPlace) {
+                        originAutocomplete.getPlace = originAutocomplete._originalGetPlace;
+                        delete originAutocomplete._manualPlace;
+                        delete originAutocomplete._hasManualSelection;
+                        delete originAutocomplete._originalGetPlace;
+                    }
+                    // Clear origin marker
+                    if (window.originMarker) {
+                        window.originMarker.setMap(null);
+                    }
+                }
+            });
+
+            document.getElementById('destinationInput').addEventListener('input', function(e) {
+                if (e.target.value === '') {
+                    // Reset destination autocomplete
+                    if (destinationAutocomplete._originalGetPlace) {
+                        destinationAutocomplete.getPlace = destinationAutocomplete._originalGetPlace;
+                        delete destinationAutocomplete._manualPlace;
+                        delete destinationAutocomplete._hasManualSelection;
+                        delete destinationAutocomplete._originalGetPlace;
+                    }
+                    // Clear destination marker
+                    if (window.destMarker) {
+                        window.destMarker.setMap(null);
+                    }
+                }
+            });
+
             // Add listeners to validate location selections
             originAutocomplete.addListener("place_changed", validatePlace);
             destinationAutocomplete.addListener("place_changed", validatePlace);
+
+            // Add map click listener for setting origin/destination
+            map.addListener('click', function(event) {
+                const latLng = event.latLng;
+                const lat = latLng.lat();
+                const lng = latLng.lng();
+                
+                // Metro Manila boundaries
+                const bounds = {
+                    north: 14.8527,
+                    south: 14.3475,
+                    west: 120.8936,
+                    east: 121.1979
+                };
+
+                if (lat < bounds.south || lat > bounds.north || lng < bounds.west || lng > bounds.east) {
+                    alert("Please select a location within Metro Manila only.");
+                    return;
+                }
+
+                const geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ location: latLng }, function(results, status) {
+                    if (status === 'OK' && results[0]) {
+                        const place = results[0];
+                        
+                        // Update popup content with place details
+                        document.getElementById('popup-place-name').textContent = 
+                            place.address_components[0].long_name || 'Selected Location';
+                        document.getElementById('popup-place-address').textContent = 
+                            place.formatted_address;
+                        document.getElementById('popup-place-coords').textContent = 
+                            `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+
+                        // Show popup
+                        const popup = document.getElementById('locationPopup');
+                        popup.style.display = 'block';
+
+                        // Handle button clicks
+                        document.getElementById('setOrigin').onclick = function() {
+                            setLocationInput('originInput', latLng, 'Origin');
+                            popup.style.display = 'none';
+                        };
+
+                        document.getElementById('setDestination').onclick = function() {
+                            setLocationInput('destinationInput', latLng, 'Destination');
+                            popup.style.display = 'none';
+                        };
+
+                        document.getElementById('cancelSelection').onclick = function() {
+                            popup.style.display = 'none';
+                        };
+                    } else {
+                        alert('Could not determine address for this location.');
+                    }
+                });
+            });
+        }
+
+        function setLocationInput(inputId, latLng, label) {
+            const geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ location: latLng }, function(results, status) {
+                if (status === 'OK' && results[0]) {
+                    // Automatically use the first result without showing dropdown
+                    const firstResult = results[0];
+                    const address = firstResult.formatted_address;
+                    
+                    // Create a place object from the first result
+                    const placeObj = {
+                        name: address,
+                        formatted_address: address,
+                        geometry: { 
+                            location: new google.maps.LatLng(latLng.lat(), latLng.lng())
+                        },
+                        place_id: firstResult.place_id || 'manual_' + Date.now()
+                    };
+
+                    // Update the input field
+                    const inputElem = document.getElementById(inputId);
+                    inputElem.value = address;
+
+                    // Get the correct autocomplete object
+                    const ac = (inputId === 'originInput') ? originAutocomplete : destinationAutocomplete;
+                    
+                    // Store the manual place and set selection flag
+                    ac._manualPlace = placeObj;
+                    ac._hasManualSelection = true;
+
+                    // Place marker
+                    const markerOptions = {
+                        position: latLng,
+                        map: map,
+                        title: label,
+                        icon: {
+                            url: inputId === 'originInput' ? 
+                                'http://maps.google.com/mapfiles/ms/icons/green-dot.png' : 
+                                'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                            scaledSize: new google.maps.Size(40, 40)
+                        },
+                        animation: google.maps.Animation.DROP
+                    };
+
+                    if (inputId === 'originInput') {
+                        if (window.originMarker) window.originMarker.setMap(null);
+                        window.originMarker = new google.maps.Marker(markerOptions);
+                    } else {
+                        if (window.destMarker) window.destMarker.setMap(null);
+                        window.destMarker = new google.maps.Marker(markerOptions);
+                    }
+                } else {
+                    console.error('Geocoding failed:', status);
+                    alert('Could not determine address for this location.');
+                }
+            });
         }
 
         function validatePlace() {
+            // Reset manual selection when a new place is selected from dropdown
+            this._hasManualSelection = false;
+            if (this._originalGetPlace) {
+                this.getPlace = this._originalGetPlace;
+                delete this._manualPlace;
+                delete this._originalGetPlace;
+            }
+
             const place = this.getPlace();
-            if (!place.geometry) {
-                alert("Please select a location from the dropdown list.");
+            if (!place || !place.geometry) {
+                alert("Please select a location from the dropdown list or click on the map.");
                 resetForm();
-                return;
+                return false;
             }
 
             const lat = place.geometry.location.lat();
@@ -253,14 +507,31 @@
             if (lat < bounds.south || lat > bounds.north || lng < bounds.west || lng > bounds.east) {
                 alert("Please select a location within Metro Manila only.");
                 resetForm();
-                return;
+                return false;
             }
+
+            return true;
         }
 
         function resetForm() {
             // Clear input fields
             document.getElementById("originInput").value = "";
             document.getElementById("destinationInput").value = "";
+
+            // Reset autocomplete objects to their original state
+            if (originAutocomplete._originalGetPlace) {
+                originAutocomplete.getPlace = originAutocomplete._originalGetPlace;
+                delete originAutocomplete._manualPlace;
+                delete originAutocomplete._hasManualSelection;
+                delete originAutocomplete._originalGetPlace;
+            }
+            
+            if (destinationAutocomplete._originalGetPlace) {
+                destinationAutocomplete.getPlace = destinationAutocomplete._originalGetPlace;
+                delete destinationAutocomplete._manualPlace;
+                delete destinationAutocomplete._hasManualSelection;
+                delete destinationAutocomplete._originalGetPlace;
+            }
 
             // Reset vehicle selection
             const vehicleRadios = document.querySelectorAll('input[name="vehicle"]');
@@ -293,16 +564,44 @@
         }
 
         function calculateRoute() {
-            const origin = originAutocomplete.getPlace();
-            const destination = destinationAutocomplete.getPlace();
-            
-            if (!origin || !origin.geometry) {
-                alert("Please select a valid origin from the dropdown list.");
+            let origin = originAutocomplete.getPlace();
+            let destination = destinationAutocomplete.getPlace();
+
+            console.log('Origin object:', origin);
+            console.log('Destination object:', destination);
+
+            // Check for manual selections first
+            if (originAutocomplete._hasManualSelection && originAutocomplete._manualPlace) {
+                origin = originAutocomplete._manualPlace;
+            }
+
+            if (destinationAutocomplete._hasManualSelection && destinationAutocomplete._manualPlace) {
+                destination = destinationAutocomplete._manualPlace;
+            }
+
+            // Then validate
+            if (!origin || !origin.geometry || !origin.geometry.location) {
+                alert("Please select a valid origin from the dropdown list or by clicking on the map.");
                 return;
             }
-            if (!destination || !destination.geometry) {
-                alert("Please select a valid destination from the dropdown list.");
+            
+            if (!destination || !destination.geometry || !destination.geometry.location) {
+                alert("Please select a valid destination from the dropdown list or by clicking on the map.");
                 return;
+            }
+
+            // Ensure geometry.location is a LatLng object
+            if (!(origin.geometry.location instanceof google.maps.LatLng)) {
+                origin.geometry.location = new google.maps.LatLng(
+                    origin.geometry.location.lat(),
+                    origin.geometry.location.lng()
+                );
+            }
+            if (!(destination.geometry.location instanceof google.maps.LatLng)) {
+                destination.geometry.location = new google.maps.LatLng(
+                    destination.geometry.location.lat(),
+                    destination.geometry.location.lng()
+                );
             }
 
             // Validate both locations are within Metro Manila
@@ -335,34 +634,40 @@
                 return;
             }
 
+            // Clear existing markers
             if (window.originMarker) window.originMarker.setMap(null);
             if (window.destMarker) window.destMarker.setMap(null);
+            
+            // Create new markers
             window.originMarker = new google.maps.Marker({
                 position: origin.geometry.location,
                 map: map,
-                title: origin.name,
+                title: origin.name || origin.formatted_address,
                 icon: {
                     url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
                     scaledSize: new google.maps.Size(40, 40)
                 },
                 animation: google.maps.Animation.DROP
             });
+            
             window.destMarker = new google.maps.Marker({
                 position: destination.geometry.location,
                 map: map,
-                title: destination.name,
+                title: destination.name || destination.formatted_address,
                 icon: {
                     url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
                     scaledSize: new google.maps.Size(40, 40)
                 },
                 animation: google.maps.Animation.DROP
             });
+
             const request = {
                 origin: origin.geometry.location,
                 destination: destination.geometry.location,
-                travelMode: google.maps.TravelMode.TRANSIT,
+                travelMode: google.maps.TravelMode.DRIVING,
                 optimizeWaypoints: true
             };
+
             directionsService.route(request, function(result, status) {
                 if (status === "OK") {
                     directionsRenderer.setDirections(result);
@@ -387,7 +692,9 @@
                                 alert('Error calculating fare: ' + fareInfo.error);
                                 return;
                             }
-                            displayFare(distanceKm, fareInfo, duration, origin.name, destination.name);
+                            displayFare(distanceKm, fareInfo, duration, 
+                                      origin.name || origin.formatted_address, 
+                                      destination.name || destination.formatted_address);
                             // Switch to fare tab after calculation
                             document.getElementById('tab-fare').checked = true;
                         })
