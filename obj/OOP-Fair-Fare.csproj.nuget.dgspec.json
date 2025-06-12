@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LENOVO\\Documents\\OOP-Fair-Fare\\OOP-Fair-Fare.csproj": {}
+    "C:\\Users\\Jerlee\\Desktop\\OOP\\OOP-Pay-Fair\\OOP-Fair-Fare.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LENOVO\\Documents\\OOP-Fair-Fare\\OOP-Fair-Fare.csproj": {
+    "C:\\Users\\Jerlee\\Desktop\\OOP\\OOP-Pay-Fair\\OOP-Fair-Fare.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LENOVO\\Documents\\OOP-Fair-Fare\\OOP-Fair-Fare.csproj",
+        "projectUniqueName": "C:\\Users\\Jerlee\\Desktop\\OOP\\OOP-Pay-Fair\\OOP-Fair-Fare.csproj",
         "projectName": "OOP-Fair-Fare",
-        "projectPath": "C:\\Users\\LENOVO\\Documents\\OOP-Fair-Fare\\OOP-Fair-Fare.csproj",
-        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LENOVO\\Documents\\OOP-Fair-Fare\\obj\\",
+        "projectPath": "C:\\Users\\Jerlee\\Desktop\\OOP\\OOP-Pay-Fair\\OOP-Fair-Fare.csproj",
+        "packagesPath": "C:\\Users\\Jerlee\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Jerlee\\Desktop\\OOP\\OOP-Pay-Fair\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Jerlee\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -45,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
@@ -95,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

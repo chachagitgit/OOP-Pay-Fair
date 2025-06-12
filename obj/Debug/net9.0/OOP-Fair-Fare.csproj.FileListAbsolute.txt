@@ -317,14 +317,8 @@ C:\Users\Jerlee\Desktop\OOP\OOP-Pay-Fair\obj\Debug\net9.0\refint\OOP-Fair-Fare.d
 C:\Users\Jerlee\Desktop\OOP\OOP-Pay-Fair\obj\Debug\net9.0\OOP-Fair-Fare.pdb
 C:\Users\Jerlee\Desktop\OOP\OOP-Pay-Fair\obj\Debug\net9.0\OOP-Fair-Fare.genruntimeconfig.cache
 C:\Users\Jerlee\Desktop\OOP\OOP-Pay-Fair\obj\Debug\net9.0\ref\OOP-Fair-Fare.dll
-C:\Users\Jerlee\Desktop\OOP\OOP-Pay-Fair\obj\Debug\net9.0\compressed\21ixajlkwe-3yl8sayykx.gz
-C:\Users\Jerlee\Desktop\OOP\OOP-Pay-Fair\obj\Debug\net9.0\compressed\2plxhryn6i-maf8h816iq.gz
 <<<<<<< HEAD
-C:\Users\Jerlee\Desktop\OOP\OOP-Pay-Fair\obj\Debug\net9.0\compressed\hifdcvsm5s-mjxm5br8p1.gz
-C:\Users\Jerlee\Desktop\OOP\OOP-Pay-Fair\obj\Debug\net9.0\compressed\1yj2osu2rw-a525frblk1.gz
 =======
-C:\Users\Jerlee\Desktop\OOP\OOP-Pay-Fair\obj\Debug\net9.0\compressed\1yj2osu2rw-89o4aumecs.gz
-C:\Users\Jerlee\Desktop\OOP\OOP-Pay-Fair\obj\Debug\net9.0\compressed\hifdcvsm5s-e0t0rw30vn.gz
 C:\Users\LENOVO\Documents\OOP-Fair-Fare\bin\Debug\net9.0\OOP-Fair-Fare.staticwebassets.runtime.json
 C:\Users\LENOVO\Documents\OOP-Fair-Fare\bin\Debug\net9.0\OOP-Fair-Fare.staticwebassets.endpoints.json
 C:\Users\LENOVO\Documents\OOP-Fair-Fare\bin\Debug\net9.0\OOP-Fair-Fare.exe
@@ -654,3 +648,7 @@ C:\Users\LENOVO\Documents\OOP-Fair-Fare\obj\Debug\net9.0\OOP-Fair-Fare.pdb
 C:\Users\LENOVO\Documents\OOP-Fair-Fare\obj\Debug\net9.0\OOP-Fair-Fare.genruntimeconfig.cache
 C:\Users\LENOVO\Documents\OOP-Fair-Fare\obj\Debug\net9.0\ref\OOP-Fair-Fare.dll
 >>>>>>> c71b52a5950b80ee9d8b85eec6982f96df1f8774
+C:\Users\Jerlee\Desktop\OOP\OOP-Pay-Fair\obj\Debug\net9.0\compressed\21ixajlkwe-ls1duc6iw3.gz
+C:\Users\Jerlee\Desktop\OOP\OOP-Pay-Fair\obj\Debug\net9.0\compressed\2plxhryn6i-qybroqw3dq.gz
+C:\Users\Jerlee\Desktop\OOP\OOP-Pay-Fair\obj\Debug\net9.0\compressed\hifdcvsm5s-lr93fmbrmu.gz
+C:\Users\Jerlee\Desktop\OOP\OOP-Pay-Fair\obj\Debug\net9.0\compressed\1yj2osu2rw-z8bec39g79.gz
