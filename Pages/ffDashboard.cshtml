@@ -92,7 +92,6 @@
         }
     </style>
 }
-
 <!-- Hidden inputs for UI control -->
 <input type="checkbox" id="check">
 <input type="radio" name="tab" id="tab-route" checked>
@@ -137,6 +136,7 @@
                             </div>
                         </div>
                         <!-- Destination -->
+                        <label class="location-label">Enter Destination</label>
                         <div class="input-container">
                             <input type="checkbox" id="dropdown2" class="dropdown-control">
                             <div class="input-wrapper">
@@ -203,12 +203,45 @@
                             </div>
                         </div>
                     </div>
+                    <button class="save-route">Save Route</button>
                 </div>
             </div>
         </div>
     </div>
     <div id="map" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;"></div>
 </div>
+    <div class="notification-dialog" id="saveRouteNotification">
+        <div class="notification-content">
+            <i class="fas fa-check-circle notification-icon"></i>
+            <p class="notification-message">Route saved successfully!</p>
+            <button class="notification-close-btn">OK</button>
+        </div>
+    </div>
+<script>
+    // Save Route Button with Notification
+    document.querySelector('.save-route').addEventListener('click', function() {
+        // Show notification
+        const notification = document.getElementById('saveRouteNotification');
+        notification.classList.add('active');
+        
+        // Close notification after 3 seconds automatically
+        setTimeout(() => {
+            notification.classList.remove('active');
+        }, 3000);
+    });
+
+    // Close notification when OK button is clicked
+    document.querySelector('.notification-close-btn').addEventListener('click', function() {
+        document.getElementById('saveRouteNotification').classList.remove('active');
+    });
+
+    // Close notification when clicking outside
+    document.getElementById('saveRouteNotification').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.classList.remove('active');
+        }
+    });
+</script>
 
 <div id="locationPopup" class="custom-popup">
     <div class="place-details">
