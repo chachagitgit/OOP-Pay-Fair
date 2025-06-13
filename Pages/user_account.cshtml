@@ -35,13 +35,34 @@
         </div>
         <button class="edit-profile">Edit profile</button>  <!--to edit user's profile-->
     </div>
-    <a href="/log-in"> <!--navigate to log in when signed out-->
-        <button class="sign-out-btn">
-            Sign out
-            <i class="fas fa-sign-out-alt"></i> <!--sign out icon-->
-        </button>
-    </a>
+    <div class="advanced-setting">
+        <input type="checkbox" id="dropdown-toggle" class="dropdown-checkbox">
+        <label for="dropdown-toggle" class="dropdown-label">Advanced Setting</label>
+        <div class="dropdown-container">
+            <label for="confirmation-toggle" class="delete-account-btn" aria-label="delete account">Delete Account</label>
+        </div>
+        <a href="/log-in">
+            <button class="sign-out-btn">
+                Sign out
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </a>
+    </div>
     
+    <!-- Confirmation Dialog for deleting account -->
+    <input type="checkbox" id="confirmation-toggle">
+    <div class="confirmation-overlay">
+        <label for="confirmation-toggle" class="overlay-close"></label>
+        <div class="confirmation-dialog">
+            <h3>Confirm Account Deletion</h3>
+            <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+            <div class="confirmation-buttons">
+                <label for="confirmation-toggle" class="confirm-btn">Yes, Delete</label>
+                <label for="confirmation-toggle" class="cancel-btn">Cancel</label>
+            </div>
+        </div>
+    </div>
+
     <div class="user-info-container">
         <div class="user-info-row"> <!--keep first name anf last name in 1 line-->
             <div class="user-info-item">
@@ -67,25 +88,52 @@
         </div>
     </div>
 
-    <div class="history-container"> <!--for history-->
+    <div class="history-container">
         <h3>Your history</h3>
         <table class="history-table">
             <thead>
-                <tr><!--table headers-->
-                    <th>Starting Location</th> 
+                <tr>
+                    <th>Starting Location</th>
                     <th>Destination</th>
                     <th>Estimated Fare</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr><!--table value placeholders-->
-                    <td><div class="history-placholder">Starting point</div></td>
-                    <td><div class="history-placholder">Destination</div></td>
-                    <td><div class="history-placholder">₱0.00</div></td>
+                <tr data-row="1">
+                    <td><div class="history-placeholder">Starting point</div></td>
+                    <td><div class="history-placeholder">Destination</div></td>
+                    <td><div class="history-placeholder">₱0.00</div></td>
+                    <td>
+                        <button class="delete-btn" data-row="1" aria-label="Delete transaction"><i class="fas fa-times"></i></button>
+                    </td>
+                </tr>
+                <tr data-row="2">
+                    <td><div class="history-placeholder">Starting point</div></td>
+                    <td><div class="history-placeholder">Destination</div></td>
+                    <td><div class="history-placeholder">₱0.00</div></td>
+                    <td>
+                        <button class="delete-btn" data-row="2" aria-label="Delete transaction"><i class="fas fa-times"></i></button>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+        <!--transaction confirmation-->
+    <input type="checkbox" id="transaction-confirm-toggle">
+    <div class="transaction-confirm-overlay">
+        <label for="transaction-confirm-toggle" class="overlay-close"></label>
+        <div class="confirmation-dialog">
+            <h3>Confirm Transaction Deletion</h3>
+            <p>Are you sure you want to delete this transaction? This action cannot be undone.</p>
+            <div class="confirmation-buttons">
+                <button class="confirm-btn" id="transaction-confirm-btn">Yes, Delete</button>
+                <button class="cancel-btn" id="transaction-cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
 <script>
     const editButton = document.querySelector('.edit-profile');
     let isEditing = false;
@@ -123,6 +171,57 @@
         document.getElementById('username-input').style.display = isEditing ? 'inline' : 'none';
 
         editButton.textContent = isEditing ? 'Save' : 'Edit profile';
+    });
+
+    // Account deletion handling
+    const deleteAccountBtn = document.querySelector('.delete-account-btn');
+    const confirmationToggle = document.getElementById('confirmation-toggle');
+
+    if (deleteAccountBtn && confirmationToggle) {
+        deleteAccountBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            confirmationToggle.checked = true;
+        });
+    }
+
+    // Transaction deletion handling
+    let rowToDelete = null;
+
+    document.querySelector('.history-table').addEventListener('click', (event) => {
+        const deleteBtn = event.target.closest('.delete-btn');
+        if (deleteBtn) {
+            event.preventDefault();
+            // Store reference to the row to be deleted
+            rowToDelete = deleteBtn.closest('tr');
+            // Show the confirmation dialog
+            document.getElementById('transaction-confirm-toggle').checked = true;
+        }
+    });
+
+    // Confirm transaction deletion
+    document.getElementById('transaction-confirm-btn').addEventListener('click', () => {
+        if (rowToDelete) {
+            rowToDelete.remove();
+            rowToDelete = null;
+            document.getElementById('transaction-confirm-toggle').checked = false;
+        }
+    });
+
+    // Cancel transaction deletion
+    document.getElementById('transaction-cancel-btn').addEventListener('click', () => {
+        document.getElementById('transaction-confirm-toggle').checked = false;
+        rowToDelete = null;
+    });
+
+    // Close transaction confirmation dialog when clicking outside
+    document.querySelector('.transaction-confirm-overlay .overlay-close').addEventListener('click', () => {
+        document.getElementById('transaction-confirm-toggle').checked = false;
+        rowToDelete = null;
+    });
+
+    // Prevent clicks on the dialog from propagating to the overlay-close
+    document.querySelector('.transaction-confirm-overlay .confirmation-dialog').addEventListener('click', (event) => {
+        event.stopPropagation();
     });
 </script>
 
