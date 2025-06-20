@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\OOP-Fair-Fare.props" />
-</Project>

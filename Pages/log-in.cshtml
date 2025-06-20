@@ -1,4 +1,5 @@
 @page
+@model OOP_Fair_Fare.Pages.logInModel
 @{
     ViewData["Title"] = "Sign In";
     Layout = "_Layout";
@@ -7,44 +8,25 @@
     <link rel="stylesheet" href="/css/log-in.css" />
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <title>FairFair - Ride Easy, Pay Fairly</title>
-    <link rel="icon" href="/images/logo.png" type="image/png">
-    <link rel="stylesheet" href="/css/log-in.css">
-</head>
-<body>
-     <div class="login-container">
-        <h1 class="welcome-title">Welcome!</h1>
-        <p class="welcome-subtitle">Log in to your account to continue</p>
-        
-        <form>
-            <div class="form-group">
-                <input type="text" class="form-input" placeholder="Email / Username" required>
-            </div>
-            
-            <div class="form-group">
-                <input type="password" class="form-input" placeholder="Password" required>
-            </div>
-            
-            <div class="login-btn-wrapper">
-                <button type="button" class="login-btn">Log in</button>
-            </div>
-        </form>
-        
-        <div class="signup-section">
-            Don't have an account yet? <a href="/signUp" class="signup-link">Sign Up here!</a>
+<div class="login-container">
+    <h1 class="welcome-title">Welcome!</h1>
+    <p class="welcome-subtitle">Log in to your account to continue</p>
+    <form method="post">
+        <div class="form-group">
+            <input type="text" class="form-input" name="Input.EmailOrUsername" placeholder="Email / Username" required />
         </div>
-     </div>
-</body>
-</html>
+        <div class="form-group">
+            <input type="password" class="form-input" name="Input.Password" placeholder="Password" required />
+        </div>
+        <div class="login-btn-wrapper">
+            <button type="submit" class="login-btn">Log in</button>
+        </div>
+        @if (!string.IsNullOrEmpty(Model?.ErrorMessage)) {
+            <div class="error-message">@Model.ErrorMessage</div>
+        }
+    </form>
+    
+    <div class="signup-section">
+        Don't have an account yet? <a href="/signUp" class="signup-link">Sign Up here!</a>
+    </div>
+</div>

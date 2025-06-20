@@ -1,4 +1,9 @@
 @page
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var userLoggedIn = HttpContextAccessor.HttpContext?.Session.GetInt32("UserId") != null;
+}
 @{
     ViewData["Title"] = "Dashboard";
     Layout = "_Layout";
@@ -240,6 +245,57 @@
         if (e.target === this) {
             this.classList.remove('active');
         }
+    });
+    let lastFareInfo = null;
+    let lastOrigin = null;
+    let lastDestination = null;
+    
+    const saveRouteBtn = document.querySelector('.save-route');
+    saveRouteBtn.disabled = true;
+    
+    function enableSaveRouteIfReady() {
+        saveRouteBtn.disabled = !(userLoggedIn && lastFareInfo && lastOrigin && lastDestination);
+    }
+    
+    // Hook into displayFare to store last fare and enable button
+    const originalDisplayFare = window.displayFare;
+    window.displayFare = function(distance, fareInfo, duration, originName, destinationName) {
+        lastFareInfo = fareInfo;
+        lastOrigin = originName;
+        lastDestination = destinationName;
+        enableSaveRouteIfReady();
+        if (originalDisplayFare) originalDisplayFare(distance, fareInfo, duration, originName, destinationName);
+    };
+    
+    saveRouteBtn.addEventListener('click', function() {
+        if (!userLoggedIn) {
+            alert('You must be logged in to save routes.');
+            return;
+        }
+        if (!lastFareInfo || !lastOrigin || !lastDestination) {
+            alert('Please calculate a fare first.');
+            return;
+        }
+        fetch(window.location.pathname + '?handler=SaveRoute', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                Origin: lastOrigin,
+                Destination: lastDestination,
+                Fare: lastFareInfo.totalFare
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                const notification = document.getElementById('saveRouteNotification');
+                notification.classList.add('active');
+                setTimeout(() => { notification.classList.remove('active'); }, 3000);
+            } else {
+                alert(data.error || 'Failed to save route.');
+            }
+        })
+        .catch(() => alert('Failed to save route.'));
     });
 </script>
 

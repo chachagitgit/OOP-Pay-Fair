@@ -1,11 +1,16 @@
 @page
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "PayFare Homepage";
     Layout = "_Layout";
+    var userId = HttpContextAccessor.HttpContext?.Session.GetInt32("UserId");
+    var isLoggedIn = userId != null;
 }
 @section Styles {
     <link rel="stylesheet" href="/css/ffHomepage.css" />
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,11 +58,22 @@
         <!-- Empty middle section -->
         <div></div>
             <!-- User Logo on the right -->
-           <a href="/user_account">
-                <figure class="logo">
-                    <img src="/images/profile.png" alt="User Logo">
-                </figure>
-            </a>
+           @if (isLoggedIn)
+    {
+        <a href="/user_account">
+            <figure class="logo">
+                <img src="/images/profile.png" alt="User Logo">
+            </figure>
+        </a>
+    }
+    else
+    {
+        <a href="/log-in">
+            <figure class="logo">
+                <img src="/images/profile.png" alt="User Logo">
+            </figure>
+        </a>
+    }
     </header>
 
     <main>

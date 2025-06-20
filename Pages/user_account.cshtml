@@ -1,140 +1,162 @@
 @page
+@model OOP_Fair_Fare.Pages.user_accountModel
 @{
     ViewData["Title"] = "User Profile";
     Layout = "_Layout";
+    var showDeleteConfirm = TempData["ShowDeleteConfirm"] as bool? ?? false;
+    var deleteError = TempData["DeleteError"] as string;
 }
 @section Styles {
     <link rel="stylesheet" href="/css/user_account.css" />
-}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4+0V8iIdNv0U+d7gRZnt9+wDTrvE9OQ9z8mNIUlTTMQQKO6oGpCgkFvZ5j8v7Zb1K2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <title>PayFair - Ride Easy, Pay Fairly</title>
     <link rel="icon" href="/images/logo.png" type="image/png">
-    <link rel="stylesheet" href="/css/user_account.css">
-</head>
-<body>
-    <!--logo layout and navigates to homepage-->
-    <figure class="logo">
-        <a href="/"><img src="/images/logo.png" alt="PayFair Logo"></a>
-    </figure>
+    <style>
+        .popup-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000;
+        }
+        .popup-dialog {
+            background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 16px rgba(0,0,0,0.2); max-width: 350px; text-align: center;
+        }
+        .popup-dialog button { margin: 0 0.5rem; }
+        .popup-error { color: red; margin-bottom: 1rem; }
+    </style>
+}
 
-    <h1 class="user-profile">User Profile</h1> <!--page heading-->
-    <div class="user-pic-container">
-        <div class="user-pic">
-            <img src="/images/profile.png"> <!--user default profile picture-->
-        </div>
-        <button class="edit-profile">Edit profile</button>  <!--to edit user's profile-->
+<figure class="logo">
+    <a href="/"><img src="/images/logo.png" alt="PayFair Logo"></a>
+</figure>
+
+<h1 class="user-profile">User Profile</h1>
+<div class="user-pic-container">
+    <div class="user-pic">
+        <img src="/images/profile.png">
     </div>
-    <div class="advanced-setting">
-        <input type="checkbox" id="dropdown-toggle" class="dropdown-checkbox">
-        <label for="dropdown-toggle" class="dropdown-label">Advanced Setting</label>
-        <div class="dropdown-container">
-            <label for="confirmation-toggle" class="delete-account-btn" aria-label="delete account">Delete Account</label>
-        </div>
-        <a href="/log-in">
-            <button class="sign-out-btn">
-                Sign out
-                <i class="fas fa-sign-out-alt"></i>
-            </button>
-        </a>
+    <button class="edit-profile">Edit profile</button>
+</div>
+<div class="advanced-setting">
+    <input type="checkbox" id="dropdown-toggle" class="dropdown-checkbox">
+    <label for="dropdown-toggle" class="dropdown-label">Advanced Setting</label>
+    <div class="dropdown-container">
+        @if (!showDeleteConfirm)
+        {
+            <form method="post" asp-page-handler="DeleteAccount">
+                <button type="submit" name="showConfirm" value="1" class="delete-account-btn">Delete Account</button>
+            </form>
+        }
     </div>
-    
-    <!-- Confirmation Dialog for deleting account -->
-    <input type="checkbox" id="confirmation-toggle">
-    <div class="confirmation-overlay">
-        <label for="confirmation-toggle" class="overlay-close"></label>
-        <div class="confirmation-dialog">
+    <form method="post" asp-page-handler="Logout" style="display:inline;">
+        <button type="submit" class="sign-out-btn">
+            Sign out
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+    </form>
+</div>
+
+@if (showDeleteConfirm)
+{
+    <div class="popup-overlay">
+        <div class="popup-dialog">
             <h3>Confirm Account Deletion</h3>
             <p>Are you sure you want to delete your account? This action cannot be undone.</p>
-            <div class="confirmation-buttons">
-                <label for="confirmation-toggle" class="confirm-btn">Yes, Delete</label>
-                <label for="confirmation-toggle" class="cancel-btn">Cancel</label>
-            </div>
+            @if (!string.IsNullOrEmpty(deleteError))
+            {
+                <div class="popup-error">@deleteError</div>
+            }
+            <form method="post" asp-page-handler="DeleteAccount">
+                <input type="hidden" name="confirmDelete" value="1" />
+                <button type="submit" class="confirm-btn">Yes, Delete</button>
+                <a href="" class="cancel-btn">Cancel</a>
+            </form>
         </div>
     </div>
+}
 
+<form method="post" asp-page-handler="EditInfo" id="edit-info-form">
     <div class="user-info-container">
-        <div class="user-info-row"> <!--keep first name anf last name in 1 line-->
+        <div class="user-info-row">
             <div class="user-info-item">
-                <span class="user-info-label">First Name</span><!--firstname field label-->
-                <span class="user-info-value" id="firstname-display">First Name</span><!--user's first name-->
-                <input type="text" class="user-info-input" id="firstname-input" value="Firstname"  style="display: none;"> <!--for editing value in the field-->
+                <span class="user-info-label">First Name</span>
+                <span class="user-info-value" id="firstname-display">@Model.UserInfo?.FirstName</span>
+                <input type="text" class="user-info-input" id="firstname-input" name="FirstName" value="@Model.UserInfo?.FirstName" style="display:none;" />
             </div>
             <div class="user-info-item">
-                <span class="user-info-label">Last Name</span><!--last name label-->
-                <span class="user-info-value" id="lastname-display">Last Name</span> <!--user's last name--> 
-                <input type="text" class="user-info-input" id="lastname-input" value="Lastname" style="display: none;"> <!--for editing value in the field-->
+                <span class="user-info-label">Last Name</span>
+                <span class="user-info-value" id="lastname-display">@Model.UserInfo?.LastName</span>
+                <input type="text" class="user-info-input" id="lastname-input" name="LastName" value="@Model.UserInfo?.LastName" style="display:none;" />
             </div>
         </div>
-
         <div class="user-info-item">
-            <span class="user-info-label">Username</span> <!--label in username field-->
-            <span class="user-info-value" id="username-display">Username</span> <!--username set by user-->
-            <input type="text" class="user-info-input" id="username-input" value="Username" style="display: none;"> <!--for editing value in the field-->
+            <span class="user-info-label">Username</span>
+            <span class="user-info-value" id="username-display">@Model.UserInfo?.Username</span>
+            <input type="text" class="user-info-input" id="username-input" name="Username" value="@Model.UserInfo?.Username" style="display:none;" />
         </div>
         <div class="user-info-item">
-            <span class="user-info-label">Email</span> <!--label in email field-->
-            <span class="user-info-value" id="email-display">Email</span> <!--user's email-->
+            <span class="user-info-label">Email</span>
+            <span class="user-info-value" id="email-display">@Model.UserInfo?.Email</span>
         </div>
     </div>
+</form>
 
-    <div class="history-container">
-        <h3>Your history</h3>
-        <table class="history-table">
-            <thead>
+<div class="history-container">
+    <h3>Your history</h3>
+    <table class="history-table">
+        <thead>
+            <tr>
+                <th>Starting Location</th>
+                <th>Destination</th>
+                <th>Estimated Fare</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @if (Model.SavedRoutes != null && Model.SavedRoutes.Count > 0)
+        {
+            foreach (var route in Model.SavedRoutes)
+            {
                 <tr>
-                    <th>Starting Location</th>
-                    <th>Destination</th>
-                    <th>Estimated Fare</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr data-row="1">
-                    <td><div class="history-placeholder">Starting point</div></td>
-                    <td><div class="history-placeholder">Destination</div></td>
-                    <td><div class="history-placeholder">₱0.00</div></td>
+                    <td>@route.StartLocation</td>
+                    <td>@route.Destination</td>
+                    <td>₱@route.EstimatedFare.ToString("F2")</td>
                     <td>
-                        <button class="delete-btn" data-row="1" aria-label="Delete transaction"><i class="fas fa-times"></i></button>
+                        <form method="post" asp-page-handler="DeleteRoute">
+                            <input type="hidden" name="RouteId" value="@route.Id" />
+                            <button class="delete-btn" aria-label="Delete transaction"><i class="fas fa-times"></i></button>
+                        </form>
                     </td>
                 </tr>
-                <tr data-row="2">
-                    <td><div class="history-placeholder">Starting point</div></td>
-                    <td><div class="history-placeholder">Destination</div></td>
-                    <td><div class="history-placeholder">₱0.00</div></td>
-                    <td>
-                        <button class="delete-btn" data-row="2" aria-label="Delete transaction"><i class="fas fa-times"></i></button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+            }
+        }
+        else
+        {
+            <tr><td colspan="4">No saved routes.</td></tr>
+        }
+        </tbody>
+    </table>
+</div>
 
-        <!--transaction confirmation-->
-    <input type="checkbox" id="transaction-confirm-toggle">
-    <div class="transaction-confirm-overlay">
-        <label for="transaction-confirm-toggle" class="overlay-close"></label>
-        <div class="confirmation-dialog">
-            <h3>Confirm Transaction Deletion</h3>
-            <p>Are you sure you want to delete this transaction? This action cannot be undone.</p>
-            <div class="confirmation-buttons">
-                <button class="confirm-btn" id="transaction-confirm-btn">Yes, Delete</button>
-                <button class="cancel-btn" id="transaction-cancel-btn">Cancel</button>
-            </div>
+<!--transaction confirmation-->
+<input type="checkbox" id="transaction-confirm-toggle">
+<div class="transaction-confirm-overlay">
+    <label for="transaction-confirm-toggle" class="overlay-close"></label>
+    <div class="confirmation-dialog">
+        <h3>Confirm Transaction Deletion</h3>
+        <p>Are you sure you want to delete this transaction? This action cannot be undone.</p>
+        <div class="confirmation-buttons">
+            <button class="confirm-btn" id="transaction-confirm-btn">Yes, Delete</button>
+            <button class="cancel-btn" id="transaction-cancel-btn">Cancel</button>
         </div>
     </div>
+</div>
 
+@section Scripts {
 <script>
+window.addEventListener('DOMContentLoaded', function() {
+    // Edit profile logic
     const editButton = document.querySelector('.edit-profile');
     let isEditing = false;
 
@@ -145,46 +167,33 @@
             const lastname = document.getElementById('lastname-input').value.trim();
             const username = document.getElementById('username-input').value.trim();
 
-            const nameConstraint = /^[A-Za-z\s\-]+$/;
+            const nameConstraint = /^[A-Za-z\\s\\-]+$/;
 
             if (!nameConstraint.test(firstname) || !nameConstraint.test(lastname)) {
                 alert("First name and Last name must not contain numbers.");
                 return; // Stop saving and stay in editing mode
             }
 
-            // Update the display with new values
-            document.getElementById('firstname-display').textContent = firstname;
-            document.getElementById('lastname-display').textContent = lastname;
-            document.getElementById('username-display').textContent = username;
+            // Submit the form to update the database
+            document.getElementById('edit-info-form').submit();
+            return; // Do not toggle back to view mode, let the server reload the page
         }
 
-        // Toggle editing state after saving or switching to edit 
-        isEditing = !isEditing;
+        // Toggle to edit mode
+        isEditing = true;
+        document.getElementById('firstname-display').style.display = 'none';
+        document.getElementById('firstname-input').style.display = 'inline';
 
-        document.getElementById('firstname-display').style.display = isEditing ? 'none' : 'inline';
-        document.getElementById('firstname-input').style.display = isEditing ? 'inline' : 'none';
+        document.getElementById('lastname-display').style.display = 'none';
+        document.getElementById('lastname-input').style.display = 'inline';
 
-        document.getElementById('lastname-display').style.display = isEditing ? 'none' : 'inline';
-        document.getElementById('lastname-input').style.display = isEditing ? 'inline' : 'none';
+        document.getElementById('username-display').style.display = 'none';
+        document.getElementById('username-input').style.display = 'inline';
 
-        document.getElementById('username-display').style.display = isEditing ? 'none' : 'inline';
-        document.getElementById('username-input').style.display = isEditing ? 'inline' : 'none';
-
-        editButton.textContent = isEditing ? 'Save' : 'Edit profile';
+        editButton.textContent = 'Save';
     });
 
-    // Account deletion handling
-    const deleteAccountBtn = document.querySelector('.delete-account-btn');
-    const confirmationToggle = document.getElementById('confirmation-toggle');
-
-    if (deleteAccountBtn && confirmationToggle) {
-        deleteAccountBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            confirmationToggle.checked = true;
-        });
-    }
-
-    // Transaction deletion handling
+    // Transaction deletion handling (optional, can be removed if you want Razor-only for this too)
     let rowToDelete = null;
 
     document.querySelector('.history-table').addEventListener('click', (event) => {
@@ -223,17 +232,6 @@
     document.querySelector('.transaction-confirm-overlay .confirmation-dialog').addEventListener('click', (event) => {
         event.stopPropagation();
     });
+});
 </script>
-
-</body>
-<footer class="app-footer"> <!--footer-->
-    <p>Copyright© 2025 PayFair · All rights reserved
-        <span class="footer-nav">
-            <a href="/#aboutSection">About Us |</a>
-            <a href="/#tncSection">Terms and Conditions |</a>
-            <a href="/#privacySection">Privacy Policy |</a>
-            <a href="/#contactSection">Contact Us</a>
-        </span> 
-    </p>
-</footer>
-</html>
+}

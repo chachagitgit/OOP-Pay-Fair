@@ -1,9 +1,9 @@
 @page
+@model OOP_Fair_Fare.Pages.signUpModel
 @{
     ViewData["Title"] = "Sign Up";
     Layout = "_Layout";
 }
-
 @section Styles {
     <link rel="stylesheet" href="/css/log-in.css" />
 }
@@ -12,42 +12,34 @@
     <h1 class="welcome-title">Welcome!</h1>
     <p class="welcome-subtitle">Create your account to get started</p>
 
-    <form id="signupForm">
+    <form id="signupForm" method="post">
         <div class="form-group">
-            <input type="text" class="form-input-name" placeholder="First Name" required>
-            <input type="text" class="form-input-name" placeholder="Last Name" required>
+            <input type="text" class="form-input-name" name="Input.FirstName" placeholder="First Name" required>
+            <input type="text" class="form-input-name" name="Input.LastName" placeholder="Last Name" required>
             <div class="error-message">Please enter your name</div>
         </div>
-
         <div class="form-group">
-            <input type="text" class="form-input" placeholder="Username" required>
+            <input type="text" class="form-input" name="Input.Username" placeholder="Username" required>
             <div class="error-message">Please enter your username</div>
         </div>
-
         <div class="form-group">
-            <input type="email" 
-                   id="emailInput"
-                   class="form-input" 
-                   placeholder="Email" 
-                   required 
-                   pattern="^[a-zA-Z0-9._%+-]+@@gmail\.com"
-                   title="Please enter a valid Gmail address (example@gmail.com)">
+            <input type="email" id="emailInput" class="form-input" name="Input.Email" placeholder="Email" required pattern="^[a-zA-Z0-9._%+-]+@@gmail\.com" title="Please enter a valid Gmail address (example@gmail.com)">
             <div class="error-message" id="emailError">Please enter a valid Gmail address</div>
         </div>
-
         <div class="form-group">
-            <input type="password" class="form-input" id="password" placeholder="Password" name="password" required minlength="6">
+            <input type="password" class="form-input" name="Input.Password" id="password" placeholder="Password" required minlength="6">
             <div class="error-message">Password must be at least 6 characters long</div>
         </div>
-
         <div class="form-group">
-            <input type="password" class="form-input" id="confirmPassword" placeholder="Confirm Password" required>
+            <input type="password" class="form-input" name="Input.ConfirmPassword" id="confirmPassword" placeholder="Confirm Password" required>
             <div class="error-message" id="confirmError">Passwords do not match</div>
         </div>
-
         <div class="login-btn-wrapper">
             <button type="submit" class="login-btn">Sign Up</button>
         </div>
+        @if (!string.IsNullOrEmpty(Model?.ErrorMessage)) {
+            <div class="error-message">@Model.ErrorMessage</div>
+        }
     </form>
 
     <div class="login-section">
@@ -57,9 +49,7 @@
 
 @section Scripts {
 <script>
-    //This waits until the entire HTML document above has loaded before running the script. To ensure that all DOM elements (like your form and input fields) are ready
     document.addEventListener('DOMContentLoaded', function () {  
-        //grab references to the form and input elements  
         const form = document.getElementById('signupForm');
         const emailInput = document.getElementById('emailInput');
         const emailError = document.getElementById('emailError');
@@ -68,63 +58,55 @@
         const confirmError = document.getElementById('confirmError');
 
         function validateGmail(email) {
-             const gmailPattern = /^[a-zA-Z0-9._%+-]+@@gmail\.com$/;  //CUSTOM REGEX TO MAKE SURE THAT ENTERED EMAIL ENDS WITH @@GMAIL.COM
-            return gmailPattern.test(email); //return true if valid
+            const gmailPattern = /^[a-zA-Z0-9._%+-]+@@gmail\.com$/;
+            return gmailPattern.test(email);
         }
 
         emailInput.addEventListener('input', function () {
-            if (!validateGmail(this.value.trim())) { //WILL SEND VALUE TO THE FUNCTION ABOVE, THEN IF FALSE,- ERROR MESSAGE WILL APPEAR
+            if (!validateGmail(this.value.trim())) {
                 this.setCustomValidity('Please enter a valid Gmail address');
                 emailError.style.display = 'block';
             } else {
                 this.setCustomValidity('');
-                emailError.style.display = 'none'; //HIDE THE ERROR MESSAGE IF EMAIL IS VALID
+                emailError.style.display = 'none';
             }
         });
-        //AS YOU TYPE THE INPUT IT VALIDATES NA AGAD
         confirmPassword.addEventListener('input', function () {
-            if (password.value === confirmPassword.value) { //IF MATCH,- NO ERROR MESSAGE
+            if (password.value === confirmPassword.value) {
                 confirmError.style.display = 'none';
                 confirmPassword.setCustomValidity('');
             } else {
-                confirmError.style.display = 'block'; //IF NOT MATCH, WITH ERROR MESSAGE
+                confirmError.style.display = 'block';
                 confirmPassword.setCustomValidity('Passwords do not match');
             }
         });
 
-        form.addEventListener('submit', function (e) { //VALIDATES THE FORM WHEN SUBMIT BUTTON IS CLICKED
+        form.addEventListener('submit', function (e) {
             let valid = true;
-
-            // Email validation
             if (!validateGmail(emailInput.value.trim())) {
                 emailInput.setCustomValidity('Invalid Gmail');
                 emailError.style.display = 'block';
-                emailInput.focus(); //BRING THE USER CURSOR HERE IF INVALID
+                emailInput.focus();
                 valid = false;
             } else {
                 emailInput.setCustomValidity('');
                 emailError.style.display = 'none';
             }
-
-            //  CHECK IF     PASSWORD MATCH 
             if (password.value !== confirmPassword.value) {
                 confirmError.style.display = 'block';
                 confirmPassword.setCustomValidity('Passwords do not match');
-                confirmPassword.reportValidity();  //CLEARS INVALID INPUT
-                confirmPassword.focus(); //BRING THE USER CURSOR HERE IF INVALID
+                confirmPassword.reportValidity();
+                confirmPassword.focus();
                 valid = false;
             } else {
                 confirmError.style.display = 'none';
                 confirmPassword.setCustomValidity('');
-                confirmPassword.reportValidity(); // CLEARS INVALID INPUT
+                confirmPassword.reportValidity();
             }
-
             if (!valid) {
-                e.preventDefault(); //  Prevent form submission on validation error
-            } else {
                 e.preventDefault();
-                window.location.href = '/log-in';
             }
+            // else: allow form to submit to server
         });
     });
 </script>
