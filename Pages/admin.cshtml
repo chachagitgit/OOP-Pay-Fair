@@ -1,0 +1,165 @@
+@page
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Admin";
+    Layout = "_Layout";
+}
+@section Styles{
+    <link rel="stylesheet" href="~/css/admin.css" />
+}
+
+<div class="header-card">
+        <div class="logo"></div>
+
+        <div class="profile-section">
+            <!-- Left: Avatar and Edit Button -->
+            <div class="profile-left">
+                <div class="admin-title">ADMINISTRATOR</div>
+                <div class="profile-avatar"></div>
+                <div class="button-container">
+                    <button class="btn btn-logout">Log Out</button>
+                </div>
+            </div>
+
+            <!-- Right: Info -->
+            <div class="admin-info">
+                <div class="form-group">
+                    <div class="form-field">
+                        <label>First Name</label>
+                        <input type="text" id="firstName" value="Charlene" disabled>
+                    </div>
+                    <div class="form-field">
+                        <label>Last Name</label>
+                        <input type="text" id="lastName" value="Charlene" disabled>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-field full-width">
+                        <label>Username</label>
+                        <input type="text" id="username" value="urcharlene" disabled>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-field full-width">
+                        <label>Email</label>
+                        <input type="email" id="email" value="charlenecaramoan@gmail.com" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fare-section">
+            <div class="fare-tabs">
+                <div class="fare-header vehicle-header">Vehicle Type</div>
+                    <div class="fare-header fare-values">
+                        <div class="fare-header fare-values">
+                            <div>Base Fare <span class="info-icon" title="The minimum charge to the commuter for a ride">ⓘ</span></div>
+                            <div>Per Kilometer <span class="info-icon" title="The base distance covered by the base fare">ⓘ</span></div>
+                            <div>Additional Fare <span class="info-icon" title="The extra charge per kilometer after the base distance is exceeded">ⓘ</span></div>
+                        </div>
+                    </div>
+                <div style="width: 80px;"></div> <!-- Spacer for edit button column 100-->
+            </div>
+            
+            <div class="fare-content">
+                <div class="vehicle-row">
+                    <div class="vehicle-icon bus-airconditioned"></div>
+                    <div class="vehicle-name">Bus<br>Airconditioned</div>
+                    <div class="fare-inputs">
+                        <div class="fare-input">
+                            <input type="number" value="10.10" disabled data-vehicle="bus-ac" data-type="base">
+                        </div>
+                        <div class="fare-input">
+                            <input type="number" value="10.10" disabled data-vehicle="bus-ac" data-type="km">
+                        </div>
+                        <div class="fare-input">
+                            <input type="number" value="10.10" disabled data-vehicle="bus-ac" data-type="additional">
+                        </div>
+                    </div>
+                    <button class="edit-btn" onclick="toggleFareEdit(this)">Edit Fare</button>
+                </div>
+                
+                <div class="vehicle-row">
+                    <div class="vehicle-icon bus-regular"></div>
+                    <div class="vehicle-name">Bus<br>Regular</div>
+                    <div class="fare-inputs">
+                        <div class="fare-input">
+                            <input type="number" value="10.10" disabled data-vehicle="bus-regular" data-type="base">
+                        </div>
+                        <div class="fare-input">
+                            <input type="number" value="10.10" disabled data-vehicle="bus-regular" data-type="km">
+                        </div>
+                        <div class="fare-input">
+                            <input type="number" value="10.10" disabled data-vehicle="bus-regular" data-type="additional">
+                        </div>
+                    </div>
+                    <button class="edit-btn" onclick="toggleFareEdit(this)">Edit Fare</button>
+                </div>
+                
+                <div class="vehicle-row">
+                    <div class="vehicle-icon jeepney-traditional"></div>
+                    <div class="vehicle-name">Traditional<br>Jeepney</div>
+                    <div class="fare-inputs">
+                        <div class="fare-input">
+                            <input type="number" value="10.10" disabled data-vehicle="jeepney-traditional" data-type="base">
+                        </div>
+                        <div class="fare-input">
+                            <input type="number" value="10.10" disabled data-vehicle="jeepney-traditional" data-type="km">
+                        </div>
+                        <div class="fare-input">
+                            <input type="number" value="10.10" disabled data-vehicle="jeepney-traditional" data-type="additional">
+                        </div>
+                    </div>
+                    <button class="edit-btn" onclick="toggleFareEdit(this)">Edit Fare</button>
+                </div>
+                
+                <div class="vehicle-row">
+                    <div class="vehicle-icon jeepney-e"></div>
+                    <div class="vehicle-name">E-Jeepney</div>
+                    <div class="fare-inputs">
+                        <div class="fare-input">
+                            <input type="number" value="10.10" disabled data-vehicle="jeepney-e" data-type="base">
+                        </div>
+                        <div class="fare-input">
+                            <input type="number" value="10.10" disabled data-vehicle="jeepney-e" data-type="km">
+                        </div>
+                        <div class="fare-input">
+                            <input type="number" value="10.10" disabled data-vehicle="jeepney-e" data-type="additional">
+                        </div>
+                    </div>
+                    <button class="edit-btn" onclick="toggleFareEdit(this)">Edit Fare</button>
+                </div>
+            </div>
+        </div>
+
+@section Scripts{
+    <script>
+        function toggleFareEdit(button) {
+                const row = button.closest('.vehicle-row');
+                const inputs = row.querySelectorAll('.fare-inputs input');
+                
+                if (button.textContent === 'Edit Fare') {
+                    // Enable editing
+                    inputs.forEach(input => {
+                        input.disabled = false;
+                    });
+                    button.textContent = 'Save Fare';
+                    button.style.background = '#f59e0b';
+                } else {
+                    // Save and disable editing
+                    inputs.forEach(input => {
+                        input.disabled = true;
+                    });
+                    button.textContent = 'Edit Fare';
+                    button.style.background = '#10b981';
+                    
+                    // Here you would typically save the data to a server
+                    console.log('Fare saved!');
+                }
+            }
+    </script>
+}
