@@ -190,6 +190,10 @@
                             <div class="section">
                                 <div class="section-title">Breakdown</div>
                                 <div class="breakdown-item">
+                                    <span class="item-label">Vehicle</span>
+                                    <span class="item-value" id="vehicle-options">XXXX</span>
+                                </div>
+                                <div class="breakdown-item">
                                     <span class="item-label">Regular fare</span>
                                     <span class="item-value" id="baseFare">XXXX</span>
                                 </div>
@@ -787,12 +791,24 @@
                 document.getElementById("fareAmount").innerText = "Error";
                 return;
             }
+            // Vehicle mapping based on the values in your HTML
+            const vehicleMapping = {
+                '4': 'Traditional Jeepney',
+                '1': 'Airconditioned Bus', 
+                '2': 'Ordinary Bus',
+                '3': 'Modern E-Jeepney'
+            };
+             // Get the selected vehicle type
+            const selectedVehicle = document.querySelector('input[name="vehicle"]:checked');
+            const vehicleText = selectedVehicle ? vehicleMapping[selectedVehicle.value] || 'Unknown' : 'Unknown';
+    
             document.getElementById("fareAmount").innerText = `₱ ${fareInfo.totalFare.toFixed(2)}`;
             document.getElementById("baseFare").innerText = `₱ ${fareInfo.baseFare.toFixed(2)}`;
             document.getElementById("appliedDiscount").innerText = `₱ ${fareInfo.discountAmount.toFixed(2)}`;
             document.getElementById("distance").innerText = `${distance.toFixed(2)} km`;
             document.getElementById("totalFare").innerText = `₱ ${fareInfo.totalFare.toFixed(2)}`;
             document.getElementById("fareLocation").innerText = `${originName} → ${destinationName}`;
+            document.getElementById("vehicle-options").innerText = vehicleText;
         }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJWH0VLI60CGZNcXQQbFWrLUDIfG3z3G0&libraries=places&callback=initMap"></script>
