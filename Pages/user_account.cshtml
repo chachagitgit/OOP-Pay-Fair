@@ -126,7 +126,7 @@
                     <th>Applied Discount</th>
                     <th>Distance</th>
                     <th>Total Estimated Fare</th>
-                    <th></th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -137,11 +137,15 @@
                     <tr>
                         <td>@route.StartLocation</td>
                         <td>@route.Destination</td>
+                        <td>@route.Vehicle</td>
+                        <td>₱@route.RegularFare.ToString("F2")</td>
+                        <td>₱@route.AppliedDiscount.ToString("F2")</td>
+                        <td>@route.Distance.ToString("F2") km</td>
                         <td>₱@route.EstimatedFare.ToString("F2")</td>
                         <td>
-                            <form method="post" asp-page-handler="DeleteRoute">
+                            <form method="post" asp-page-handler="DeleteRoute" style="display:inline;">
                                 <input type="hidden" name="RouteId" value="@route.Id" />
-                                <button class="delete-btn" aria-label="Delete transaction"><i class="fas fa-times"></i></button>
+                                <button class="delete-btn" aria-label="Delete transaction" onclick="return confirm('Are you sure you want to delete this route?');"><i class="fas fa-times"></i></button>
                             </form>
                         </td>
                     </tr>
@@ -257,46 +261,6 @@
                 alert('Password would be changed successfully! (UI only - no backend logic)');
                 passwordModal.style.display = 'none';
                 passwordForm.reset();
-            });
-
-            // Transaction deletion handling (optional, can be removed if you want Razor-only for this too)
-            let rowToDelete = null;
-
-            document.querySelector('.history-table').addEventListener('click', (event) => {
-                const deleteBtn = event.target.closest('.delete-btn');
-                if (deleteBtn) {
-                    event.preventDefault();
-                    // Store reference to the row to be deleted
-                    rowToDelete = deleteBtn.closest('tr');
-                    // Show the confirmation dialog
-                    document.getElementById('transaction-confirm-toggle').checked = true;
-                }
-            });
-
-            // Confirm transaction deletion
-            document.getElementById('transaction-confirm-btn').addEventListener('click', () => {
-                if (rowToDelete) {
-                    rowToDelete.remove();
-                    rowToDelete = null;
-                    document.getElementById('transaction-confirm-toggle').checked = false;
-                }
-            });
-
-            // Cancel transaction deletion
-            document.getElementById('transaction-cancel-btn').addEventListener('click', () => {
-                document.getElementById('transaction-confirm-toggle').checked = false;
-                rowToDelete = null;
-            });
-
-            // Close transaction confirmation dialog when clicking outside
-            document.querySelector('.transaction-confirm-overlay .overlay-close').addEventListener('click', () => {
-                document.getElementById('transaction-confirm-toggle').checked = false;
-                rowToDelete = null;
-            });
-
-            // Prevent clicks on the dialog from propagating to the overlay-close
-            document.querySelector('.transaction-confirm-overlay .confirmation-dialog').addEventListener('click', (event) => {
-                event.stopPropagation();
             });
         });
         </script>
