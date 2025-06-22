@@ -5,7 +5,7 @@
     Layout = "_Layout";
 }
 @section Styles {
-    <link rel="stylesheet" href="/css/log-in.css" />
+    <link rel="stylesheet" href="/css/log-in.css" />\
 }
 
 <div class="login-container">
@@ -28,7 +28,9 @@
             <div class="error-message">@Model.ErrorMessage</div>
         }
     </form>
-    
+    <div class="no-user">
+        <a href="/ffDashboard" class="dashboard-link">Calculate Fare</a><span> without logging in</span>
+    </div>
     <div class="signup-section">
         Don't have an account yet? <a href="/signUp" class="signup-link">Sign Up here!</a>
     </div>

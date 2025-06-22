@@ -94,18 +94,20 @@ body {
     text-decoration: none;
     font-family: 'Poppins', sans-serif;
     color: #6b7280;
+    margin-left: 15px;
+    font-size: 14px;
 }
-.forgot-pass-bth:hover{
+.forgot-pass-btn:hover{
     text-decoration: underline;
-}
-
+    color: #1e40af;
+    transition: all 0.3s ease;
+}     
 .login-btn-wrapper {
     display: flex;
     justify-content: center;
     width: 100%;
     padding-top: 25px;
 }
-
 .login-btn {
     width: 200px;
     height: 45px;
@@ -129,7 +131,6 @@ body {
 .login-btn:active {
     transform: translateY(0);
 }
-
 .signup-section {
     padding-top: 30px;
     padding-left: 0px;
@@ -145,17 +146,43 @@ body {
     color: #6b7280;
     font-size: 0.95rem;
 }
-
+.no-user {
+    margin-top: 30px;
+    margin-right: 50px;
+} 
+/*dashboard link layout */
+.dashboard-link {
+    color: #6b7280;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+.dashboard-link:hover {
+    color: #1e40af;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+/* Text following dashboard link */
+.no-user span {
+    color: #6b7280;
+    font-size: 0.95rem;
+}
 .signup-link {
     color: #06b6d4;
     text-decoration: none;
     font-weight: 500;
     transition: all 0.3s ease;
 }
-
 .signup-link:hover {
     color: #0891b2;
     text-decoration: underline;
+}
+.signup-section {
+    padding-left: 0px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.95rem;
 }
 
 /* Error message styling - hidden by default */
