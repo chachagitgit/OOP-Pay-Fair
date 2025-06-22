@@ -83,12 +83,12 @@
             background-color: #1976d2;
             color: #fff;
             border: none;
-            border-radius: 4px;
-            padding: 8px 18px;
-            font-size: 15px;
+            border-radius: 3px;
+            padding: 8px 12px;
+            font-size: 12px;
             font-family: "Poppins", sans-serif;
             font-weight: 600;
-            margin: 10px 0;
+            margin: 8px 0;
             cursor: pointer;
             box-shadow: 0 2px 6px rgba(10,36,99,0.08);
             transition: background 0.2s, color 0.2s;
@@ -158,7 +158,7 @@
                                 <input type="text" id="destinationInput" class="main-input" placeholder="Destination" aria-label="Destination" autocomplete="off">
                                 <label for="dropdown2" class="dropdown-btn"><i class="fas fa-chevron-down"></i></label>
                                 <div class="dropdown-menu" id="destinationDropdown"></div>
-                            </div>
+                            </div>  
                         </div>
                     </div>
                     <!-- Clear Locations button -->
@@ -195,13 +195,13 @@
                                 </div>
                                 <div class="section">
                                     <div class="section-title">Location</div>
-                                    <input type="text" id="fareLocation" name="RouteOrigin" value="" readonly style="border:none;background:transparent;width:100%;" />
-                                    <input type="text" id="fareDestinationInput" name="RouteDestination" value="" readonly style="border:none;background:transparent;width:100%;margin-top:5px;" />
+                                    <input type="text" class="origin" id="fareLocation" name="RouteOrigin" value="" readonly style="border:none;background:transparent;width:100%;" />
+                                    <input type="text" class="destination" id="fareDestinationInput" name="RouteDestination" value="" readonly style="border:none;background:transparent;width:100%;margin-top:5px;" />
                                 </div>
                                 <div class="section">
                                     <div class="section-title">Breakdown</div>
                                     <div class="breakdown-item">
-                                        <span class="item-label">Vehicle: </span>
+                                        <span class="item-label">Vehicle:  </span>
                                         <input type="text" class="item-value" id="vehicle-options" name="RouteVehicle" value="" readonly style="border:none;background:transparent;" />
                                     </div>
                                     <div class="breakdown-item">
