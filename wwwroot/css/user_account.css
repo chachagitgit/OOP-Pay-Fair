@@ -291,10 +291,10 @@ body {
     display: inline-block;
     z-index: 100;
 }
-#dropdown-toggle {
+#dropdown-toggle { /*defaulf for dropdown*/
     display: none;
 }
-.dropdown-label {
+.dropdown-label { 
     background: none;
     border: none;
     color: rgba(30, 58, 138, 0.7);
@@ -311,7 +311,7 @@ body {
     color: rgba(30, 58, 138, 0.9);
     font-weight: 600;
 }
-.dropdown-container {
+.dropdown-container { /*advanced setting dropdown container for change pass and delete accs*/
     position: absolute;
     top: 100%;
     background: rgba(255, 255, 255, 0.95);
@@ -330,7 +330,7 @@ body {
     transform: translateY(-10px);
     transition: all 0.3s ease;
 }
-#dropdown-toggle:checked ~ .dropdown-container {
+#dropdown-toggle:checked ~ .dropdown-container { /*to open the dropdown*/
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -338,10 +338,10 @@ body {
 .password-form-group {
     margin-bottom: 1rem; text-align: left;
 }
-.password-form-group label {
+.password-form-group label { /*textbox labels for password*/
     display: block; margin-bottom: 0.5rem; font-weight: 500; color: #1e3a8a;
 }
-.password-form-group input {
+.password-form-group input { /*input password textbox layout*/
     width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; border-radius: 15px;
 }
 .password-form-group input:focus {
@@ -349,6 +349,29 @@ body {
 }
 .change-password-btn {
     background: #007bff; color: #1e3a8a;border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; margin-bottom: 0.5rem; display: block; width: 100%;
+}
+.error-message {/* Error message styles */
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: none;
+}
+/* show error message invalid input in password fields*/
+#newPassword:not(:placeholder-shown) + .password-form-group #confirmPassword:not(:placeholder-shown):not(:focus):invalid ~ .error-message {
+    display: block;
+}
+/* invalid input field */
+#newPassword:not(:placeholder-shown) + .password-form-group #confirmPassword:not(:placeholder-shown):not(:focus):invalid {
+    border-color: red;
+}
+#confirmPassword:valid {/* valid input field */
+    border-color: green;
+}
+#confirmPassword {/*default input layout*/
+    border-color: #ddd;
+}
+#confirmPassword:focus {
+    border-color: #1e3a8a;
 }
 .popup-dialog h3 {color: #1e3a8a; margin-top: 0; margin-bottom: 2rem; }
 .change-password-btn,
@@ -382,12 +405,12 @@ body {
 .delete-account-btn:hover, .change-password-btn:hover {
     font-weight: 600;
 }
-/* Confirmation Dialog Styles */
+/* Confirmation Dialog*/
 #confirmation-toggle {
     display: none;
 }
-.confirmation-overlay {
-    position: fixed;
+.confirmation-overlay {/*for deleting*/
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
@@ -399,8 +422,8 @@ body {
     z-index: 2000;
     backdrop-filter: blur(5px);
 }
-#confirmation-toggle:checked + .confirmation-overlay {
-            display: flex;
+#confirmation-toggle:checked + .confirmation-overlay { 
+    display: flex;
 }
 .confirmation-dialog {
     background: white;
@@ -426,12 +449,12 @@ body {
     color: #64748b;
     line-height: 1.5;
 }
-.confirmation-buttons {
+.confirmation-buttons { /*for confim and cancel button in confirmation dialog for delete*/
     display: flex;
     gap: 15px;
     justify-content: center;
 }
-.confirm-btn, .cancel-btn {
+.confirm-btn, .cancel-btn { /*confimation dialog btns*/
     padding: 10px 20px;
     border: none;
     border-radius: 8px;
@@ -459,7 +482,7 @@ body {
     transform: translateY(-2px);
 }
 /* Close dialog when clicking outside */
-.overlay-close,.popup-overlay{
+.overlay-close, .popup-overlay{
     position: absolute;
     top: 0;
     left: 0;
