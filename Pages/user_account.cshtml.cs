@@ -36,7 +36,7 @@ namespace OOP_Fair_Fare.Pages
                 return Page();
             }
             IsLoggedIn = true;
-            UserInfo = await _db.Users.FindAsync(userId);
+            UserInfo = await _db.Users.FirstOrDefaultAsync(u => u.Id == userId && !u.IsDeleted);
             if (UserInfo == null)
             {
                 IsLoggedIn = false;
@@ -56,7 +56,7 @@ namespace OOP_Fair_Fare.Pages
             {
                 return RedirectToPage("/log-in");
             }
-            var user = await _db.Users.FindAsync(userId);
+            var user = await _db.Users.FirstOrDefaultAsync(u => u.Id == userId && !u.IsDeleted);
             if (user == null)
             {
                 return RedirectToPage("/log-in");
@@ -101,7 +101,7 @@ namespace OOP_Fair_Fare.Pages
                 return Page();
             }
 
-            // Step 2: Actually delete the account
+            // Step 2: soft delete the account
             if (!string.IsNullOrEmpty(confirmDelete))
             {
                 var userId = HttpContext.Session.GetInt32("UserId");
@@ -114,7 +114,7 @@ namespace OOP_Fair_Fare.Pages
                     if (user != null)
                     {
                         _db.SavedRoutes.RemoveRange(user.SavedRoutes);
-                        _db.Users.Remove(user);
+                        user.IsDeleted = true; // Soft delete
                         await _db.SaveChangesAsync();
                     }
                 }

@@ -35,8 +35,10 @@ namespace OOP_Fair_Fare.Pages
                 return Page();
             }
 
-            var user = await _db.Users.FirstOrDefaultAsync(u =>
-                u.Email == Input.EmailOrUsername || u.Username == Input.EmailOrUsername);
+            var user = await _db.Users
+                .Where(u => !u.IsDeleted)
+                .FirstOrDefaultAsync(u =>
+                    u.Email == Input.EmailOrUsername || u.Username == Input.EmailOrUsername);
 
             if (user == null)
             {

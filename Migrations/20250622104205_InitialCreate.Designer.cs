@@ -11,7 +11,7 @@ using OOP_Fair_Fare.Models;
 namespace OOP_Fair_Fare.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250622094700_InitialCreate")]
+    [Migration("20250622104205_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -37,6 +37,9 @@ namespace OOP_Fair_Fare.Migrations
                     b.Property<string>("HashedPassword")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("LastName")
                         .IsRequired()
