@@ -8,7 +8,6 @@ namespace OOP_Fair_Fare.Models
         public required string Username { get; set; }
         public required string Email { get; set; }
         public required string HashedPassword { get; set; }
-        public int Passwordkey { get; set; }  // can be used for changing password later
         public ICollection<SavedRoute> SavedRoutes { get; set; }
     }
 }

@@ -85,39 +85,45 @@ namespace OOP_Fair_Fare.Pages
             }
             return RedirectToPage();
         }
+        
+        public IActionResult OnPostLogout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToPage("/log-in");
+        }
 
             public async Task<IActionResult> OnPostDeleteAccountAsync(string showConfirm, string confirmDelete)
+        {
+            // Step 1: Show confirmation dialog
+            if (!string.IsNullOrEmpty(showConfirm))
             {
-                // Step 1: Show confirmation dialog
-                if (!string.IsNullOrEmpty(showConfirm))
-                {
-                    TempData["ShowDeleteConfirm"] = true;
-                    return Page();
-                }
-            
-                // Step 2: Actually delete the account
-                if (!string.IsNullOrEmpty(confirmDelete))
-                {
-                    var userId = HttpContext.Session.GetInt32("UserId");
-                    if (userId != null)
-                    {
-                        var user = await _db.Users
-                            .Include(u => u.SavedRoutes)
-                            .FirstOrDefaultAsync(u => u.Id == userId.Value);
-            
-                        if (user != null)
-                        {
-                            _db.SavedRoutes.RemoveRange(user.SavedRoutes);
-                            _db.Users.Remove(user);
-                            await _db.SaveChangesAsync();
-                        }
-                    }
-                    HttpContext.Session.Clear();
-                    return RedirectToPage("/Index");
-                }
-            
-                // Fallback: just reload the page
+                TempData["ShowDeleteConfirm"] = true;
                 return Page();
             }
+
+            // Step 2: Actually delete the account
+            if (!string.IsNullOrEmpty(confirmDelete))
+            {
+                var userId = HttpContext.Session.GetInt32("UserId");
+                if (userId != null)
+                {
+                    var user = await _db.Users
+                        .Include(u => u.SavedRoutes)
+                        .FirstOrDefaultAsync(u => u.Id == userId.Value);
+
+                    if (user != null)
+                    {
+                        _db.SavedRoutes.RemoveRange(user.SavedRoutes);
+                        _db.Users.Remove(user);
+                        await _db.SaveChangesAsync();
+                    }
+                }
+                HttpContext.Session.Clear();
+                return RedirectToPage("/Index");
+            }
+
+            // Fallback: just reload the page
+            return Page();
+        }
     }
 }

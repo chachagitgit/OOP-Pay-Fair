@@ -16,43 +16,44 @@ namespace OOP_Fair_Fare.Pages
 
         [BindProperty]
         public InputModel Input { get; set; } = new InputModel();
-        public string ErrorMessage { get; set; }
 
         public class InputModel
         {
             [Required]
-            public string EmailOrUsername { get; set; }
+            public string? EmailOrUsername { get; set; }
             [Required]
-            public string Password { get; set; }
+            public string? Password { get; set; }
         }
 
         public void OnGet() { }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            ErrorMessage = "Handler reached!";
             if (!ModelState.IsValid)
             {
-                ErrorMessage = "Please fill in all fields.";
+                ModelState.AddModelError(string.Empty, "Please fill in all fields.");
                 return Page();
             }
-        
-            string hashed = HashPassword(Input.Password);
-        
+
             var user = await _db.Users.FirstOrDefaultAsync(u =>
-                (u.Email == Input.EmailOrUsername || u.Username == Input.EmailOrUsername)
-                && u.HashedPassword == hashed);
-        
+                u.Email == Input.EmailOrUsername || u.Username == Input.EmailOrUsername);
+
             if (user == null)
             {
-                ErrorMessage = "Invalid credentials.";
+                ModelState.AddModelError(string.Empty, "Account not found.");
                 return Page();
             }
-        
+
+            string hashed = HashPassword(Input.Password);
+            if (user.HashedPassword != hashed)
+            {
+                ModelState.AddModelError(string.Empty, "Wrong Password, try again.");
+                return Page();
+            }
+
             // Set session
             HttpContext.Session.SetInt32("UserId", user.Id);
             HttpContext.Session.SetString("Username", user.Username);
-            ErrorMessage = "Redirecting...";
             return RedirectToPage("/Index");
         }
 

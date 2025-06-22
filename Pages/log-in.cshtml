@@ -5,7 +5,7 @@
     Layout = "_Layout";
 }
 @section Styles {
-    <link rel="stylesheet" href="/css/log-in.css" />\
+    <link rel="stylesheet" href="/css/log-in.css" />
 }
 
 <div class="login-container">
@@ -21,8 +21,12 @@
         <div class="login-btn-wrapper">
             <button type="submit" class="login-btn">Log in</button>
         </div>
-        @if (!string.IsNullOrEmpty(Model?.ErrorMessage)) {
-            <div class="error-message">@Model.ErrorMessage</div>
+        @* Error messages appear just below the login button as plain text *@
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <div style="color: #d32f2f; font-weight: 600; text-align: center; font-size: 1rem; margin: 0 0 10px 0;">
+                @error.ErrorMessage
+            </div>
         }
         <div class="forgot-pass-btn-wrapper">
             <a href="/forgotPass" class="forgot-pass-btn" style="text-decoration: none;">Forgot Password?</a>

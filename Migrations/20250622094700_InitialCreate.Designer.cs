@@ -11,7 +11,7 @@ using OOP_Fair_Fare.Models;
 namespace OOP_Fair_Fare.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250622084806_InitialCreate")]
+    [Migration("20250622094700_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -41,9 +41,6 @@ namespace OOP_Fair_Fare.Migrations
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("Passwordkey")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Username")
                         .IsRequired()

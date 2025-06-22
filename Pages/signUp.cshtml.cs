@@ -36,8 +36,6 @@ namespace OOP_Fair_Fare.Pages
             [Required]
             [Compare("Password")]
             public string ConfirmPassword { get; set; }
-            [Required]
-            public int Passwordkey { get; set; } //can be used for changing password later
         }
 
         public void OnGet() { }
@@ -62,7 +60,7 @@ namespace OOP_Fair_Fare.Pages
                     LastName = Input.LastName,
                     Username = Input.Username,
                     Email = Input.Email,
-                    HashedPassword = HashPassword(Input.Password)
+                    HashedPassword = HashPassword(Input.Password),
                 };
                 _db.Users.Add(user);
                 await _db.SaveChangesAsync();

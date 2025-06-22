@@ -21,8 +21,7 @@ namespace OOP_Fair_Fare.Migrations
                     LastName = table.Column<string>(type: "TEXT", nullable: false),
                     Username = table.Column<string>(type: "TEXT", nullable: false),
                     Email = table.Column<string>(type: "TEXT", nullable: false),
-                    HashedPassword = table.Column<string>(type: "TEXT", nullable: false),
-                    Passwordkey = table.Column<int>(type: "INTEGER", nullable: false)
+                    HashedPassword = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
