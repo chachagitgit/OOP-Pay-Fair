@@ -1,3 +1,4 @@
+
 @page
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
@@ -13,7 +14,10 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <div class="forgotPass-container">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="forgotPass.css">
+
+    <div class="forgot-pass-container">
         <h1 class="forgot-pass-hdr">Forgot Password</h1>
 
         <form id="passwordForm" method="post">
@@ -29,8 +33,8 @@
                 <input type="password" class="form-input" name="Input.ConfirmPassword" id="password" placeholder="Confirm Password" required>
                 <div class="error-message" id="confirmError">Passwords do not match</div>
             </div>
-            <div class="button-wrapper">
-                
+            <div class="confirm-button-wrapper">
+                <button type="submit" class="forgot-pass-btn">Confirm</button>
             </div>
         </form>
     </div>

@@ -1,0 +1,125 @@
+body {
+    background-color: white; 
+    background-image: url('/images/logobg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+}
+.forgot-pass-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 700px;
+    padding-top: 120px;
+    gap: 0px;
+    font-family: 'Poppins', sans-serif;
+    justify-content: center; 
+}
+.forgot-pass-hdr {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    text-align: center;
+    padding-left: 0;
+    padding-top: 0; 
+    margin-bottom: 4rem; 
+    padding-bottom: 0;
+}
+.form-group{
+    margin-bottom: 1.3rem;
+    position: relative;
+}
+.form-input{
+    width: 300px;
+    height: 45px;
+    padding: 0 20px; 
+    border: none;
+    background: #1e3a8a;
+    color: white;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    transition: all 0.3s ease;
+}
+.form-input::placeholder{
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+}
+.form-input:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+    background:#1e3a8a;
+    transform: translateY(-2px);
+}
+.confirm-button-wrapper{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 25px;
+}
+.forgot-pass-btn {
+    width: 200px;
+    height: 45px;
+    padding: 0 20px; 
+    background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0 0 3rem 0;
+    font-family: 'Poppins', sans-serif;
+}
+.forgot-pass-btn:hover {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+}
+.forgot-pass-btn:active {
+    transform: translateY(0);
+}
+ /* Error message styling - hidden by default */
+.error-message {
+    display: none;
+    color: white;
+    background: #e74c3c;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-left: 18px;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    width: 300px;
+    font-size: 0.85rem;
+}
+.gmail-invalid {
+    border: 2px solid #ef4444 !important;
+    background: #7c2d12 !important;
+}
+.gmail-valid {
+    border: 2px solid #10b981 !important;
+    background: #065f46 !important;
+}
+/* Show error message only when form has been submitted and is invalid */
+.form-submitted .form-input:invalid + .error-message,
+.form-submitted .form-input-name:invalid + .error-message,
+.gmail-error {
+    display: block;
+}
+/* Error styling only shows after form submission attempt */
+.form-submitted .form-input:invalid,
+.form-submitted .form-input-name:invalid {
+    border: 2px solid #ef4444;
+    background: #7c2d12;
+}
+/* Success styling only shows after form submission attempt */
+.form-submitted .form-input:valid,
+.form-submitted .form-input-name:valid {
+    border: 2px solid #10b981;
+    background: #065f46;
+}
