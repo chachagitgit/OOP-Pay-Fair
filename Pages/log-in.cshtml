@@ -18,15 +18,15 @@
         <div class="form-group">
             <input type="password" class="form-input" name="Input.Password" placeholder="Password" required />
         </div>
-        <div class="forgot-pass-btn-wrapper">
-            <a href="/forgotPass" class="forgot-pass-btn" style="text-decoration: none;">Forgot Password</a>
-        </div>
         <div class="login-btn-wrapper">
             <button type="submit" class="login-btn">Log in</button>
         </div>
         @if (!string.IsNullOrEmpty(Model?.ErrorMessage)) {
             <div class="error-message">@Model.ErrorMessage</div>
         }
+        <div class="forgot-pass-btn-wrapper">
+            <a href="/forgotPass" class="forgot-pass-btn" style="text-decoration: none;">Forgot Password?</a>
+        </div>
     </form>
     <div class="no-user">
         <a href="/ffDashboard" class="dashboard-link">Calculate Fare</a><span> without logging in</span>
