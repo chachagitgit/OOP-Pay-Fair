@@ -1,207 +1,207 @@
 body {
-            background-color: white; 
-            background-image: url('/images/loginbg.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 100vh;
-            margin: 0;
+    background-color: white; 
+    background-image: url('/images/logobg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+}
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 700px;
+    padding-top: 120px;
+    gap: 0px;
+    font-family: Poppins, sans-serif;
+    justify-content: center;
+}
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 700px;
+    padding-top: 50px;
+    gap: 0px;
+    font-family: Poppins, sans-serif;
+    justify-content: center;
+}
+.welcome-title {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    text-align: center;
+    padding-left: 0 ;
+    padding-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.welcome-subtitle {
+    font-size: 1.1rem;
+    color: #6b7280;
+    text-align: center;
+    font-weight: 400;
+    padding-left: 15px;
+}
+.form-group {
+    margin-bottom: 1.3rem;
+    position: relative;
+}
+.form-input {
+    width: 300px;
+    height: 45px;
+    padding: 0 20px; 
+    border: none;
+    background: #1e3a8a;
+    color: white;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    transition: all 0.3s ease;
+}
+.form-input-name {
+    width: 135px;
+    height: 45px;
+    padding: 0 15px; 
+    border: none;
+    background: #1e3a8a;
+    color: white;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    transition: all 0.3s ease;
+    margin-right: 5px;
+}
+
+.form-input-name:last-of-type {
+    margin-right: 0;
+}
+
+.form-input::placeholder, .form-input-name::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+}
+
+.form-input:focus, .form-input-name:focus {
+    background: #1e40af;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+    transform: translateY(-2px);
+}
+.forgot-pass-btn{
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    color: #6b7280;
+}
+.forgot-pass-bth:hover{
+    text-decoration: underline;
+}
+
+.login-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 25px;
+}
+
+.login-btn {
+    width: 200px;
+    height: 45px;
+    padding: 0 20px; 
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 0 3rem 0;
+    font-family: 'Poppins', sans-serif;
+        }
+.login-btn:hover {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+}
+.login-btn:active {
+    transform: translateY(0);
+}
+
+.signup-section {
+    padding-top: 30px;
+    padding-left: 0px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.95rem;
+}
+
+.login-section {
+    padding-top: 5px;
+    padding-left: 0px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.95rem;
+}
+
+.signup-link {
+    color: #06b6d4;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.signup-link:hover {
+    color: #0891b2;
+    text-decoration: underline;
+}
+
+/* Error message styling - hidden by default */
+.error-message {
+    display: none;
+    color: white;
+    background: #e74c3c;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-left: 18px;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    width: 300px;
+    font-size: 0.85rem;
         }
 
-        .login-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-left: 700px;
-            padding-top: 120px;
-            gap: 0px;
-            font-family: Poppins, sans-serif;
-            justify-content: center;
-        }
+/* Custom Gmail validation */
+.gmail-invalid {
+    border: 2px solid #ef4444 !important;
+    background: #7c2d12 !important;
+}
 
-        .signup-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-left: 700px;
-            padding-top: 50px;
-            gap: 0px;
-            font-family: Poppins, sans-serif;
-            justify-content: center;
-        }
+.gmail-valid {
+    border: 2px solid #10b981 !important;
+    background: #065f46 !important;
+}
 
-        .welcome-title {
-            font-size: 4rem;
-            font-weight: 700;
-            color: #1e3a8a;
-            text-align: center;
-            padding-left: 0 ;
-            padding-top: 0;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
+/* Show error message only when form has been submitted and is invalid */
+.form-submitted .form-input:invalid + .error-message,
+.form-submitted .form-input-name:invalid + .error-message,
+.gmail-error {
+    display: block;
+}
 
-        .welcome-subtitle {
-            font-size: 1.1rem;
-            color: #6b7280;
-            text-align: center;
-            font-weight: 400;
-            padding-left: 15px;
-        }
+/* Error styling only shows after form submission attempt */
+.form-submitted .form-input:invalid,
+.form-submitted .form-input-name:invalid {
+    border: 2px solid #ef4444;
+    background: #7c2d12;
+}
 
-        .form-group {
-            margin-bottom: 1.3rem;
-            position: relative;
-        }
-
-        .form-input {
-            width: 300px;
-            height: 45px;
-            padding: 0 20px; 
-            border: none;
-            background: #1e3a8a;
-            color: white;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-family: 'Poppins', sans-serif;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-        .form-input-name {
-            width: 135px;
-            height: 45px;
-            padding: 0 15px; 
-            border: none;
-            background: #1e3a8a;
-            color: white;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-family: 'Poppins', sans-serif;
-            outline: none;
-            transition: all 0.3s ease;
-            margin-right: 5px;
-        }
-
-        .form-input-name:last-of-type {
-            margin-right: 0;
-        }
-
-        .form-input::placeholder, .form-input-name::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 400;
-        }
-
-        .form-input:focus, .form-input-name:focus {
-            background: #1e40af;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .login-btn-wrapper {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            padding-top: 25px;
-        }
-
-        .login-btn {
-            width: 200px;
-            height: 45px;
-            padding: 0 20px; 
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 0 0 3rem 0;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .login-btn:hover {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
-        }
-
-        .login-btn:active {
-            transform: translateY(0);
-        }
-
-        .signup-section {
-            padding-top: 30px;
-            padding-left: 0px;
-            text-align: center;
-            color: #6b7280;
-            font-size: 0.95rem;
-        }
-
-         .login-section {
-            padding-top: 5px;
-            padding-left: 0px;
-            text-align: center;
-            color: #6b7280;
-            font-size: 0.95rem;
-        }
-
-        .signup-link {
-            color: #06b6d4;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .signup-link:hover {
-            color: #0891b2;
-            text-decoration: underline;
-        }
-
-        /* Error message styling - hidden by default */
-        .error-message {
-            display: none;
-            color: white;
-            background: #e74c3c;
-            padding: 5px;
-            text-align: center;
-            border-radius: 5px;
-            margin-top: 5px;
-            margin-left: 18px;
-            margin-bottom: 10px;
-            font-family: 'Poppins', sans-serif;
-            width: 300px;
-            font-size: 0.85rem;
-        }
-
-        /* Custom Gmail validation */
-        .gmail-invalid {
-            border: 2px solid #ef4444 !important;
-            background: #7c2d12 !important;
-        }
-
-        .gmail-valid {
-            border: 2px solid #10b981 !important;
-            background: #065f46 !important;
-        }
-
-        /* Show error message only when form has been submitted and is invalid */
-        .form-submitted .form-input:invalid + .error-message,
-        .form-submitted .form-input-name:invalid + .error-message,
-        .gmail-error {
-            display: block;
-        }
-
-        /* Error styling only shows after form submission attempt */
-        .form-submitted .form-input:invalid,
-        .form-submitted .form-input-name:invalid {
-            border: 2px solid #ef4444;
-            background: #7c2d12;
-        }
-
-        /* Success styling only shows after form submission attempt */
-        .form-submitted .form-input:valid,
-        .form-submitted .form-input-name:valid {
+/* Success styling only shows after form submission attempt */
+.form-submitted .form-input:valid,
+.form-submitted .form-input-name:valid {
             border: 2px solid #10b981;
             background: #065f46;
         }
