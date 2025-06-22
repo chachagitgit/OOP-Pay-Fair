@@ -20,9 +20,17 @@ namespace OOP_Fair_Fare.Models
 
         [Required]
         public string Destination { get; set; }
-
+        [Required]
+        public string Vehicle {get; set; }
+        [Required]
+        public double RegularFare { get; set; }
+        [Required]
+        public double AppliedDiscount { get; set; }
+        [Required]
+        public double Distance { get; set; }
+        [Required]
         public double EstimatedFare { get; set; }
-
+        [Required]
         public DateTime DateSaved { get; set; } = DateTime.Now;
     }
 }

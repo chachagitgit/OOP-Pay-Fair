@@ -1,4 +1,5 @@
 @page
+@model OOP_Fair_Fare.Pages.ffDashboardModel
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
 @{
@@ -95,6 +96,13 @@
         #clearLocationsBtn:hover {
             background-color: #0d47a1;
         }
+        .save-route:disabled {
+            background-color: #e0e0e0 !important;
+            color: #b0b0b0 !important;
+            border: 1px solid #cccccc !important;
+            cursor: not-allowed !important;
+            opacity: 0.7;
+        }
     </style>
 }
 <!-- Hidden inputs for UI control -->
@@ -176,80 +184,67 @@
                     <button class="calculate-fare" onclick="calculateRoute()">Calculate Fare</button>
                 </div>
                 <div class="content_box fare-content">
-                    <div class="fare-card">
-                        <div class="header-section"></div>
-                        <div class="content-section">
-                            <div class="total-fare">
-                                <h2>Total estimated fare:</h2>
-                                <div class="fare-amount" id="fareAmount">₱ XXXX</div>
-                            </div>
-                            <div class="section">
-                                <div class="section-title">Location</div>
-                                <div id="fareLocation"></div>
-                            </div>
-                            <div class="section">
-                                <div class="section-title">Breakdown</div>
-                                <div class="breakdown-item">
-                                    <span class="item-label">Vehicle</span>
-                                    <span class="item-value" id="vehicle-options">XXXX</span>
+                    <form method="post" id="saveRouteForm" autocomplete="off">
+                        @Html.AntiForgeryToken()
+                        <div class="fare-card">
+                            <div class="header-section"></div>
+                            <div class="content-section">
+                                <div class="total-fare">
+                                    <h2>Total estimated fare:</h2>
+                                    <input type="text" class="fare-amount" id="fareAmount" name="RouteFare" value="" readonly style="border:none;background:transparent;font-size:2em;font-weight:bold;" />
                                 </div>
-                                <div class="breakdown-item">
-                                    <span class="item-label">Regular fare</span>
-                                    <span class="item-value" id="baseFare">XXXX</span>
+                                <div class="section">
+                                    <div class="section-title">Location</div>
+                                    <input type="text" id="fareLocation" name="RouteOrigin" value="" readonly style="border:none;background:transparent;width:100%;" />
+                                    <input type="text" id="fareDestinationInput" name="RouteDestination" value="" readonly style="border:none;background:transparent;width:100%;margin-top:5px;" />
                                 </div>
-                                <div class="breakdown-item">
-                                    <span class="item-label">Applied discount</span>
-                                    <span class="item-value" id="appliedDiscount">XXXX</span>
-                                </div>
-                                <div class="breakdown-item">
-                                    <span class="item-label">Distance</span>
-                                    <span class="item-value" id="distance">XXXX</span>
-                                </div>
-                                <div class="breakdown-item total">
-                                    <span class="item-label">Total estimated fare</span>
-                                    <span class="item-value" id="totalFare">XXXX</span>
+                                <div class="section">
+                                    <div class="section-title">Breakdown</div>
+                                    <div class="breakdown-item">
+                                        <span class="item-label">Vehicle: </span>
+                                        <input type="text" class="item-value" id="vehicle-options" name="RouteVehicle" value="" readonly style="border:none;background:transparent;" />
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <span class="item-label">Regular fare: </span>
+                                        <input type="text" class="item-value" id="baseFare" name="RouteRegularFare" value="" readonly style="border:none;background:transparent;" />
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <span class="item-label">Applied discount: </span>
+                                        <input type="text" class="item-value" id="appliedDiscount" name="RouteAppliedDiscount" value="" readonly style="border:none;background:transparent;" />
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <span class="item-label">Distance: </span>
+                                        <input type="text" class="item-value" id="distance" name="RouteDistance" value="" readonly style="border:none;background:transparent;" />
+                                    </div>
+                                    <div class="breakdown-item total">
+                                        <span class="item-label">Total estimated fare: </span>
+                                        <input type="text" class="item-value" id="totalFare" value="" readonly style="border:none;background:transparent;" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <button class="save-route">Save Route</button>
+                        <button type="submit" class="save-route">Save Route</button>
+                    </form>
+                    @if (TempData["SaveRouteResult"] != null)
+                    {
+                        <div class="alert alert-success" role="alert" style="margin: 20px 0; font-size: 1.1em;">@TempData["SaveRouteResult"]</div>
+                    }
+                    <script>
+                        // Ensure form is always submitted as a normal POST
+                        document.getElementById('saveRouteForm').onsubmit = function(e) {
+                            return true;
+                        };
+                    </script>
+                    <div id="saveRouteAlert" class="alert d-none" role="alert"></div>
                 </div>
             </div>
         </div>
     </div>
     <div id="map" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;"></div>
 </div>
-    <div class="notification-dialog" id="saveRouteNotification">
-        <div class="notification-content">
-            <i class="fas fa-check-circle notification-icon"></i>
-            <p class="notification-message">Route saved successfully!</p>
-            <button class="notification-close-btn">OK</button>
-        </div>
-    </div>
+
 <script>
-    // Save Route Button with Notification
-    document.querySelector('.save-route').addEventListener('click', function() {
-        // Show notification
-        const notification = document.getElementById('saveRouteNotification');
-        notification.classList.add('active');
-        
-        // Close notification after 3 seconds automatically
-        setTimeout(() => {
-            notification.classList.remove('active');
-        }, 3000);
-    });
-
-    // Close notification when OK button is clicked
-    document.querySelector('.notification-close-btn').addEventListener('click', function() {
-        document.getElementById('saveRouteNotification').classList.remove('active');
-    });
-
-    // Close notification when clicking outside
-    document.getElementById('saveRouteNotification').addEventListener('click', function(e) {
-        if (e.target === this) {
-            this.classList.remove('active');
-        }
-    });
+    var userLoggedIn = @(userLoggedIn.ToString().ToLower());
     let lastFareInfo = null;
     let lastOrigin = null;
     let lastDestination = null;
@@ -261,46 +256,9 @@
         saveRouteBtn.disabled = !(userLoggedIn && lastFareInfo && lastOrigin && lastDestination);
     }
     
-    // Hook into displayFare to store last fare and enable button
-    const originalDisplayFare = window.displayFare;
-    window.displayFare = function(distance, fareInfo, duration, originName, destinationName) {
-        lastFareInfo = fareInfo;
-        lastOrigin = originName;
-        lastDestination = destinationName;
-        enableSaveRouteIfReady();
-        if (originalDisplayFare) originalDisplayFare(distance, fareInfo, duration, originName, destinationName);
-    };
-    
-    saveRouteBtn.addEventListener('click', function() {
-        if (!userLoggedIn) {
-            alert('You must be logged in to save routes.');
-            return;
-        }
-        if (!lastFareInfo || !lastOrigin || !lastDestination) {
-            alert('Please calculate a fare first.');
-            return;
-        }
-        fetch(window.location.pathname + '?handler=SaveRoute', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                Origin: lastOrigin,
-                Destination: lastDestination,
-                Fare: lastFareInfo.totalFare
-            })
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                const notification = document.getElementById('saveRouteNotification');
-                notification.classList.add('active');
-                setTimeout(() => { notification.classList.remove('active'); }, 3000);
-            } else {
-                alert(data.error || 'Failed to save route.');
-            }
-        })
-        .catch(() => alert('Failed to save route.'));
-    });
+    function updateSaveRouteForm() {
+        // No-op: all form fields are updated directly in displayFare
+    }
 </script>
 
 <div id="locationPopup" class="custom-popup">
@@ -737,8 +695,10 @@
                     const vehicleChoice = parseInt(document.querySelector('input[name="vehicle"]:checked')?.value || '4');
                     const isDiscounted = document.getElementById("discounts").checked;
 
+                    console.log('Calling calculateFare with:', {distanceKm, vehicleChoice, isDiscounted});
                     calculateFare(distanceKm, vehicleChoice, isDiscounted)
                         .then(fareInfo => {
+                            console.log('calculateFare result', fareInfo);
                             if (fareInfo.error) {
                                 alert('Error calculating fare: ' + fareInfo.error);
                                 return;
@@ -749,6 +709,7 @@
                             document.getElementById('tab-fare').checked = true;
                         })
                         .catch(error => {
+                            console.error('calculateFare promise catch:', error);
                             alert('Error calculating fare. Please try again.');
                         });
 
@@ -763,9 +724,9 @@
         }
         function calculateFare(distanceTraveled, vehicleChoice, isDiscounted) {
             const request = {
-                distanceTraveled: distanceTraveled,
-                vehicleChoice: vehicleChoice,
-                isDiscounted: isDiscounted
+                DistanceTraveled: distanceTraveled,
+                VehicleChoice: vehicleChoice,
+                IsDiscounted: isDiscounted
             };
             return fetch('/api/fare/calculate', {
                 method: 'POST',
@@ -774,23 +735,51 @@
                 },
                 body: JSON.stringify(request)
             })
-            .then(response => {
+            .then(async response => {
                 if (!response.ok) {
-                    return response.text().then(text => {
-                        throw new Error(`Failed to calculate fare: ${text}`);
-                    });
+                    const text = await response.text();
+                    console.error('Fare API error:', response.status, text);
+                    throw new Error(`Failed to calculate fare: ${text}`);
                 }
                 return response.json();
             })
             .catch(error => {
+                console.error('calculateFare fetch error:', error);
                 return { error: error.message || "Failed to calculate fare" };
             });
         }
         function displayFare(distance, fareInfo, duration, originName, destinationName) {
-            if (fareInfo.error) {
+            console.log('displayFare called with:', {distance, fareInfo, duration, originName, destinationName});
+            // Only treat as error if fareInfo.error is present AND required properties are missing
+            const hasRequiredFields = fareInfo && typeof fareInfo.baseFare === 'number' && typeof fareInfo.discountAmount === 'number' && typeof fareInfo.totalFare === 'number';
+            if (fareInfo.error && !hasRequiredFields) {
+                // Clear all fare fields and disable Save Route
+                document.getElementById("fareAmount").value = "";
+                document.getElementById("baseFare").value = "";
+                document.getElementById("appliedDiscount").value = "";
+                document.getElementById("distance").value = "";
+                document.getElementById("totalFare").value = "";
+                document.getElementById("fareLocation").value = "";
+                document.getElementById("fareDestinationInput").value = "";
+                document.getElementById("vehicle-options").value = "";
+                saveRouteBtn.disabled = true;
                 document.getElementById("fareAmount").innerText = "Error";
                 return;
             }
+            lastFareInfo = fareInfo;
+            lastFareInfo.distance = distance;
+            lastOrigin = originName;
+            lastDestination = destinationName;
+            enableSaveRouteIfReady();
+            // Set values in readonly input fields for form submission (always 2 decimals)
+            document.getElementById("fareAmount").value = fareInfo.totalFare.toFixed(2);
+            document.getElementById("baseFare").value = fareInfo.baseFare.toFixed(2);
+            document.getElementById("appliedDiscount").value = fareInfo.discountAmount.toFixed(2);
+            document.getElementById("distance").value = distance.toFixed(2);
+            document.getElementById("totalFare").value = fareInfo.totalFare.toFixed(2);
+            document.getElementById("fareLocation").value = originName;
+            document.getElementById("fareDestinationInput").value = destinationName;
+            document.getElementById("vehicle-options").value = (document.querySelector('input[name="vehicle"]:checked')?.nextElementSibling?.innerText?.trim() || '');
             // Vehicle mapping based on the values in your HTML
             const vehicleMapping = {
                 '4': 'Traditional Jeepney',
@@ -798,10 +787,11 @@
                 '2': 'Ordinary Bus',
                 '3': 'Modern E-Jeepney'
             };
-             // Get the selected vehicle type
+            // Get the selected vehicle type
             const selectedVehicle = document.querySelector('input[name="vehicle"]:checked');
-            const vehicleText = selectedVehicle ? vehicleMapping[selectedVehicle.value] || 'Unknown' : 'Unknown';
-    
+            const vehicleText = selectedVehicle ? selectedVehicle.nextElementSibling?.innerText?.trim() || selectedVehicle.value : '';
+
+            // Always show 2 decimals for all fare fields
             document.getElementById("fareAmount").innerText = `₱ ${fareInfo.totalFare.toFixed(2)}`;
             document.getElementById("baseFare").innerText = `₱ ${fareInfo.baseFare.toFixed(2)}`;
             document.getElementById("appliedDiscount").innerText = `₱ ${fareInfo.discountAmount.toFixed(2)}`;
