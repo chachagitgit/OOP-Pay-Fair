@@ -114,8 +114,8 @@
 <div class="container">
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <a href="/index">
-            <img src="/images/logo.png" alt="PayFair Logo" class="sidebar-logo">
+            <a href="@(userLoggedIn ? "/user_account" : "/log-in")">
+                <img src="/images/logo.png" alt="PayFair Logo" class="sidebar-logo">
             </a> 
         </div>
         <div class="sidebar-content">

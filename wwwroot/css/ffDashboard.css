@@ -562,7 +562,7 @@ label #cancel {
     padding: 12px 24px;
     font-size: 14px;
     font-weight: 500;
-    margin: 20px 0 0 20px;
+    margin: 20px 0 20px 20px;
     cursor: pointer;
     transition: all 0.3s ease;
     display: block; /* Makes it take full width of container */
@@ -573,6 +573,14 @@ label #cancel {
     background-color: rgba(30, 58, 138, 1);
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.save-route:disabled {
+    background-color: #e0e7ef;
+    color: #b0b8c9;
+    cursor: not-allowed;
+    opacity: 1;
+    box-shadow: none;
+    transform: none;
 }
 /* Notification Dialog Styles */
 .notification-dialog {
