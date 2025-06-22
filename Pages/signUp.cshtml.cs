@@ -36,6 +36,8 @@ namespace OOP_Fair_Fare.Pages
             [Required]
             [Compare("Password")]
             public string ConfirmPassword { get; set; }
+            [Required]
+            public int Passwordkey { get; set; } //can be used for changing password later
         }
 
         public void OnGet() { }

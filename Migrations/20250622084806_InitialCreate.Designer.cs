@@ -11,7 +11,7 @@ using OOP_Fair_Fare.Models;
 namespace OOP_Fair_Fare.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250620174214_InitialCreate")]
+    [Migration("20250622084806_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -19,6 +19,40 @@ namespace OOP_Fair_Fare.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0-preview.4.24267.1");
+
+            modelBuilder.Entity("OOP_Fair_Fare.Models.AppUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HashedPassword")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Passwordkey")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
 
             modelBuilder.Entity("OOP_Fair_Fare.Models.SavedRoute", b =>
                 {
@@ -50,38 +84,20 @@ namespace OOP_Fair_Fare.Migrations
                     b.ToTable("SavedRoutes");
                 });
 
-            modelBuilder.Entity("OOP_Fair_Fare.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("OOP_Fair_Fare.Models.SavedRoute", b =>
                 {
-                    b.HasOne("OOP_Fair_Fare.Models.User", "User")
-                        .WithMany()
+                    b.HasOne("OOP_Fair_Fare.Models.AppUser", "User")
+                        .WithMany("SavedRoutes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("OOP_Fair_Fare.Models.AppUser", b =>
+                {
+                    b.Navigation("SavedRoutes");
                 });
 #pragma warning restore 612, 618
         }
