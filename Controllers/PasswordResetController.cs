@@ -7,13 +7,28 @@ using System.Text;
 
 namespace OOP_Fair_Fare.Controllers
 {
+    /// <summary>
+    /// Controller that handles the password reset functionality.
+    /// This includes:
+    /// - Initiating password reset requests
+    /// - Sending reset links via email
+    /// - Validating reset tokens
+    /// - Processing password changes
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     public class PasswordResetController : ControllerBase
     {
+        // Database context for user and token management
         private readonly AppDbContext _context;
+        
+        // Service for sending emails
         private readonly IEmailService _emailService;
+        
+        // Configuration for app settings (URLs, etc.)
         private readonly IConfiguration _configuration;
+        
+        // Logger for debugging and monitoring
         private readonly ILogger<PasswordResetController> _logger;
 
         public PasswordResetController(
@@ -26,8 +41,25 @@ namespace OOP_Fair_Fare.Controllers
             _emailService = emailService;
             _configuration = configuration;
             _logger = logger;
-        }
-
+        }        /// <summary>
+        /// Initiates the password reset process for a user.
+        /// The process works as follows:
+        /// 1. Validates that the email exists in the system
+        /// 2. Generates a secure random token
+        /// 3. Saves the token to the database with a 24-hour expiration
+        /// 4. Sends a reset link to the user's email
+        /// 
+        /// Security features:
+        /// - Uses cryptographically secure random tokens
+        /// - Tokens expire after 24 hours
+        /// - One-time use tokens (marked as used after reset)
+        /// - Generic response messages to prevent email enumeration
+        /// </summary>
+        /// <param name="email">The email address of the user requesting password reset</param>
+        /// <returns>
+        /// - Generic success message (even if email not found, for security)
+        /// - Error details if email sending fails
+        /// </returns>
         [HttpPost("request")]
         public async Task<IActionResult> RequestReset([FromForm] string email)
         {
@@ -84,8 +116,26 @@ namespace OOP_Fair_Fare.Controllers
                 _logger.LogError(ex, $"Error processing password reset for user ID: {user.Id}");
                 return StatusCode(500, new { message = "An error occurred while processing your request." });
             }
-        }
-
+        }        /// <summary>
+        /// Processes the actual password reset when user clicks the link and submits new password.
+        /// The verification process:
+        /// 1. Validates the reset token exists and hasn't expired
+        /// 2. Ensures the token hasn't been used before
+        /// 3. Updates the user's password with the new one
+        /// 4. Marks the token as used to prevent reuse
+        /// 
+        /// Security features:
+        /// - Validates token expiration
+        /// - Prevents token reuse
+        /// - Requires both token and new password
+        /// - Uses secure password hashing (defined in User model)
+        /// </summary>
+        /// <param name="token">The reset token from the email link</param>
+        /// <param name="newPassword">The new password chosen by the user</param>
+        /// <returns>
+        /// - Success response if password was reset
+        /// - Error if token invalid/expired or password requirements not met
+        /// </returns>
         [HttpPost("reset")]
         public async Task<IActionResult> ResetPassword([FromForm] string token, [FromForm] string newPassword)
         {
