@@ -196,7 +196,7 @@ label #cancel {
 .content_box {  
     max-width: 500px;
     margin: 5px auto;
-    padding: 20px 20px 20px 0px;
+    padding: 0px 20px 20px 0px;
     font-family: "Poppins", sans-serif;
 }
 .location-label {

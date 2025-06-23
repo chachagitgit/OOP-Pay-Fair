@@ -135,6 +135,10 @@
             </div>
             <div class="content-container">
                 <div class="content_box route-content">
+                    @if (TempData["SaveRouteResult"] != null)
+                    {
+                        <div class="alert alert-success" role="alert" style="margin: 10px 0; font-size: 1.1em;">@TempData["SaveRouteResult"]</div>
+                    }
                     <label class="location-label">Enter Starting location</label>
                     <div class="input-group">
                         <!-- Origin -->
@@ -225,10 +229,7 @@
                         </div>
                         <button type="submit" class="save-route">Save Route</button>
                     </form>
-                    @if (TempData["SaveRouteResult"] != null)
-                    {
-                        <div class="alert alert-success" role="alert" style="margin: 20px 0; font-size: 1.1em;">@TempData["SaveRouteResult"]</div>
-                    }
+
                     <script>
                         // Ensure form is always submitted as a normal POST
                         document.getElementById('saveRouteForm').onsubmit = function(e) {
