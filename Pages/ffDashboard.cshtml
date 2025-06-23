@@ -227,7 +227,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="save-route">Save Route</button>
+                        <button type="submit" class="save-route" @(Model.IsAdmin ? "disabled" : "")>Save Route</button>
                     </form>
 
                     <script>
@@ -246,17 +246,26 @@
 
 <script>
     var userLoggedIn = @(userLoggedIn.ToString().ToLower());
+    var isAdmin = @(Model.IsAdmin.ToString().ToLower());
     let lastFareInfo = null;
     let lastOrigin = null;
     let lastDestination = null;
     
     const saveRouteBtn = document.querySelector('.save-route');
-    saveRouteBtn.disabled = true;
-    
-    function enableSaveRouteIfReady() {
-        saveRouteBtn.disabled = !(userLoggedIn && lastFareInfo && lastOrigin && lastDestination);
+    // Always disable for admin
+    if (isAdmin) {
+        saveRouteBtn.disabled = true;
+        saveRouteBtn.title = "Admins cannot save routes.";
     }
-    
+    function enableSaveRouteIfReady() {
+        if (isAdmin) {
+            saveRouteBtn.disabled = true;
+            saveRouteBtn.title = "Admins cannot save routes.";
+        } else {
+            saveRouteBtn.disabled = !(userLoggedIn && lastFareInfo && lastOrigin && lastDestination);
+            saveRouteBtn.title = "";
+        }
+    }
     function updateSaveRouteForm() {
         // No-op: all form fields are updated directly in displayFare
     }
