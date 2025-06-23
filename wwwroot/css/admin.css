@@ -28,7 +28,7 @@ body {
     right: 20px;
     width: 40px;
     height: 40px;
-    background: url('logo.png') no-repeat center;
+    background: url('/images/logo.png') no-repeat center;
     background-size: contain;
     border-radius: 8px;
 }
@@ -44,7 +44,7 @@ body {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background: url('user.png') no-repeat center;
+    background: url('/images/user.png') no-repeat center;
     background-size: cover;
     background-color: #ef4444;
     border: 4px solid rgba(255, 255, 255, 0.3);
@@ -238,10 +238,10 @@ body {
     background-position: center;
 }
 
-.bus-airconditioned { background-image: url('AirconBus.png'); }
-.bus-regular { background-image: url('RegularBus.png'); }
-.jeepney-traditional { background-image: url('TradJeep.png'); }
-.jeepney-e { background-image: url('ejeep.png'); }
+.bus-airconditioned { background-image: url('/images/AirconBus.png'); }
+.bus-regular { background-image: url('/images/RegularBus.png'); }
+.jeepney-traditional { background-image: url('/images/TradJeep.png'); }
+.jeepney-e { background-image: url('/images/ejeep.png'); }
 
 .vehicle-name {
     flex: 1;
