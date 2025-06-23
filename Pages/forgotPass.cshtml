@@ -24,18 +24,20 @@
         <!-- Success Message -->
         <div class="success-message" id="successMessage">
             ✓ Email Sent! Check your inbox for the password reset link.
-        </div>
-
-        <form id="passwordForm" method="post">
+        </div>        <form id="passwordForm" method="post">
+            @Html.AntiForgeryToken()
             <div class="form-group">
-                <input type="email" class="form-input" name="Input.Email" id="emailInput" placeholder="Email" required pattern="^[a-zA-Z0-9._%+-]+@@gmail.com" title="Please enter a valid Gmail address (example@gmail.com)">
-                <div class="error-message" id="emailError">Please enter valid Gmail address</div>
+                <input type="email" class="form-input" name="Input.Email" id="emailInput" placeholder="Email" required pattern="^[a-zA-Z0-9._%+-]+@@gmail.com" title="Please enter a valid Gmail address (example@gmail.com)">                <div class="error-message" id="emailError">Please enter valid Gmail address</div>
             </div>
             <div class="confirm-button-wrapper">
                 <button type="submit" class="forgot-pass-btn" id="submitBtn">
                     <span class="spinner" id="spinner"></span>
                     <span id="buttonText">Send to my Email</span>
                 </button>
+            </div>
+            <div class="error-message" id="serverError" style="display: none; margin-top: 10px; text-align: center;"></div>
+            <div style="margin-top: 15px; text-align: center;">
+                <a href="/signUp" class="sign-up-link">Don't have an account? Sign up here</a>
             </div>
         </form>
     </div>
@@ -70,34 +72,53 @@
             submitBtn.disabled = true;
             spinner.style.display = 'inline-block';
             buttonText.textContent = 'Sending...';
-            
-            // Create FormData for the request
-            const formData = new FormData(form);
+              // Create FormData for the request
+            const formData = new FormData();
+            formData.append('email', emailInput.value);            // Hide any previous messages
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            document.getElementById('serverError').style.display = 'none';
             
             // Submit the form via fetch API
-            fetch(window.location.pathname, {
+            fetch('/api/PasswordReset/request', {
                 method: 'POST',
                 body: formData,
                 headers: {
                     'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value || ''
                 }
             })
-            .then(response => {
+            .then(async response => {
+                const data = await response.json();
+                
                 if (response.ok) {
                     // Success - show success message
                     successMessage.style.display = 'block';
                     emailInput.value = ''; // Clear the input
                     form.classList.remove('form-submitted');
+                    
+                    // Hide the error messages
+                    errorMessage.style.display = 'none';
+                    document.getElementById('serverError').style.display = 'none';
                 } else {
-                    // Error - show error message
-                    errorMessage.textContent = 'Failed to send email. Please try again.';
-                    errorMessage.style.display = 'block';
+                    // Show the server error message
+                    document.getElementById('serverError').textContent = data.message || 'Failed to send reset link. Please try again.';
+                    document.getElementById('serverError').style.display = 'block';
+                    
+                    // Re-enable the submit button
+                    submitBtn.disabled = false;
+                    spinner.style.display = 'none';
+                    buttonText.textContent = 'Send to my Email';
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                errorMessage.textContent = 'An error occurred. Please try again.';
-                errorMessage.style.display = 'block';
+                document.getElementById('serverError').textContent = 'An error occurred. Please try again.';
+                document.getElementById('serverError').style.display = 'block';
+                
+                // Re-enable the submit button
+                submitBtn.disabled = false;
+                spinner.style.display = 'none';
+                buttonText.textContent = 'Send to my Email';
             })
             .finally(() => {
                 // Reset button state

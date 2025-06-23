@@ -10,18 +10,16 @@ namespace OOP_Fair_Fare.Models
         public int Id { get; set; }
 
         [Required]
-        public int UserId { get; set; }
-
-        [ForeignKey("UserId")]
-        public AppUser User { get; set; }
+        public int UserId { get; set; }        [ForeignKey("UserId")]
+        public virtual AppUser User { get; set; } = null!;
 
         [Required]
-        public string StartLocation { get; set; }
+        public required string StartLocation { get; set; }
 
         [Required]
-        public string Destination { get; set; }
+        public required string Destination { get; set; }
         [Required]
-        public string Vehicle {get; set; }
+        public required string Vehicle {get; set; }
         [Required]
         public double RegularFare { get; set; }
         [Required]

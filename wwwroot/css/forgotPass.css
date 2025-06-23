@@ -101,9 +101,12 @@ body {
         /* Error message styling - hidden by default */
         .error-message {
             display: none;
-            color: white;
-            background: #e74c3c;
-            padding: 5px;
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            padding: 8px;
+            border-radius: 4px;
+            background-color: rgba(220, 53, 69, 0.1);
             text-align: center;
             border-radius: 5px;
             margin-top: 5px;
@@ -185,4 +188,24 @@ body {
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+        
+        .sign-up-link {
+            color: #0056b3;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .sign-up-link:hover {
+            color: #003d7a;
+            text-decoration: underline;
+        }
+
+        #serverError {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: 500;
         }

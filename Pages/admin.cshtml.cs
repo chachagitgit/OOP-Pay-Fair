@@ -14,7 +14,7 @@ namespace OOP_Fair_Fare.Pages
         private readonly AppDbContext _db;
         public adminModel(AppDbContext db) { _db = db; }
 
-        public List<Vehicle> Vehicles { get; set; }
+        public List<Vehicle> Vehicles { get; set; } = new();
 
         public async Task OnGetAsync()
         {

@@ -8,6 +8,7 @@ using OOP_Fair_Fare.Models;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using OOP_Fair_Fare.Services;
 
 namespace OOP_Fair_Fare
 {
@@ -23,6 +24,7 @@ namespace OOP_Fair_Fare
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpContextAccessor();
+            services.AddTransient<IEmailService, EmailService>();
             services.AddRazorPages();
             services.AddSession();
             services.AddControllers()
@@ -30,6 +32,8 @@ namespace OOP_Fair_Fare
                 {
                     options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
                 });
+            
+            services.AddScoped<IEmailService, EmailService>();
 
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));

@@ -44,6 +44,10 @@ namespace OOP_Fair_Fare.Pages
             {
                 ModelState.AddModelError(string.Empty, "Account not found.");
                 return Page();
+            }            if (Input.Password == null)
+            {
+                ModelState.AddModelError(string.Empty, "Password is required.");
+                return Page();
             }
 
             string hashed = HashPassword(Input.Password);
@@ -51,9 +55,7 @@ namespace OOP_Fair_Fare.Pages
             {
                 ModelState.AddModelError(string.Empty, "Wrong Password, try again.");
                 return Page();
-            }
-
-            // Set session
+            }            // Set session
             HttpContext.Session.SetInt32("UserId", user.Id);
             HttpContext.Session.SetString("Username", user.Username);
 

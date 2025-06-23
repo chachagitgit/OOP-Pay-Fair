@@ -368,6 +368,10 @@ FodyWeavers.xsd
 .env.staging
 .env.production
 
+# Config files
+appsettings.json
+appsettings.*.json
+
 # Database files
 *.db
 *.sqlite

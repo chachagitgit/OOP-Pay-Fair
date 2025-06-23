@@ -60,10 +60,9 @@ namespace OOP_Fair_Fare.Pages
             if (user == null)
             {
                 return RedirectToPage("/log-in");
-            }
-            user.Username = Username;
-            user.FirstName = FirstName;
-            user.LastName = LastName;
+            }            user.Username = Username ?? user.Username;
+            user.FirstName = FirstName ?? user.FirstName;
+            user.LastName = LastName ?? user.LastName;
             await _db.SaveChangesAsync();
             StatusMessage = "Profile updated.";
             return RedirectToPage();

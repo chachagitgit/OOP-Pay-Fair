@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OOP_Fair_Fare.Models;
 
@@ -10,9 +11,11 @@ using OOP_Fair_Fare.Models;
 namespace OOP_Fair_Fare.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250623091433_InitialPasswordResetTokens")]
+    partial class InitialPasswordResetTokens
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0-preview.5.24306.3");
@@ -27,12 +30,6 @@ namespace OOP_Fair_Fare.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("EmailVerificationToken")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("EmailVerificationTokenExpiry")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -42,9 +39,6 @@ namespace OOP_Fair_Fare.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("IsEmailVerified")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("LastName")

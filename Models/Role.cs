@@ -9,13 +9,11 @@ namespace OOP_Fair_Fare.Models
         public int Id { get; set; }
 
         [Required]
-        public int UserId { get; set; }
-
-        [ForeignKey("UserId")]
-        public AppUser User { get; set; }
+        public int UserId { get; set; }        [ForeignKey("UserId")]
+        public virtual AppUser User { get; set; } = null!;
 
         [Required]
         [MaxLength(50)]
-        public string RoleName { get; set; } // "Admin" or "Regular"
+        public required string RoleName { get; set; } // "Admin" or "Regular"
     }
 }

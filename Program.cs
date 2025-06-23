@@ -11,11 +11,9 @@ namespace OOP_Fair_Fare
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+            Host.CreateDefaultBuilder(args)                .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseWebRoot("wwwroot");
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseWebRoot("wwwroot");                    webBuilder.UseStartup<Startup>();
                 });
     }
 }

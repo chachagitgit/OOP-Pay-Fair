@@ -14,28 +14,33 @@ namespace OOP_Fair_Fare.Pages
     public class signUpModel : PageModel
     {
         private readonly AppDbContext _db;
-        public signUpModel(AppDbContext db) { _db = db; }
-
-        [BindProperty]
-        public InputModel Input { get; set; } = new InputModel();
-        public string ErrorMessage { get; set; }
+        public signUpModel(AppDbContext db) { _db = db; }        [BindProperty]
+        public InputModel Input { get; set; } = new InputModel() 
+        {
+            FirstName = string.Empty,
+            LastName = string.Empty,
+            Username = string.Empty,
+            Email = string.Empty,
+            Password = string.Empty,
+            ConfirmPassword = string.Empty
+        };public string? ErrorMessage { get; set; }
 
         public class InputModel
         {
             [Required]
-            public string FirstName { get; set; }
+            public required string FirstName { get; set; }
             [Required]
-            public string LastName { get; set; }
+            public required string LastName { get; set; }
             [Required]
-            public string Username { get; set; }
+            public required string Username { get; set; }
             [Required]
             [EmailAddress]
-            public string Email { get; set; }
+            public required string Email { get; set; }
             [Required]
-            public string Password { get; set; }
+            public required string Password { get; set; }
             [Required]
             [Compare("Password")]
-            public string ConfirmPassword { get; set; }
+            public required string ConfirmPassword { get; set; }
         }
 
         public void OnGet() { }
