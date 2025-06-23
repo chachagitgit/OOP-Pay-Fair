@@ -19,23 +19,96 @@
 
     <div class="forgot-pass-container">
         <h1 class="forgot-pass-hdr">Forgot Password</h1>
+        <p class="forgot-pass-subtitle">Enter your email address to receive a password reset link</p>
+
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage">
+            ✓ Email Sent! Check your inbox for the password reset link.
+        </div>
 
         <form id="passwordForm" method="post">
             <div class="form-group">
-                <input type="email" class="form-input" name="Input.Email" placeholder="Email" required pattern="^[a-zA-Z0-9._%+-]+@@gmail\.com" title="Please enter a valid Gmail address (example@gmail.com)">
+                <input type="email" class="form-input" name="Input.Email" id="emailInput" placeholder="Email" required pattern="^[a-zA-Z0-9._%+-]+@@gmail.com" title="Please enter a valid Gmail address (example@gmail.com)">
                 <div class="error-message" id="emailError">Please enter valid Gmail address</div>
             </div>
-            <div class="form-group">
-                <input type="password" class="form-input" name="Input.Password" id="password" placeholder="New Password" required min-length="6">
-                <div class="error-message">Password must be atleast 6 characters long</div>
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-input" name="Input.ConfirmPassword" id="confirmpassword" placeholder="Confirm Password" required min-length="6">
-                <div class="error-message" id="confirmError">Passwords do not match</div>
-            </div>
             <div class="confirm-button-wrapper">
-                <button type="submit" class="forgot-pass-btn">Confirm</button>
+                <button type="submit" class="forgot-pass-btn" id="submitBtn">
+                    <span class="spinner" id="spinner"></span>
+                    <span id="buttonText">Send to my Email</span>
+                </button>
             </div>
         </form>
     </div>
 </html>
+
+    <script>
+        document.getElementById('passwordForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+            
+            const form = this;
+            const emailInput = document.getElementById('emailInput');
+            const submitBtn = document.getElementById('submitBtn');
+            const buttonText = document.getElementById('buttonText');
+            const spinner = document.getElementById('spinner');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('emailError');
+            
+            // Add form-submitted class for validation styling
+            form.classList.add('form-submitted');
+            
+            // Check if email is valid
+            if (!emailInput.checkValidity()) {
+                errorMessage.style.display = 'block';
+                return;
+            }
+            
+            // Hide any previous messages
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            spinner.style.display = 'inline-block';
+            buttonText.textContent = 'Sending...';
+            
+            // Create FormData for the request
+            const formData = new FormData(form);
+            
+            // Submit the form via fetch API
+            fetch(window.location.pathname, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value || ''
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Success - show success message
+                    successMessage.style.display = 'block';
+                    emailInput.value = ''; // Clear the input
+                    form.classList.remove('form-submitted');
+                } else {
+                    // Error - show error message
+                    errorMessage.textContent = 'Failed to send email. Please try again.';
+                    errorMessage.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                errorMessage.textContent = 'An error occurred. Please try again.';
+                errorMessage.style.display = 'block';
+            })
+            .finally(() => {
+                // Reset button state
+                submitBtn.disabled = false;
+                spinner.style.display = 'none';
+                buttonText.textContent = 'Send to my Email';
+            });
+        });
+        
+        // Hide success message when user starts typing again
+        document.getElementById('emailInput').addEventListener('input', function() {
+            document.getElementById('successMessage').style.display = 'none';
+        });
+    </script>
