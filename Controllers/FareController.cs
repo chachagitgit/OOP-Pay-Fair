@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
+using OOP_Fair_Fare.Models;
 
 namespace OOP_Fair_Fare.Controllers
 {
@@ -7,11 +8,11 @@ namespace OOP_Fair_Fare.Controllers
     [Route("api/[controller]")]
     public class FareController : ControllerBase
     {
-        private readonly FareCalculator _fareCalculator;
+        private readonly AppDbContext _db;
 
-        public FareController(FareCalculator fareCalculator)
+        public FareController(AppDbContext db)
         {
-            _fareCalculator = fareCalculator;
+            _db = db;
         }
 
         [HttpPost("calculate")]
@@ -19,7 +20,8 @@ namespace OOP_Fair_Fare.Controllers
         {
             try
             {
-                var result = _fareCalculator.Calculate(
+                var fareCalculator = new FareCalculator(_db);
+                var result = fareCalculator.Calculate(
                     request.DistanceTraveled,
                     request.VehicleChoice,
                     request.IsDiscounted
@@ -45,4 +47,4 @@ namespace OOP_Fair_Fare.Controllers
         public int VehicleChoice { get; set; }
         public bool IsDiscounted { get; set; }
     }
-} 
+}

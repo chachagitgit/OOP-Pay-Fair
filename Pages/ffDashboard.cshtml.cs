@@ -30,10 +30,20 @@ namespace OOP_Fair_Fare.Pages
 
         public int? UserId { get; private set; }
         public bool IsLoggedIn => UserId != null;
+        public bool IsAdmin { get; private set; }
 
         public void OnGet()
         {
             UserId = HttpContext.Session.GetInt32("UserId");
+            if (UserId != null)
+            {
+                var role = _dbContext.Roles.FirstOrDefault(r => r.UserId == UserId);
+                IsAdmin = role != null && role.RoleName == "Admin";
+            }
+            else
+            {
+                IsAdmin = false;
+            }
             _logger.LogInformation("OnGet called");
         }
 

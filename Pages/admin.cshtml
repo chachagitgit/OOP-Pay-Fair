@@ -1,4 +1,5 @@
 @page
+@model OOP_Fair_Fare.Pages.adminModel
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
 @{
@@ -9,8 +10,12 @@
     <link rel="stylesheet" href="~/css/admin.css" />
 }
 
+<form method="post">
+    @Html.AntiForgeryToken()
+</form>
+
 <div class="header-card">
-        <div class="logo"></div>
+        <a href="/ffDashboard"><div class="logo" style="cursor:pointer;"></div></a>
 
         <div class="profile-section">
             <!-- Left: Avatar and Edit Button -->
@@ -18,7 +23,9 @@
                 <div class="admin-title">ADMINISTRATOR</div>
                 <div class="profile-avatar"></div>
                 <div class="button-container">
-                    <button class="btn btn-logout">Log Out</button>
+                    <form method="post" asp-page-handler="Logout" style="display:inline;">
+                        <button type="submit" class="btn btn-logout">Log Out</button>
+                    </form>
                 </div>
             </div>
 
@@ -27,25 +34,25 @@
                 <div class="form-group">
                     <div class="form-field">
                         <label>First Name</label>
-                        <input type="text" id="firstName" value="Charlene" disabled>
+                        <input type="text" id="firstName" value="PayFair" disabled>
                     </div>
                     <div class="form-field">
                         <label>Last Name</label>
-                        <input type="text" id="lastName" value="Charlene" disabled>
+                        <input type="text" id="lastName" value="Admin" disabled>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="form-field full-width">
                         <label>Username</label>
-                        <input type="text" id="username" value="urcharlene" disabled>
+                        <input type="text" id="username" value="admin" disabled>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="form-field full-width">
                         <label>Email</label>
-                        <input type="email" id="email" value="charlenecaramoan@gmail.com" disabled>
+                        <input type="email" id="email" value="payfairadmin@gmail.com" disabled>
                     </div>
                 </div>
             </div>
@@ -66,100 +73,74 @@
             </div>
             
             <div class="fare-content">
-                <div class="vehicle-row">
-                    <div class="vehicle-icon bus-airconditioned"></div>
-                    <div class="vehicle-name">Bus<br>Airconditioned</div>
-                    <div class="fare-inputs">
-                        <div class="fare-input">
-                            <input type="number" value="10.10" disabled data-vehicle="bus-ac" data-type="base">
+                @foreach (var v in Model.Vehicles)
+                {
+                    <div class="vehicle-row" data-vehicle-id="@v.VehicleId">
+                        <div class="vehicle-icon @v.Name.ToLower().Replace(" ", "-")"></div>
+                        <div class="vehicle-name">@v.Name</div>
+                        <div class="fare-inputs">
+                            <div class="fare-input">
+                                <input type="number" value="@v.BaseFare" disabled data-type="base">
+                            </div>
+                            <div class="fare-input">
+                                <input type="number" value="@v.BaseKm" disabled data-type="km">
+                            </div>
+                            <div class="fare-input">
+                                <input type="number" value="@v.AdditionalFare" disabled data-type="additional">
+                            </div>
                         </div>
-                        <div class="fare-input">
-                            <input type="number" value="10.10" disabled data-vehicle="bus-ac" data-type="km">
-                        </div>
-                        <div class="fare-input">
-                            <input type="number" value="10.10" disabled data-vehicle="bus-ac" data-type="additional">
-                        </div>
+                        <button class="edit-btn" onclick="toggleFareEdit(this)">Edit Fare</button>
                     </div>
-                    <button class="edit-btn" onclick="toggleFareEdit(this)">Edit Fare</button>
-                </div>
-                
-                <div class="vehicle-row">
-                    <div class="vehicle-icon bus-regular"></div>
-                    <div class="vehicle-name">Bus<br>Regular</div>
-                    <div class="fare-inputs">
-                        <div class="fare-input">
-                            <input type="number" value="10.10" disabled data-vehicle="bus-regular" data-type="base">
-                        </div>
-                        <div class="fare-input">
-                            <input type="number" value="10.10" disabled data-vehicle="bus-regular" data-type="km">
-                        </div>
-                        <div class="fare-input">
-                            <input type="number" value="10.10" disabled data-vehicle="bus-regular" data-type="additional">
-                        </div>
-                    </div>
-                    <button class="edit-btn" onclick="toggleFareEdit(this)">Edit Fare</button>
-                </div>
-                
-                <div class="vehicle-row">
-                    <div class="vehicle-icon jeepney-traditional"></div>
-                    <div class="vehicle-name">Traditional<br>Jeepney</div>
-                    <div class="fare-inputs">
-                        <div class="fare-input">
-                            <input type="number" value="10.10" disabled data-vehicle="jeepney-traditional" data-type="base">
-                        </div>
-                        <div class="fare-input">
-                            <input type="number" value="10.10" disabled data-vehicle="jeepney-traditional" data-type="km">
-                        </div>
-                        <div class="fare-input">
-                            <input type="number" value="10.10" disabled data-vehicle="jeepney-traditional" data-type="additional">
-                        </div>
-                    </div>
-                    <button class="edit-btn" onclick="toggleFareEdit(this)">Edit Fare</button>
-                </div>
-                
-                <div class="vehicle-row">
-                    <div class="vehicle-icon jeepney-e"></div>
-                    <div class="vehicle-name">E-Jeepney</div>
-                    <div class="fare-inputs">
-                        <div class="fare-input">
-                            <input type="number" value="10.10" disabled data-vehicle="jeepney-e" data-type="base">
-                        </div>
-                        <div class="fare-input">
-                            <input type="number" value="10.10" disabled data-vehicle="jeepney-e" data-type="km">
-                        </div>
-                        <div class="fare-input">
-                            <input type="number" value="10.10" disabled data-vehicle="jeepney-e" data-type="additional">
-                        </div>
-                    </div>
-                    <button class="edit-btn" onclick="toggleFareEdit(this)">Edit Fare</button>
-                </div>
+                }
             </div>
         </div>
 
 @section Scripts{
     <script>
         function toggleFareEdit(button) {
-                const row = button.closest('.vehicle-row');
-                const inputs = row.querySelectorAll('.fare-inputs input');
-                
-                if (button.textContent === 'Edit Fare') {
-                    // Enable editing
-                    inputs.forEach(input => {
-                        input.disabled = false;
-                    });
-                    button.textContent = 'Save Fare';
-                    button.style.background = '#f59e0b';
-                } else {
-                    // Save and disable editing
-                    inputs.forEach(input => {
-                        input.disabled = true;
-                    });
-                    button.textContent = 'Edit Fare';
-                    button.style.background = '#10b981';
-                    
-                    // Here you would typically save the data to a server
-                    console.log('Fare saved!');
-                }
+            const row = button.closest('.vehicle-row');
+            const inputs = row.querySelectorAll('.fare-inputs input');
+            const vehicleId = row.getAttribute('data-vehicle-id');
+            if (button.textContent === 'Edit Fare') {
+                // Enable editing
+                inputs.forEach(input => {
+                    input.disabled = false;
+                });
+                button.textContent = 'Save Fare';
+                button.style.background = '#f59e0b';
+            } else {
+                // Save and disable editing
+                const baseFare = parseFloat(inputs[0].value);
+                const baseKm = parseFloat(inputs[1].value);
+                const additionalFare = parseFloat(inputs[2].value);
+                fetch(`@Url.Page("/admin", "UpdateFare")`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    },
+                    body: JSON.stringify({ id: vehicleId, baseFare, baseKm, additionalFare })
+                })
+                .then(res => {
+                    if (!res.ok) throw new Error('Network response was not ok');
+                    return res.text();
+                })
+                .then(text => {
+                    let data = {};
+                    try { data = JSON.parse(text); } catch (e) { throw new Error('Invalid JSON response'); }
+                    if (data.success) {
+                        inputs.forEach(input => { input.disabled = true; });
+                        button.textContent = 'Edit Fare';
+                        button.style.background = '#10b981';
+                        alert('Fare updated!');
+                    } else {
+                        alert('Failed to update fare.');
+                    }
+                })
+                .catch(err => {
+                    alert('Error updating fare: ' + err.message);
+                });
             }
+        }
     </script>
 }

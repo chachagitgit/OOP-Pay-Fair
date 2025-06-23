@@ -122,7 +122,7 @@
 <div class="container">
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <a href="@(userLoggedIn ? "/user_account" : "/log-in")">
+            <a href="@((!userLoggedIn) ? "/log-in" : (Model.IsAdmin ? "/admin" : "/user_account"))">
                 <img src="/images/logo.png" alt="PayFair Logo" class="sidebar-logo">
             </a> 
         </div>
