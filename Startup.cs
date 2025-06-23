@@ -61,7 +61,10 @@ namespace OOP_Fair_Fare
             {
                 var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
                 db.Database.Migrate();
-                SeedAdminUser(db);
+                // Seed vehicles
+                OOP_Fair_Fare.Models.VehicleSeeder.SeedVehicles(db);
+                // Seed roles (admin and regular)
+                OOP_Fair_Fare.Models.RoleSeeder.SeedRoles(db);
             }
 
             app.UseEndpoints(endpoints =>
@@ -69,26 +72,6 @@ namespace OOP_Fair_Fare
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
             });
-        }
-
-        private static void SeedAdminUser(AppDbContext db)
-        {
-            var adminEmail = "payfairadmin@gmail.com";
-            if (!db.Users.Any(u => u.Email == adminEmail))
-            {
-                var admin = new AppUser
-                {
-                    FirstName = "Admin",
-                    LastName = "Account",
-                    Username = "admin",
-                    Email = adminEmail,
-                    HashedPassword = HashPassword("PayFairadmin123"),
-                    IsDeleted = false,
-                    SavedRoutes = new System.Collections.Generic.List<SavedRoute>()
-                };
-                db.Users.Add(admin);
-                db.SaveChanges();
-            }
         }
 
         private static string HashPassword(string password)

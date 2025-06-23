@@ -8,5 +8,7 @@ namespace OOP_Fair_Fare.Models
 
         public DbSet<AppUser> Users { get; set; }
         public DbSet<SavedRoute> SavedRoutes { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<Role> Roles { get; set; }
     }
 }

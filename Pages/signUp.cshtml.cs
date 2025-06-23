@@ -64,6 +64,9 @@ namespace OOP_Fair_Fare.Pages
                 };
                 _db.Users.Add(user);
                 await _db.SaveChangesAsync();
+                // Assign Regular role to new user
+                _db.Roles.Add(new Role { UserId = user.Id, RoleName = "Regular" });
+                await _db.SaveChangesAsync();
                 ErrorMessage = "Account created successfully! You can now log in.";
                 //ErrorMessage = $"DB Path: {_db.Database.GetDbConnection().DataSource}";
                 return RedirectToPage("/log-in");

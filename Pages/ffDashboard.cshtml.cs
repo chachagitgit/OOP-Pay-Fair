@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http;
 using OOP_Fair_Fare.Models;
 using System.Threading.Tasks;
 using System.IO;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace OOP_Fair_Fare.Pages
 {
@@ -11,9 +13,12 @@ namespace OOP_Fair_Fare.Pages
     public class ffDashboardModel : PageModel
     {
         private readonly AppDbContext _dbContext;
-        public ffDashboardModel(AppDbContext dbContext)
+        private readonly ILogger<ffDashboardModel> _logger;
+        public ffDashboardModel(AppDbContext dbContext, ILogger<ffDashboardModel> logger)
         {
             _dbContext = dbContext;
+            _logger = logger;
+            _logger.LogInformation("ffDashboardModel constructed");
         }
 
         [BindProperty]
@@ -29,33 +34,75 @@ namespace OOP_Fair_Fare.Pages
         public void OnGet()
         {
             UserId = HttpContext.Session.GetInt32("UserId");
+            _logger.LogInformation("OnGet called");
         }
 
-        public async Task<IActionResult> OnPostSaveRouteAsync()
+        [BindProperty] public string? RouteOrigin { get; set; }
+        [BindProperty] public string? RouteDestination { get; set; }
+        [BindProperty] public string? RouteVehicle { get; set; }
+        [BindProperty] public double RouteRegularFare { get; set; }
+        [BindProperty] public double RouteAppliedDiscount { get; set; }
+        [BindProperty] public double RouteDistance { get; set; }
+        [BindProperty] public decimal RouteFare { get; set; }
+
+        [TempData]
+        public string? SaveRouteResult { get; set; }
+
+        public async Task<IActionResult> OnPostAsync()
         {
             UserId = HttpContext.Session.GetInt32("UserId");
-            if (UserId == null)
-                return new JsonResult(new { success = false, error = "Not logged in" });
-
-            using (var reader = new StreamReader(Request.Body))
+            _logger.LogInformation("OnPostAsync: UserId={UserId}, Origin={RouteOrigin}, Destination={RouteDestination}, Vehicle={RouteVehicle}, RegularFare={RouteRegularFare}, AppliedDiscount={RouteAppliedDiscount}, Distance={RouteDistance}, Fare={RouteFare}", UserId, RouteOrigin, RouteDestination, RouteVehicle, RouteRegularFare, RouteAppliedDiscount, RouteDistance, RouteFare);
+            _logger.LogInformation("ModelState.IsValid={IsValid}", ModelState.IsValid);
+            if (!ModelState.IsValid)
             {
-                var body = await reader.ReadToEndAsync();
-                var data = System.Text.Json.JsonDocument.Parse(body).RootElement;
-
-                var origin = data.GetProperty("Origin").GetString();
-                var destination = data.GetProperty("Destination").GetString();
-                var fare = data.GetProperty("Fare").GetDecimal();
-
-                var route = new SavedRoute
+                foreach (var kvp in ModelState)
                 {
-                    UserId = UserId.Value,
-                    StartLocation = origin!,
-                    Destination = destination!,
-                    EstimatedFare = (double)fare
-                };
+                    foreach (var error in kvp.Value.Errors)
+                    {
+                        _logger.LogWarning($"ModelState error for {kvp.Key}: {error.ErrorMessage}");
+                    }
+                }
+                SaveRouteResult = "Invalid form submission. Please try again.";
+                return Page();
+            }
+            if (UserId == null)
+            {
+                _logger.LogWarning("SaveRoute: Not logged in");
+                SaveRouteResult = "You must be logged in to save routes.";
+                return Page();
+            }
+            // Validate required fields
+            if (string.IsNullOrWhiteSpace(RouteOrigin) || string.IsNullOrWhiteSpace(RouteDestination) || RouteFare == 0)
+            {
+                _logger.LogWarning("SaveRoute: Missing or invalid required fields. Origin={RouteOrigin}, Destination={RouteDestination}, Fare={RouteFare}", RouteOrigin, RouteDestination, RouteFare);
+                SaveRouteResult = "Missing or invalid required fields. Please calculate a fare and try again.";
+                return Page();
+            }
+            var route = new SavedRoute
+            {
+                UserId = UserId.Value,
+                StartLocation = RouteOrigin,
+                Destination = RouteDestination,
+                Vehicle = RouteVehicle ?? string.Empty,
+                RegularFare = RouteRegularFare,
+                AppliedDiscount = RouteAppliedDiscount,
+                Distance = RouteDistance,
+                EstimatedFare = (double)RouteFare,
+                DateSaved = DateTime.Now
+            };
+            try
+            {
                 _dbContext.SavedRoutes.Add(route);
                 await _dbContext.SaveChangesAsync();
-                return new JsonResult(new { success = true });
+                _logger.LogInformation("SaveRoute: Route saved for user {UserId}", UserId);
+                SaveRouteResult = "Route saved successfully!";
+                return RedirectToPage("/ffDashboard");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error saving route. UserId={UserId}, Origin={RouteOrigin}, Destination={RouteDestination}", UserId, RouteOrigin, RouteDestination);
+                SaveRouteResult = $"An error occurred while saving the route: {ex.Message}";
+                return Page();
             }
         }
     }

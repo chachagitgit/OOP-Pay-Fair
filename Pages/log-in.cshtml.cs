@@ -56,7 +56,17 @@ namespace OOP_Fair_Fare.Pages
             // Set session
             HttpContext.Session.SetInt32("UserId", user.Id);
             HttpContext.Session.SetString("Username", user.Username);
-            return RedirectToPage("/Index");
+
+            // Check user role
+            var role = await _db.Roles.FirstOrDefaultAsync(r => r.UserId == user.Id);
+            if (role != null && role.RoleName == "Admin")
+            {
+                return RedirectToPage("/admin");
+            }
+            else
+            {
+                return RedirectToPage("/Index");
+            }
         }
 
         private string HashPassword(string password)

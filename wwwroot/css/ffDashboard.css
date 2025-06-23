@@ -98,7 +98,7 @@ label #cancel {
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 0 30px 20px;
+    padding: 0 20px 20px;
     height: calc(100vh - 80px); /* Adjust based on header height */
     /* Custom scrollbar styling */
     scrollbar-width: thin;
@@ -159,8 +159,10 @@ label #cancel {
 
 .content-container {
     padding: 5px 0;
-    flex: 1; /* Allow content to expand */
-    min-height: 0; /* Important for flex scrolling */
+    flex: 1;
+    min-height: 0; 
+    width: 100%;
+
 }
 
 .content_box {
@@ -194,7 +196,7 @@ label #cancel {
 .content_box {  
     max-width: 500px;
     margin: 5px auto;
-    padding: 20px 20px 20px 0px;
+    padding: 0px 20px 20px 0px;
     font-family: "Poppins", sans-serif;
 }
 .location-label {
@@ -377,12 +379,12 @@ label #cancel {
 /*discount checkbox layout*/
 .discount {
     margin-bottom: 30px;
-    margin-top: 5px;
+    margin-top: 1px;
 }
 .checkbox-wrapper {
     display: flex;
     align-items: center;
-    padding: 4px 10px;
+    padding: 10px 10px;
     background: #f8f9fa;
     border: 2px solid #e9ecef;
     border-radius: 8px;
@@ -432,21 +434,22 @@ label #cancel {
 /* Auto-switch to fare tab when calculate button is clicked */
 .calculate-fare:active ~ #tab-fare {
     opacity: 1;
-}/* fare tab*/
-.fare-breakdown {
+}
+.fare-breakdown {/* fare tab*/
     padding: 20px;
     border-radius: 12px;
     border: 1px solid rgba(10, 36, 99, 0.8);
+    width: 100%;
+    max-width: none;
 }
-
-/*container for the fare contents - WIDENED*/
 .fare-card {
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     width: 100%;
-    max-width: 600px; /* Increased from 400px to 600px */
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 /*gradient design*/
@@ -474,23 +477,36 @@ label #cancel {
 }
 .total-fare {
     margin-bottom: 24px;
+    color: #091c48;
 }
 /*for the total estimated fare*/
 .total-fare h2 {
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 700;
     color: #0a2463;
     margin-bottom: 8px;
 }
 /*estimated fare layout*/
 .fare-amount {
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 550;
     color: #000;
     padding-bottom: 12px;
+    padding-left: 20px;
     border-bottom: 3px solid rgba(10, 36, 99, 0.8);
     display: inline-block;
     min-width: 120px;
+    padding-left: 60px;
+    background: transparent;
+}
+.origin, .destination{
+    text-align: left;
+    padding-right: 5px;
+    font-size: 14px;
+    color: #000;
+    font-weight: 550;
+    font-size: 'Poppins', sans-serif;
+
 }
 .section {
     margin-bottom: 20px;
@@ -504,7 +520,6 @@ label #cancel {
     color: #666;
     font-size: 14px;
 }
-
 .breakdown-item:not(:last-child) {
     border-bottom: 1px solid #f0f0f0;
 }
@@ -519,12 +534,24 @@ label #cancel {
 /*fare breakdown contents layout*/
 .item-label {
     font-weight: 500;
+    color:  #666;
+    font-size: 14px;
+    flex: 1;
 }
 .item-value {
     font-weight: 600;
     color: #333;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    text-align: right;
+    min-width: 80px;
 }
-
+.breakdown-item.total .item-label{
+    font-weight: 550;
+    color: #0a2463;
+    font-size: 14px;
+    flex: 1;
+}
 /* Responsive design */
 @media (max-width: 768px) {
     .fare-card {
