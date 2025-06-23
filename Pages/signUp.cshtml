@@ -35,7 +35,7 @@
             <div class="error-message" id="confirmError">Passwords do not match</div>
         </div>
         <div class="login-btn-wrapper">
-            <button type="submit" class="login-btn">Sign Up</button>
+            <button type="button" id=signupBtn class="login-btn">Sign Up</button>
         </div>
         @if (!string.IsNullOrEmpty(Model?.ErrorMessage)) {
             <div class="error-message">@Model.ErrorMessage</div>
@@ -45,21 +45,151 @@
     <div class="login-section">
         Already have an account? <a href="/log-in" class="signup-link">Log In</a>
     </div>
+
+    <div id="otpModal" class="otp-modal">
+        <div class="otp-modal-content">
+            <span class="otp-close">&times;</span>
+            <h2 class="otp-modal-title">Verify your Email</h2>
+            <p class="otp-subtitle">We've sent a 6-digit code to your email</p>
+
+            <div class="otp-inputs">
+                <input type="text" class="otp-input" maxlength="1" data-index="0">
+                <input type="text" class="otp-input" maxlength="1" data-index="1">
+                <input type="text" class="otp-input" maxlength="1" data-index="2">
+                <input type="text" class="otp-input" maxlength="1" data-index="3">
+                <input type="text" class="otp-input" maxlength="1" data-index="4">
+                <input type="text" class="otp-input" maxlength="1" data-index="5">
+            </div>
+
+            <button type="button" class="otp-verify-btn" id="verify-otp-btn">Verify and Sign Up</button>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
 <script>
-    document.addEventListener('DOMContentLoaded', function () {  
+    document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('signupForm');
+        const signupBtn = document.getElementById('signupBtn');
         const emailInput = document.getElementById('emailInput');
         const emailError = document.getElementById('emailError');
         const password = document.getElementById('password');
         const confirmPassword = document.getElementById('confirmPassword');
         const confirmError = document.getElementById('confirmError');
+        const otpModal = document.getElementById('otpModal');
+        const otpClose = document.querySelector('.otp-close');
+        const otpInputs = document.querySelectorAll('.otp-input');
+        const verifyOtpBtn = document.getElementById('verify-otp-btn');
 
         function validateGmail(email) {
             const gmailPattern = /^[a-zA-Z0-9._%+-]+@@gmail\.com$/;
             return gmailPattern.test(email);
+        }
+
+        function validateForm() {
+            let valid = true;
+
+            if (!validateGmail(emailInput.value.trim())) {
+                emailInput.setCustomValidity('Invalid Gmail');
+                emailError.style.display = 'block';
+                emailInput.focus();
+                valid = false;
+            } else {
+                emailInput.setCustomValidity('');
+                emailError.style.display = 'none';
+            }
+
+            if (password.value !== confirmPassword.value) {
+                confirmError.style.display = 'block';
+                confirmPassword.setCustomValidity('Passwords do not match');
+                confirmPassword.focus();
+                valid = false;
+            } else {
+                confirmError.style.display = 'none';
+                confirmPassword.setCustomValidity('');
+            }
+
+            return valid;
+        }
+
+        function showOtpModal() {
+            otpModal.style.display = 'block';
+            otpInputs[0].focus();
+            sendOtp(emailInput.value);
+        }
+
+        function hideOtpModal() {
+            otpModal.style.display = 'none';
+            otpInputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('filled');
+            });
+        }
+
+        function sendOtp(email) {
+            console.log('Sending OTP to: ', email);
+            fetch('/api/send/otp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: email })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('OTP sent successfully');
+                } else {
+                    console.error('Failed to send OTP');
+                }
+            })
+            .catch(error => {
+                console.error('Error sending OTP: ', error);
+            });
+        }
+
+        function verifyOtp() {
+            const otpCode = Array.from(otpInputs).map(input => input.value).join('');
+            if (otpCode.length !== 6) {
+                alert('Please enter the complete 6-digit code');
+                return;
+            }
+
+            verifyOtpBtn.innerHTML = '<div class="loading-spinner"></div>Verifying...';
+            verifyOtpBtn.disabled = true;
+
+            fetch('/api/verify-otp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: emailInput.value,
+                    otp: otpCode
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    hideOtpModal();
+                    form.submit();
+                } else {
+                    alert('Invalid OTP. Please try again');
+                    otpInputs.forEach(input => {
+                        input.value = '';
+                        input.classList.remove('filled');
+                    });
+                    otpInputs[0].focus();
+                }
+            })
+            .catch(error => {
+                console.error('Error verifying OTP:', error);
+                alert('Error verifying OTP. Please try again');
+            })
+            .finally(() => {
+                verifyOtpBtn.innerHTML = 'Verify and Sign Up';
+                verifyOtpBtn.disabled = false;
+            });
         }
 
         emailInput.addEventListener('input', function () {
@@ -71,6 +201,7 @@
                 emailError.style.display = 'none';
             }
         });
+
         confirmPassword.addEventListener('input', function () {
             if (password.value === confirmPassword.value) {
                 confirmError.style.display = 'none';
@@ -81,32 +212,56 @@
             }
         });
 
-        form.addEventListener('submit', function (e) {
-            let valid = true;
-            if (!validateGmail(emailInput.value.trim())) {
-                emailInput.setCustomValidity('Invalid Gmail');
-                emailError.style.display = 'block';
-                emailInput.focus();
-                valid = false;
-            } else {
-                emailInput.setCustomValidity('');
-                emailError.style.display = 'none';
+        signupBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (validateForm()) {
+                showOtpModal();
             }
-            if (password.value !== confirmPassword.value) {
-                confirmError.style.display = 'block';
-                confirmPassword.setCustomValidity('Passwords do not match');
-                confirmPassword.reportValidity();
-                confirmPassword.focus();
-                valid = false;
-            } else {
-                confirmError.style.display = 'none';
-                confirmPassword.setCustomValidity('');
-                confirmPassword.reportValidity();
-            }
-            if (!valid) {
+        });
+
+        otpInputs.forEach((input, index) => {
+            input.addEventListener('input', function () {
+                if (this.value) {
+                    this.classList.add('filled');
+                    if (index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
+                } else {
+                    this.classList.remove('filled');
+                }
+            });
+
+            input.addEventListener('keydown', function (e) {
+                if (e.key === 'Backspace' && !this.value && index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+                if (!/[0-9]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                    e.preventDefault();
+                }
+            });
+
+            input.addEventListener('paste', function (e) {
                 e.preventDefault();
+                const pastedData = e.clipboardData.getData('text');
+                if (/^\d{6}$/.test(pastedData)) {
+                    pastedData.split('').forEach((digit, i) => {
+                        if (otpInputs[i]) {
+                            otpInputs[i].value = digit;
+                            otpInputs[i].classList.add('filled');
+                        }
+                    });
+                }
+            });
+        });
+
+        verifyOtpBtn.addEventListener('click', verifyOtp);
+
+        otpClose.addEventListener('click', hideOtpModal);
+
+        window.addEventListener('click', function (event) {
+            if (event.target === otpModal) {
+                hideOtpModal();
             }
-            // else: allow form to submit to server
         });
     });
 </script>
