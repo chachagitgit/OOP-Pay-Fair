@@ -249,6 +249,8 @@
                         </div>
                     </div>
                     <div id="inputErrorMsg" style="color:red;font-weight:bold;margin:8px 0;"></div>
+                    <!-- Use Current Location Button -->
+                    <button type="button" id="useCurrentLocationBtn" class="popup-button destination-btn" style="margin-top:8px;">Use Current Location</button>
                     <!-- Clear Locations button -->
                     <button type="button" id="clearLocationsBtn" class="popup-button origin-btn">Clear Locations</button>
                     <div class="section-title">Transportation Options</div>
@@ -493,6 +495,18 @@
         <button class="popup-button origin-btn" id="setOrigin">Set as Origin</button>
         <button class="popup-button destination-btn" id="setDestination">Set as Destination</button>
         <button class="popup-button cancel-btn" id="cancelSelection">Cancel</button>
+    </div>
+</div>
+
+<!-- Modal for location permission -->
+<div id="locationPermissionModal" class="custom-popup" style="display:none;z-index:2000;">
+    <div class="place-details">
+        <h3>Allow Location Access?</h3>
+        <p>We need your permission to use your current location to set as destination.</p>
+    </div>
+    <div class="popup-buttons">
+        <button class="popup-button origin-btn" id="allowLocationBtn">Allow</button>
+        <button class="popup-button cancel-btn" id="denyLocationBtn">Deny</button>
     </div>
 </div>
 
@@ -1074,4 +1088,47 @@
         }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJWH0VLI60CGZNcXQQbFWrLUDIfG3z3G0&libraries=places&callback=initMap"></script>
+    <script>
+        // --- Use Current Location Button Logic (session-based) ---
+        const useCurrentLocationBtn = document.getElementById('useCurrentLocationBtn');
+        const locationPermissionModal = document.getElementById('locationPermissionModal');
+        let locationPermissionGranted = sessionStorage.getItem('locationPermissionGranted') === 'true';
+
+        useCurrentLocationBtn.addEventListener('click', function() {
+            if (locationPermissionGranted) {
+                getAndSetCurrentLocation();
+            } else {
+                locationPermissionModal.style.display = 'block';
+            }
+        });
+
+        document.getElementById('allowLocationBtn').onclick = function() {
+            locationPermissionGranted = true;
+            sessionStorage.setItem('locationPermissionGranted', 'true');
+            locationPermissionModal.style.display = 'none';
+            getAndSetCurrentLocation();
+        };
+        document.getElementById('denyLocationBtn').onclick = function() {
+            locationPermissionGranted = false;
+            sessionStorage.removeItem('locationPermissionGranted'); // Always show modal if denied
+            locationPermissionModal.style.display = 'none';
+        };
+
+        function getAndSetCurrentLocation() {
+            if (!navigator.geolocation) {
+                alert('Geolocation is not supported by your browser.');
+                return;
+            }
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+                setLocationInput('destinationInput', {lat: () => lat, lng: () => lng}, 'Destination');
+            }, function(error) {
+                alert('Unable to retrieve your location. Please allow location access.');
+                // Reset permission so modal will show again next time
+                locationPermissionGranted = false;
+                sessionStorage.removeItem('locationPermissionGranted');
+            });
+        }
+    </script>
 }
