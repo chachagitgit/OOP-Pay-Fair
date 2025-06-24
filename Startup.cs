@@ -19,13 +19,24 @@ namespace OOP_Fair_Fare
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-        }
-
-        public void ConfigureServices(IServiceCollection services)
+        }        public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpContextAccessor();
             services.AddTransient<IEmailService, EmailService>();
-            services.AddRazorPages();
+            
+            services.AddAuthentication("Cookies")
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/log-in";
+                    options.AccessDeniedPath = "/log-in";
+                    options.ExpireTimeSpan = TimeSpan.FromHours(24);
+                });
+
+            services.AddRazorPages(options =>
+            {
+                options.Conventions.AuthorizeFolder("/admin");
+            });
+            
             services.AddSession();
             services.AddControllers()
                 .AddJsonOptions(options =>
@@ -54,10 +65,11 @@ namespace OOP_Fair_Fare
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
-            app.UseRouting();
+            app.UseStaticFiles();            app.UseRouting();
             app.UseSession();
+            
+            // Add authentication before authorization
+            app.UseAuthentication();
             app.UseAuthorization();
 
             // Seed admin user

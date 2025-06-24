@@ -6,6 +6,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace OOP_Fair_Fare.Pages
 {
@@ -26,7 +29,6 @@ namespace OOP_Fair_Fare.Pages
         }
 
         public void OnGet() { }
-
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -44,31 +46,79 @@ namespace OOP_Fair_Fare.Pages
             {
                 ModelState.AddModelError(string.Empty, "Account not found.");
                 return Page();
-            }            if (Input.Password == null)
-            {
-                ModelState.AddModelError(string.Empty, "Password is required.");
-                return Page();
             }
 
-            string hashed = HashPassword(Input.Password);
+            string hashed = HashPassword(Input.Password!);
             if (user.HashedPassword != hashed)
             {
                 ModelState.AddModelError(string.Empty, "Wrong Password, try again.");
                 return Page();
-            }            // Set session
+            }            // Check user role
+            var role = await _db.Roles.FirstOrDefaultAsync(r => r.UserId == user.Id);
+            if (role == null)
+            {
+                ModelState.AddModelError(string.Empty, "User role not found.");
+                return Page();
+            }
+
+            // Create claims for the user
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, role.RoleName)
+            };
+
+            // Create claims identity
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            // Create claims principal
+            var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
+            // Set authentication properties
+            var authProperties = new AuthenticationProperties
+            {
+                IsPersistent = true, // Remember the login
+                ExpiresUtc = DateTimeOffset.UtcNow.AddHours(24)
+            };
+
+            // Sign in the user
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                claimsPrincipal,
+                authProperties
+            );
+
+            // Also set session data if needed
             HttpContext.Session.SetInt32("UserId", user.Id);
             HttpContext.Session.SetString("Username", user.Username);
 
-            // Check user role
-            var role = await _db.Roles.FirstOrDefaultAsync(r => r.UserId == user.Id);
-            if (role != null && role.RoleName == "Admin")
+            // Redirect based on role
+            if (role.RoleName == "Admin")
             {
                 return RedirectToPage("/admin");
             }
-            else
+            
+            // Check if there's a return URL
+            var returnUrl = Request.Query["returnUrl"].ToString();
+            if (!string.IsNullOrEmpty(returnUrl))
             {
-                return RedirectToPage("/Index");
+                return LocalRedirect(returnUrl);
             }
+
+            return RedirectToPage("/Index");
+        }
+
+        public async Task<IActionResult> OnGetLogoutAsync()
+        {
+            // Sign out the user
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            
+            // Clear the session
+            HttpContext.Session.Clear();
+            
+            return RedirectToPage("/Index");
         }
 
         private string HashPassword(string password)
