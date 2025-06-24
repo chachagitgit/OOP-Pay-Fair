@@ -430,6 +430,51 @@
     const clearBtn = document.getElementById('clearLocationsBtn');
     if (clearBtn) {
         clearBtn.addEventListener('click', function() {
+            // Clear input fields
+            document.getElementById("originInput").value = "";
+            document.getElementById("destinationInput").value = "";
+
+            // Remove manual place selections from autocomplete
+            if (originAutocomplete._originalGetPlace) {
+                originAutocomplete.getPlace = originAutocomplete._originalGetPlace;
+                delete originAutocomplete._manualPlace;
+                delete originAutocomplete._hasManualSelection;
+                delete originAutocomplete._originalGetPlace;
+            }
+            if (destinationAutocomplete._originalGetPlace) {
+                destinationAutocomplete.getPlace = destinationAutocomplete._originalGetPlace;
+                delete destinationAutocomplete._manualPlace;
+                delete destinationAutocomplete._hasManualSelection;
+                delete destinationAutocomplete._originalGetPlace;
+            }
+
+            // Uncheck vehicle radios and discount
+            const vehicleRadios = document.querySelectorAll('input[name="vehicle"]');
+            vehicleRadios.forEach(radio => radio.checked = false);
+            document.getElementById("discounts").checked = false;
+
+            // Remove markers
+            if (window.originMarker) window.originMarker.setMap(null);
+            if (window.destMarker) window.destMarker.setMap(null);
+            if (directionsRenderer) directionsRenderer.setDirections({ routes: [] });
+
+            // Reset fare display fields
+            document.getElementById("fareAmount").value = "";
+            document.getElementById("baseFare").value = "";
+            document.getElementById("appliedDiscount").value = "";
+            document.getElementById("distance").value = "";
+            document.getElementById("totalFare").value = "";
+            document.getElementById("fareLocation").value = "";
+            document.getElementById("fareDestinationInput").value = "";
+            document.getElementById("vehicle-options").value = "";
+            document.getElementById("fareAmount").innerText = "₱ XXXX";
+            document.getElementById("baseFare").innerText = "XXXX";
+            document.getElementById("appliedDiscount").innerText = "XXXX";
+            document.getElementById("distance").innerText = "XXXX";
+            document.getElementById("totalFare").innerText = "XXXX";
+            document.getElementById("fareLocation").innerText = "";
+
+            // Reset calculation state
             lastFareInfo = null;
             lastOrigin = null;
             lastDestination = null;
@@ -569,17 +614,55 @@
 
             // Clear Locations button logic
             document.getElementById('clearLocationsBtn').onclick = function() {
+                // Clear input fields
                 document.getElementById("originInput").value = "";
                 document.getElementById("destinationInput").value = "";
+
+                // Remove manual place selections from autocomplete
+                if (originAutocomplete._originalGetPlace) {
+                    originAutocomplete.getPlace = originAutocomplete._originalGetPlace;
+                    delete originAutocomplete._manualPlace;
+                    delete originAutocomplete._hasManualSelection;
+                    delete originAutocomplete._originalGetPlace;
+                }
+                if (destinationAutocomplete._originalGetPlace) {
+                    destinationAutocomplete.getPlace = destinationAutocomplete._originalGetPlace;
+                    delete destinationAutocomplete._manualPlace;
+                    delete destinationAutocomplete._hasManualSelection;
+                    delete destinationAutocomplete._originalGetPlace;
+                }
+
+                // Uncheck vehicle radios and discount
+                const vehicleRadios = document.querySelectorAll('input[name="vehicle"]');
+                vehicleRadios.forEach(radio => radio.checked = false);
+                document.getElementById("discounts").checked = false;
+
+                // Remove markers
                 if (window.originMarker) window.originMarker.setMap(null);
                 if (window.destMarker) window.destMarker.setMap(null);
                 if (directionsRenderer) directionsRenderer.setDirections({ routes: [] });
+
+                // Reset fare display fields
+                document.getElementById("fareAmount").value = "";
+                document.getElementById("baseFare").value = "";
+                document.getElementById("appliedDiscount").value = "";
+                document.getElementById("distance").value = "";
+                document.getElementById("totalFare").value = "";
+                document.getElementById("fareLocation").value = "";
+                document.getElementById("fareDestinationInput").value = "";
+                document.getElementById("vehicle-options").value = "";
                 document.getElementById("fareAmount").innerText = "₱ XXXX";
                 document.getElementById("baseFare").innerText = "XXXX";
                 document.getElementById("appliedDiscount").innerText = "XXXX";
                 document.getElementById("distance").innerText = "XXXX";
                 document.getElementById("totalFare").innerText = "XXXX";
                 document.getElementById("fareLocation").innerText = "";
+
+                // Reset calculation state
+                lastFareInfo = null;
+                lastOrigin = null;
+                lastDestination = null;
+                enableSaveRouteIfReady();
             };
 
             map.addListener('click', function(event) {
