@@ -23,16 +23,13 @@ namespace OOP_Fair_Fare.Models
             // Get the decimal part
             decimal decimalPart = fare - Math.Floor(fare);
             
-            // If decimal is <= 0.49, round down
-            if (decimalPart <= 0.49M)
-            {
-                return Math.Floor(fare);
-            }
-            // If decimal is >= 0.50, round up
-            else
+            // If there's any decimal part, round up
+            if (decimalPart > 0)
             {
                 return Math.Ceiling(fare);
             }
+            // If no decimal part, return as is
+            return fare;
         }
     }
 }

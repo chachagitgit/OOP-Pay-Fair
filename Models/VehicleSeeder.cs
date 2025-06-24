@@ -17,8 +17,8 @@ namespace OOP_Fair_Fare.Models
                 db.Vehicles.AddRange(
                     new Vehicle { Name = "Airconditioned Bus", BaseFare = 15.00m, BaseKm = 5.0m, AdditionalFare = 2.65m },
                     new Vehicle { Name = "Ordinary Bus", BaseFare = 13.00m, BaseKm = 5.0m, AdditionalFare = 2.25m },
-                    new Vehicle { Name = "Modern E-Jeepney", BaseFare = 14.00m, BaseKm = 4.0m, AdditionalFare = 2.00m },
-                    new Vehicle { Name = "Traditional Jeepney", BaseFare = 12.00m, BaseKm = 4.0m, AdditionalFare = 1.80m }
+                    new Vehicle { Name = "Modern E-Jeepney", BaseFare = 15.00m, BaseKm = 4.0m, AdditionalFare = 2.00m },
+                    new Vehicle { Name = "Traditional Jeepney", BaseFare = 13.00m, BaseKm = 4.0m, AdditionalFare = 1.80m }
                 );
                 // Save changes to the database (creates the initial vehicle records)
                 db.SaveChanges();

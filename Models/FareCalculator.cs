@@ -4,15 +4,15 @@ using System.Linq;
 
 namespace OOP_Fair_Fare
 {
-    public class FareCalculator
+    public class FareCalculator //hides complex fare calculation logic
     {
-        private readonly AppDbContext _db;
-        public FareCalculator(AppDbContext db)
+        private readonly AppDbContext _db; //private field encap
+        public FareCalculator(AppDbContext db) //constructor encap
         {
             _db = db;
         }
 
-        public class FareResult
+        public class FareResult 
         {
             public double BaseFare { get; set; }
             public double DiscountAmount { get; set; }
@@ -45,14 +45,11 @@ namespace OOP_Fair_Fare
 
             //apply rounding rules only to the final total fare
             double roundedTotalFare = rawTotalFare;
-            if (roundedTotalFare % 1 >= 0.50)
+            if (roundedTotalFare % 1 > 0)  // if there's any decimal part
             {
                 roundedTotalFare = Math.Ceiling(roundedTotalFare);
             }
-            else
-            {
-                roundedTotalFare = Math.Floor(roundedTotalFare);
-            }
+            // if no decimal part, keep the original value
 
             return new FareResult
             {
@@ -63,6 +60,7 @@ namespace OOP_Fair_Fare
         }
 
         private double CalculateBaseFare(double distanceTraveled, double initialKm, double initialFare, double additionalPerKm)
+        // private method encap
         {
             double additionalDistance = Math.Max(0, distanceTraveled - initialKm);
             return initialFare + (additionalDistance * additionalPerKm);
