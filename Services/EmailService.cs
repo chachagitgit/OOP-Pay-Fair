@@ -8,13 +8,14 @@ using Microsoft.Extensions.Logging;
 
 namespace OOP_Fair_Fare.Services
 {
-    public interface IEmailService
+    public interface IEmailService //hides implementation details - abstraction
     {
         Task SendEmailAsync(string to, string subject, string body);
     }
 
-    public class EmailService : IEmailService
+    public class EmailService : IEmailService //inherits IEmailService interface
     {
+        //encap
         private readonly string _smtpServer;
         private readonly int _smtpPort;
         private readonly string _fromEmail;
