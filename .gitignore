@@ -98,6 +98,10 @@ ipch/
 *.psess
 *.vsp
 *.vspx
+
+# SQLite temporary files
+*.db-shm
+*.db-wal
 *.sap
 
 # Visual Studio Trace Files
