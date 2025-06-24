@@ -238,10 +238,10 @@ body {
     background-position: center;
 }
 
-.bus-airconditioned { background-image: url('/images/AirconBus.png'); }
-.bus-regular { background-image: url('/images/RegularBus.png'); }
-.jeepney-traditional { background-image: url('/images/TradJeep.png'); }
-.jeepney-e { background-image: url('/images/ejeep.png'); }
+.airconditioned-bus { background-image: url('/images/AirconBus.png'); }
+.ordinary-bus { background-image: url('/images/RegularBus.png'); }
+.modern-e-jeepney { background-image: url('/images/ejeep.png'); }
+.traditional-jeepney { background-image: url('/images/TradJeep.png'); }
 
 .vehicle-name {
     flex: 1;
