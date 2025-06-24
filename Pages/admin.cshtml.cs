@@ -5,9 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OOP_Fair_Fare.Pages
-{
+{   [Authorize]
     [IgnoreAntiforgeryToken]
     public class adminModel : PageModel
     {
