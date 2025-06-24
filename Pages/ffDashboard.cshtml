@@ -248,6 +248,7 @@
                             </div>  
                         </div>
                     </div>
+                    <div id="inputErrorMsg" style="color:red;font-weight:bold;margin:8px 0;"></div>
                     <!-- Clear Locations button -->
                     <button type="button" id="clearLocationsBtn" class="popup-button origin-btn">Clear Locations</button>
                     <div class="section-title">Transportation Options</div>
@@ -357,24 +358,83 @@
     let lastFareInfo = null;
     let lastOrigin = null;
     let lastDestination = null;
-    
+
     const saveRouteBtn = document.querySelector('.save-route');
-    // Always disable for admin
-    if (isAdmin) {
-        saveRouteBtn.disabled = true;
-        saveRouteBtn.title = "Admins cannot save routes.";
-    }
+    // Helper to check if Save Route should be enabled
     function enableSaveRouteIfReady() {
-        if (isAdmin) {
+        if (!userLoggedIn || isAdmin) {
             saveRouteBtn.disabled = true;
-            saveRouteBtn.title = "Admins cannot save routes.";
+            saveRouteBtn.title = !userLoggedIn ? "You must be logged in to save routes." : "Admins cannot save routes.";
         } else {
-            saveRouteBtn.disabled = !(userLoggedIn && lastFareInfo && lastOrigin && lastDestination);
-            saveRouteBtn.title = "";
+            // Only enable if a route has been calculated (lastFareInfo, lastOrigin, lastDestination)
+            saveRouteBtn.disabled = !(lastFareInfo && lastOrigin && lastDestination);
+            saveRouteBtn.title = saveRouteBtn.disabled ? "Calculate a route first." : "";
         }
     }
-    function updateSaveRouteForm() {
-        // No-op: all form fields are updated directly in displayFare
+    // Initial state
+    enableSaveRouteIfReady();
+
+    // Error message for same origin/destination
+    function showInputError(msg) {
+        let err = document.getElementById('inputErrorMsg');
+        if (err) {
+            err.textContent = msg;
+            err.style.display = '';
+        }
+    }
+    function clearInputError() {
+        let err = document.getElementById('inputErrorMsg');
+        if (err) {
+            err.textContent = '';
+            err.style.display = 'none';
+        }
+    }
+    // Check for same input on change
+    function checkSameLocationInputs() {
+        const origin = document.getElementById('originInput').value.trim();
+        const dest = document.getElementById('destinationInput').value.trim();
+        if (origin && dest && origin.toLowerCase() === dest.toLowerCase()) {
+            alert('Origin and destination cannot be the same.');
+            return true;
+        } else {
+            return false;
+        }
+    }
+    document.getElementById('originInput').addEventListener('input', checkSameLocationInputs);
+    document.getElementById('destinationInput').addEventListener('input', checkSameLocationInputs);
+
+    // Patch calculateRoute to check for same input
+    const origCalculateRoute = window.calculateRoute;
+    window.calculateRoute = function() {
+        // Block calculation if origin and destination are the same
+        const originVal = document.getElementById('originInput').value.trim();
+        const destVal = document.getElementById('destinationInput').value.trim();
+        if (originVal && destVal && originVal.toLowerCase() === destVal.toLowerCase()) {
+            alert('Origin and destination cannot be the same.');
+            return;
+        }
+        origCalculateRoute();
+    };
+
+    // Patch displayFare to update Save Route state
+    const origDisplayFare = window.displayFare;
+    window.displayFare = function(distance, fareInfo, duration, originName, destinationName) {
+        origDisplayFare(distance, fareInfo, duration, originName, destinationName);
+        lastFareInfo = fareInfo;
+        lastOrigin = originName;
+        lastDestination = destinationName;
+        enableSaveRouteIfReady();
+    };
+
+    // Also disable Save Route on reset/clear
+    const clearBtn = document.getElementById('clearLocationsBtn');
+    if (clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            lastFareInfo = null;
+            lastOrigin = null;
+            lastDestination = null;
+            enableSaveRouteIfReady();
+        });
     }
 </script>
 
@@ -712,6 +772,13 @@
         }
 
         function calculateRoute() {
+            // Block calculation if origin and destination are the same
+            const originVal = document.getElementById('originInput').value.trim();
+            const destVal = document.getElementById('destinationInput').value.trim();
+            if (originVal && destVal && originVal.toLowerCase() === destVal.toLowerCase()) {
+                alert('Origin and destination cannot be the same.');
+                return;
+            }
             let origin = originAutocomplete.getPlace();
             let destination = destinationAutocomplete.getPlace();
 
