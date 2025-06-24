@@ -16,14 +16,15 @@ namespace OOP_Fair_Fare.Controllers
     /// </summary>
     [Route("api")]
     [ApiController]
-    public class EmailVerificationController : ControllerBase
+    public class EmailVerificationController : ControllerBase //inherits form ControllerBase.cs
     {
         // Database context for accessing and manipulating data
+        // encapsulation - private fields
         private readonly AppDbContext _context;
-        
+
         // Random number generator for OTP creation
         private readonly Random _random;
-        
+
         // Configuration service to access email settings from appsettings.json
         private readonly IConfiguration _configuration;
 
@@ -33,15 +34,15 @@ namespace OOP_Fair_Fare.Controllers
             _random = new Random();
             _configuration = configuration;
         }        /// <summary>
-        /// Endpoint for sending OTP verification codes via email.
-        /// This method is called when a user signs up and needs to verify their email.
-        /// The process:
-        /// 1. Generates a random 6-digit OTP
-        /// 2. Saves the OTP to the database with a 5-minute expiration
-        /// 3. Sends the OTP to the user's email using SMTP
-        /// </summary>
-        /// <param name="request">Contains the user's email address</param>
-        /// <returns>Success response if email sent, error response if failed</returns>
+                 /// Endpoint for sending OTP verification codes via email.
+                 /// This method is called when a user signs up and needs to verify their email.
+                 /// The process:
+                 /// 1. Generates a random 6-digit OTP
+                 /// 2. Saves the OTP to the database with a 5-minute expiration
+                 /// 3. Sends the OTP to the user's email using SMTP
+                 /// </summary>
+                 /// <param name="request">Contains the user's email address</param>
+                 /// <returns>Success response if email sent, error response if failed</returns>
         [HttpPost("send/otp")]
         public async Task<IActionResult> SendOTP([FromBody] EmailRequest request)
         {
@@ -52,7 +53,7 @@ namespace OOP_Fair_Fare.Controllers
                 var fromEmail = _configuration["Email:FromEmail"] ?? throw new InvalidOperationException("From email not configured");
                 var password = _configuration["Email:Password"] ?? throw new InvalidOperationException("Email password not configured");
 
-                // Generate 6-digit OTP
+                // Generate 6-digit OTP //abstract otp generation
                 string otp = _random.Next(100000, 999999).ToString();
 
                 // Save OTP to database
@@ -68,6 +69,7 @@ namespace OOP_Fair_Fare.Controllers
                 _context.EmailVerifications.Add(verification);
                 await _context.SaveChangesAsync();
 
+                // Send email with OTP //abstract email sending process
                 using (var client = new SmtpClient(smtpServer, int.Parse(smtpPort)))
                 {
                     client.EnableSsl = true;
@@ -86,26 +88,27 @@ namespace OOP_Fair_Fare.Controllers
                 }
 
                 return Ok(new { success = true });
-            }            catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.Error.WriteLine($"Failed to send OTP: {ex.Message}");
                 Console.Error.WriteLine($"Stack trace: {ex.StackTrace}");
                 return StatusCode(500, new { success = false, message = $"Failed to send OTP: {ex.Message}" });
-            }
+            } //email sending implementation hidden from users
         }        /// <summary>
-        /// Endpoint for verifying the OTP code entered by the user.
-        /// This method is called when a user submits the OTP code from the verification modal.
-        /// The verification process:
-        /// 1. Finds the most recent unused OTP for the email
-        /// 2. Checks if the OTP exists and hasn't expired
-        /// 3. Validates the entered code against the stored OTP
-        /// 4. Marks the OTP as used if validation succeeds
-        /// </summary>
-        /// <param name="request">Contains the email and OTP code entered by user</param>
-        /// <returns>
-        /// - Success response if OTP is valid
-        /// - Bad request if OTP is invalid, expired, or not found
-        /// </returns>
+                 /// Endpoint for verifying the OTP code entered by the user.
+                 /// This method is called when a user submits the OTP code from the verification modal.
+                 /// The verification process:
+                 /// 1. Finds the most recent unused OTP for the email
+                 /// 2. Checks if the OTP exists and hasn't expired
+                 /// 3. Validates the entered code against the stored OTP
+                 /// 4. Marks the OTP as used if validation succeeds
+                 /// </summary>
+                 /// <param name="request">Contains the email and OTP code entered by user</param>
+                 /// <returns>
+                 /// - Success response if OTP is valid
+                 /// - Bad request if OTP is invalid, expired, or not found
+                 /// </returns>
         [HttpPost("verify-otp")]
         public async Task<IActionResult> VerifyOTP([FromBody] OTPVerificationRequest request)
         {
@@ -134,6 +137,7 @@ namespace OOP_Fair_Fare.Controllers
 
             return Ok(new { success = true });
         }
+    //data encapsulation through models
     }    public class EmailRequest
     {
         public required string Email { get; set; }

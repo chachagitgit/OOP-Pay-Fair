@@ -19,12 +19,13 @@ namespace OOP_Fair_Fare.Controllers
     /// </summary>
     [ApiController]
     [Route("api/[controller]")]
-    public class FareController : ControllerBase
+    public class FareController : ControllerBase //inherits from ControllerBase.cs
+    // inherits needed functionalities
     {
         // Database context for accessing vehicle fare rates and rules
-        private readonly AppDbContext _db;
+        private readonly AppDbContext _db; //encapsulates db context
 
-        public FareController(AppDbContext db)
+        public FareController(AppDbContext db) //constructor encap
         {
             _db = db;
         }        /// <summary>
@@ -56,7 +57,7 @@ namespace OOP_Fair_Fare.Controllers
         public IActionResult Calculate([FromBody] FareRequest request)
         {
             try
-            {
+            {//hides complex fare calculation logic - abstraction
                 var fareCalculator = new FareCalculator(_db);
                 var result = fareCalculator.Calculate(
                     request.DistanceTraveled,

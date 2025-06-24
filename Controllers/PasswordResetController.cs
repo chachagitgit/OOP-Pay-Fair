@@ -17,7 +17,7 @@ namespace OOP_Fair_Fare.Controllers
     /// </summary>
     [ApiController]
     [Route("api/[controller]")]
-    public class PasswordResetController : ControllerBase
+    public class PasswordResetController : ControllerBase //inherits from ContollerBase
     {
         // Database context for user and token management
         private readonly AppDbContext _context;
@@ -42,29 +42,30 @@ namespace OOP_Fair_Fare.Controllers
             _configuration = configuration;
             _logger = logger;
         }        /// <summary>
-        /// Initiates the password reset process for a user.
-        /// The process works as follows:
-        /// 1. Validates that the email exists in the system
-        /// 2. Generates a secure random token
-        /// 3. Saves the token to the database with a 24-hour expiration
-        /// 4. Sends a reset link to the user's email
-        /// 
-        /// Security features:
-        /// - Uses cryptographically secure random tokens
-        /// - Tokens expire after 24 hours
-        /// - One-time use tokens (marked as used after reset)
-        /// - Generic response messages to prevent email enumeration
-        /// </summary>
-        /// <param name="email">The email address of the user requesting password reset</param>
-        /// <returns>
-        /// - Generic success message (even if email not found, for security)
-        /// - Error details if email sending fails
-        /// </returns>
+                 /// Initiates the password reset process for a user.
+                 /// The process works as follows:
+                 /// 1. Validates that the email exists in the system
+                 /// 2. Generates a secure random token
+                 /// 3. Saves the token to the database with a 24-hour expiration
+                 /// 4. Sends a reset link to the user's email
+                 /// 
+                 /// Security features:
+                 /// - Uses cryptographically secure random tokens
+                 /// - Tokens expire after 24 hours
+                 /// - One-time use tokens (marked as used after reset)
+                 /// - Generic response messages to prevent email enumeration
+                 /// </summary>
+                 /// <param name="email">The email address of the user requesting password reset</param>
+                 /// <returns>
+                 /// - Generic success message (even if email not found, for security)
+                 /// - Error details if email sending fails
+                 /// </returns>
         [HttpPost("request")]
+        //hides complex password reset logic - abstraction
         public async Task<IActionResult> RequestReset([FromForm] string email)
         {
             _logger.LogInformation($"Password reset requested for email: {email}");
-              var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email && !u.IsDeleted);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email && !u.IsDeleted);
             if (user == null)
             {
                 _logger.LogWarning($"User not found for email: {email}");
@@ -98,7 +99,7 @@ namespace OOP_Fair_Fare.Controllers
                     <p>We received a request to reset your password. Click the link below to set a new password:</p>
                     <p><a href='{resetLink}'>Reset Password</a></p>
                     <p>This link will expire in 24 hours.</p>
-                    <p>If you didn't request this password reset, please ignore this email.</p>";                _logger.LogInformation($"Attempting to send reset email to: {user.Email}");
+                    <p>If you didn't request this password reset, please ignore this email.</p>"; _logger.LogInformation($"Attempting to send reset email to: {user.Email}");
                 try
                 {
                     await _emailService.SendEmailAsync(user.Email, "Password Reset Request", emailBody);
@@ -111,7 +112,7 @@ namespace OOP_Fair_Fare.Controllers
                     return StatusCode(500, new { message = $"Failed to send email: {emailEx.Message}" });
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) //error handling
             {
                 _logger.LogError(ex, $"Error processing password reset for user ID: {user.Id}");
                 return StatusCode(500, new { message = "An error occurred while processing your request." });
