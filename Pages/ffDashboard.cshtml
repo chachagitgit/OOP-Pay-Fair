@@ -502,11 +502,23 @@
 <div id="locationPermissionModal" class="custom-popup" style="display:none;z-index:2000;">
     <div class="place-details">
         <h3>Allow Location Access?</h3>
-        <p>We need your permission to use your current location to set as destination.</p>
+        <p>We need your permission to use your current location to set as origin or destination.</p>
     </div>
     <div class="popup-buttons">
         <button class="popup-button origin-btn" id="allowLocationBtn">Allow</button>
         <button class="popup-button cancel-btn" id="denyLocationBtn">Deny</button>
+    </div>
+</div>
+<!-- Modal for choosing origin/destination -->
+<div id="chooseLocationUseModal" class="custom-popup" style="display:none;z-index:2100;">
+    <div class="place-details">
+        <h3>Use current location as:</h3>
+        <p>Would you like to use your current location as the origin or destination?</p>
+    </div>
+    <div class="popup-buttons">
+        <button class="popup-button origin-btn" id="useAsOriginBtn">Origin</button>
+        <button class="popup-button destination-btn" id="useAsDestinationBtn">Destination</button>
+        <button class="popup-button cancel-btn" id="cancelUseLocationBtn">Cancel</button>
     </div>
 </div>
 
@@ -727,18 +739,32 @@
 
         function setLocationInput(inputId, latLng, label) {
             const geocoder = new google.maps.Geocoder();
-            geocoder.geocode({ location: latLng }, function(results, status) {
+            // Accept both LatLng object and plain {lat, lng} object
+            let locationObj = latLng;
+            let lat, lng;
+            if (typeof latLng.lat === 'function' && typeof latLng.lng === 'function') {
+                lat = latLng.lat();
+                lng = latLng.lng();
+                locationObj = { lat, lng };
+            } else {
+                lat = latLng.lat;
+                lng = latLng.lng;
+            }
+            geocoder.geocode({ location: locationObj }, function(results, status) {
                 if (status === 'OK' && results[0]) {
                     // Automatically use the first result without showing dropdown
                     const firstResult = results[0];
                     const address = firstResult.formatted_address;
+
+                    // Always use a Google Maps LatLng object for geometry and marker
+                    const gLatLng = new google.maps.LatLng(lat, lng);
 
                     // Create a place object from the first result
                     const placeObj = {
                         name: address,
                         formatted_address: address,
                         geometry: { 
-                            location: new google.maps.LatLng(latLng.lat(), latLng.lng())
+                            location: gLatLng
                         },
                         place_id: firstResult.place_id || 'manual_' + Date.now()
                     };
@@ -756,7 +782,7 @@
 
                     // Place marker
                     const markerOptions = {
-                        position: latLng,
+                        position: gLatLng,
                         map: map,
                         title: label,
                         icon: {
@@ -1089,6 +1115,30 @@
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJWH0VLI60CGZNcXQQbFWrLUDIfG3z3G0&libraries=places&callback=initMap"></script>
     <script>
+        const chooseLocationUseModal = document.getElementById('chooseLocationUseModal');
+        let pendingLocationCoords = null;
+
+        function showChooseLocationUseModal(coords) {
+            pendingLocationCoords = coords;
+            chooseLocationUseModal.style.display = 'block';
+        }
+
+        document.getElementById('useAsOriginBtn').onclick = function() {
+            if (pendingLocationCoords) {
+                setLocationInput('originInput', { lat: pendingLocationCoords.lat, lng: pendingLocationCoords.lng }, 'Origin');
+            }
+            chooseLocationUseModal.style.display = 'none';
+        };
+        document.getElementById('useAsDestinationBtn').onclick = function() {
+            if (pendingLocationCoords) {
+                setLocationInput('destinationInput', { lat: pendingLocationCoords.lat, lng: pendingLocationCoords.lng }, 'Destination');
+            }
+            chooseLocationUseModal.style.display = 'none';
+        };
+        document.getElementById('cancelUseLocationBtn').onclick = function() {
+            chooseLocationUseModal.style.display = 'none';
+        };
+
         // --- Use Current Location Button Logic (session-based) ---
         const useCurrentLocationBtn = document.getElementById('useCurrentLocationBtn');
         const locationPermissionModal = document.getElementById('locationPermissionModal');
@@ -1122,7 +1172,7 @@
             navigator.geolocation.getCurrentPosition(function(position) {
                 const lat = position.coords.latitude;
                 const lng = position.coords.longitude;
-                setLocationInput('destinationInput', {lat: () => lat, lng: () => lng}, 'Destination');
+                showChooseLocationUseModal({lat, lng});
             }, function(error) {
                 alert('Unable to retrieve your location. Please allow location access.');
                 // Reset permission so modal will show again next time
