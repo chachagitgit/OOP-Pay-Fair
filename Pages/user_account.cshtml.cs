@@ -149,14 +149,24 @@ namespace OOP_Fair_Fare.Pages
                     return RedirectToPage("/log-in");
                 }
 
-                // Ensure we get a fresh copy of the user from the database
-                var user = await _db.Users
+                // Load user data for the page
+                IsLoggedIn = true;
+                UserInfo = await _db.Users
                     .FirstOrDefaultAsync(u => u.Id == userId && !u.IsDeleted);
                 
-                if (user == null)
+                if (UserInfo == null)
                 {
                     return RedirectToPage("/log-in");
                 }
+
+                // Set the user information for the page
+                Username = UserInfo.Username;
+                FirstName = UserInfo.FirstName;
+                LastName = UserInfo.LastName;
+                SavedRoutes = await _db.SavedRoutes
+                    .Where(r => r.UserId == userId)
+                    .OrderByDescending(r => r.DateSaved)
+                    .ToListAsync();
 
                 // Validate inputs
                 if (string.IsNullOrEmpty(CurrentPassword) || string.IsNullOrEmpty(NewPassword) || string.IsNullOrEmpty(ConfirmNewPassword))
@@ -167,12 +177,8 @@ namespace OOP_Fair_Fare.Pages
 
                 // Hash current password to compare with stored hash
                 string hashedCurrentPassword = HashPassword(CurrentPassword);
-                
-                // Debug check - remove in production
-                System.Diagnostics.Debug.WriteLine($"Stored hash: {user.HashedPassword}");
-                System.Diagnostics.Debug.WriteLine($"Input hash: {hashedCurrentPassword}");
 
-                if (!string.Equals(user.HashedPassword, hashedCurrentPassword, StringComparison.OrdinalIgnoreCase))
+                if (!string.Equals(UserInfo.HashedPassword, hashedCurrentPassword, StringComparison.OrdinalIgnoreCase))
                 {
                     StatusMessage = "Current password is incorrect.";
                     return Page();
@@ -186,11 +192,14 @@ namespace OOP_Fair_Fare.Pages
                 }
 
                 // Update the password
-                user.HashedPassword = HashPassword(NewPassword);
-                _db.Users.Update(user);
+                UserInfo.HashedPassword = HashPassword(NewPassword);
+                _db.Users.Update(UserInfo);
                 await _db.SaveChangesAsync();
 
+                // Clear sensitive form data but keep user info
+                CurrentPassword = NewPassword = ConfirmNewPassword = null;
                 StatusMessage = "Password successfully updated.";
+                
                 return RedirectToPage();
             }
             catch (Exception ex)

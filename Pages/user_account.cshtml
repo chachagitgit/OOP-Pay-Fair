@@ -60,12 +60,14 @@
     </div>
     
     <!-- change password button in advanced settings-->
-    <div class="popup-overlay" id="password-modal" style="display: none;">
+    <div class="popup-overlay" id="password-modal" style="@((!string.IsNullOrEmpty(Model.StatusMessage) && Model.StatusMessage.Contains("incorrect")) ? "display: flex;" : "display: none;")">
         <div class="popup-dialog"> <!--show dialog for changing password-->
             <h3>Change Password</h3>
             @if (!string.IsNullOrEmpty(Model.StatusMessage))
             {
-                <div class="alert alert-info">@Model.StatusMessage</div>
+                <div class="alert @(Model.StatusMessage.Contains("incorrect") || Model.StatusMessage.Contains("required") ? "alert-danger" : "alert-info")">
+                    @Model.StatusMessage
+                </div>
             }
             <form id="password-form" method="post" asp-page-handler="ChangePassword">
                 @Html.AntiForgeryToken()
@@ -78,12 +80,17 @@
                 <!-- New password field with pattern matching for confirmation -->
                 <div class="password-form-group">
                     <label for="newPassword">New Password</label>
-                    <input type="password" id="newPassword" asp-for="NewPassword" required minlength="6" oninput="document.getElementById('confirmPassword').pattern = this.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');"/>
+                    <input type="password" id="newPassword" asp-for="NewPassword" required minlength="6"/>
+                    <div class="error-message">
+                        <span asp-validation-for="NewPassword"></span>
+                    </div>
                 </div>
                 <div class="password-form-group"> <!-- Confirm new password field -->
                     <label for="confirmPassword">Confirm New Password</label>
-                    <input type="password" id="confirmPassword" asp-for="ConfirmNewPassword" required minlength="6" title="Passwords must match"/>
-                    <span class="error-message" id="confirm-password-error">Passwords do not match</span>
+                    <input type="password" id="confirmPassword" asp-for="ConfirmNewPassword" required minlength="6"/>
+                    <div class="error-message">
+                        <span asp-validation-for="ConfirmNewPassword"></span>
+                    </div>
                 </div>
                 <!-- Modal action buttons -->
                 <button type="submit" class="confirm-btn">Change Password</button>
@@ -268,32 +275,50 @@
 
             // Password form validation
             passwordForm.addEventListener('submit', function(e) {
-                // Get form values
                 const currentPassword = document.getElementById('currentPassword').value;
                 const newPassword = document.getElementById('newPassword').value;
                 const confirmPassword = document.getElementById('confirmPassword').value;
+                let isValid = true;
+                
+                // Clear previous error messages
+                document.querySelectorAll('.error-message').forEach(msg => {
+                    if (msg.children.length === 0) {
+                        msg.style.display = 'none';
+                    }
+                });
                 
                 // Client-side validation
                 if (!currentPassword || !newPassword || !confirmPassword) {
                     e.preventDefault();
-                    alert('All password fields are required.');
-                    return;
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'alert alert-danger';
+                    errorDiv.textContent = 'All password fields are required.';
+                    passwordForm.insertBefore(errorDiv, passwordForm.firstChild);
+                    isValid = false;
                 }
                 
                 if (newPassword !== confirmPassword) {
                     e.preventDefault();
-                    alert('New password and confirm password do not match.');
-                    return;
+                    const confirmErrorSpan = document.querySelector('#confirmPassword').nextElementSibling.querySelector('span');
+                    confirmErrorSpan.textContent = 'New passwords do not match.';
+                    confirmErrorSpan.style.display = 'block';
+                    isValid = false;
                 }
                 
                 if (newPassword.length < 6) {
                     e.preventDefault();
-                    alert('New password must be at least 6 characters long.');
-                    return;
+                    const newPasswordErrorSpan = document.querySelector('#newPassword').nextElementSibling.querySelector('span');
+                    newPasswordErrorSpan.textContent = 'Password must be at least 6 characters long.';
+                    newPasswordErrorSpan.style.display = 'block';
+                    isValid = false;
                 }
                 
-                // If we get here, allow the form to submit to the server
-                return true;
+                // If validation failed, show the modal
+                if (!isValid) {
+                    document.getElementById('password-modal').style.display = 'flex';
+                }
+                
+                return isValid;
             });
         });
         </script>
