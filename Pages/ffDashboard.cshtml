@@ -111,7 +111,8 @@
                             <div class="content-section">
                                 <div class="total-fare">
                                     <h2>Total estimated fare:</h2>
-                                    <input type="text" class="fare-amount" id="fareAmount" name="RouteFare" value="" readonly style="border:none;background:transparent;font-size:2em;font-weight:bold;" />
+                                    <span class="fare-amount" id="fareAmount" style="font-size:2em;font-weight:bold;">0.00</span>
+                                    <input type="hidden" id="fareAmountInput" name="RouteFare" value="" />
                                 </div>
                                 <div class="section">
                                     <div class="section-title">Location</div>
@@ -299,7 +300,7 @@
             document.getElementById("fareLocation").value = "";
             document.getElementById("fareDestinationInput").value = "";
             document.getElementById("vehicle-options").value = "";
-            document.getElementById("fareAmount").innerText = "₱ XXXX";
+            document.getElementById("fareAmount").innerText = "XXXX";
             document.getElementById("baseFare").innerText = "XXXX";
             document.getElementById("appliedDiscount").innerText = "XXXX";
             document.getElementById("distance").innerText = "XXXX";
@@ -507,7 +508,7 @@
                 document.getElementById("fareLocation").value = "";
                 document.getElementById("fareDestinationInput").value = "";
                 document.getElementById("vehicle-options").value = "";
-                document.getElementById("fareAmount").innerText = "₱ XXXX";
+                document.getElementById("fareAmount").innerText = "XXXX";
                 document.getElementById("baseFare").innerText = "XXXX";
                 document.getElementById("appliedDiscount").innerText = "XXXX";
                 document.getElementById("distance").innerText = "XXXX";
@@ -704,7 +705,7 @@
 
             document.getElementById("discounts").checked = false;
 
-            document.getElementById("fareAmount").innerText = "₱ XXXX";
+            document.getElementById("fareAmount").innerText = "XXXX";
             document.getElementById("baseFare").innerText = "XXXX";
             document.getElementById("appliedDiscount").innerText = "XXXX";
             document.getElementById("distance").innerText = "XXXX";
@@ -914,7 +915,8 @@
             lastDestination = destinationName;
             enableSaveRouteIfReady();
             // Set values in readonly input fields for form submission (always 2 decimals)
-            document.getElementById("fareAmount").value = fareInfo.totalFare.toFixed(2);
+            document.getElementById("fareAmount").innerText = fareInfo.totalFare.toFixed(2);
+            document.getElementById("fareAmountInput").value = fareInfo.totalFare.toFixed(2);
             document.getElementById("baseFare").value = fareInfo.baseFare.toFixed(2);
             document.getElementById("appliedDiscount").value = fareInfo.discountAmount.toFixed(2);
             document.getElementById("distance").value = distance.toFixed(2);

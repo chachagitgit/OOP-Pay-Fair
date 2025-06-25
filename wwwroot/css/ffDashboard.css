@@ -493,7 +493,8 @@ label #cancel {
     font-weight: 550;
     color: #000;
     padding-bottom: 12px;
-    padding-left: 20px;
+    padding-left: 0px;
+    margin-left: -20px;
     border-bottom: 3px solid rgba(10, 36, 99, 0.8);
     display: inline-block;
     min-width: 120px;
