@@ -79,6 +79,7 @@ header{
     width: 0%;
     left: 50%;
 }
+
 /* Logo positioned on the right */
 header .logo{
     display: flex;

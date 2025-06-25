@@ -39,6 +39,8 @@ document.addEventListener('keydown', (e) => {
         closeSidebarFunc();
     }
 });
+
+//main animation for the homepage
 document.addEventListener('DOMContentLoaded', () => {
     // Carousel functionality - Keep all existing animations
     let next = document.getElementById('next');
