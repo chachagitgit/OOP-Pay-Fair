@@ -508,13 +508,13 @@ header .logo img{
     background: linear-gradient(60deg, #667eea 0%, #8a6ede 50%, #764ba2 100%);
 }
 .section-terms {
-    background: linear-gradient(60deg, #3e92cc 0%, #5a7fcc 50%, #667eea 100%);
+    background: linear-gradient(60deg, #3e92cc 0%, #5a7fcc 50%, #6079e9 100%);
 }
 .section-privacy {
-    background: linear-gradient(60deg, #3e92cc 0%, #3175a6 50%, #4165b3 100%);
+    background: linear-gradient(60deg, #6aafe0 0%, #4794cc 50%, #5475be 100%);
 }
 .section-contact {
-    background: linear-gradient(60deg, #af4e71 0%, #9a60a2 50%, #6a4b8c 100%);
+    background: linear-gradient(60deg, #cc6289 0%, #b376bb 50%, #8666a9 100%);
 }
 .content-container {
     margin-top: 80px;
@@ -545,7 +545,7 @@ header .logo img{
     backdrop-filter: blur(15px);
     padding: 2.5rem;
     border-radius: 20px;
-    color: #0a2463;
+    color: #071c4d;
     width: 1000px;
     font-size: 18px;
     line-height: 1.6;
@@ -572,7 +572,7 @@ header .logo img{
     opacity: 0.9;
 }
 .content-section strong {
-    color: #0a2463;
+    color: #061e58;
 }
 .icon-container {
     transform: translateX(100vw);
