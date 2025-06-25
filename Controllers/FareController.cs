@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using OOP_Fair_Fare.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OOP_Fair_Fare.Controllers
 {
