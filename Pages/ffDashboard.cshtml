@@ -33,7 +33,7 @@
 <div class="container">
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <a href="@((!userLoggedIn) ? "/log-in" : (Model.IsAdmin ? "/admin" : "/user_account"))">
+            <a href="@((!userLoggedIn) ? "/log-in" : (Model.IsAdmin ? "/admin" : "/index"))">
                 <img src="/images/logo.png" alt="PayFair Logo" class="sidebar-logo">
             </a> 
         </div>
@@ -127,19 +127,27 @@
                                     </div>
                                     <div class="breakdown-item">
                                         <span class="item-label">Regular fare: </span>
-                                        <input type="text" class="item-value" id="baseFare" name="RouteRegularFare" value="" readonly style="border:none;background:transparent;" />
+                                        <span class="item-value peso-value" id="baseFare">0.00</span>
+                                        <input type="hidden" name="RouteRegularFare" id="baseFareInput" value="" />
                                     </div>
                                     <div class="breakdown-item">
                                         <span class="item-label">Applied discount: </span>
-                                        <input type="text" class="item-value" id="appliedDiscount" name="RouteAppliedDiscount" value="" readonly style="border:none;background:transparent;" />
+                                        <span class="item-value peso-value" id="appliedDiscount">0.00</span>
+                                        <input type="hidden" name="RouteAppliedDiscount" id="appliedDiscountInput" value="" />
                                     </div>
                                     <div class="breakdown-item">
                                         <span class="item-label">Distance: </span>
-                                        <input type="text" class="item-value" id="distance" name="RouteDistance" value="" readonly style="border:none;background:transparent;" />
+                                        <span class="item-value distance-value" id="distance">0.00</span>
+                                        <input type="hidden" name="RouteDistance" id="distanceInput" value="" />
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <span class="item-label">Traffic Condition: </span>
+                                        <input type="text" class="item-value" id="traffic" name="RouteTraffic" value="" readonly style="border:none;background:transparent;" />
                                     </div>
                                     <div class="breakdown-item total">
                                         <span class="item-label">Total estimated fare: </span>
-                                        <input type="text" class="item-value" id="totalFare" value="" readonly style="border:none;background:transparent;" />
+                                        <span class="item-value peso-value" id="totalFare">0.00</span>
+                                        <input type="hidden" id="totalFareInput" value="" />
                                     </div>
                                 </div>
                             </div>
