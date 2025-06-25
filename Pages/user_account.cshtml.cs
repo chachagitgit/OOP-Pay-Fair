@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using OOP_Fair_Fare.Models;
 using System.Text;
@@ -7,12 +8,23 @@ using System.Security.Cryptography;
 
 namespace OOP_Fair_Fare.Pages
 {
+    [RequireAuthentication]
     public class user_accountModel : PageModel
     {
         private readonly AppDbContext _db;
         public user_accountModel(AppDbContext db)
         {
             _db = db;
+        }
+
+        // Override to add cache control headers
+        public override void OnPageHandlerExecuting(PageHandlerExecutingContext context)
+        {
+            base.OnPageHandlerExecuting(context);
+            var headers = context.HttpContext.Response.Headers;
+            headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
+            headers["Pragma"] = "no-cache";
+            headers["Expires"] = "0";
         }
 
         public bool IsLoggedIn { get; set; }
@@ -37,16 +49,17 @@ namespace OOP_Fair_Fare.Pages
             var userId = HttpContext.Session.GetInt32("UserId");
             if (userId == null)
             {
-                IsLoggedIn = false;
-                return Page();
+                return RedirectToPage("/log-in");
             }
-            IsLoggedIn = true;
+
             UserInfo = await _db.Users.FirstOrDefaultAsync(u => u.Id == userId && !u.IsDeleted);
             if (UserInfo == null)
             {
-                IsLoggedIn = false;
-                return Page();
+                HttpContext.Session.Clear();
+                return RedirectToPage("/log-in");
             }
+
+            IsLoggedIn = true;
             Username = UserInfo.Username;
             FirstName = UserInfo.FirstName;
             LastName = UserInfo.LastName;
@@ -213,6 +226,16 @@ namespace OOP_Fair_Fare.Pages
                 System.Diagnostics.Debug.WriteLine($"Error changing password: {ex}");
                 return ReturnError("An error occurred while changing the password.");
             }
+        }
+
+        public IActionResult OnGetCheckAuth()
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return new UnauthorizedResult();
+            }
+            return new OkResult();
         }
     }
 }

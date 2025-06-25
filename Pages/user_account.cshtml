@@ -384,4 +384,31 @@
                 }
             });
         </script>
+    <script>
+        // Check session status on page load and when returning via back button
+        function checkAuth() {
+            fetch('/user_account?handler=CheckAuth', {
+                method: 'GET',
+                headers: {
+                    'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    window.location.href = '/log-in';
+                }
+            })
+            .catch(() => window.location.href = '/log-in');
+        }
+
+        // Check on page load
+        checkAuth();
+
+        // Check when returning via back button
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                checkAuth();
+            }
+        });
+    </script>
     }
