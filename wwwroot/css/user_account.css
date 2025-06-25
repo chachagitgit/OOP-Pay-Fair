@@ -14,7 +14,7 @@ body {
     border: none;   
     color: #0891b2;
     font-family: 'Poppins', sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     text-decoration: none;
     align-items: center;
@@ -402,9 +402,19 @@ body {
     font-weight: 500;
     cursor: pointer;
     transition: color 0.3s ease;
-    display: block;
+    display: flex; /*align the text and icon horizontally*/
+    align-items: center;
+    justify-content: center;
     padding: 4px 0;
-    text-align: center; /*center the label*/
+}
+.dropdown-icon {
+    font-size: 12px;
+    color: white;
+    margin-left: 13px;
+    transition: transform 0.3s ease;
+}
+#dropdown-toggle:checked ~ .dropdown-label .dropdown-icon {
+    transform: rotate(180deg); /*rotate when dropdown is open*/
 }
 .dropdown-container { /*advanced setting dropdown container for change pass and delete accs*/
     position: absolute;
@@ -579,11 +589,11 @@ body {
     min-width: 80px;
 }
 .confirm-btn {
-    background: rgba(220, 38, 38, 0.9);
+    background: #1e3a8a;
     color: white;
 }
 .confirm-btn:hover {
-    background: rgba(220, 38, 38, 1);
+    background: #3957ab;
     transform: translateY(-2px);
 }
 .cancel-btn {
