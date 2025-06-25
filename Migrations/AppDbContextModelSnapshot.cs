@@ -61,7 +61,6 @@ namespace OOP_Fair_Fare.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("ExpiresAt")
