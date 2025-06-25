@@ -78,7 +78,7 @@ namespace OOP_Fair_Fare.Controllers
             {
                 // Generate a random token
                 var token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(32));
-                var expiryDate = DateTime.UtcNow.AddHours(24);
+                var expiryDate = DateTime.UtcNow.AddMinutes(5);
 
                 var resetToken = new PasswordResetToken
                 {
@@ -98,7 +98,7 @@ namespace OOP_Fair_Fare.Controllers
                     <h2>Password Reset Request</h2>
                     <p>We received a request to reset your password. Click the link below to set a new password:</p>
                     <p><a href='{resetLink}'>Reset Password</a></p>
-                    <p>This link will expire in 24 hours.</p>
+                    <p>This link will expire in 5 minutes.</p>
                     <p>If you didn't request this password reset, please ignore this email.</p>"; _logger.LogInformation($"Attempting to send reset email to: {user.Email}");
                 try
                 {
