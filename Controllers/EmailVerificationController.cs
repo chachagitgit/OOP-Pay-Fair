@@ -62,7 +62,7 @@ namespace OOP_Fair_Fare.Controllers
                     Email = request.Email,
                     OTP = otp,
                     CreatedAt = DateTime.UtcNow,
-                    ExpiresAt = DateTime.UtcNow.AddMinutes(5),
+                    ExpiresAt = DateTime.UtcNow.AddMinutes(30),
                     IsUsed = false
                 };
 
@@ -79,7 +79,7 @@ namespace OOP_Fair_Fare.Controllers
                     {
                         From = new MailAddress(fromEmail),
                         Subject = "Fair Fare - Email Verification",
-                        Body = $"Your verification code is: {otp}\nThis code will expire in 5 minutes.",
+                        Body = $"Your verification code is: {otp}\nThis code will expire in 30 minutes.",
                         IsBodyHtml = false
                     };
                     mailMessage.To.Add(request.Email);
