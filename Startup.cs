@@ -81,6 +81,8 @@ namespace OOP_Fair_Fare
                 OOP_Fair_Fare.Models.VehicleSeeder.SeedVehicles(db);
                 // Seed roles (admin and regular)
                 OOP_Fair_Fare.Models.RoleSeeder.SeedRoles(db);
+                // Seed admin user
+                OOP_Fair_Fare.Models.AdminSeeder.SeedAdmin(db);
             }
 
             app.UseEndpoints(endpoints =>
