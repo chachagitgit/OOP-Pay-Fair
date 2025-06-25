@@ -905,16 +905,20 @@
             const hasRequiredFields = fareInfo && typeof fareInfo.baseFare === 'number' && typeof fareInfo.discountAmount === 'number' && typeof fareInfo.totalFare === 'number';
             if (fareInfo.error && !hasRequiredFields) {
                 // Clear all fare fields and disable Save Route
-                document.getElementById("fareAmount").value = "";
-                document.getElementById("baseFare").value = "";
-                document.getElementById("appliedDiscount").value = "";
-                document.getElementById("distance").value = "";
-                document.getElementById("totalFare").value = "";
+                document.getElementById("fareAmount").innerText = "Error";
+                document.getElementById("fareAmountInput").value = "";
+                document.getElementById("baseFare").innerText = "Error";
+                document.getElementById("baseFareInput").value = "";
+                document.getElementById("appliedDiscount").innerText = "Error";
+                document.getElementById("appliedDiscountInput").value = "";
+                document.getElementById("distance").innerText = "Error";
+                document.getElementById("distanceInput").value = "";
+                document.getElementById("totalFare").innerText = "Error";
+                document.getElementById("totalFareInput").value = "";
                 document.getElementById("fareLocation").value = "";
                 document.getElementById("fareDestinationInput").value = "";
                 document.getElementById("vehicle-options").value = "";
                 saveRouteBtn.disabled = true;
-                document.getElementById("fareAmount").innerText = "Error";
                 return;
             }
             lastFareInfo = fareInfo;
@@ -923,12 +927,16 @@
             lastDestination = destinationName;
             enableSaveRouteIfReady();
             // Set values in readonly input fields for form submission (always 2 decimals)
-            document.getElementById("fareAmount").innerText = fareInfo.totalFare.toFixed(2);
+            document.getElementById("fareAmount").innerText = `₱ ${fareInfo.totalFare.toFixed(2)}`;
             document.getElementById("fareAmountInput").value = fareInfo.totalFare.toFixed(2);
-            document.getElementById("baseFare").value = fareInfo.baseFare.toFixed(2);
-            document.getElementById("appliedDiscount").value = fareInfo.discountAmount.toFixed(2);
-            document.getElementById("distance").value = distance.toFixed(2);
-            document.getElementById("totalFare").value = fareInfo.totalFare.toFixed(2);
+            document.getElementById("baseFare").innerText = `₱ ${fareInfo.baseFare.toFixed(2)}`;
+            document.getElementById("baseFareInput").value = fareInfo.baseFare.toFixed(2);
+            document.getElementById("appliedDiscount").innerText = `₱ ${fareInfo.discountAmount.toFixed(2)}`;
+            document.getElementById("appliedDiscountInput").value = fareInfo.discountAmount.toFixed(2);
+            document.getElementById("distance").innerText = `${distance.toFixed(2)} km`;
+            document.getElementById("distanceInput").value = distance.toFixed(2);
+            document.getElementById("totalFare").innerText = `₱ ${fareInfo.totalFare.toFixed(2)}`;
+            document.getElementById("totalFareInput").value = fareInfo.totalFare.toFixed(2);
             document.getElementById("fareLocation").value = originName;
             document.getElementById("fareDestinationInput").value = destinationName;
             document.getElementById("vehicle-options").value = (document.querySelector('input[name="vehicle"]:checked')?.nextElementSibling?.innerText?.trim() || '');
