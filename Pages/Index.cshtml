@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
 @{
-    ViewData["Title"] = "PayFare Homepage";
+    ViewData["Title"] = "PayFair Homepage";
     Layout = "_Layout";
     var userId = HttpContextAccessor.HttpContext?.Session.GetInt32("UserId");
     var isLoggedIn = userId != null;

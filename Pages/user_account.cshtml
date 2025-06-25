@@ -63,21 +63,26 @@
     <div class="popup-overlay" id="password-modal" style="display: none;">
         <div class="popup-dialog"> <!--show dialog for changing password-->
             <h3>Change Password</h3>
-            <form id="password-form">
+            @if (!string.IsNullOrEmpty(Model.StatusMessage))
+            {
+                <div class="alert alert-info">@Model.StatusMessage</div>
+            }
+            <form id="password-form" method="post" asp-page-handler="ChangePassword">
+                @Html.AntiForgeryToken()
                 <!-- Current password field -->
                 <div class="password-form-group">
                     <label for="currentPassword">Current Password</label>
-                    <input type="password" id="currentPassword" name="CurrentPassword" required minlength="6"/>
+                    <input type="password" id="currentPassword" asp-for="CurrentPassword" required minlength="6"/>
                     <a href="/forgotPass" class="forgot-password-link">Forgot your password?</a>
                 </div>
                 <!-- New password field with pattern matching for confirmation -->
                 <div class="password-form-group">
                     <label for="newPassword">New Password</label>
-                    <input type="password" id="newPassword" name="NewPassword" required minlength="6" oninput="document.getElementById('confirmPassword').pattern = this.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');"/>
+                    <input type="password" id="newPassword" asp-for="NewPassword" required minlength="6" oninput="document.getElementById('confirmPassword').pattern = this.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');"/>
                 </div>
                 <div class="password-form-group"> <!-- Confirm new password field -->
                     <label for="confirmPassword">Confirm New Password</label>
-                    <input type="password" id="confirmPassword" name="ConfirmPassword" required minlength="6" title="Passwords must match"/>
+                    <input type="password" id="confirmPassword" asp-for="ConfirmNewPassword" required minlength="6" title="Passwords must match"/>
                     <span class="error-message" id="confirm-password-error">Passwords do not match</span>
                 </div>
                 <!-- Modal action buttons -->
@@ -263,31 +268,32 @@
 
             // Password form validation
             passwordForm.addEventListener('submit', function(e) {
-                e.preventDefault(); // Prevent actual form submission
                 // Get form values
                 const currentPassword = document.getElementById('currentPassword').value;
                 const newPassword = document.getElementById('newPassword').value;
                 const confirmPassword = document.getElementById('confirmPassword').value;
-                // Validation: Check if all fields are filled
+                
+                // Client-side validation
                 if (!currentPassword || !newPassword || !confirmPassword) {
+                    e.preventDefault();
                     alert('All password fields are required.');
                     return;
                 }
-                // Validation: Check if new passwords match
+                
                 if (newPassword !== confirmPassword) {
+                    e.preventDefault();
                     alert('New password and confirm password do not match.');
                     return;
                 }
-            // Validation: Check if new passwords match
+                
                 if (newPassword.length < 6) {
+                    e.preventDefault();
                     alert('New password must be at least 6 characters long.');
                     return;
                 }
                 
-                // Simulate successful password change
-                alert('Password would be changed successfully!');
-                passwordModal.style.display = 'none';
-                passwordForm.reset();
+                // If we get here, allow the form to submit to the server
+                return true;
             });
         });
         </script>

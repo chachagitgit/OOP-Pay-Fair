@@ -2,9 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using OOP_Fair_Fare.Models;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace OOP_Fair_Fare.Pages
 {
@@ -26,6 +25,12 @@ namespace OOP_Fair_Fare.Pages
         [BindProperty]
         public string? LastName { get; set; }
         public string? StatusMessage { get; set; }
+        [BindProperty]
+        public string? CurrentPassword { get; set; }
+        [BindProperty]
+        public string? NewPassword { get; set; }
+        [BindProperty]
+        public string? ConfirmNewPassword { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -123,6 +128,78 @@ namespace OOP_Fair_Fare.Pages
 
             // Fallback: just reload the page
             return Page();
+        }
+
+        private string HashPassword(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                var bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return BitConverter.ToString(bytes).Replace("-", "").ToLower();
+            }
+        }
+
+        public async Task<IActionResult> OnPostChangePasswordAsync()
+        {
+            try
+            {
+                var userId = HttpContext.Session.GetInt32("UserId");
+                if (userId == null)
+                {
+                    return RedirectToPage("/log-in");
+                }
+
+                // Ensure we get a fresh copy of the user from the database
+                var user = await _db.Users
+                    .FirstOrDefaultAsync(u => u.Id == userId && !u.IsDeleted);
+                
+                if (user == null)
+                {
+                    return RedirectToPage("/log-in");
+                }
+
+                // Validate inputs
+                if (string.IsNullOrEmpty(CurrentPassword) || string.IsNullOrEmpty(NewPassword) || string.IsNullOrEmpty(ConfirmNewPassword))
+                {
+                    StatusMessage = "All password fields are required.";
+                    return Page();
+                }
+
+                // Hash current password to compare with stored hash
+                string hashedCurrentPassword = HashPassword(CurrentPassword);
+                
+                // Debug check - remove in production
+                System.Diagnostics.Debug.WriteLine($"Stored hash: {user.HashedPassword}");
+                System.Diagnostics.Debug.WriteLine($"Input hash: {hashedCurrentPassword}");
+
+                if (!string.Equals(user.HashedPassword, hashedCurrentPassword, StringComparison.OrdinalIgnoreCase))
+                {
+                    StatusMessage = "Current password is incorrect.";
+                    return Page();
+                }
+
+                // Check if new passwords match
+                if (NewPassword != ConfirmNewPassword)
+                {
+                    StatusMessage = "New passwords do not match.";
+                    return Page();
+                }
+
+                // Update the password
+                user.HashedPassword = HashPassword(NewPassword);
+                _db.Users.Update(user);
+                await _db.SaveChangesAsync();
+
+                StatusMessage = "Password successfully updated.";
+                return RedirectToPage();
+            }
+            catch (Exception ex)
+            {
+                // Log the error - remove in production
+                System.Diagnostics.Debug.WriteLine($"Error changing password: {ex}");
+                StatusMessage = "An error occurred while changing the password.";
+                return Page();
+            }
         }
     }
 }
