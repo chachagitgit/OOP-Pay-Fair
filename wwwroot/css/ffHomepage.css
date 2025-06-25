@@ -511,10 +511,10 @@ header .logo img{
     background: linear-gradient(60deg, #3e92cc 0%, #5a7fcc 50%, #667eea 100%);
 }
 .section-privacy {
-    background: linear-gradient(60deg, #0a2463 0%, #1c4a9a 50%, #3e92cc 100%);
+    background: linear-gradient(60deg, #3e92cc 0%, #3175a6 50%, #4165b3 100%);
 }
 .section-contact {
-    background: linear-gradient(60deg, #8b2a4d 0%, #7c3f86 50%, #6a4b8c 100%);
+    background: linear-gradient(60deg, #af4e71 0%, #9a60a2 50%, #6a4b8c 100%);
 }
 .content-container {
     margin-top: 80px;
@@ -545,7 +545,7 @@ header .logo img{
     backdrop-filter: blur(15px);
     padding: 2.5rem;
     border-radius: 20px;
-    color: white;
+    color: #0a2463;
     width: 1000px;
     font-size: 18px;
     line-height: 1.6;
@@ -572,7 +572,7 @@ header .logo img{
     opacity: 0.9;
 }
 .content-section strong {
-    color: #e0e7ff;
+    color: #0a2463;
 }
 .icon-container {
     transform: translateX(100vw);
