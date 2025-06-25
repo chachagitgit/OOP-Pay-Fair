@@ -139,6 +139,11 @@ namespace OOP_Fair_Fare.Pages
             }
         }
 
+        private JsonResult ReturnError(string message)
+        {
+            return new JsonResult(new { success = false, message = message });
+        }
+
         public async Task<IActionResult> OnPostChangePasswordAsync()
         {
             try
@@ -171,24 +176,28 @@ namespace OOP_Fair_Fare.Pages
                 // Validate inputs
                 if (string.IsNullOrEmpty(CurrentPassword) || string.IsNullOrEmpty(NewPassword) || string.IsNullOrEmpty(ConfirmNewPassword))
                 {
-                    StatusMessage = "All password fields are required.";
-                    return Page();
+                    return ReturnError("All password fields are required.");
                 }
 
-                // Hash current password to compare with stored hash
+                // Hash both current and new passwords for comparison
                 string hashedCurrentPassword = HashPassword(CurrentPassword);
+                string hashedNewPassword = HashPassword(NewPassword);
 
                 if (!string.Equals(UserInfo.HashedPassword, hashedCurrentPassword, StringComparison.OrdinalIgnoreCase))
                 {
-                    StatusMessage = "Current password is incorrect.";
-                    return Page();
+                    return ReturnError("Current password is incorrect.");
                 }
 
                 // Check if new passwords match
                 if (NewPassword != ConfirmNewPassword)
                 {
-                    StatusMessage = "New passwords do not match.";
-                    return Page();
+                    return ReturnError("New passwords do not match.");
+                }
+
+                // Check if new password hash is same as current password hash
+                if (string.Equals(hashedNewPassword, UserInfo.HashedPassword, StringComparison.OrdinalIgnoreCase))
+                {
+                    return ReturnError("New password must be different from your current password.");
                 }
 
                 // Update the password
@@ -196,18 +205,13 @@ namespace OOP_Fair_Fare.Pages
                 _db.Users.Update(UserInfo);
                 await _db.SaveChangesAsync();
 
-                // Clear sensitive form data but keep user info
-                CurrentPassword = NewPassword = ConfirmNewPassword = null;
-                StatusMessage = "Password successfully updated.";
-                
-                return RedirectToPage();
+                return new JsonResult(new { success = true, message = "Password successfully updated." });
             }
             catch (Exception ex)
             {
                 // Log the error - remove in production
                 System.Diagnostics.Debug.WriteLine($"Error changing password: {ex}");
-                StatusMessage = "An error occurred while changing the password.";
-                return Page();
+                return ReturnError("An error occurred while changing the password.");
             }
         }
     }

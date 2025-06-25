@@ -322,4 +322,66 @@
             });
         });
         </script>
+    <script>
+            // Enhanced AJAX form submission handler
+            document.getElementById('password-form').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const form = e.target;
+                const formData = new FormData(form);
+
+                try {
+                    const response = await fetch('?handler=ChangePassword', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'RequestVerificationToken': form.querySelector('input[name="__RequestVerificationToken"]').value
+                        }
+                    });
+
+                    const result = await response.json();
+                    
+                    // Find or create the alert div inside the popup-dialog
+                    let alertDiv = document.querySelector('.popup-dialog .alert');
+                    if (!alertDiv) {
+                        alertDiv = document.createElement('div');
+                        const title = document.querySelector('.popup-dialog h3');
+                        title.insertAdjacentElement('afterend', alertDiv);
+                    }
+
+                    // Update alert styling and message
+                    alertDiv.className = 'alert ' + (result.success ? 'alert-info' : 'alert-danger');
+                    alertDiv.textContent = result.message;
+
+                    if (result.success) {
+                        // On success, close modal after delay
+                        setTimeout(() => {
+                            document.getElementById('password-modal').style.display = 'none';
+                            form.reset();
+                            window.location.reload();
+                        }, 1500);
+                    } else {
+                        // On error, clear the password fields
+                        document.getElementById('currentPassword').value = '';
+                        document.getElementById('newPassword').value = '';
+                        document.getElementById('confirmPassword').value = '';
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    let alertDiv = document.querySelector('.popup-dialog .alert');
+                    if (!alertDiv) {
+                        alertDiv = document.createElement('div');
+                        const title = document.querySelector('.popup-dialog h3');
+                        title.insertAdjacentElement('afterend', alertDiv);
+                    }
+                    alertDiv.className = 'alert alert-danger';
+                    alertDiv.textContent = 'An error occurred. Please try again.';
+                    
+                    // Clear the password fields
+                    document.getElementById('currentPassword').value = '';
+                    document.getElementById('newPassword').value = '';
+                    document.getElementById('confirmPassword').value = '';
+                }
+            });
+        </script>
     }
