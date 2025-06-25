@@ -364,9 +364,13 @@ header .logo img{
     transform: scale(1.1);
 }
 
+/* Carousel Item Styles */
+/* All carousel are hidden by default */
 .carousel .list .item{
     display: none;
 }
+
+/* display only the active items */
 .carousel .list .item.active,
 .carousel .list .item.other_1,
 .carousel .list .item.other_2{
@@ -380,9 +384,11 @@ header .logo img{
     pointer-events: none;
     opacity: 0;
 }
+/*When the item is active, its .main-content animates using a circular reveal.*/
 .carousel .list .item.active .main-content{
     animation: showContent 1s ease-in-out 1 forwards;
 }
+/*stating from 0% revealing the item from 70(X) and 50(y)*/
 @keyframes showContent{
     from{
         clip-path: circle(0% at 70% 50%);
@@ -393,10 +399,11 @@ header .logo img{
 .next .item.other_1{
     z-index: 1;
 }
-
+/*All images animate with effectNext when moving to the next slide.*/
 .next .item .image img{
     animation: effectNext .5s ease-in-out 1 forwards;
 }
+/*image slide to the left*/
 @keyframes effectNext{
     from{
         transform: translateX(calc(var(--transform-from)));
