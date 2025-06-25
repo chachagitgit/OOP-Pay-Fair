@@ -833,132 +833,140 @@
                 origin: origin.geometry.location,
                 destination: destination.geometry.location,
                 travelMode: google.maps.TravelMode.DRIVING,
-                optimizeWaypoints: true
+                drivingOptions: {
+                    departureTime: new Date(), // Use current time
+                    trafficModel: google.maps.TrafficModel.BEST_GUESS
+                },
+                provideRouteAlternatives: false,
+                avoidHighways: false,
+                avoidTolls: false
             };
 
             directionsService.route(request, function(result, status) {
                 if (status === "OK") {
                     directionsRenderer.setDirections(result);
                     const route = result.routes[0];
-                    const distanceMeters = route.legs[0].distance.value;
-                    const distanceKm = distanceMeters / 1000;
-                    const duration = route.legs[0].duration.text;
-                    const vehicleChoice = parseInt(document.querySelector('input[name="vehicle"]:checked')?.value || '4');
-                    const isDiscounted = document.getElementById("discounts").checked;
+                    let totalDistance = 0;
+                    let worstTrafficStatus = "Fast"; // Default traffic status
 
-                    console.log('Calling calculateFare with:', {distanceKm, vehicleChoice, isDiscounted});
-                    calculateFare(distanceKm, vehicleChoice, isDiscounted)
-                        .then(fareInfo => {
-                            console.log('calculateFare result', fareInfo);
-                            if (fareInfo.error) {
-                                alert('Error calculating fare: ' + fareInfo.error);
-                                return;
+                    // Calculate total distance and determine traffic condition
+                    for (let i = 0; i < route.legs.length; i++) {
+                        totalDistance += route.legs[i].distance.value;
+                        
+                        // Compare actual duration with traffic to duration without traffic
+                        if (route.legs[i].duration_in_traffic && route.legs[i].duration) {
+                            const ratio = route.legs[i].duration_in_traffic.value / route.legs[i].duration.value;
+                            if (ratio > 2.0) {
+                                worstTrafficStatus = "Very Slow"; // More than double the normal time
+                            } else if (ratio > 1.5 && worstTrafficStatus !== "Very Slow") {
+                                worstTrafficStatus = "Slow"; // 50% to 100% longer than normal
+                            } else if (ratio > 1.2 && worstTrafficStatus !== "Very Slow" && worstTrafficStatus !== "Slow") {
+                                worstTrafficStatus = "Moderate"; // 20% to 50% longer than normal
                             }
-                            displayFare(distanceKm, fareInfo, duration, 
-                                      origin.name || origin.formatted_address, 
-                                      destination.name || destination.formatted_address);
-                            document.getElementById('tab-fare').checked = true;
-                        })
-                        .catch(error => {
-                            console.error('calculateFare promise catch:', error);
-                            alert('Error calculating fare. Please try again.');
-                        });
+                        }
+                    }
 
-                    const bounds = new google.maps.LatLngBounds();
-                    bounds.extend(origin.geometry.location);
-                    bounds.extend(destination.geometry.location);
-                    map.fitBounds(bounds);
+                    const distanceInKm = totalDistance / 1000;
+                    const vehicleChoice = document.querySelector('input[name="vehicle"]:checked').value;
+                    const isDiscounted = document.getElementById("discounts").checked;
+                    calculateFare(distanceInKm, vehicleChoice, isDiscounted).then(fareInfo => {
+                        // Update the fare display with traffic status
+                        displayFare(
+                            distanceInKm, 
+                            fareInfo, 
+                            route.legs[0].duration.text,
+                            origin.name || origin.formatted_address,
+                            destination.name || destination.formatted_address,
+                            worstTrafficStatus
+                        );
+
+                        // Center and zoom the map to show the entire route
+                        const bounds = new google.maps.LatLngBounds();
+                        bounds.extend(origin.geometry.location);
+                        bounds.extend(destination.geometry.location);
+                        map.fitBounds(bounds);
+
+                        // Switch to the fare tab
+                        document.getElementById("tab-fare").checked = true;
+                    }).catch(error => {
+                        console.error('Error calculating fare:', error);
+                        alert('Error calculating fare. Please try again.');
+                    });
                 } else {
-                    alert("Could not calculate route. Please ensure the selected locations are reachable by road.");
+                    alert("Could not calculate route: " + status);
                 }
-            }); 
-        }
-        function calculateFare(distanceTraveled, vehicleChoice, isDiscounted) {
-            const request = {
-                DistanceTraveled: distanceTraveled,
-                VehicleChoice: vehicleChoice,
-                IsDiscounted: isDiscounted
-            };
-            return fetch('/api/fare/calculate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(request)
-            })
-            .then(async response => {
-                if (!response.ok) {
-                    const text = await response.text();
-                    console.error('Fare API error:', response.status, text);
-                    throw new Error(`Failed to calculate fare: ${text}`);
-                }
-                return response.json();
-            })
-            .catch(error => {
-                console.error('calculateFare fetch error:', error);
-                return { error: error.message || "Failed to calculate fare" };
             });
         }
-        function displayFare(distance, fareInfo, duration, originName, destinationName) {
-            console.log('displayFare called with:', {distance, fareInfo, duration, originName, destinationName});
-            // Only treat as error if fareInfo.error is present AND required properties are missing
-            const hasRequiredFields = fareInfo && typeof fareInfo.baseFare === 'number' && typeof fareInfo.discountAmount === 'number' && typeof fareInfo.totalFare === 'number';
-            if (fareInfo.error && !hasRequiredFields) {
-                // Clear all fare fields and disable Save Route
-                document.getElementById("fareAmount").innerText = "Error";
-                document.getElementById("fareAmountInput").value = "";
-                document.getElementById("baseFare").innerText = "Error";
-                document.getElementById("baseFareInput").value = "";
-                document.getElementById("appliedDiscount").innerText = "Error";
-                document.getElementById("appliedDiscountInput").value = "";
-                document.getElementById("distance").innerText = "Error";
-                document.getElementById("distanceInput").value = "";
-                document.getElementById("totalFare").innerText = "Error";
-                document.getElementById("totalFareInput").value = "";
-                document.getElementById("fareLocation").value = "";
-                document.getElementById("fareDestinationInput").value = "";
-                document.getElementById("vehicle-options").value = "";
-                saveRouteBtn.disabled = true;
-                return;
-            }
-            lastFareInfo = fareInfo;
-            lastFareInfo.distance = distance;
-            lastOrigin = originName;
-            lastDestination = destinationName;
-            enableSaveRouteIfReady();
-            // Set values in readonly input fields for form submission (always 2 decimals)
-            document.getElementById("fareAmount").innerText = `₱ ${fareInfo.totalFare.toFixed(2)}`;
+
+        function displayFare(distance, fareInfo, duration, originName, destinationName, trafficStatus) {
+            // Update all fare-related display fields
+            document.getElementById("fareAmount").innerText = fareInfo.totalFare.toFixed(2);
             document.getElementById("fareAmountInput").value = fareInfo.totalFare.toFixed(2);
-            document.getElementById("baseFare").innerText = `₱ ${fareInfo.baseFare.toFixed(2)}`;
+            document.getElementById("baseFare").innerText = fareInfo.baseFare.toFixed(2);
             document.getElementById("baseFareInput").value = fareInfo.baseFare.toFixed(2);
-            document.getElementById("appliedDiscount").innerText = `₱ ${fareInfo.discountAmount.toFixed(2)}`;
-            document.getElementById("appliedDiscountInput").value = fareInfo.discountAmount.toFixed(2);
-            document.getElementById("distance").innerText = `${distance.toFixed(2)} km`;
+            document.getElementById("appliedDiscount").innerText = fareInfo.discountAmount ? fareInfo.discountAmount.toFixed(2) : "0.00";
+            document.getElementById("appliedDiscountInput").value = fareInfo.discountAmount ? fareInfo.discountAmount.toFixed(2) : "0.00";
+            document.getElementById("distance").innerText = distance.toFixed(2) + " km";
             document.getElementById("distanceInput").value = distance.toFixed(2);
-            document.getElementById("totalFare").innerText = `₱ ${fareInfo.totalFare.toFixed(2)}`;
+            document.getElementById("totalFare").innerText = fareInfo.totalFare.toFixed(2);
             document.getElementById("totalFareInput").value = fareInfo.totalFare.toFixed(2);
+            
+            // Update location fields
             document.getElementById("fareLocation").value = originName;
             document.getElementById("fareDestinationInput").value = destinationName;
-            document.getElementById("vehicle-options").value = (document.querySelector('input[name="vehicle"]:checked')?.nextElementSibling?.innerText?.trim() || '');
-            // Vehicle mapping based on the values in your HTML
-            const vehicleMapping = {
-                '4': 'Traditional Jeepney',
-                '1': 'Airconditioned Bus', 
-                '2': 'Ordinary Bus',
-                '3': 'Modern E-Jeepney'
-            };
-            // Get the selected vehicle type
-            const selectedVehicle = document.querySelector('input[name="vehicle"]:checked');
-            const vehicleText = selectedVehicle ? selectedVehicle.nextElementSibling?.innerText?.trim() || selectedVehicle.value : '';
+            
+            // Update vehicle type
+            const vehicleSelect = document.querySelector('input[name="vehicle"]:checked');
+            const vehicleLabel = vehicleSelect ? vehicleSelect.parentElement.textContent.trim() : "";
+            document.getElementById("vehicle-options").value = vehicleLabel;
 
-            // Always show 2 decimals for all fare fields
-            document.getElementById("fareAmount").innerText = `₱ ${fareInfo.totalFare.toFixed(2)}`;
-            document.getElementById("baseFare").innerText = `₱ ${fareInfo.baseFare.toFixed(2)}`;
-            document.getElementById("appliedDiscount").innerText = `₱ ${fareInfo.discountAmount.toFixed(2)}`;
-            document.getElementById("distance").innerText = `${distance.toFixed(2)} km`;
-            document.getElementById("totalFare").innerText = `₱ ${fareInfo.totalFare.toFixed(2)}`;
-            document.getElementById("fareLocation").innerText = `${originName} → ${destinationName}`;
-            document.getElementById("vehicle-options").innerText = vehicleText;
+            // Update traffic status with color coding
+            const trafficElement = document.getElementById("traffic");
+            if (trafficElement) {
+                const trafficStatusColor = {
+                    "Fast": "green",
+                    "Moderate": "#FFA500",
+                    "Slow": "#FF6B6B",
+                    "Very Slow": "red"
+                };
+                trafficElement.value = trafficStatus;
+                trafficElement.style.color = trafficStatusColor[trafficStatus] || "black";
+            }
+
+            // Store the information for the save route functionality
+            lastFareInfo = fareInfo;
+            lastOrigin = originName;
+            lastDestination = destinationName;
+            
+            // Enable/disable save route button based on the calculation
+            enableSaveRouteIfReady();
+        }
+
+        async function calculateFare(distance, vehicleChoice, isDiscounted) {
+            try {
+                const response = await fetch('/api/Fare/calculate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        distanceTraveled: distance,
+                        vehicleChoice: parseInt(vehicleChoice),
+                        isDiscounted: isDiscounted
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const fareInfo = await response.json();
+                return fareInfo;
+            } catch (error) {
+                console.error('Error calculating fare:', error);
+                alert('Error calculating fare. Please try again.');
+                throw error;
+            }
         }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJWH0VLI60CGZNcXQQbFWrLUDIfG3z3G0&libraries=places&callback=initMap"></script>
